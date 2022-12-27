@@ -31,7 +31,7 @@
 model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
                        interval=c("prediction", "confidence", "none"), level=0.95,
                        type=c("response", "link")) {
-  response_var_name <- as.character(deparse(mosaicModel:::response_var(mod)))
+  response_var_name <- as.character(deparse(response_var(mod)))
 
   # Figure out where the data is coming from
   if (is.null(data) || nrow(data) == 0) {
@@ -55,7 +55,7 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
     response_in_data <- response_var_name %in% names(data)
   }
 
-  explan_names <- mosaicModel:::explanatory_vars(mod)
+  explan_names <- explanatory_vars(mod)
   if (!all(explan_names %in% names(eval_data)))
     stop("Must provide values for all explanatory variables.")
 

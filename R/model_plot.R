@@ -20,13 +20,13 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
 
   interval=match.arg(interval)
 
-  response_name <- as.character(deparse(mosaicModel:::response_var(mod)))
+  response_name <- as.character(deparse(response_var(mod)))
 
   if (is.null(data)) data <- extract_training_data(mod)
   plotting_names <- c(x, color)
   facet_names <- c(facet, facet2)
   spread_names <- c(plotting_names, facet_names)
-  other_explan_names <- all.vars(mosaicModel::formula_from_mod(mod)[[3]])
+  other_explan_names <- all.vars(formula_from_mod(mod)[[3]])
   all_names <- union(spread_names, other_explan_names)
   all_names_formula <- as.formula(paste("~", paste(all_names, collapse="+")))
   # data_skeleton() never returns the response variable
@@ -114,7 +114,7 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
   P <- P %>%
     mod_plot_fun(space_formula, color=color_formula, fill=fill_formula,
                  group=color_formula, data = For_plotting, alpha=alpha_val,
-                 size=0.75, inherit=FALSE) +
+                 linewidth=0.75, inherit=FALSE) +
     ylab(response_name)
 
   # Facet the plot

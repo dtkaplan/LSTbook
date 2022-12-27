@@ -19,7 +19,7 @@ model_skeleton <- function(mod, data=NULL, ncont=3) {
     if (length(formula)==2) explan_names <- all.vars(formula)
     else explan_names <- all.vars(formula[[3]])
   } else {
-    explan_names <- all.vars(mosaicModel::formula_from_mod(mod)[[3]])
+    explan_names <- all.vars(formula_from_mod(mod)[[3]])
   }
   Skeleton <- list()
 
