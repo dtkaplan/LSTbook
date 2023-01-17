@@ -16,7 +16,8 @@ dag_draw <- function(DAG, ...) {
                    vertex.shape="circle",
                    vertex.label.cex=2,
                    vertex.label.family="Courier",
-                   vertex.frame.color=NA)
+                   vertex.frame.color=NA,
+                   layout=igraph::layout_nicely)
   if ("seed" %in% names(dots)) {
     set.seed(dots$seed)
     dots$seed <- NULL
@@ -26,7 +27,6 @@ dag_draw <- function(DAG, ...) {
     defaults[[nm]] <- dots[[nm]]
   }
   ig <- dag_to_igraph(DAG)
-
   do.call(plot, c(list(ig), defaults))
 }
 

@@ -119,9 +119,14 @@ dag_vaccine <- dag_make(
   flu ~ binom(.f)
 )
 
+dag_satgpa <- dag_make(
+  sat ~ unif(min=400, max=1600),
+  gpa ~ 4*(pnorm(((sat-1000)/300 + exo(2.0))/4))^0.6
+)
+
 save(dag00, dag01, dag02, dag03, dag04, dag05,
      dag06, dag07, dag08, dag09, dag10, dag11, dag12,
      dag_vaccine,
-     dag_school1, dag_school2,
+     dag_school1, dag_school2, dag_satgpa,
      file = "data/daglib.rda")
 
