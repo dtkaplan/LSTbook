@@ -48,7 +48,17 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, .size_multiplier=1
     expr <- substitute(expr)
     replicate(size, eval(expr))
   }
-
+  cumulative <- function(probs, vals) {
+    cumprobs <- cumsum(probs/(sum(probs)))
+    pick <- runif(size)
+    choices <- outer(pick, cumprobs, FUN=`>=`) |>
+      apply(1, function(x) max(which(x)))
+    vals[choices]
+  }
+  #coin flips
+  count_flips <- function(x, prob=.5) {
+    rbinom(size, size=x, prob)
+  }
   #transformations
   binom <- function(x=0, labels=NULL) {
     # 1 or 0 output with logistic input

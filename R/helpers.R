@@ -28,7 +28,7 @@ dag_sort <- function(DAG) {
   new_order <- dag_to_igraph(DAG) %>% igraph::topo_sort()
 
   res <- DAG[new_order]
-  class(res) <- c(class(res), "dagsystem")
+  class(res) <- c("dagsystem")
 
   res
 }

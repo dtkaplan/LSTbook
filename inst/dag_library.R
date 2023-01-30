@@ -94,6 +94,11 @@ dag12 <- dag_make(
   g ~- h + exo()
 )
 
+dag_prob_21.1 <- dag_make(
+  x ~ exo(1),
+  y ~ x + exo(2)
+)
+
 dag_school1 <- dag_make(
   expenditure ~ unif(7000, 18000),
   participation ~ unif(1,100),
@@ -124,9 +129,25 @@ dag_satgpa <- dag_make(
   gpa ~ 4*(pnorm(((sat-1000)/300 + exo(2.0))/4))^0.6
 )
 
-save(dag00, dag01, dag02, dag03, dag04, dag05,
-     dag06, dag07, dag08, dag09, dag10, dag11, dag12,
-     dag_vaccine,
-     dag_school1, dag_school2, dag_satgpa,
-     file = "data/daglib.rda")
+dag_flights <- dag_make(
+  ready ~ each(10),
+  abortAM ~ count_flips(ready, .06),
+  AM ~ ready - abortAM,
+  brokeAM  ~ count_flips(AM, 0.12),
+  PM ~ AM - brokeAM + count_flips(abortAM, 0.67) + count_flips(brokeAM, .4),
+  abortPM ~ count_flips(PM, .06),
+  brokePM ~ count_flips(PM - abortPM, .12)
+)
+
+list_of_dags <- c(
+  lapply(as.list(ls(pattern="dag[_0-9]")), as.name),
+  file = "data/daglib.rda")
+
+do.call(save, list_of_dags)
+
+# save(dag00, dag01, dag02, dag03, dag04, dag05,
+#      dag06, dag07, dag08, dag09, dag10, dag11, dag12,
+#      dag_vaccine,
+#      dag_school1, dag_school2, dag_satgpa, dag_flights,
+#      file = "data/daglib.rda")
 

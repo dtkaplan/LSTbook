@@ -27,6 +27,7 @@ dag_draw <- function(DAG, ...) {
     defaults[[nm]] <- dots[[nm]]
   }
   ig <- dag_to_igraph(DAG)
+  par(mai=c(0,0,0,0)) # have the graph fill the frame
   do.call(plot, c(list(ig), defaults))
 }
 
