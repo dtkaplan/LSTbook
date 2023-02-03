@@ -4,7 +4,7 @@
 \alias{dag_intervene}
 \title{Convert a DAG to an experiment}
 \usage{
-dag_intervene(DAG, tilde, mix = 0)
+dag_intervene(DAG, tilde, ..., mix = 0)
 }
 \arguments{
 \item{DAG}{An existing DAG}
@@ -14,6 +14,8 @@ whose mechanism is to be changed. The right-hand side is the new mechanism for t
 
 \item{mix}{Number between 0 and 1. Fraction of the original mechanism to mix with the experiment. This is
 just for convenience, since you can specify the mixing "by hand" in \code{tilde}.}
+
+\item{\ldots}{Additional tilde expressions to include in the DAG.}
 }
 \description{
 By an "experiment," we mean a DAG with one of the variables set exogenously. That is, an intervention.

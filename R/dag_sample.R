@@ -122,7 +122,7 @@ print.dagsystem <- function(x, ..., show_hidden=FALSE) {
     # find the hidden ones and suppress
     left_names <- lapply(x, FUN=function(x) all.vars(x[[2]]))
     rid <- which(grepl("^\\.", left_names))
-    x <- x[-rid]
+    if (length(rid) > 0) x <- x[-rid]
   }
   cat(paste(unlist(lapply(x, FUN=capture.output)),
         collapse="\n"))

@@ -16,6 +16,9 @@ Make a simple drawing of a DAG.
 }
 \details{
 See the igraph package for more details.
+
+By default, edges are not drawn to hidden nodes. To show the hidden
+nodes, use the argument \code{show_hidden=TRUE}.
 }
 \examples{
 dag_draw(dag03)

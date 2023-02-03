@@ -9,6 +9,7 @@
 #' @param DAG An existing DAG
 #' @param tilde Tilde expression such as `y ~ binom()`. The left-hand side is the name of the variable
 #' whose mechanism is to be changed. The right-hand side is the new mechanism for that variable.
+#' @param \ldots Additional tilde expressions to include in the DAG.
 #' @param mix Number between 0 and 1. Fraction of the original mechanism to mix with the experiment. This is
 #' just for convenience, since you can specify the mixing "by hand" in `tilde`.
 #'
@@ -19,9 +20,11 @@
 #'
 #' @importFrom glue glue
 #' @export
-dag_intervene <- function(DAG, tilde, mix=0) {
+dag_intervene <- function(DAG, tilde, ..., mix=0) {
   var_names <- unlist(lapply(DAG, function(x) all.vars(rlang::f_lhs(x))))
   new_name <- all.vars(rlang::f_lhs(tilde))
+
+  new_nodes <- list(...)
 
   if (!new_name %in% var_names) stop("Experimental variable must already exist in DAG.")
 
@@ -36,6 +39,8 @@ dag_intervene <- function(DAG, tilde, mix=0) {
     new_tilde <- glue::glue("{new_name} ~ {mix}*({old_part}) + ({1-mix})*({exp_part})")
     DAG[[replacement]] <- new_tilde
   }
+
+  DAG <- do.call(dag_make, c(DAG, new_nodes)) # append the new nodes and remake the DAG
 
   DAG
 }
