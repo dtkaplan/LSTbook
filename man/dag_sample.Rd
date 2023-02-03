@@ -4,7 +4,14 @@
 \alias{dag_sample}
 \title{Generate data from a DAG}
 \usage{
-dag_sample(DAG, size = 10, seed = NULL, survive = NULL, .size_multiplier = 10)
+dag_sample(
+  DAG,
+  size = 10,
+  seed = NULL,
+  survive = NULL,
+  show_hidden = FALSE,
+  .size_multiplier = 10
+)
 }
 \arguments{
 \item{DAG}{list of formulas. Variables must be listed before they
@@ -15,7 +22,9 @@ can be used to create other variables.}
 \item{seed}{Set the random number seed. Useful for reproducibility.}
 
 \item{survive}{one-sided tilde expression that generates a boolean/logical from the
-oDAG variables indicating whether to keep the case in the output.}
+DAG variables indicating whether to keep the case in the output.}
+
+\item{show_hidden}{If \code{TRUE}, show even the hidden variables.}
 
 \item{.size_multiplier}{number (default 10) by which to increase the
 number of rows initiially generated so that the output size will be that nominally

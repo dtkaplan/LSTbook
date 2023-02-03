@@ -41,5 +41,5 @@
 #' @keywords datasets
 #'
 #' @source Roger W. Johnson (2021) "Fitting Percentage of Body Fat to Simple Body Measurements: College Women"
-#' *Journal of Statistics and Data Science Education* **29**(3) \href{https://doi.org/10.1080/26939169.2021.1971585}
+#' *Journal of Statistics and Data Science Education* **29**(3) \href{https://doi.org/10.1080/26939169.2021.1971585}{link}
 "Anthro_F"

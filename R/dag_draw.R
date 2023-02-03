@@ -26,7 +26,11 @@ dag_draw <- function(DAG, ...) {
   for (nm in names(dots)) {
     defaults[[nm]] <- dots[[nm]]
   }
-  ig <- dag_to_igraph(DAG)
+
+  reveal <- FALSE # default
+  if ("show_hidden" %in% names(dots) ) reveal = dots$show_hidden
+
+  ig <- dag_to_igraph(DAG, show_hidden=reveal)
   par(mai=c(0,0,0,0)) # have the graph fill the frame
   do.call(plot, c(list(ig), defaults))
 }

@@ -9,7 +9,8 @@
 #' @param size size of the sample, that is, the number of rows to be put in the data frame
 #' @param seed Set the random number seed. Useful for reproducibility.
 #' @param survive one-sided tilde expression that generates a boolean/logical from the
-#' oDAG variables indicating whether to keep the case in the output.
+#' DAG variables indicating whether to keep the case in the output.
+#' @param show_hidden If `TRUE`, show even the hidden variables.
 #' @param .size_multiplier number (default 10) by which to increase the
 #' number of rows initiially generated so that the output size will be that nominally
 #' specified by `size=`. Note: If `.size_multiplier` isn't big enough, the output size
@@ -21,7 +22,7 @@
 #' dag_sample(dag03, survive= ~ g > 0)
 #' @importFrom tibble as_tibble
 #' @export
-dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, .size_multiplier=10) {
+dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, show_hidden=FALSE, .size_multiplier=10) {
   # check that DAG is a list of formulas
   if (!is.list(DAG)) stop("DAG must be a list of formulas")
   if (!all(unlist(lapply(DAG, function(x) inherits(x, "formula")))))
@@ -102,9 +103,10 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, .size_multiplier=1
   }
 
   # Post-process: take out the items whose names start with dots
-  keepers <- !grepl("^\\.", vnames)
+  rid <- rep(FALSE, length(vnames))
+  if (! show_hidden) rid <- grepl("^\\.", vnames)
 
-  return(Res[keepers])
+  return(Res[, !rid])
 }
 
 #' @importFrom mosaic sample
@@ -115,7 +117,13 @@ sample.dagsystem <- function(x, size, replace = FALSE, ...) {
 }
 
 #' @export
-print.dagsystem <- function(x, ...) {
+print.dagsystem <- function(x, ..., show_hidden=FALSE) {
+  if (!show_hidden) {
+    # find the hidden ones and suppress
+    left_names <- lapply(x, FUN=function(x) all.vars(x[[2]]))
+    rid <- which(grepl("^\\.", left_names))
+    x <- x[-rid]
+  }
   cat(paste(unlist(lapply(x, FUN=capture.output)),
         collapse="\n"))
 }

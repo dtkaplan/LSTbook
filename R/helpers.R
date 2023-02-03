@@ -1,12 +1,17 @@
 #' helper functions for transforming and checking DAGs
 #'
-dag_to_igraph <- function(DAG) {
+dag_to_igraph <- function(DAG, show_hidden=FALSE) {
   nnames <- node_names(DAG)
-
+  # Get rid of the hidden ones
+  if (!show_hidden) nnames[grepl("^\\.", nnames)] <- " "
 
   edges <- numeric(0)
   for (k in 1:length(DAG)) {
     # loop over all the nodes
+    if (!show_hidden) {
+      this_name <- all.names(DAG[[k]][[2]])
+      if (grepl("^\\.", this_name)) next;
+    }
     from_names <- all.names(DAG[[k]][[3]])
     from_nums <- which(nnames %in% from_names)
     if (length(from_nums) > 0 ) {
