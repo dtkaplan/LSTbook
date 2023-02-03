@@ -7,6 +7,9 @@
 #' @param DAG The DAG to draw
 #' @param \ldots Additional arguments to plot.igraph()
 #'
+#' @details By default, edges are not drawn to hidden nodes. To show the hidden
+#' nodes, use the argument `show_hidden=TRUE`.
+#'
 #' @examples
 #' dag_draw(dag03)
 #' @export

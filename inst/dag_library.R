@@ -139,6 +139,13 @@ dag_flights <- dag_make(
   brokePM ~ count_flips(PM - abortPM, .12)
 )
 
+dag_medical_observations <- dag_make(
+  .sex ~ binom(x=exo(), labels=c("F", "M")),
+  .cond ~ exo(),
+  treatment ~ binom(1*(.sex=="F")- .cond, labels=c("none", "treat")),
+  outcome ~ -0.5*(treatment=="treat") - .cond + 1.5*(.sex=="F") + exo()
+)
+
 list_of_dags <- c(
   lapply(as.list(ls(pattern="dag[_0-9]")), as.name),
   file = "data/daglib.rda")

@@ -4,7 +4,7 @@
 \alias{dag_to_igraph}
 \title{helper functions for transforming and checking DAGs}
 \usage{
-dag_to_igraph(DAG)
+dag_to_igraph(DAG, show_hidden = FALSE)
 }
 \description{
 helper functions for transforming and checking DAGs
