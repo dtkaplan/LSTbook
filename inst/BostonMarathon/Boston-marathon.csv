@@ -1,0 +1,176 @@
+year, name, time, sex
+2022,	Evans Chebet	Kenya, 2:06:51, male
+2021,	Benson Kipruto	Kenya, 2:09:51, male
+2019,	Lawrence Cherono	Kenya, 2:07:57, male
+2018,	Yuki Kawauchi	Japan, 2:15:58, male
+2017,	Geoffrey Kirui	Kenya, 2:09:37, male
+2016,	Lemi Berhanu	Ethiopia, 2:12:45, male
+2015,	Lelisa Desisa	Ethiopia, 2:09:17, male
+2014,	Mebrahtom "Meb" Keflezighi	United States, 2:08:37, male
+2013,	Lelisa Desisa	Ethiopia, 2:10:22, male
+2012,	Wesley Korir	Kenya, 2:12:40, male
+2011,	Geoffrey Mutai	Kenya, 2:03:02, male
+2010,	Robert Kiprono Cheruiyot	Kenya, 2:05:52, male
+2009,	Deriba Merga	Ethiopia, 2:08:42, male
+2008,	Robert Kipkoech Cheruiyot	Kenya, 2:07:46, male
+2007,	Robert Kipkoech Cheruiyot	Kenya, 2:14:13, male
+2006,	Robert Kipkoech Cheruiyot	Kenya, 2:07:14, male
+2005,	Hailu Negussie	Ethiopia, 2:11:45, male
+2004,	Timothy Cherigat	Kenya, 2:10:37, male
+2003,	Robert Kipkoech Cheruiyot	Kenya, 2:10:11, male
+2002,	Rodgers Rop	Kenya, 2:09:02, male
+2001,	Lee Bong-Ju	South Korea, 2:09:43, male
+2000,	Elijah Lagat	Kenya, 2:09:47, male
+1999,	Joseph Chebet	Kenya, 2:09:52, male
+1998,	Moses Tanui	Kenya, 2:07:34, male
+1997,	Lameck Aguta	Kenya, 2:10:34, male
+1996,	Moses Tanui	Kenya, 2:09:15, male
+1995,	Cosmas Ndeti	Kenya, 2:09:22, male
+1994,	Cosmas Ndeti	Kenya, 2:07:15, male
+1993,	Cosmas Ndeti	Kenya, 2:09:33, male
+1992,	Ibrahim Hussein	Kenya, 2:08:14, male
+1991,	Ibrahim Hussein	Kenya, 2:11:06, male
+1990,	Gelindo Bordin	Italy, 2:08:19, male
+1989,	Abebe Mekonnen	Ethiopia, 2:09:06, male
+1988,	Ibrahim Hussein	Kenya, 2:08:43, male
+1987,	Toshihiko Seko	Japan, 2:11:50, male
+1986,	Robert de Castella	Australia, 2:07:51, male
+1985,	Geoff Smith	England, 2:14:05, male
+1984,	Geoff Smith	England, 2:10:34, male
+1983,	Greg A. Meyer	United States, 2:09:00, male
+1982,	Alberto Salazar	United States, 2:08:52, male
+1981,	Toshihiko Seko	Japan, 2:09:26, male
+1980,	Bill Rodgers	United States, 2:12:11, male
+1979,	Bill Rodgers	United States, 2:09:27, male
+1978,	Bill Rodgers	United States, 2:10:13, male
+1977,	Jerome Drayton	Canada, 2:14:46, male
+1976,	Jack Fultz	United States, 2:20:19, male
+1975,	Bill Rodgers	United States, 2:09:55, male
+1974,	Neil Cusack	Ireland, 2:13:39, male
+1973,	Jon Anderson	United States, 2:16:03, male
+1972,	Olavi Suomalainen	Finland, 2:15:39, male
+1971,	Alvaro Mejia	Colombia, 2:18:45, male
+1970,	Ron Hill	England, 2:10:30, male
+1969,	Yoshiaki Unetani	Japan, 2:13:49, male
+1968,	Amby Burfoot	United States, 2:22:17, male
+1967,	David C. McKenzie	New Zealand, 2:15:45, male
+1966,	Kenji Kimihara	Japan, 2:17:11, male
+1965,	Morio Shigematsu	Japan, 2:16:33, male
+1964,	Aurele Vandendriessche	Belgium, 2:19:59, male
+1963,	Aurele Vandendriessche	Belgium, 2:18:58, male
+1962,	Eino Oksanen	Finland, 2:23:48, male
+1961,	Eino Oksanen	Finland, 2:23:39, male
+1960,	Paavo Kotila	Finland, 2:20:54, male
+1959,	Eino Oksanen	Finland, 2:22:42, male
+1958,	Franjo Mihalic	Yugoslavia, 2:25:54, male
+1957,	John J. Kelley	United States, 2:20:05, male
+1956,	Antti Viskari	Finland, 2:14:14, male
+1955,	Hideo Hamamura	Japan, 2:18:22, male
+1954,	Veikko Karvonen	Finland, 2:20:39, male
+1953,	Keizo Yamada	Japan, 2:18:51, male
+1952,	Doroteo Flores	Guatemala, 2:31:53, male
+1951,	Shigeki Tanaka	Japan, 2:27:45, male
+1950,	Ki-Yong Ham	Korea, 2:32:39, male
+1949,	Karl Gosta Leandersson	Sweden, 2:31:50, male
+1948,	Gerard Cote	Canada, 2:31:02, male
+1947,	Yun Bok Suh	Korea, 2:25:39, male
+1946,	Stylianos Kyriakides	Greece, 2:29:27, male
+1945,	John A. Kelley	United States, 2:30:40, male
+1944,	Gerard Cote	Canada, 2:31:50, male
+1943,	Gerard Cote	Canada, 2:28:25, male
+1942,	Bernard Joseph (Joe) Smith	United States, 2:26:51, male
+1941,	Leslie S. Pawson	United States, 2:30:38, male
+1940,	Gerard Cote	Canada, 2:28:28, male
+1939,	Ellison M. Brown	United States, 2:28:51, male
+1938,	Leslie S. Pawson	United States, 2:35:34, male
+1937,	Walter Young	Canada, 2:33:20, male
+1936,	Ellison M. Brown	United States, 2:33:40, male
+1935,	John A. Kelley	United States, 2:32:07, male
+1934,	Dave Komonen	Canada, 2:32:53, male
+1933,	Leslie S. Pawson	United States, 2:31:01, male
+1932,	Paul de Bruyn	Germany, 2:33:36, male
+1931,	James P. Henigan	United States, 2:46:45, male
+1930,	Clarence H. DeMar	United States, 2:34:48, male
+1929,	John C. Miles	Canada, 2:33:08, male
+1928,	Clarence H. DeMar	United States, 2:37:07, male
+1927,	Clarence H. DeMar	United States, 2:40:22, male
+1926,	John C. Miles	Canada, 2:25:40, male
+1925,	Charles L. (Chuck) Mellor	United States, 2:33:00, male
+1924,	Clarence H. DeMar	United States, 2:29:40, male
+1923,	Clarence H. DeMar	United States, 2:23:47, male
+1922,	Clarence H. DeMar	United States, 2:18:10, male
+1921,	Frank T. Zuna	United States, 2:18:57, male
+1920,	Peter Trivoulidas	Greece, 2:29:31, male
+1919,	Carl W. A. Linder	United States, 2:29:13, male
+1918,	Camp Devens Divisional Team	United States, 2:24:53, male
+1917,	William J. (Bill) Kennedy	United States, 2:28:37, male
+1916,	Arthur V. Roth	United States, 2:27:16, male
+1915,	Edouard Fabre	Canada, 2:31:41, male
+1914,	James Duffy	Canada, 2:25:01, male
+1913,	Fritz Carlson	United States, 2:25:14, male
+1912,	Michael J. Ryan	United States, 2:21:18, male
+1911,	Clarence H. DeMar	United States, 2:21:39, male
+1910,	Fred L. Cameron	Canada, 2:28:52, male
+1909,	Henri Renaud	United States, 2:53:36, male
+1908,	Thomas P. Morrissey	United States, 2:25:43, male
+1907,	Thomas Longboat	Canada, 2:24:24, male
+1906,	Timothy Ford	United States, 2:45:45, male
+1905,	Frederick Lorz	United States, 2:38:25, male
+1904,	Michael Spring	United States, 2:38:04, male
+1903,	John C. Lorden	United States, 2:41:29, male
+1902,	Sammy A. Mellor	United States, 2:43:12, male
+1901,	John P. Caffery	Canada, 2:29:23, male
+1900,	John P. Caffery	Canada, 2:39:44, male
+1899,	Lawrence Brignolia	United States, 2:54:38, male
+1898,	Ronald J. MacDonald	Canada, 2:42:00, male
+1897,	John J. McDermott	United States, 2:55:10, male
+2022,	Peres Jepchirchir	Kenya,  2:21:01, female
+2021,	Edna Kiplagat	Kenya, 2:25:09, female
+2019,	Worknesh Degefa	Ethiopia, 2:23:31, female
+2018,	Desiree Linden	United States, 2:39:54, female
+2017,	Edna Kiplagat	Kenya, 2:21:52, female
+2016,	Atsede Baysa	Ethiopia, 2:29:19, female
+2015,	Caroline Rotich	Kenya, 2:24:55, female
+2014,	Buzunesh Deba	Ethiopia, 2:19:59, female
+2013,	Rita Jeptoo	Kenya, 2:26:25, female
+2012,	Sharon Cherop	Kenya, 2:31:50, female
+2011,	Caroline Kilel	Kenya, 2:22:36, female
+2010,	Teyba Erkesso	Ethiopia, 2:26:11, female
+2009,	Salina Kosgei	Kenya, 2:32:16, female
+2008,	Dire Tune	Ethiopia, 2:25:25, female
+2007,	Lidiya Grigoryeva	Russia, 2:29:18, female
+2006,	Rita Jeptoo	Kenya, 2:23:38, female
+2005,	Catherine Ndereba	Kenya, 2:25:13, female
+2004,	Catherine Ndereba	Kenya, 2:24:27, female
+2003,	Svetlana Zakharova	Russia, 2:25:20, female
+2002,	Margaret Okayo	Kenya, 2:20:43, female
+2001,	Catherine Ndereba	Kenya, 2:23:53, female
+2000,	Catherine Ndereba	Kenya, 2:26:11, female
+1999,	Fatuma Roba	Ethiopia, 2:23:25, female
+1998,	Fatuma Roba	Ethiopia, 2:23:21, female
+1997,	Fatuma Roba	Ethiopia, 2:26:23, female
+1996,	Uta Pippig	Germany, 2:27:12, female
+1995,	Uta Pippig	Germany, 2:25:11, female
+1994,	Uta Pippig	Germany, 2:21:45, female
+1993,	Olga Markova	Russia, 2:25:27, female
+1992,	Olga Markova	Comm. Ind. States, 2:23:43, female
+1991,	Wanda Panfil	Poland, 2:24:18, female
+1990,	Rosa Mota	Portugal, 2:25:24, female
+1989,	Ingrid Kristiansen	Norway, 2:24:33, female
+1988,	Rosa Mota	Portugal, 2:24:30, female
+1987,	Rosa Mota	Portugal, 2:25:21, female
+1986,	Ingrid Kristiansen	Norway, 2:24:55, female
+1985,	Lisa Larsen-Weidenbach	United States, 2:34:06, female
+1984,	Lorraine Moller	New Zealand, 2:29:28, female
+1983,	Joan Benoit	United States, 2:22:43, female
+1982,	Charlotte Teske	Germany, 2:29:33, female
+1981,	Allison Roe	New Zealand, 2:26:46, female
+1980,	Jacqueline Gareau	Canada, 2:34:28, female
+1979,	Joan Benoit	United States, 2:35:15, female
+1978,	Gayle S. Barron	United States, 2:44:52, female
+1977,	Michiko (Miki) Gorman	United States, 2:48:33, female
+1976,	Kim Merritt	United States, 2:47:10, female
+1975,	Liane Winter	Germany, 2:42:24, female
+1974,	Michiko (Miki) Gorman	United States, 2:47:11, female
+1973,	Jacqueline A. Hansen	United States, 3:05:59, female
+1972,	Nina Kuscsik	United States, 3:10:26, female
