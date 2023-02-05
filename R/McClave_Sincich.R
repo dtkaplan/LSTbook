@@ -35,3 +35,12 @@
 #' - `index` an index score for ranking players.
 #'
 "PGA_index"
+
+#' @rdname McClave_Sincich
+#' @format `Dowsing`: Locations identified by dowsers in an experiment
+#' - `trial` just the row number
+#' - `subject` identifying number assigned to the subject
+#' - `pipe` location of the flowing-water pipe along a 10-meter line (decimeters)
+#' - `guess` the dowser's guess of the location of the pipe in that trial (decimeters)
+#'
+"Dowsing"

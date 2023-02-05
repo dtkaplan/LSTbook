@@ -6,6 +6,7 @@
 \alias{Clock_auction}
 \alias{Geography_journals}
 \alias{PGA_index}
+\alias{Dowsing}
 \title{Data from McClave-Sincich \emph{Statistics} 11/e}
 \format{
 \code{Clock_auction}: Prices for grandfather clocks sold in auction
@@ -31,6 +32,14 @@
 \item \code{accuracy} percent of drives that land in the fairway
 \item \code{index} an index score for ranking players.
 }
+
+\code{Dowsing}: Locations identified by dowsers in an experiment
+\itemize{
+\item \code{trial} just the row number
+\item \code{subject} identifying number assigned to the subject
+\item \code{pipe} location of the flowing-water pipe along a 10-meter line (decimeters)
+\item \code{guess} the dowser's guess of the location of the pipe in that trial (decimeters)
+}
 }
 \source{
 \href{https://www.statcrunch.com/books/?book=mcclave_mstat12e}{StatCrunch}
@@ -41,6 +50,8 @@ Clock_auction
 Geography_journals
 
 PGA_index
+
+Dowsing
 }
 \description{
 These are relatively small data frames used for exercises
