@@ -9,14 +9,30 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
                        ..., data = NULL, nlevels=3, show_data=TRUE,
                        interval=c("none", "prediction", "confidence"), data_alpha=0.25) {
   # Allow unquoted names as arguments
+  if (missing(x)) { # when the plotting variables aren't explicitly identified.
+    evars <- explanatory_vars(mod)
+    x <- evars[1]
+    if (length(evars) >= 4) facet2 <- evars[4]
+    if (length(evars) >= 3) facet <- evars[3]
+    if( length(evars) >= 2) color <- evars[2]
+  }
+
   x <- as.character(substitute(x))
-  if (length(x) == 0) stop("Must provide mapping to `x` variable.")
-  color <- as.character(substitute(color))
-  if (length(color) == 0) color <- NULL
-  facet <- as.character(substitute(facet))
-  if (length(facet) == 0) facet <- NULL
-  facet2 <- as.character(substitute(facet2))
-  if (length(facet2) == 0) facet2 <- NULL
+
+  if (x[1] == "aes") { # handle the mistaken use of aes() gracefully.
+    if (length(x) >= 5) facet2 <- x[5]
+    if (length(x) >= 4) facet <- x[4]
+    if (length(x) >= 3) color <- x[3]
+    x <- x[2]
+  } else {
+    if (length(x) == 0) stop("Must provide mapping to `x` variable.")
+    color <- as.character(substitute(color))
+    if (length(color) == 0) color <- NULL
+    facet <- as.character(substitute(facet))
+    if (length(facet) == 0) facet <- NULL
+    facet2 <- as.character(substitute(facet2))
+    if (length(facet2) == 0) facet2 <- NULL
+  }
 
   interval=match.arg(interval)
 
