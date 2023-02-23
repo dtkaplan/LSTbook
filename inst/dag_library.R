@@ -78,7 +78,7 @@ dag10 <- dag_make(
   d ~ exo(),
   e ~ exo(),
   f ~ 2*binom() - 1,
-  y ~ binom(2*a - 3*b + c + 0*d + 0*e + 0*f)
+  y ~ binom(2*a - 3*b + c - 1.5*d + 1*e + 0.5*f)
 )
 
 dag11 <- dag_make(
@@ -151,10 +151,4 @@ list_of_dags <- c(
   file = "data/daglib.rda")
 
 do.call(save, list_of_dags)
-
-# save(dag00, dag01, dag02, dag03, dag04, dag05,
-#      dag06, dag07, dag08, dag09, dag10, dag11, dag12,
-#      dag_vaccine,
-#      dag_school1, dag_school2, dag_satgpa, dag_flights,
-#      file = "data/daglib.rda")
 
