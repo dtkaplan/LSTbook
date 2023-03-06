@@ -18,6 +18,8 @@ get_lesson_worksheet <- function(lesson=19, force=FALSE) {
 
   content <- readLines(URL)
   # Fix the author line
+  userID <- rstudioapi::userIdentity()
+  userID <- gsub("@.*$", "", userID)
   content <- sub("Jane Doe", rstudioapi::userIdentity(), content)
   # Replace the content-ful answer blocks with a mute "ANSWER: "
   content <- fix_answers(content)
