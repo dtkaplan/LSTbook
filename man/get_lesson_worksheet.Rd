@@ -2,9 +2,12 @@
 % Please edit documentation in R/get_lesson_worksheet.R
 \name{get_lesson_worksheet}
 \alias{get_lesson_worksheet}
+\alias{get_teaching_notes}
 \title{Pull in a worksheet template from the Math 300Z repository.}
 \usage{
 get_lesson_worksheet(lesson = 19, force = FALSE)
+
+get_teaching_notes(lesson = 19, force = FALSE)
 }
 \arguments{
 \item{lesson}{integer: lesson number}

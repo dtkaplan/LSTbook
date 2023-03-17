@@ -12,13 +12,13 @@ Depends: R (> 3.5),
 LazyData: true
 Imports: rlang,
          tibble,
-         igraph
+         igraph,
+         palmerpenguins
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests: 
     ggplot2,
     ggformula,
     testthat (>= 3.0.0),
-    moderndive,
-    palmerpenguins
+    moderndive
 Config/testthat/edition: 3

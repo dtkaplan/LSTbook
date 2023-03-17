@@ -30,6 +30,25 @@ get_lesson_worksheet <- function(lesson=19, force=FALSE) {
 
 
 }
+#' @rdname get_lesson_worksheet
+#' @export
+get_teaching_notes <- function(lesson=19, force=FALSE) {
+  if (length(lesson) != 1 || lesson != round(lesson) || lesson < 19 || lesson > 38)
+    stop("lesson must be an integer 19 through 38.")
+  file_name <- glue::glue("Teaching-notes-{lesson}.Rmd")
+
+  if (!force && file_name %in% dir())
+    stop(glue::glue("Teaching notes file for Lesson {lesson} already exists. To over-write it, use the `force=TRUE` argument."))
+
+  URL <- glue::glue("https://raw.githubusercontent.com/dtkaplan/Math-300Z/main/Day-by-day/Lesson-{lesson}/Teaching-notes-{lesson}.qmd")
+
+  content <- readLines(URL)
+
+  writeLines(content, con=file_name)
+
+  message("Created ", file_name, ". You can open it in the editor.")
+
+}
 
 #' Replace the answer blocks with a simple "ANSWER:"
 fix_answers <- function(content, spacer="@") {
