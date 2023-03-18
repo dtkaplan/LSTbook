@@ -1,0 +1,31 @@
+# Data on run-off from the Monocacy river at Jug Bridge, Maryland.
+# Source: "Probability Concepts in Engineering" A H-S Ang and W H Tang, 2007, John Wiley and Sons
+
+Monocacy_river <- tibble::tribble(
+  ~ precip, ~ runoff,
+  1.11, 0.52,
+  1.17, 0.40,
+  1.79, 0.97,
+  5.62, 2.92,
+  1.13, 0.17,
+  1.54, 0.19,
+  3.19, 0.76,
+  1.73, 0.66,
+  2.09, 0.78,
+  2.75, 1.24,
+  1.20, 0.39,
+  1.01, 0.30,
+  1.64, 0.70,
+  1.57, 0.77,
+  1.54, 0.59,
+  2.09, 0.95,
+  3.54, 1.02,
+  1.17, 0.39,
+  1.15, 0.23,
+  2.57, 0.45,
+  3.57, 1.59,
+  5.11, 1.74,
+  1.52, 0.56,
+  2.93, 1.12,
+  1.16, 0.64,
+)
