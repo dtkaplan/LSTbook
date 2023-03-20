@@ -15,8 +15,30 @@ model_plot(
   nlevels = 3,
   show_data = TRUE,
   interval = c("none", "prediction", "confidence"),
+  level = 0.95,
   data_alpha = 0.25
 )
+}
+\arguments{
+\item{mod}{A model object as constructed by \code{lm()} or \code{glm()}}
+
+\item{x}{Name (unquoted) of the explanatory variable to put on the x-axis}
+
+\item{color}{Like \code{x}, but for color (if any).}
+
+\item{facet}{Like \code{x}, but for first level of facetting (if any).}
+
+\item{facet2}{Like \code{x}, but for second level of facetting (if any).}
+
+\item{nlevels}{Number of levels to use for categorical variables}
+
+\item{show_data}{Whether to show the data along with the model}
+
+\item{interval}{One of "none", "prediction", "confidence"}
+
+\item{level}{Level to use for interval (default: 0.95)}
+
+\item{data_alpha}{Transparency level for data (default: 0.25)}
 }
 \description{
 Plot model output for representative levels of explanatory variables

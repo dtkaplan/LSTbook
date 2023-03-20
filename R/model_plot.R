@@ -1,5 +1,17 @@
 #' Plot model output for representative levels of explanatory variables
 #'
+#' @param mod A model object as constructed by `lm()` or `glm()`
+#' @param x Name (unquoted) of the explanatory variable to put on the x-axis
+#' @param color Like `x`, but for color (if any).
+#' @param facet Like `x`, but for first level of facetting (if any).
+#' @param facet2 Like `x`, but for second level of facetting (if any).
+#' @param nlevels Number of levels to use for categorical variables
+#' @param show_data Whether to show the data along with the model
+#' @param interval One of "none", "prediction", "confidence"
+#' @param level Level to use for interval (default: 0.95)
+#' @param data_alpha Transparency level for data (default: 0.25)
+#'
+#'
 #' @examples
 #' mod <- lm(time ~ distance*sex*climb, data=Hill_racing)
 #' model_plot(mod, x=climb, color=sex, facet=distance, nlevels=4, show_data=TRUE)
@@ -7,7 +19,8 @@
 #' @export
 model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
                        ..., data = NULL, nlevels=3, show_data=TRUE,
-                       interval=c("none", "prediction", "confidence"), data_alpha=0.25) {
+                       interval=c("none", "prediction", "confidence"),
+                       level=0.95, data_alpha=0.25) {
   # Allow unquoted names as arguments
   if (missing(x)) { # when the plotting variables aren't explicitly identified.
     evars <- explanatory_vars(mod)
@@ -75,7 +88,7 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
 
   alpha_val <- 0.75
   For_plotting <-
-    model_eval(mod, data=expand.grid(Skeleton), interval=interval)
+    model_eval(mod, data=expand.grid(Skeleton), interval=interval, level=level)
 
   # determine the plot geoms and formulas
   data_formula <- as.formula(glue::glue("{response_name} ~ {x}"))
@@ -96,8 +109,9 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
     data_plot_fun <- gf_jitter
     if (interval != "none" && ".lwr" %in% names(For_plotting)) {
       space_formula <- as.formula(glue::glue(".lwr + .upr ~ {x}"))
+    } else {
+      space_formula <- as.formula(glue::glue(".output + .output ~ {x}"))
     }
-    space_formula <- as.formula(glue::glue(".output + .output ~ {x}"))
   }
 
   if(length(plotting_names) > 1) {
