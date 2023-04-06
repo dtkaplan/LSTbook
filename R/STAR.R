@@ -16,6 +16,7 @@
 #' - hsgrad: high-school graduation (graduated or not). NOTE: There are many NAs
 #' - g4math: total scaled score for the math portion of the fourth-grade standardized test
 #' - g4reading: total scaled score for the reading portion of the fourth-grade standardized test
+#'
 #' @references
 #' -  Imai, Kosuke. 2017. Quantitative Social Science: An Introduction. Princeton University Press. [URL](https://press.princeton.edu/books/hardcover/9780691167039/quantitative-social-science) from whence
 #' these data were added to `{math300}`.
