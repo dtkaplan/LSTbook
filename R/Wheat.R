@@ -1,6 +1,7 @@
 #' Experimental data on the yield of winter wheat
 #'
 #' In the experiment, eight different varieties of winter wheat were planted in each of 7 calendar years (1996-2002).
+#' Each genotype was assigned randomly to a `plot` within a `block`.
 #'
 #'
 #' @usage data("Wheat")
@@ -9,14 +10,11 @@
 #'
 #' @format A data.frame with 240 rows
 #'
-#' - bodymass Mass of the adult in grams.
-#' - phylogentic identifiers
-#' - class
-#' - clade
-#' - order
-#' - family
-#' - binomial
-#'
+#' - genotype The type of wheat.
+#' - yield of the wheat from this plot
+#' - block Major region of the field
+#' - plot Subdivision of block in which the wheat was planted
+#' - year of the planting and measurement
 #'
 #' @keywords datasets
 #'

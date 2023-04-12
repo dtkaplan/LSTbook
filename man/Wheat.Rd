@@ -7,13 +7,11 @@
 \format{
 A data.frame with 240 rows
 \itemize{
-\item bodymass Mass of the adult in grams.
-\item phylogentic identifiers
-\item class
-\item clade
-\item order
-\item family
-\item binomial
+\item genotype The type of wheat.
+\item yield of the wheat from this plot
+\item block Major region of the field
+\item plot Subdivision of block in which the wheat was planted
+\item year of the planting and measurement
 }
 }
 \source{
@@ -24,5 +22,6 @@ data("Wheat")
 }
 \description{
 In the experiment, eight different varieties of winter wheat were planted in each of 7 calendar years (1996-2002).
+Each genotype was assigned randomly to a \code{plot} within a \code{block}.
 }
 \keyword{datasets}
