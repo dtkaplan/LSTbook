@@ -13,7 +13,13 @@
 #' Also,
 #' - `seq()` --- sequence from 1 to nrow
 #' - `binom(input)` --- generates a 0/1 variable based on the magnitude of the input. Probability of 1 is a logistic transformation
-#' of the input.
+#' of the input. If you want a 50/50 draw from levels "yes" and "no", use `binom(0, labels=c("yes", "no"))`
+#' - Similar to `binom()` but for multiple levels, use `categorical(levels=c("red", "green", "blue"))`. If
+#' you want the something other than even numbers of the levels, give a first argument that contains
+#' the relative frequencies of the levels, e.g. `categorical(c(1, .5, 2), levels=c("red", "green", "blue"))`
+#' - `block_by()` generate levels (as in `categorical()`) but which are designed to be orthogonal
+#' to another variable, e.g. block_by(weight, levels=c("treatment", "control"))
+#'
 #' Use `sample()` to collect data from a DAG. Arguments: `size=` and, optionally, `seed=`
 #'
 #' @param \dots one or more formulas in the DAG format

@@ -49,12 +49,33 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, show_hidden=FALSE,
     expr <- substitute(expr)
     replicate(size, eval(expr))
   }
-  cumulative <- function(probs, vals) {
+  # block an assignment to various levels by another variable
+  block_by <- function(block_var, levels=c("treatment", "control")) {
+    orig <- 1:size
+    inds <- order(block_var)
+    block_var <- block_var[inds]
+    if (is.numeric(block_var)) {
+      # divide into even-sized groups
+      block_var <- ((1:size)-1) %/% length(levels)
+    }
+    orig <- orig[inds]
+    out <- rep_len(levels, length.out=size)
+    out <- mosaic::sample(out, groups=block_var) # randomize the order within the blocks
+    back_inds <- order(orig)
+    out[back_inds]
+  }
+
+  # many levels
+  categorical <- function(probs = rep(1, length(levels)), levels = c("A", "B", "C")) {
+    if (all(probs==1)) {
+      # generate even numbers of the levels
+      return(sample(rep_len(levels, length.out=size)))
+    }
     cumprobs <- cumsum(probs/(sum(probs)))
     pick <- runif(size)
-    choices <- outer(pick, cumprobs, FUN=`>=`) |>
-      apply(1, function(x) max(which(x)))
-    vals[choices]
+    choices <- outer(pick, cumprobs, FUN=`<=`) |>
+      apply(1, function(x) min(which(x)))
+    levels[choices]
   }
   #coin flips
   count_flips <- function(x, prob=.5) {

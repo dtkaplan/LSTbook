@@ -27,9 +27,15 @@ Some random number generators are built in, and can be used in the DAG.
 Also,
 \item \code{seq()} --- sequence from 1 to nrow
 \item \code{binom(input)} --- generates a 0/1 variable based on the magnitude of the input. Probability of 1 is a logistic transformation
-of the input.
-Use \code{sample()} to collect data from a DAG. Arguments: \verb{size=} and, optionally, \verb{seed=}
+of the input. If you want a 50/50 draw from levels "yes" and "no", use \code{binom(0, labels=c("yes", "no"))}
+\item Similar to \code{binom()} but for multiple levels, use \code{categorical(levels=c("red", "green", "blue"))}. If
+you want the something other than even numbers of the levels, give a first argument that contains
+the relative frequencies of the levels, e.g. \code{categorical(c(1, .5, 2), levels=c("red", "green", "blue"))}
+\item \code{block_by()} generate levels (as in \code{categorical()}) but which are designed to be orthogonal
+to another variable, e.g. block_by(weight, levels=c("treatment", "control"))
 }
+
+Use \code{sample()} to collect data from a DAG. Arguments: \verb{size=} and, optionally, \verb{seed=}
 }
 \examples{
 one <- dag_make(x ~ exo(0.5), y ~ x + exo(0.5))
