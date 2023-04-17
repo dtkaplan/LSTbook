@@ -10,7 +10,7 @@
 #' @param seed Set the random number seed. Useful for reproducibility.
 #' @param survive one-sided tilde expression that generates a boolean/logical from the
 #' DAG variables indicating whether to keep the case in the output.
-#' @param show_hidden If `TRUE`, show even the hidden variables.
+#' @param report_hidden If `TRUE`, show even the hidden variables.
 #' @param .size_multiplier number (default 10) by which to increase the
 #' number of rows initiially generated so that the output size will be that nominally
 #' specified by `size=`. Note: If `.size_multiplier` isn't big enough, the output size
@@ -22,15 +22,14 @@
 #' dag_sample(dag03, survive= ~ g > 0)
 #' @importFrom tibble as_tibble
 #' @export
-dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, show_hidden=FALSE, .size_multiplier=10) {
+dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, report_hidden=FALSE, .size_multiplier=10) {
   # check that DAG is a list of formulas
   if (!is.list(DAG)) stop("DAG must be a list of formulas")
   if (!all(unlist(lapply(DAG, function(x) inherits(x, "formula")))))
     stop("All the components of DAG must be formulas.")
 
-  out_size <- size
   survived <- TRUE # a boolean TRUE (default: keep all the rows)
-  size <- ifelse(!is.null(survive), .size_multiplier*out_size, out_size)
+  size <- ifelse(!is.null(survive), .size_multiplier*size, size)
 
   # random noise generators
   exo <- eps <- function(sd = 1) {
@@ -41,6 +40,9 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, show_hidden=FALSE,
   }
   unif <- function(min=0, max=1) {
     runif(size, min=min, max=max)
+  }
+  pois <- function(rate) {
+    rpois(size, lambda=rate)
   }
   roll <- function(levels=1:6, weight=rep(1, length(levels))) {
     replicate(size, sample(levels, size=1, prob=weight))
@@ -66,11 +68,15 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, show_hidden=FALSE,
   }
 
   # many levels
-  categorical <- function(probs = rep(1, length(levels)), levels = c("A", "B", "C")) {
-    if (all(probs==1)) {
-      # generate even numbers of the levels
-      return(sample(rep_len(levels, length.out=size)))
+  categorical <- function(levels = c("A", "B", "C"), exact=TRUE, probs = rep(1, length(levels))) {
+    probs <- probs/sum(probs) # They should add up to 1
+    if (exact) { # table of counts should be as exactly as possible matched to probs.
+      if (unique(probs) != 1)
+        return(sample(rep.int(levels, times=round(probs*size))))
+      else
+        return(sample(rep_len(levels, length.out=size)))
     }
+    # When <exact> is FALSE, generate the levels probabalistically
     cumprobs <- cumsum(probs/(sum(probs)))
     pick <- runif(size)
     choices <- outer(pick, cumprobs, FUN=`<=`) |>
@@ -78,13 +84,13 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, show_hidden=FALSE,
     levels[choices]
   }
   #coin flips
-  count_flips <- function(x, prob=.5) {
+  count_flips <- function(x, prob=0.5) {
     rbinom(size, size=x, prob)
   }
   #transformations
-  binom <- function(x=0, labels=NULL) {
+  binom <- function(logodds=NULL, prob=0.5, labels=NULL) {
     # 1 or 0 output with logistic input
-    prob <- exp(x)/(1+exp(x))
+    if (is.null(logodds))  prob <- exp(logodds)/(1+exp(logodds))
     yesno <- as.numeric(runif(size) < prob)
     if (!is.null(labels) && length(labels)==2)
       yesno <- labels[yesno+1]
@@ -125,7 +131,7 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, show_hidden=FALSE,
 
   # Post-process: take out the items whose names start with dots
   rid <- rep(FALSE, length(vnames))
-  if (! show_hidden) rid <- grepl("^\\.", vnames)
+  if (! report_hidden) rid <- grepl("^\\.", vnames)
 
   return(Res[, !rid])
 }
@@ -138,8 +144,8 @@ sample.dagsystem <- function(x, size, replace = FALSE, ...) {
 }
 
 #' @export
-print.dagsystem <- function(x, ..., show_hidden=FALSE) {
-  if (!show_hidden) {
+print.dagsystem <- function(x, ..., report_hidden=FALSE) {
+  if (!report_hidden) {
     # find the hidden ones and suppress
     left_names <- lapply(x, FUN=function(x) all.vars(x[[2]]))
     rid <- which(grepl("^\\.", left_names))

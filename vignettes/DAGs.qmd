@@ -1,0 +1,96 @@
+---
+title: "Simulations with Directed Acyclic Graphs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DAGs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r include=FALSE}
+library(math300)
+```
+
+A "directed acyclic graph" (DAG) is an almost intuitive way of representing causal connections among variables. For instance, a popular legend holds that there is a correlation between drownings and ice-cream consumption. This legend is used as an example of the principle "correlation is not causation," since drownings don't lead to ice-cream consumption and ice-cream consumption doesn't lead to drownings. Rather, the warmth and relaxation of summer leads to both increased swimming activity and cooling refreshment consumption. In a DAG, the variables (`season`, `drowning`, `ice_cream` consumption) form the nodes of a mathematical graph. The causal links are arrows ("directed edges") between the nodes. @fig-ice-cream-dags show two DAGs representing two distinct hypotheses about the causal connections.
+
+```{r echo=FALSE}
+Legend2 <- dag_make(
+  season ~ categorical(c("Spring", "Summer", "Fall", "Winter")),
+  drowning ~ pois(rate=.05 + .15*(season=="Summer")),
+  ice_cream ~ signif(unif(1,3) + (season=="Summer")*unif(2,5),2)
+)
+```
+
+```{r}
+#| code-fold: true
+Legend <- dag_make(
+  season ~ categorical(c("Spring", "Summer", "Fall", "Winter")),
+  ice_cream ~ signif(unif(1,3) + (season=="Summer")*unif(2,5),2),
+  drowning ~ pois(rate=ice_cream/30 + .5*(season=="Summer"))
+)
+```
+
+```{r echo=FALSE}
+#| label: fig-ice-cream-dags
+#| layout-ncol: 2
+#| fig-cap: "Two different DAGs about the ice-cream/drowning legend."
+#| fig-subcap:
+#|   - "Possibly a direct connection between ice-cream and drowning"
+#|   - "No direct connection"
+
+
+  
+
+dag_draw(Legend, vertex.label.cex=1)
+dag_draw(Legend2, vertex.label.cex=1)
+```
+
+DAGs are often used as simple depictions for hypotheses about causal connections among variables. In the field of causal inference, they can be used more formally as mathematical structures, for instance to select appropriate covariates when estimating a causal link between two variables.
+
+In *Lessons*, we use them in a third way as well: as a description of a simulation. For instance, the DAG drawn in @fig-ice-cream-dags(a) was implemented in R as a list of formulas named `Legend`. We'll go into what those formulas signify later in this document. For now, note that given the R list, generating (simulated) data from the DAG is straightforward. We use such simulations throughout *Lessons*, for very specific reasons explained in the next section. `r set.seed(101)`
+
+```{r}
+#| label: tbl-ice-cream
+#| tbl-cap: "A sample of size 10 from the `Legend` DAG. Drownings are per 100,000 people in the season, ice cream is per-capita cone consumption."
+sample(Legend, size=10) |> 
+  knitr::kable() # for nice printing
+```
+
+## Simulations?
+
+"Simulation methods" in teaching statistics are usually taken to refer to resampling and permutation-test approaches to statistical inference. We use these, as appropriate in *Lessons*. But the meaning of "simulation" relevant to this document is the generation of made-up data that possesses specified properties such as being consistent with a given causal hypothesis.
+
+The statistics education community has become familiar with the advice to "use real data." *Lessons* is primarily oriented toward the use of real data. However, made-up data can serve important pedagogical purposes.
+
+1. Learn about sampling variation and confidence intervals.
+2. Observe the uses of covariates in statistical modeling.
+3. Confirm the causal inference principles about the choice of covariates.
+
+A key feature of simulations is that the results of data analysis can be compared to the *actual mechanism* that generates the data.
+
+Simulating data using DAGs is a two-step process:
+
+1. Define the DAG, which is mostly a matter of writing formulas describing the relationships among variables.
+2. Sample from the DAG defined in (1). 
+
+## Defining normal DAGs
+
+"Normal DAG" is a double-ententre, referring to the easiest kind of DAG to define and to the use of Gaussian noise as the exogenous inputs to the simulation. A few examples will suffice for those who want to write their own DAGs. There are also several off-the-shelf DAGs provided in the `{math300}` package, e.g., `dag01` through `dag12` and a few others.
+
+Use the `dag_make()` command to construct an R object which can then be drawn as a diagram, sampled from, and so on. The arguments to `dag_make()` are one or more tilde expressions (called "formulas" in most R documentation) that name the variables to be included in the DAG and describe the calculations in the simulations.
+
+```{r}
+ex1 <- dag_make(
+  C ~ exo(),
+  X ~ C + exo(),
+  Y ~ 2*X - 3*C + exo()
+)
+```
+

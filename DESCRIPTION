@@ -20,5 +20,8 @@ Suggests:
     ggplot2,
     ggformula,
     testthat (>= 3.0.0),
-    moderndive
+    moderndive,
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
+VignetteBuilder: knitr

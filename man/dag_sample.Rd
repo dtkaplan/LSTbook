@@ -9,7 +9,7 @@ dag_sample(
   size = 10,
   seed = NULL,
   survive = NULL,
-  show_hidden = FALSE,
+  report_hidden = FALSE,
   .size_multiplier = 10
 )
 }
@@ -24,7 +24,7 @@ can be used to create other variables.}
 \item{survive}{one-sided tilde expression that generates a boolean/logical from the
 DAG variables indicating whether to keep the case in the output.}
 
-\item{show_hidden}{If \code{TRUE}, show even the hidden variables.}
+\item{report_hidden}{If \code{TRUE}, show even the hidden variables.}
 
 \item{.size_multiplier}{number (default 10) by which to increase the
 number of rows initiially generated so that the output size will be that nominally
