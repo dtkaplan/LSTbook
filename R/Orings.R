@@ -8,8 +8,8 @@
 #' launch ever.  After an intense 3-hour telephone conference, officials
 #' decided to proceed with the launch.  This data frame contains the
 #' launch temperatures and the number of O-ring problems in 24 shuttle
-#' launches prior to the *Challenger*. [This documentation comes from the `Sleuth3` package,
-#' where the dataset is called `ex2223`.]
+#' launches prior to the *Challenger*. (This documentation comes from the `Sleuth3` package,
+#' where the dataset is called `ex2223`.)
 #'
 #' @docType data
 #'

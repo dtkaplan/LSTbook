@@ -40,7 +40,12 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
 
   if (is.null(data) || nrow(data) == 0) {
      if (skeleton) { # build a skeleton
-       eval_data <- training_data <- model_skeleton(mod, ncont=ncont)
+       if (length(explanatory_vars(mod))==0) {
+          # handle ~ 1 models with no explanatory variables
+         eval_data <- training_data <- tibble(.input = "~ 1")
+       } else {
+         eval_data <- training_data <- model_skeleton(mod, ncont=ncont)
+       }
        response_in_data <- FALSE
      } else {
        # use the training data

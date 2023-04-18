@@ -6,7 +6,8 @@
 #' @param facet Like `x`, but for first level of facetting (if any).
 #' @param facet2 Like `x`, but for second level of facetting (if any).
 #' @param nlevels Number of levels to use for categorical variables
-#' @param show_data Whether to show the data along with the model
+#' @param show_data Whether to show the data along with the model (default TRUE)
+#' @param jitter Whether to jitter the plotted data (default TRUE)
 #' @param interval One of "none", "prediction", "confidence"
 #' @param level Level to use for interval (default: 0.95)
 #' @param data_alpha Transparency level for data (default: 0.25)
@@ -18,12 +19,15 @@
 
 #' @export
 model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
-                       ..., data = NULL, nlevels=3, show_data=TRUE,
+                       ..., data = NULL, nlevels=5, show_data=TRUE, jitter=TRUE,
                        interval=c("none", "prediction", "confidence"),
                        level=0.95, data_alpha=0.25) {
+  evars <- explanatory_vars(mod)
+  # handle case of ~ 1 models, with no explanatory variables
+  if (length(evars) == 0) evars <- "No_explan_vars"
+
   # Allow unquoted names as arguments
   if (missing(x)) { # when the plotting variables aren't explicitly identified.
-    evars <- explanatory_vars(mod)
     x <- evars[1]
     if (length(evars) >= 4) facet2 <- evars[4]
     if (length(evars) >= 3) facet <- evars[3]
@@ -59,6 +63,7 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
   all_names <- union(spread_names, other_explan_names)
   all_names_formula <- as.formula(paste("~", paste(all_names, collapse="+")))
   # data_skeleton() never returns the response variable
+  if (x=="No_explan_vars") data$No_explan_vars <- " "
   Skeleton <- data_skeleton(data, all_names_formula,
                             spreadn=length(spread_names),
                             ...,
@@ -94,7 +99,7 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
   data_formula <- as.formula(glue::glue("{response_name} ~ {x}"))
   if (continuous_or_discrete(data[[x]]) == "continuous") {
 
-    data_plot_fun <- gf_point
+    data_plot_fun <- if (jitter) gf_jitter else gf_point
     if (interval != "none" && ".lwr" %in% names(For_plotting)) {
       space_formula <- as.formula(glue::glue(".lwr + .upr ~ {x}"))
       mod_plot_fun <- gf_ribbon
@@ -146,6 +151,15 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
                  group=color_formula, data = For_plotting, alpha=alpha_val,
                  linewidth=0.75, inherit=FALSE) +
     ylab(response_name)
+
+  # Add model-value dots when x is categorical
+  if (identical(mod_plot_fun, gf_errorbar) && interval != "none") {
+    dot_formula <- as.formula(glue::glue(".output ~ {x}"))
+    P <- P %>%
+      gf_point(dot_formula, color=color_formula, fill=fill_formula,
+                   group=color_formula, data = For_plotting, alpha=1, size=3, shape=1,
+                   linewidth=0.75, inherit=FALSE)
+  }
 
   # Facet the plot
   if (length(facet_names) == 1) {

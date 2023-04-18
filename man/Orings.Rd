@@ -27,6 +27,7 @@ launched in the cold weather.  The forecasted temperature for the
 launch ever.  After an intense 3-hour telephone conference, officials
 decided to proceed with the launch.  This data frame contains the
 launch temperatures and the number of O-ring problems in 24 shuttle
-launches prior to the \emph{Challenger}.
+launches prior to the \emph{Challenger}. (This documentation comes from the \code{Sleuth3} package,
+where the dataset is called \code{ex2223}.)
 }
 \keyword{datasets}

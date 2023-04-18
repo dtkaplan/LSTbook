@@ -12,8 +12,9 @@ model_plot(
   facet2 = NULL,
   ...,
   data = NULL,
-  nlevels = 3,
+  nlevels = 5,
   show_data = TRUE,
+  jitter = TRUE,
   interval = c("none", "prediction", "confidence"),
   level = 0.95,
   data_alpha = 0.25
@@ -32,7 +33,9 @@ model_plot(
 
 \item{nlevels}{Number of levels to use for categorical variables}
 
-\item{show_data}{Whether to show the data along with the model}
+\item{show_data}{Whether to show the data along with the model (default TRUE)}
+
+\item{jitter}{Whether to jitter the plotted data (default TRUE)}
 
 \item{interval}{One of "none", "prediction", "confidence"}
 

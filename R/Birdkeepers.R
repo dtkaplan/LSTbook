@@ -19,7 +19,7 @@
 #' @format  A data frame with 147 observations on the following 7 variables.
 #' - LC Whether subject has lung cancer
 #' - FM Sex of subject
-#' - SS Socioeconomic status, determined by occupation of the household's principal wage earner}
+#' - SS Socioeconomic status, determined by occupation of the household's principal wage earner
 #' - BK Indicator for birdkeeping (caged birds in the home for more that 6 consecutive months from 5 to 14 years before diagnosis (cases) or examination (control))
 #' - AG Age of subject (in years)
 #' - YR Years of smoking prior to diagnosis or examination

@@ -9,7 +9,7 @@ A data frame with 147 observations on the following 7 variables.
 \itemize{
 \item LC Whether subject has lung cancer
 \item FM Sex of subject
-\item SS Socioeconomic status, determined by occupation of the household's principal wage earner}
+\item SS Socioeconomic status, determined by occupation of the household's principal wage earner
 \item BK Indicator for birdkeeping (caged birds in the home for more that 6 consecutive months from 5 to 14 years before diagnosis (cases) or examination (control))
 \item AG Age of subject (in years)
 \item YR Years of smoking prior to diagnosis or examination
