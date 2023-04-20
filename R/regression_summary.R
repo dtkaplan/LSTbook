@@ -16,15 +16,21 @@
 #'
 #' @param model A model as produced by `lm()`, `glm()`, and so on
 #' @param level Confidence level to use in `conf_interval()` (default: 0.95)
+#' @param show_p For `conf_interval()`, append the p-value to the report.
 #' @param \ldots One or more models (for ANOVA)
 #'
 #'
 #' @rdname regression_summaries
 #' @export
-conf_interval <- function(mod, level=0.95) {
+conf_interval <- function(mod, level=0.95, show_p = FALSE) {
   Raw <- confint(mod, level=level)
   Tmp <- stats::coefficients(mod)
-  tibble::tibble(term = row.names(Raw), .lwr = Raw[, 1], .coef=as.numeric(Tmp),  .upr = Raw[, 2])
+  Res <- tibble::tibble(term = row.names(Raw), .lwr = Raw[, 1], .coef=as.numeric(Tmp),  .upr = Raw[, 2])
+
+  if (show_p) { # add the p-values to the report
+    Res$p.value <- regression_summary(mod)$p.value
+  }
+  Res
 }
 #'
 #'
