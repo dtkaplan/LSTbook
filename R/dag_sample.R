@@ -66,12 +66,18 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, report_hidden=FALS
     back_inds <- order(orig)
     out[back_inds]
   }
+  # translate each level of a categorical variable into a specified numerical value
+  value <- function(variable, levels, vals) {
+    names(vals) <- levels
+    as.vector(vals[variable])
+  }
+
 
   # many levels
   categorical <- function(levels = c("A", "B", "C"), exact=TRUE, probs = rep(1, length(levels))) {
     probs <- probs/sum(probs) # They should add up to 1
     if (exact) { # table of counts should be as exactly as possible matched to probs.
-      if (unique(probs) != 1)
+      if (length(unique(probs)) != 1)
         return(sample(rep.int(levels, times=round(probs*size))))
       else
         return(sample(rep_len(levels, length.out=size)))
@@ -117,7 +123,8 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, report_hidden=FALS
     # next line is to handle constants, e.g. x ~ 3
     if (length(this) != size) this <- rep_len(this, size)
 
-    Res[[vnames[k]]] <- this # make it available for successive formulas.
+    Res[[vnames[k]]] <- this
+    #assign(vnames[k], this, envir=Res) # make it available for successive formulas.
   }
 
   Res <- tibble::as_tibble(Res) # convert to a data frame

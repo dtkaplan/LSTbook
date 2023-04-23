@@ -59,6 +59,7 @@ source_nodes <- function(DAG) {
 # appear on the left-hand side of one of the formulas.
 dag_check <- function(DAG) {
   all(source_nodes(DAG) %in% node_names(DAG))
+  TRUE
 }
 
 

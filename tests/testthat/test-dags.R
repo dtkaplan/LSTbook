@@ -30,3 +30,13 @@ test_that("rounding works", {
   expect_equal(S$x, round(S$x))
 })
 
+test_that("Translation from categorical to numerical works.", {
+          D <- dag_make(
+            g ~ categorical(levels=c("A", "B", "C")),
+            y ~ value(g, c("A", "B", "C"), c(1,2,10))
+            )
+          Samp <- sample(D, size=100)
+          expect_equal(df_stats(y ~ g, data=Samp, mean)$mean, c(1,2,10))
+
+
+         } )
