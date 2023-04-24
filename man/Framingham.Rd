@@ -7,7 +7,7 @@
 \format{
 4238 rows, each of which is a FHS subject. There are 16 variables:
 \itemize{
-\item \code{male} 1 if male, 0 if female
+\item \code{sex}
 \item \code{age} of the patient
 \item \code{education} highest level achieved: some HS, HS grad/GED, some college/vocational school, college graduate
 \item \code{currentSmoker}: whether or not the patient is a current smoker

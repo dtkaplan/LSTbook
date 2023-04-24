@@ -11,7 +11,7 @@
 #' @docType data
 #'
 #' @format 4238 rows, each of which is a FHS subject. There are 16 variables:
-#' - `male` 1 if male, 0 if female
+#' - `sex`
 #' - `age` of the patient
 #' - `education` highest level achieved: some HS, HS grad/GED, some college/vocational school, college graduate
 #' - `currentSmoker`: whether or not the patient is a current smoker
