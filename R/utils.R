@@ -15,7 +15,7 @@ response_var <- function(model, ...) {
 }
 #' @rdname utils
 response_values <- function(model, ...) {
-  eval(parse(text = response_var(model)), envir = data_from_mod(model))
+  eval(parse(text = response_var(model)), envir = data_from_model(model))
 }
 #' @rdname utils
 formula_from_mod <- function(model, ...) {
@@ -33,29 +33,25 @@ formula_from_mod <- function(model, ...) {
 #'
 #' @details not all model architectures keep track of the training data
 #' If a model architecture isn't recognized, you'll have to add a method for that class. See vignette.
-data_from_mod <- function(model, ...) {
-  UseMethod("data_from_mod")
+#'
+data_from_model <- function(model, ...) {
+  UseMethod("data_from_model")
 }
+#' @exportS3Method
+data_from_model.lm <- function(model, ...) model.frame(model)
+#' @exportS3Method
+data_from_model.glm <- function(model, ...) model.frame(model)
 
 
-data_from_mod.bootstrap_ensemble <- function(model, ...) data_from_mod(model$original_model, ...)
-
-data_from_mod.default <- function(model, ...) {
+data_from_model.default <- function(model, ...) {
   error_string <- paste0("Model architecture '",
                          paste(class(model), collapse = "', "),
                          "' not recognized by mosaicModel.")
-  if ( ! "call" %in% names(model) || !"data" %in% names(model$call))
-    stop(error_string)
-  data_in_call <- which("data" == names(model$call))
-  if (length(data_in_call) == 1) {
-    the_data <- eval(model$call[[data_in_call]], envir = parent.frame(3))
-    if (is.data.frame(the_data)) return(the_data)
-  }
   stop(error_string)
 }
 
-
-data_from_mod.knn3 <- function(model, ...) {
+#' @exportS3Method
+data_from_model.knn3 <- function(model, ...) {
   res <- data.frame(model$learn$y, model$learn$X)
   names(res)[1] <- as.character(response_var(model))
 

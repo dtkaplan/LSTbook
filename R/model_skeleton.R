@@ -10,7 +10,8 @@
 #' @export
 model_skeleton <- function(mod, data=NULL, ncont=3) {
   if (is.null(data)) {
-    data <- try(extract_training_data(mod), silent=TRUE)
+    #data <- try(extract_training_data(mod), silent=TRUE)
+    data <- try(data_from_model(mod), silent=TRUE)
     if (inherits(data, "try-error")) {
       stop("Your model does not carry its own training data. Use the data= argument to provide it. ")
     }

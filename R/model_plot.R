@@ -55,7 +55,10 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
 
   response_name <- as.character(deparse(response_var(mod)))
 
-  if (is.null(data)) data <- extract_training_data(mod)
+  if (is.null(data)) {
+    #data <- extract_training_data(mod)
+    data <- data_from_model(mod)
+  }
   plotting_names <- c(x, color)
   facet_names <- c(facet, facet2)
   spread_names <- c(plotting_names, facet_names)
@@ -146,6 +149,8 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
     P <- NULL
   }
 
+  # avoid warning if fill aesthetic isn't needed.
+  if (interval=="none") fill_formula <- NULL
   P <- P %>%
     mod_plot_fun(space_formula, color=color_formula, fill=fill_formula,
                  group=color_formula, data = For_plotting, alpha=alpha_val,
@@ -165,10 +170,8 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
   if (length(facet_names) == 1) {
     P <- P + facet_wrap(paste0("..", facet, ".."),labeller = "label_both")
   } else if (length(facet_names)==2) {
-    dotted_names <- paste0("..", facet_names, "..")
-     P <- P + facet_grid(rows=dotted_names[1],
-                         cols=dotted_names[2],
-                         labeller = "label_both")
+     facet_formula <- as.formula(paste(facet, "~", facet2))
+     P <- P + facet_grid(facet_formula, labeller = "label_both")
   }
 
   # Set the color scale

@@ -96,7 +96,7 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, report_hidden=FALS
   #transformations
   binom <- function(logodds=NULL, prob=0.5, labels=NULL) {
     # 1 or 0 output with logistic input
-    if (is.null(logodds))  prob <- exp(logodds)/(1+exp(logodds))
+    if (!is.null(logodds))  prob <- exp(logodds)/(1+exp(logodds))
     yesno <- as.numeric(runif(size) < prob)
     if (!is.null(labels) && length(labels)==2)
       yesno <- labels[yesno+1]

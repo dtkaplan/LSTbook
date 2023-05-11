@@ -68,25 +68,29 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
   interval = match.arg(interval)
   if (level <= 0 || level >=1) stop("<level> must be > 0 and < 1.")
 
-  # Evaluate the model at the selected data values
-  interval_fun <- add_pi
-  if (interval == "confidence") interval_fun = add_ci
-  # Try to get a prediction interval
-  Result <- try(
-    interval_fun(eval_data, mod, yhatName=".output",
-                 names=c(".lwr", ".upr"), alpha=1-level, response=TRUE),
-    silent=TRUE
+  if (interval == "none") {
+    Fitted <- model_eval_fun(mod, data=eval_data)
+    Result <- NULL
+  } else {
+    # Evaluate the model at the selected data values
+    interval_fun <- add_pi
+    if (interval == "confidence") interval_fun = add_ci
+    # Try to get a prediction interval
+    Result <- try(
+      interval_fun(eval_data, mod, yhatName=".output",
+                   names=c(".lwr", ".upr"), alpha=1-level, response=TRUE),
+      silent=TRUE
     )
-  if (inherits(Result, "try-error")) {
-    if (interval=="prediction")
-      warning("Prediction intervals not available for this model type. Giving confidence intervals instead.")
-    Result <- add_ci(eval_data, mod, alpha = 1 - level,
-                     names=c(".lwr", ".upr"), yhatName=".output",
-                     response=TRUE)
+    if (inherits(Result, "try-error")) {
+      if (interval=="prediction")
+        warning("Prediction intervals not available for this model type. Giving confidence intervals instead.")
+      Result <- add_ci(eval_data, mod, alpha = 1 - level,
+                       names=c(".lwr", ".upr"), yhatName=".output",
+                       response=TRUE)
     }
-  Fitted <- Result[".output"]
-  if (".lwr" %in% names(Result)) Result <- Result[c(".lwr", ".upr")]
-
+    Fitted <- Result[".output"]
+    if (".lwr" %in% names(Result)) Result <- Result[c(".lwr", ".upr")]
+  }
   if (response_in_data) {
     Residuals <- data.frame(.resid = eval_data[[1]] - Fitted$.output)
     names(training_data)[1] <- ".response" # give it a generic name
