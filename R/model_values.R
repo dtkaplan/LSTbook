@@ -17,7 +17,7 @@
 #' @export
 model_values <- function(data, tilde, family="lm") {
   # Figure out if we are in side `mutate()`
-  in_mutate <- try(grepl("mutate", deparse(sys.calls()[[sys.nframe()-1]])))
+  in_mutate <- try(any(grepl("mutate", deparse(sys.calls()))))
   if (inherits(in_mutate, "try-error")) in_mutate <- FALSE
   if (in_mutate) {
     tilde <- data # we don't need the data argument
