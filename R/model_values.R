@@ -15,8 +15,9 @@
 #' mtcars |> mutate(mpg_mod = model_values(mpg ~ hp + wt)) |> select(hp, wt, mpg_mod) |> head()
 #'
 #' @export
-model_values <- function(data, tilde, family="lm") {
-  # Figure out if we are in side `mutate()`
+model_values <- function(data, tilde, family=c("linear", "prob", "counts")) {
+  family <- match.arg(family)
+  # Figure out if we are inside `mutate()`
   in_mutate <- try(any(grepl("mutate", deparse(sys.calls()))))
   if (inherits(in_mutate, "try-error")) in_mutate <- FALSE
   if (in_mutate) {
@@ -38,6 +39,12 @@ model_values <- function(data, tilde, family="lm") {
     data <- data
   }
 
-  if (family=="lm") lm(tilde, data=data, na.action=na.exclude) |> predict() |> as.vector()
-  else stop("Model type not recognized.")
+  model <-
+    if (family=="linear") lm(tilde, data=data, na.action=na.exclude)
+    else if (family=="prob") glm(tilde, data=data, family="binomial", na.action=na.exclude)
+    else if (family=="counts") glm(tilde, data=data, family="poisson", na.action=na.exclude)
+    else stop("Model type not recognized.")
+
+  model |> predict(type="response") |> as.vector()
+
 }

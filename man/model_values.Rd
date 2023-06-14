@@ -4,7 +4,7 @@
 \alias{model_values}
 \title{Construct a model and return the model values}
 \usage{
-model_values(data, tilde, family = "lm")
+model_values(data, tilde, family = c("linear", "prob", "counts"))
 }
 \arguments{
 \item{data}{A data frame containing the training data. When used with \code{mutate()}, \code{data} will

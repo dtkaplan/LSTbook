@@ -33,6 +33,6 @@ variables.}
 A simple introduction to data graphics with up to three variables.
 }
 \examples{
-mtcars |> df_graphic(mpg ~ wt + cyl)
-mtcars |> mutate(cyl=as.factor(cyl)) |> df_graphic(mpg ~ wt + cyl, annot="both")
+mtcars |> data_graph(mpg ~ wt + cyl)
+mtcars |> mutate(cyl=as.factor(cyl)) |> data_graph(mpg ~ wt + cyl, annot="both")
 }

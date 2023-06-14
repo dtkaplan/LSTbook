@@ -16,7 +16,8 @@
 #' @export
 #'
 data_graph <- function(D, tilde, ..., data=NULL, seed=101,
-                       annot = c("none", "violin", "box", "both"), jitter=TRUE,
+                       annot = c("none", "violin", "box", "both"),
+                       jitter=TRUE,
                        cgrad = c("yellow", "darkblue")) {
   annot <- match.arg(annot)
   vars <- all.vars(tilde)
@@ -61,9 +62,9 @@ data_graph <- function(D, tilde, ..., data=NULL, seed=101,
   color_discrete <- inherits(color_data, "zero_one") || !is.numeric(color_data)
 
   if (jitter) { # automatic jittering
-    x_jitter <- NULL # default jittering amount
+    x_jitter <- 0.15 # default jittering amount
     if (is.numeric(x_data) && !inherits(x_data, "zero_one")) x_jitter=0
-    y_jitter <- NULL # default jittering amount
+    y_jitter <- 0.15 # default jittering amount
     if (is.numeric(y_data) && !inherits(y_data, "zero_one")) y_jitter=0
   }
 
@@ -77,7 +78,7 @@ data_graph <- function(D, tilde, ..., data=NULL, seed=101,
 
   Res <- do.call(gf_jitter, args)
   # Eliminate x-axis label and ticks if not needed.
-  if (all(x_data == xstring)) Res <- Res + scale_x_discrete() + xlab("")
+  if (is.character(x_data) && all(x_data == xstring)) Res <- Res + scale_x_discrete() + xlab("")
 
   # Add palette if color mapped to a variable
   if ("color" %in% names(args) && inherits(args$color, "formula")) {

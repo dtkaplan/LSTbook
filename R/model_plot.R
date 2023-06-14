@@ -71,6 +71,16 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
                             spreadn=length(spread_names),
                             ...,
                             ncont=100, nlevels=nlevels)
+  Skeleton_label_data <- NULL
+
+  # If color is a numerical value, prettify the levels
+  if (!is.null(color) && is.numeric(data[[color]]) &&
+      any(Skeleton[[color]] != round(Skeleton[[color]]))) {
+    Skeleton[[color]] <- pretty(Skeleton[[color]], n=nlevels)
+    Skeleton_label_data <- Skeleton
+    Skeleton_label_data[[x]] <- extendrange(
+      Skeleton_label_data[[x]])[2]
+  }
 
   # If there is faceting going on based on a quantitative variable,
   # redo the Skeleton so the levels are in the middle
@@ -86,18 +96,27 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
   }
   # If a continuous variable is mapped to color, space the skeleton
   # levels evenly
-  if (!is.null(color) && continuous_or_discrete(data[[color]])=="continuous") {
-    vals <- data[[color]]
-    breaks <- seq(quantile(vals, 0.01, na.rm=TRUE),
-                  quantile(vals, 0.99, na.rm=TRUE),
-                  length = nlevels)
-    Skeleton[[color]] <- breaks
-  }
+  #
+  # I replaced this with the earlier logic near line 75
+  #
+  # if (!is.null(color) && continuous_or_discrete(data[[color]])=="continuous") {
+  #   vals <- data[[color]]
+  #   breaks <- pretty(
+  #     c(quantile(vals, 0.01, na.rm=TRUE),
+  #       quantile(vals, 0.99, na.rm=TRUE)),
+  #     n = nlevels)
+  #   Skeleton[[color]] <- breaks
+  # }
 
   alpha_val <- 0.75
   For_plotting <-
     model_eval(mod, data=expand.grid(Skeleton), interval=interval, level=level)
-
+  if (!is.null(Skeleton_label_data)) {
+    For_color_labels <-
+      model_eval(mod,
+                 data=expand.grid(Skeleton_label_data),
+                 interval="none")
+  }
   # determine the plot geoms and formulas
   data_formula <- as.formula(glue::glue("{response_name} ~ {x}"))
   if (continuous_or_discrete(data[[x]]) == "continuous") {
@@ -156,6 +175,13 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
                  group=color_formula, data = For_plotting, alpha=alpha_val,
                  linewidth=0.75, inherit=FALSE) +
     ylab(response_name)
+  # Add labels to the color
+  if (!is.null(Skeleton_label_data)) {
+    P <- P |>
+      gf_text(space_formula, color=color_formula,
+               data=For_color_labels,
+               label=color_formula, size=3)
+  }
 
   # Add model-value dots when x is categorical
   if (identical(mod_plot_fun, gf_errorbar) && interval != "none") {
@@ -178,8 +204,8 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
   if (is.null(color)) return(P)
   else if (continuous_or_discrete(data[[color]]) == "discrete")
     return(P)
-  else return(P + scale_color_stepsn(colors=heat.colors(5)) +
-                scale_fill_stepsn(colors=heat.colors(5)))
+  else return(P + scale_color_stepsn(colors=heat.colors(nlevels)) +
+                scale_fill_stepsn(colors=heat.colors(nlevels)))
 
 }
 
