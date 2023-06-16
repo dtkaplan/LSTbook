@@ -78,8 +78,13 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
       any(Skeleton[[color]] != round(Skeleton[[color]]))) {
     Skeleton[[color]] <- pretty(Skeleton[[color]], n=nlevels)
     Skeleton_label_data <- Skeleton
-    Skeleton_label_data[[x]] <- extendrange(
-      Skeleton_label_data[[x]])[2]
+    if (is.numeric(data[[x]])) {
+      Skeleton_label_data[[x]] <-
+        extendrange(Skeleton_label_data[[x]])[2]
+    } else {
+      x_levels <- unique(Skeleton_label_data[[x]])
+      Skeleton_label_data[[x]] <- x_levels[length(x_levels)]
+    }
   }
 
   # If there is faceting going on based on a quantitative variable,
@@ -94,19 +99,6 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
       Skeleton[[var]] <- center_of_groups$middle
     }
   }
-  # If a continuous variable is mapped to color, space the skeleton
-  # levels evenly
-  #
-  # I replaced this with the earlier logic near line 75
-  #
-  # if (!is.null(color) && continuous_or_discrete(data[[color]])=="continuous") {
-  #   vals <- data[[color]]
-  #   breaks <- pretty(
-  #     c(quantile(vals, 0.01, na.rm=TRUE),
-  #       quantile(vals, 0.99, na.rm=TRUE)),
-  #     n = nlevels)
-  #   Skeleton[[color]] <- breaks
-  # }
 
   alpha_val <- 0.75
   For_plotting <-
@@ -177,10 +169,14 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
     ylab(response_name)
   # Add labels to the color
   if (!is.null(Skeleton_label_data)) {
+    label_formula <- space_formula
+    label_formula[[2]] <- as.name(".output")
+    xnudge <- 0
+    if (!is.numeric(For_color_labels[[x]])) xnudge <- 0.5
     P <- P |>
-      gf_text(space_formula, color=color_formula,
-               data=For_color_labels,
-               label=color_formula, size=3)
+        gf_text(label_formula, color=color_formula,
+                data=For_color_labels,
+                label=color_formula, size=3, nudge_x=xnudge)
   }
 
   # Add model-value dots when x is categorical
