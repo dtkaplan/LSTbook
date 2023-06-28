@@ -17,8 +17,11 @@ zero_one <- function(x, one) {
   U <- unique(x)
   if (length(U) > 2) U <- c(U[1], "others")
   if (missing(one)) one <- U[1]
-  if (! one %in% U) stop("Specified level for one not one of the levels.")
-
+  if (! one %in% U) {
+    stop("Specified level for one not one of the levels.")
+  } else {
+    U <- c(one, U[U!=one])
+  }
   res <- rep(0, length(x))
   res[x == one] <- 1
   class(res) <- c(class(res), "zero_one")
