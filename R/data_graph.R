@@ -9,6 +9,8 @@
 #' @param jitter If `TRUE`, jitter categorical and zero-one variables
 #' @param cgrad vector of two color names to set color gradient for continuous color
 #' variables.
+#' @param .by a tilde expression specifying one or two variables to use for facetting
+#' the graph. (Faceting works best when the faceting variables have just a few levels.)
 #'
 #' @examples
 #' mtcars |> data_graph(mpg ~ wt + cyl)
@@ -18,6 +20,7 @@
 data_graph <- function(D, tilde, ..., data=NULL, seed=101,
                        annot = c("none", "violin", "box", "both"),
                        jitter=TRUE,
+                       .by = NULL,
                        cgrad = c("yellow", "darkblue")) {
   annot <- match.arg(annot)
   vars <- all.vars(tilde)
@@ -97,7 +100,13 @@ data_graph <- function(D, tilde, ..., data=NULL, seed=101,
   if (annot %in% c("box", "both"))
           Res <- Res |> gf_boxplot(color="blue", fill=NA)
 
-  Res
+  if (!is.null(.by)) {
+    # check that it is a formula
+    if (!inherits(.by, "formula")) error(".by= argument must be a tilde expression.")
+    Res |> gf_facet_grid(.by)
+  } else {
+    Res
+  }
 
 }
 

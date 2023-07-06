@@ -12,6 +12,7 @@ data_graph(
   seed = 101,
   annot = c("none", "violin", "box", "both"),
   jitter = TRUE,
+  .by = NULL,
   cgrad = c("yellow", "darkblue")
 )
 }
@@ -25,6 +26,9 @@ data_graph(
 \item{annot}{Statistical annotation (one of "none", "violin", "box", "both")}
 
 \item{jitter}{If \code{TRUE}, jitter categorical and zero-one variables}
+
+\item{.by}{a tilde expression specifying one or two variables to use for facetting
+the graph. (Faceting works best when the faceting variables have just a few levels.)}
 
 \item{cgrad}{vector of two color names to set color gradient for continuous color
 variables.}
