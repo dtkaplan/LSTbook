@@ -11,15 +11,22 @@
 #' @param P a ggplot2 object made by the ggformula package
 #' @param x the x-position of the rose. This will be assigned automatically if `x` isn't specified.
 #' @param y the y-position of the rose, just like `x`.
+#' @param width for rulers, the distance between tick marks (in native units, where
+#' categories are separated by a distance of 1.)
+#' @param ticks Integers, typically `0:5`, that label the ticks.
 #' @param scale the size of the rose as a fraction of the plot area covered (default 1/4)
 #' @param color text string (e.g. `"blue"`) for the rose
 #' @param keepers whether to show `"both"` positive and negative slopes or just show the `"pos"` or the `"neg"`
+#'
+#' @details For the ruler, x gives the position of the root of the ruler, with
+#' the rest of the ruler moving off to the left. (For vertically oriented rulers, use
+#' a negative width.)
 #'
 #' @examples
 #' gf_point(mpg ~ hp, data=mtcars) |> add_slope_rose()
 #' gf_point(wt ~ hp, data=mtcars) |> add_slope_rose(keepers="pos", color="blue", x=100, scale=.5 )
 #'
-#'
+#' @rdname statistical_annotations
 #' @export
 add_slope_rose <-
 function(P, x=NULL, y=NULL, scale=1/4, color="red", keepers=c("both", "pos", "neg")) {
@@ -45,3 +52,37 @@ function(P, x=NULL, y=NULL, scale=1/4, color="red", keepers=c("both", "pos", "ne
 
 
 }
+
+
+#' Add a ruler (typically on top of a violin plot)
+#' @rdname statistical_annotations
+#' @export
+add_violin_ruler <-
+  function(P, x=NULL, y=NULL,
+           width=1/10, ticks=seq(0,1,by=0.1),
+           ...) {
+    xy <- layer_scales(P)
+    xrange <- xy$x$range$range
+    if (!is.numeric(xrange)) {
+      # deal with a categorical variable on x axis
+      xrange <- c(0, length(xrange)) + 0.5
+    }
+    yrange <- xy$y$range$range
+    if (is.null(x)) x <- mean(xrange)
+    if (is.null(y)) y <- mean(yrange)
+    height <- diff(yrange)
+
+    Ruler <- tibble(
+      xticks = x - width*(seq_along(ticks)-1),
+      ybase = y,
+      ymid = y + height/20,
+      ytop = y + height/15,
+      labels = as.character(sort(ticks))
+    )
+
+    P + geom_path(aes(x=xticks, y=ybase), data=Ruler, ...) +
+      geom_segment(aes(x=xticks, xend=xticks, y=ybase, yend=ymid), data=Ruler, ...) +
+      geom_text(aes(x=xticks, y=ytop, label=labels), size=3,
+                vjust=0, data=Ruler, ...)
+
+  }

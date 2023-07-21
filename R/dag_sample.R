@@ -82,7 +82,7 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, report_hidden=FALS
       else
         return(sample(rep_len(levels, length.out=size)))
     }
-    # When <exact> is FALSE, generate the levels probabalistically
+    # When <exact> is FALSE, generate the levels probabilistically
     cumprobs <- cumsum(probs/(sum(probs)))
     pick <- runif(size)
     choices <- outer(pick, cumprobs, FUN=`<=`) |>

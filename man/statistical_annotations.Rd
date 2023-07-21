@@ -2,6 +2,7 @@
 % Please edit documentation in R/add_slope_rose.R
 \name{add_slope_rose}
 \alias{add_slope_rose}
+\alias{add_violin_ruler}
 \title{Add a slope "rose" to a plot.}
 \usage{
 add_slope_rose(
@@ -11,6 +12,15 @@ add_slope_rose(
   scale = 1/4,
   color = "red",
   keepers = c("both", "pos", "neg")
+)
+
+add_violin_ruler(
+  P,
+  x = NULL,
+  y = NULL,
+  width = 1/10,
+  ticks = seq(0, 1, by = 0.1),
+  ...
 )
 }
 \arguments{
@@ -25,11 +35,21 @@ add_slope_rose(
 \item{color}{text string (e.g. \code{"blue"}) for the rose}
 
 \item{keepers}{whether to show \code{"both"} positive and negative slopes or just show the \code{"pos"} or the \code{"neg"}}
+
+\item{width}{for rulers, the distance between tick marks (in native units, where
+categories are separated by a distance of 1.)}
+
+\item{ticks}{Integers, typically \code{0:5}, that label the ticks.}
 }
 \description{
 To guide a reader in quantifying the slope of components of an x-y graph, a "slope rose" is helpful.
 Several radiating lines are drawn, each marked with a numerical slope. A suitable choice of slopes
 is made automatically, based on the x- and y- scale of the plot.
+}
+\details{
+For the ruler, x gives the position of the root of the ruler, with
+the rest of the ruler moving off to the left. (For vertically oriented rulers, use
+a negative width.)
 }
 \note{
 Use the pipe operator to send a previously made plot to have a rose added. Don't use the \code{{ggplot2}}
@@ -38,6 +58,5 @@ Use the pipe operator to send a previously made plot to have a rose added. Don't
 \examples{
 gf_point(mpg ~ hp, data=mtcars) |> add_slope_rose()
 gf_point(wt ~ hp, data=mtcars) |> add_slope_rose(keepers="pos", color="blue", x=100, scale=.5 )
-
 
 }
