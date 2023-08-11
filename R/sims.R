@@ -63,7 +63,7 @@ datasim_run <- function(sim, n=5, seed=NULL) {
   # Get rid of unwanted names, such as those starting with a dot (".")
   values$n <- NULL
   rid <- grepl("^\\.", names(values))
-  if (any(rid)) values[[rid]] <- NULL
+  if (any(rid)) values[rid] <- NULL
 
   # return a data frame
   as_tibble(values)
@@ -73,22 +73,22 @@ datasim_run <- function(sim, n=5, seed=NULL) {
 #' @export
 sample.datasim <- function(x, size, replace = FALSE, ...) {
   if (missing(size)) size=5
-  datasim_run(x, size=size, ...)
+  datasim_run(x, n=size, ...)
 }
 
 #' @rdname datasim
 #' @export
 categorical <- function(n=5, levels = NULL, ..., exact = TRUE) {
   # specify levels either as a list in <levels> or using ...
-  if (!is.null(levels)) dots <- levels
-  else dots <- list(...)
+  if (!is.null(levels)) { # all values equally likely
+    probs <- 1
+  } else {
+    dots <- list(...)
+    levels <- names(dots)
+    probs <- abs(as.numeric(unlist(dots)))
+  }
 
-  levels <- names(dots)
-  if (any(nchar(levels) == 0)) stop("All levels must be given names.")
-
-  # Get the weight associated with each level
-  probs <- abs(as.numeric(unlist(dots)))
-  # Convert to cumulative probabilities
+  # Convert to normalized probabilities
   probs <- probs / sum(probs)
 
   # generate the levels
@@ -114,6 +114,17 @@ categorical <- function(n=5, levels = NULL, ..., exact = TRUE) {
     return(levels[choices])
   }
 }
+
+#' @rdname datasim
+#' @export
+evaluate <- function(variable, values) {
+  levels <- names(values)
+  missing <- setdiff(variable, levels)
+  values[missing] <- NA
+
+  as.vector(unlist(values[variable]))
+}
+
 
 #' @rdname datasim
 #' @export

@@ -4,6 +4,7 @@
 \alias{datasim_make}
 \alias{datasim_run}
 \alias{categorical}
+\alias{evaluate}
 \alias{bernoulli}
 \alias{block_by}
 \alias{datasim_to_igraph}
@@ -14,6 +15,8 @@ datasim_make(...)
 datasim_run(sim, n = 5, seed = NULL)
 
 categorical(n = 5, levels = NULL, ..., exact = TRUE)
+
+evaluate(variable, values)
 
 bernoulli(logodds = NULL, prob = 0.5, labels = NULL, n = 0)
 
