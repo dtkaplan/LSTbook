@@ -62,9 +62,8 @@ model_train <- function(data, tilde, verbose=FALSE, prob_of = NULL,
     # Figure out what the response variable is
     response_vals <- na.omit(response_vals)
     if (is.numeric(response_vals)) {
-      if (min(response_vals, na.rm=TRUE) >= 0 &&
-          all(response_vals==round(response_vals) )) {
-        type <- ifelse(max(response_vals <= 1), "prob", "counts")
+      if (min(response_vals, na.rm=TRUE) >= 0 ) {
+        type <- ifelse(max(response_vals <= 1), "prob", "linear")
     } else type = "linear"
     } else if (is.logical(response_vals) || inherits(response_vals, "zero_one")) {
       type = "prob"

@@ -108,9 +108,14 @@ get_typical <- function(vals, type=c("continuous", "discrete"), ncont=10, nlevel
     breaks <- compromise_breaks(vals, n = n)
     return(breaks)
   } else {
+    # if an ordered factor, give all the levels
+    if (is.ordered(vals)) return(unique(vals))
     # pull out the nlevels most populated levels
-    biggest <- names(sort(table(vals)))[1:nlevels]
-    biggest[!is.na(biggest)]
+
+    tmp <- table(vals)
+    biggest <- order(tmp, decreasing=TRUE)[1:nlevels]
+    biggest <- biggest[!is.na(biggest)]
+    names(tmp)[biggest]
   }
 }
 

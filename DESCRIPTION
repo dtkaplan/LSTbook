@@ -1,6 +1,6 @@
 Package: math300
 Title: Utilities for Math 300Z
-Version: 0.2.3.0001
+Version: 0.2.3.0002
 Authors@R: 
     person("Daniel", "Kaplan", , "dtkaplan@gmail.com", role = c("aut", "cre"))
 Description: Creates data from DAGs.
@@ -22,6 +22,7 @@ Suggests:
     testthat (>= 3.0.0),
     moderndive,
     knitr,
-    rmarkdown
+    rmarkdown, 
+    stringdist
 Config/testthat/edition: 3
 VignetteBuilder: knitr
