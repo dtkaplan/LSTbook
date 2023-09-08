@@ -11,7 +11,7 @@ tilde_graph(
   data = NULL,
   seed = 101,
   annot = c("none", "violin", "model"),
-  jitter = TRUE,
+  jitter = c("all", "x", "y", "none"),
   model_alpha = 0.2,
   palette = LETTERS[1:8]
 )
@@ -27,7 +27,8 @@ tilde_graph(
 
 \item{annot}{Statistical annotation (one of "none", "violin", "model")}
 
-\item{jitter}{If \code{TRUE}, jitter categorical and zero-one variables}
+\item{jitter}{Options for turning off jitter: one of \code{"none"}, \code{"x"}, \code{"y"}. By default,
+categorical variables are jittered.}
 
 \item{model_alpha}{Transparency for the model annotation}
 

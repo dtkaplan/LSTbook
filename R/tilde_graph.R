@@ -26,7 +26,8 @@
 #' @param palette Depending on taste and visual capabilities, some people might
 #' prefer to alter the color scheme. There are 8 palettes available: `"A"` through `"H"`.
 #' @param seed (optional) random seed for jittering
-#' @param jitter If `TRUE`, jitter categorical and zero-one variables
+#' @param jitter Options for turning off jitter: one of `"none"`, `"x"`, `"y"`. By default,
+#' categorical variables are jittered.
 #' @param ... Graphical options for the data points, e.g. alpha, size
 #'
 #' @examples
@@ -37,10 +38,11 @@
 #'
 tilde_graph <- function(D, tilde, ..., data=NULL, seed=101,
                        annot = c("none", "violin", "model"),
-                       jitter = TRUE,
+                       jitter = c("all", "x", "y", "none"),
                        model_alpha = 0.2, palette=LETTERS[1:8]) {
   annot <- match.arg(annot)
   palette <- match.arg(palette)
+  jitter <- match.arg(jitter)
   set.seed(seed)
 
   if (is.null(data)) {
@@ -83,12 +85,15 @@ tilde_graph <- function(D, tilde, ..., data=NULL, seed=101,
     }
   }
 
-  if (jitter) { # automatic jittering
-    x_jitter <- 0.15 # default jittering amount
-    if (is.numeric(x_data) && !inherits(x_data, "zero_one")) x_jitter=0
-    y_jitter <- 0.15 # default jittering amount
-    if (is.numeric(y_data) && !inherits(y_data, "zero_one")) y_jitter=0
+  x_jitter <- y_jitter <- 0.15 # default
+  if (jitter == "none") {
+    x_jitter <- y_jitter <- 0
   }
+  if (jitter == "x") y_jitter <- 0
+  if (jitter == "y") x_jitter <- 0
+
+  if (is.numeric(x_data) && !inherits(x_data, "zero_one")) x_jitter=0
+  if (is.numeric(y_data) && !inherits(y_data, "zero_one")) y_jitter=0
 
   # Color if there is a non-trivial third column
   show_color <- ncol(data) > 2 && length(unique(data[[3]])) > 1
