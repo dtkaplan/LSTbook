@@ -15,12 +15,12 @@
 #' @export
 zero_one <- function(x, one) {
   U <- unique(x)
-  if (length(U) > 2) U <- c(U[1], "others")
+  if (length(U) > 2) U <- c(U[1], "other")
   if (missing(one)) one <- U[1]
-  if (! one %in% U) {
-    stop("Specified level for one not one of the levels.")
+  if (!one %in% U) {
+    stop("Specified level for <one> not one of the levels of the variable.")
   } else {
-    U <- c(one, U[U!=one])
+    U <- c(one, as.character(U[U!=one])) # as.character() to avoid factors becoming numerical levels
   }
   res <- rep(0, length(x))
   res[x == one] <- 1
@@ -43,7 +43,8 @@ zero_one <- function(x, one) {
 #' need to write documentation for the graphics command `label_zero_one()`
 #' @export
 label_zero_one <- function(P) {
-  YesNo <- rlang::eval_tidy(P$mapping$y, data = P$data)
+  # vertical axis data in P$data[[1]]
+  YesNo <- P$data[[1]]
   if (!inherits(YesNo, "zero_one")) return(P)
   else P + scale_y_continuous(breaks=waiver(),
                               sec.axis=sec_axis(trans = ~ .,

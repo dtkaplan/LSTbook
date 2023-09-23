@@ -23,7 +23,9 @@ eval_exp_list <- function(EL, .data) {
   for (k in 1:length(EL)) {
     tmp <- try(eval(EL[[k]], envir = .data), silent = TRUE)
     if (inherits(tmp, "try-error"))
-      stop(best_var_name_match(names(.data), strsplit(tmp, ":"))[2], call. = FALSE)
+      stop(best_var_name_match(names(.data), tmp),
+                               #gsub(".*object '(.*)' not found.*", "\\1", tmp)),
+           call. = FALSE)
     res[[k]] <- as_tibble(tmp, .name_repair = "minimal")
     if (ncol(res[[k]]) == 1) {
       names(res[[k]]) <- deparse(EL[[k]])
@@ -72,7 +74,7 @@ get_error_object_name <- function(msg) {
 best_var_name_match <- function(nms, msg) {
   obj_name <- get_error_object_name(msg)
   starter <- glue::glue("`{obj_name}` not found among variable names.")
-  if (requireNamespace("stringdist")) {
+  if (requireNamespace("stringdist", quietly = TRUE)) {
     best <- nms[stringdist::amatch(obj_name, nms, maxDist=5)][1]
     if (is.na(best)) return(starter)
     glue::glue("{starter}  Perhaps you meant `{best}`?")

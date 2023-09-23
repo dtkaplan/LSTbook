@@ -1,6 +1,6 @@
 #' One-step data graphics
 #'
-#' `tilde_graph()` makes it easy to construct an informative basic graph of a
+#' `pointplot()` makes it easy to construct an informative basic graph of a
 #' data frame. "Making it easy" means that the user only needs to specify
 #' two things: 1) the data frame to be used and 2) a tilde expression with the response variable on the left and up to
 #' three explanatory variables on the right. The response variable is mapped to
@@ -26,20 +26,20 @@
 #' @param palette Depending on taste and visual capabilities, some people might
 #' prefer to alter the color scheme. There are 8 palettes available: `"A"` through `"H"`.
 #' @param seed (optional) random seed for jittering
-#' @param jitter Options for turning off jitter: one of `"none"`, `"x"`, `"y"`. By default,
-#' categorical variables are jittered.
+#' @param jitter Options for turning on jitter: one of `"default"`, `"both"`, `"none"`, `"x"`, `"y"`. By default,
+#' By default, categorical variables are jittered.
+#' @param bw bandwidth for violin plot
 #' @param ... Graphical options for the data points, e.g. alpha, size
 #'
 #' @examples
-#' Galton |> tilde_graph(height ~ mother + sex + father, annot="model", model_alpha=1)
-#' mtcars |> tilde_graph(mpg ~ wt + cyl)
-#' mtcars |> tilde_graph(mpg ~ wt + cyl + hp, annot="model")
+#' Galton |> pointplot(height ~ mother + sex + father, annot="model", model_alpha=1)
+#' mtcars |> pointplot(mpg ~ wt + cyl)
+#' mtcars |> pointplot(mpg ~ wt + cyl + hp, annot="model")
 #' @export
-#'
-tilde_graph <- function(D, tilde, ..., data=NULL, seed=101,
+pointplot <- function(D, tilde, ..., data=NULL, seed=101,
                        annot = c("none", "violin", "model"),
-                       jitter = c("all", "x", "y", "none"),
-                       model_alpha = 0.2, palette=LETTERS[1:8]) {
+                       jitter = c("default", "none", "all", "x", "y"),
+                       model_alpha = 0.2, palette=LETTERS[1:8], bw = NULL) {
   annot <- match.arg(annot)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
@@ -85,15 +85,23 @@ tilde_graph <- function(D, tilde, ..., data=NULL, seed=101,
     }
   }
 
-  x_jitter <- y_jitter <- 0.15 # default
-  if (jitter == "none") {
-    x_jitter <- y_jitter <- 0
-  }
-  if (jitter == "x") y_jitter <- 0
-  if (jitter == "y") x_jitter <- 0
+  default_jitter <- 0.15 # default jitter size for categorical variables
 
-  if (is.numeric(x_data) && !inherits(x_data, "zero_one")) x_jitter=0
-  if (is.numeric(y_data) && !inherits(y_data, "zero_one")) y_jitter=0
+  if (jitter == "default") {
+    x_jitter <- ifelse(is.numeric(x_data) && !inherits(x_data, "zero_one") && length(unique(x_data)) != 1, 0, default_jitter)
+    y_jitter <- ifelse(is.numeric(y_data) && !inherits(y_data, "zero_one") && length(unique(y_data)) != 1, 0, default_jitter)
+
+  } else if (jitter == "none") {
+    x_jitter <- y_jitter <- 0
+  } else {
+  # Use geom_jitter's default jitter amount
+    x_jitter <- y_jitter <- default_jitter # just to define the variables
+    if (jitter %in% c("x", "all")) x_jitter <- NULL
+    if (jitter %in% c("y", "all")) y_jitter <- NULL
+  }
+
+
+
 
   # Color if there is a non-trivial third column
   show_color <- ncol(data) > 2 && length(unique(data[[3]])) > 1
@@ -114,8 +122,13 @@ tilde_graph <- function(D, tilde, ..., data=NULL, seed=101,
 
   # Add a violin if called for
   if (annot %in% c("violin")) {
-      Res <- Res + geom_violin(fill="blue", color=NA, alpha=.2,
+    if (!is.null(bw)) {
+      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_alpha,
+                               aes(y=.data[[vars[1]]], x=.data[[vars[2]]]), bw = bw)
+    } else { # can't always pass bw=NULL to geom_violin.
+      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_alpha,
                                aes(y=.data[[vars[1]]], x=.data[[vars[2]]]))
+    }
       warning("x-axis variable is numerical, so only one violin drawn for all rows.
               Perhaps you want to use ntiles() or factor() on that variable?")
   }
@@ -127,8 +140,7 @@ tilde_graph <- function(D, tilde, ..., data=NULL, seed=101,
     mod_vals <- simple_mod_eval(calls_to_names(tilde), data)
 
     if (y_is_discrete && length(levels(data[[1]])) > 2) {
-      warning("No modelling available for categorical vars with 3 or more levels.")
-      break
+      warning("No modeling available for categorical vars with 3 or more levels.")
     }
     if (show_color) {
       if (x_is_discrete) {
@@ -187,11 +199,22 @@ tilde_graph <- function(D, tilde, ..., data=NULL, seed=101,
   }
 
   if (ncol(data) > 3) { # facet by the fourth variable
-    Res + facet_grid(as.formula(glue::glue(". ~ `{vars[4]}`")),
+    Res <- Res + facet_grid(as.formula(glue::glue(". ~ `{vars[4]}`")),
                      labeller = label_both)
-  } else {
-    Res
   }
+
+  # turn off horizontal axis if there are no explanatory variables
+  if (vars[[2]] == 1 && all(data[[2]] == 1)){
+    Res + theme_update(axis.ticks.x = element_blank(),
+                       axis.text.x = element_blank())
+
+  }
+
+  if (inherits(data[[1]], "zero_one")) {
+    Res <- label_zero_one(Res)
+  }
+
+  Res
 }
 
 

@@ -89,6 +89,7 @@ place_codes <- c("hospital", "freestanding", "home (intended)", "home (unintende
                  "home (unknown)", "clinic", "other")
 educ_codes <- c("<8", "<12", "HS", "HS+", "Assoc", "Bachelors", "Masters", "Prof")
 
+Births2022$month <- as.numeric(Raw$month)
 Births2022$dow <- uncode(Raw$dow, dow_codes, 99)
 Births2022$dow <- factor(Births2022$dow, dow_codes, ordered = TRUE)
 
