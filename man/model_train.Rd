@@ -9,7 +9,7 @@ model_train(
   tilde,
   verbose = FALSE,
   prob_of = NULL,
-  type = c("auto", "linear", "prob", "counts"),
+  family = "auto",
   logs = FALSE,
   ...
 )
@@ -23,7 +23,7 @@ model_train(
 
 \item{prob_of}{which of two levels to use for logistic regression}
 
-\item{type}{Character string: the type of model to fit}
+\item{family}{Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...}
 }
 \description{
 An interface to several of the most often used model-fitting routines

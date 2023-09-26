@@ -7,7 +7,7 @@
 model_fit(
   data,
   specification,
-  family = c("gaussian", "binomial", "poisson", "svm", "lm", "rlm"),
+  family = c("lm", "binomial", "poisson", "svm", "gaussian", "rlm"),
   wrangle = FALSE,
   ...
 )

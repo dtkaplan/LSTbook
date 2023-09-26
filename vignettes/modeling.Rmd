@@ -1,0 +1,35 @@
+---
+title: "Training models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Training models}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(math300)
+```
+
+
+Just some notes for now. 
+
+1. Use `model_train()` which fits any of a variety of model types. You can either specify the model type or let it be deduced automatically. 
+
+TO DO IN CODE:::: ADD A MODEL_TYPE(data, tilde) that abstracts the choice of model type, then use that in `model_train()`. Use `model_train()` in `model_fit()`.
+
+2. `model_fit()` is a wrangling-compatible wrapper around `model_train()` and `model_eval()` that lets you use mutate to add model values.
+
+
+ADD TO TESTS
+
+Birdkeepers |> pointplot(YR ~ LC, annot="model") make sure it's a linear model
+
+Birdkeepers |> pointplot(LC ~ YR, annot="model") make sure it's a linear model

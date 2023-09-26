@@ -3,6 +3,7 @@ insertShortAnswer <- function() {
 }
 
 insertExercise <- function() {
+  set.seed(Sys.time())
   contents <- paste0('::: {.callout-note collapse="true"}\n',
   glue::glue('`r this_exercise(ID="{new_exercise_name()}")`'),
   "\n\n\n\n:::\n\n",

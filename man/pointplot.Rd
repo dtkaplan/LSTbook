@@ -14,7 +14,8 @@ pointplot(
   jitter = c("default", "none", "all", "x", "y"),
   model_alpha = 0.2,
   palette = LETTERS[1:8],
-  bw = NULL
+  bw = NULL,
+  level = 0.95
 )
 }
 \arguments{

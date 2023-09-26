@@ -29,6 +29,7 @@
 #' @param jitter Options for turning on jitter: one of `"default"`, `"both"`, `"none"`, `"x"`, `"y"`. By default,
 #' By default, categorical variables are jittered.
 #' @param bw bandwidth for violin plot
+#' @param level confidence level to use (0.95)
 #' @param ... Graphical options for the data points, e.g. alpha, size
 #'
 #' @examples
@@ -39,7 +40,7 @@
 pointplot <- function(D, tilde, ..., data=NULL, seed=101,
                        annot = c("none", "violin", "model"),
                        jitter = c("default", "none", "all", "x", "y"),
-                       model_alpha = 0.2, palette=LETTERS[1:8], bw = NULL) {
+                       model_alpha = 0.2, palette=LETTERS[1:8], bw = NULL, level=0.95) {
   annot <- match.arg(annot)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
@@ -137,7 +138,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   if (annot == "model") {
     # calls_to_names() rejiggers the model formula so that it contains
     # references to the <names> of the already transformed data.
-    mod_vals <- simple_mod_eval(calls_to_names(tilde), data)
+    mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level=level)
 
     if (y_is_discrete && length(levels(data[[1]])) > 2) {
       warning("No modeling available for categorical vars with 3 or more levels.")
@@ -145,12 +146,12 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
     if (show_color) {
       if (x_is_discrete) {
         Res <- Res +
-          geom_errorbar(data=mod_vals,
+          geom_linerange(data=mod_vals,
                         aes(x=.data[[vars[2]]],
                             ymin=.lwr, ymax=.upr,
                             color=.data[[vars[3]]]),
                         alpha = model_alpha, size=4,
-                        width=0.1, position="dodge") +
+                        position="dodge") +
           guides(fill="none")
       } else {
         Res <- Res +
@@ -165,10 +166,10 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
     } else {
       if (x_is_discrete) {
         Res <- Res +
-          geom_errorbar(data=mod_vals,
+          geom_linerange(data=mod_vals,
                         aes(x=.data[[vars[2]]],
                             ymin=.lwr, ymax=.upr),
-                        size = 4, width=0.1,
+                        size = 4,
                         color="blue", alpha=model_alpha)
       } else {
         Res <- Res +
@@ -220,10 +221,11 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
 
 # Train and evaluate the model, with evaluation only
 # on a skeleton.
-simple_mod_eval <- function(tilde, data) {
-  M <- model_train(data, tilde)
+simple_mod_eval <- function(tilde, data, family=NULL, level=0.95) {
+  M <- if (!is.null(family)) model_train(data, tilde, family=family)
+  else model_train(data, tilde)
   Dskel <- expand.grid(data_skeleton(data, tilde))
-  Meval <- model_eval(M, data=Dskel, interval="confidence") |> select(.output, .lwr, .upr)
+  Meval <- model_eval(M, data=Dskel, interval="confidence", level=level) |> select(.output, .lwr, .upr)
   # Rename the skeleton values to correspond to the names in <data>
   D <- data_from_tilde(Dskel, tilde[[3]])
 

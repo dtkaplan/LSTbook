@@ -14,7 +14,7 @@
 #'
 #' @export
 model_fit <- function(data, specification,
-                      family=c("gaussian", "binomial", "poisson", "svm", "lm", "rlm"),
+                      family=c("lm", "binomial", "poisson", "svm", "gaussian", "rlm"),
                       wrangle=FALSE, ...) {
   family <- match.arg(family)
   # Specification must be a two-sided formula, response variable on the left.

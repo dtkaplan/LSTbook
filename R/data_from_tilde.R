@@ -19,12 +19,26 @@ eval_exp_list <- function(EL, .data) {
   if (is.name(EL) || is.call(EL)) {
     EL <- list(EL)
   }
+  # check that the data frame exists
+  tmp <- try(class(.data))
+  if (inherits(tmp, "try-error")) {
+    # Keep track of the names of often-used data frames to help with error messages
+    .PackagesToSearch. <- c("mosaic", "math300", "openintro", "moderndive")
+    .getDFNames <- function() {
+      names <- suppressWarnings(data(package = .PackagesToSearch.))$results[,3]
+    }
+    .DataFrameNames. <- gsub(" \\(.*\\)$", "", .getDFNames())
+
+    stop(best_name_match(.DataFrameNames., tmp,
+                         starter = "`{obj_name}` data frame not found."))
+  }
+
   res <- list()
   for (k in 1:length(EL)) {
     tmp <- try(eval(EL[[k]], envir = .data), silent = TRUE)
     if (inherits(tmp, "try-error"))
-      stop(best_var_name_match(names(.data), tmp),
-                               #gsub(".*object '(.*)' not found.*", "\\1", tmp)),
+      stop(best_name_match(names(.data), tmp,
+                           starter = "`{obj_name}` not found among variable names."),
            call. = FALSE)
     res[[k]] <- as_tibble(tmp, .name_repair = "minimal")
     if (ncol(res[[k]]) == 1) {
@@ -71,9 +85,9 @@ get_error_object_name <- function(msg) {
   gsub(".* : object '(.*)' not found\n", "\\1", msg)
 }
 
-best_var_name_match <- function(nms, msg) {
+best_name_match <- function(nms, msg, starter="`{obj_name}` not found among variable names.") {
   obj_name <- get_error_object_name(msg)
-  starter <- glue::glue("`{obj_name}` not found among variable names.")
+  starter <- glue::glue(starter)
   if (requireNamespace("stringdist", quietly = TRUE)) {
     best <- nms[stringdist::amatch(obj_name, nms, maxDist=5)][1]
     if (is.na(best)) return(starter)
@@ -82,3 +96,10 @@ best_var_name_match <- function(nms, msg) {
     starter
   }
 }
+
+# Keep track of the names of often-used data frames to help with error messages
+.PackagesToSearch. <- c("mosaic", "math300", "openintro", "moderndive")
+.getDFNames <- function() {
+  names <- suppressWarnings(data(package = .PackagesToSearch.))$results[,3]
+}
+.DataFrameNames. <- gsub(" \\(.*\\)$", "", .getDFNames())
