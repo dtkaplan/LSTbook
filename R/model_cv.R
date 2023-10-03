@@ -196,8 +196,8 @@ n_levels <- function(values, n) {
 # return logicals: is the minimum an outlier? is the maximum an outlier?
 has_outlier <- function(values, whisker = 3) {
   box <- as.numeric(quantile(values, probs = c(.25, .75), na.rm = TRUE))
-  c(min(values) < box[1] - diff(box) * whisker,
-    max(values) > box[2] + diff(box) * whisker )
+  c(min(values, na.rm=TRUE) < box[1] - diff(box) * whisker,
+    max(values, na.rm=TRUE) > box[2] + diff(box) * whisker )
 
 }
 

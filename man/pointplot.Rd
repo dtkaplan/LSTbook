@@ -38,6 +38,8 @@ By default, categorical variables are jittered.}
 prefer to alter the color scheme. There are 8 palettes available: \code{"A"} through \code{"H"}.}
 
 \item{bw}{bandwidth for violin plot}
+
+\item{level}{confidence level to use (0.95)}
 }
 \description{
 \code{pointplot()} makes it easy to construct an informative basic graph of a

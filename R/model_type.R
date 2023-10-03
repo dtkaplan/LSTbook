@@ -20,8 +20,10 @@ model_family <- function(.data, .tilde, family = c("auto", "lm", "binomial", "po
   if (is.numeric(data) || is.logical(data)) {
     # It's a numeric type
     allowable <- c("lm", "gaussian", "rlm", "svm")
-    if (min(data) >= 0 && max(data) <=1) allowable <- c(allowable, "binomial")
-    if (min(data) >= 0 && all(data == round(data))) allowable <- c(allowable, "poisson")
+    if (all(data >= 0, na.rm=TRUE)) {
+      if (all(data <= 1, na.rm = TRUE)) allowable <- c(allowable, "binomial")
+      if (all(data == round(data), na.rm = TRUE)) allowable <- c(allowable, "poisson")
+    }
   } else {
     # It's categorical
     allowable <- "svm"

@@ -140,17 +140,29 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
     # references to the <names> of the already transformed data.
     mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level=level)
 
-    if (y_is_discrete && length(levels(data[[1]])) > 2) {
-      warning("No modeling available for categorical vars with 3 or more levels.")
+    # special case for categorical response variable
+    if (y_is_discrete) {
+      if (length(levels(data[[1]])) == 2) {
+        # Need to add 1 to model output levels, which are in [0,1],
+        # so that they will graph on the same
+        # axis as the categorical response values which are numerically 1 and 2.
+        mod_vals$.output <- mod_vals$.output + 1.
+        mod_vals$.lwr <- mod_vals$.lwr + 1.
+        mod_vals$.upr <- mod_vals$.upr + 1.
+      }
+      if (length(levels(data[[1]])) > 2) {
+          warning("No modeling available for categorical vars with 3 or more levels.")
+      }
     }
     if (show_color) {
       if (x_is_discrete) {
+        if (model_alpha < 0.8) model_alpha <- model_alpha + 0.2 # enhance visibility
         Res <- Res +
           geom_linerange(data=mod_vals,
                         aes(x=.data[[vars[2]]],
                             ymin=.lwr, ymax=.upr,
                             color=.data[[vars[3]]]),
-                        alpha = model_alpha, size=4,
+                        alpha = model_alpha, size=6,
                         position="dodge") +
           guides(fill="none")
       } else {
@@ -186,7 +198,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
     Res <- Res +
       scale_color_viridis_d(option=palette, begin=0, end=0.75)
 
-    # A BUG workaround?
+    # BUG workarounds?
     if (length(unique(data[[3]])) > 2) {
       Res <- Res +
         scale_fill_viridis_d(option=palette, begin=0.0, end=0.75)
@@ -205,7 +217,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   }
 
   # turn off horizontal axis if there are no explanatory variables
-  if (vars[[2]] == 1 && all(data[[2]] == 1)){
+  if (vars[[2]] == 1 && all(data[[2]] == 1, na.rm=TRUE)){
     Res + theme_update(axis.ticks.x = element_blank(),
                        axis.text.x = element_blank())
 
