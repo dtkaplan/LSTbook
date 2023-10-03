@@ -1,6 +1,6 @@
 #' Helper functions to evaluate models
 #'
-#' Only used internally in `{math300}`
+#' Only used internally in `{LST}`
 #' @param model A model object of the classes permitted
 #' @param data Usually, a data table specifying the inputs to the model. But if
 #' not specified, the training data will be used.

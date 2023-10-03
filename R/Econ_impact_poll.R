@@ -9,5 +9,5 @@
 #' inferred from these data; they are merely to illustrate adjusting for covariates.
 #'
 #' @source The simulation is from "Statistical Modeling: A Fresh Approach" (2/e). Code for
-#' it is in the file `system.file("SM2-simulations.R", package="math300")`
+#' it is in the file `system.file("SM2-simulations.R", package="LST")`
 "Econ_outlook_poll"

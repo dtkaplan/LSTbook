@@ -28,7 +28,7 @@ opposition though a campaign of imprisonment and murder.)
 \references{
 \itemize{
 \item Imai, Kosuke. 2017. Quantitative Social Science: An Introduction. Princeton University Press. \href{https://press.princeton.edu/books/hardcover/9780691167039/quantitative-social-science}{URL} from whence
-these data were added to \code{{math300}}. In QSS, the data are called \code{nazis}.
+these data were added to \code{{LST}}. In QSS, the data are called \code{nazis}.
 \item G. King, O. Rosen, M. Tanner, A.F. Wagner (2008) “Ordinary economic
 voting behavior in the extraordinary election of Adolf Hitler.”
 Journal of Economic History, vol. 68, pp. 951–996.#'

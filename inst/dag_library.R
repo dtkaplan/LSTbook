@@ -2,7 +2,7 @@
 #'
 #'
 #'
-library(math300)
+library(LST)
 
 
 dag00 <- datasim_make(

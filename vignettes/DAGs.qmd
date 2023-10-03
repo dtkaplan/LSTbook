@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r include=FALSE}
-library(math300)
+library(LST)
 ```
 
 A "directed acyclic graph" (DAG) is an almost intuitive way of representing causal connections among variables. For instance, a popular legend holds that there is a correlation between drownings and ice-cream consumption. This legend is used as an example of the principle "correlation is not causation," since drownings don't lead to ice-cream consumption and ice-cream consumption doesn't lead to drownings. Rather, the warmth and relaxation of summer leads to both increased swimming activity and cooling refreshment consumption. In a DAG, the variables (`season`, `drowning`, `ice_cream` consumption) form the nodes of a mathematical graph. The causal links are arrows ("directed edges") between the nodes. @fig-ice-cream-dags show two DAGs representing two distinct hypotheses about the causal connections.
@@ -82,7 +82,7 @@ Simulating data using DAGs is a two-step process:
 
 ## Defining normal DAGs
 
-"Normal DAG" is a double-ententre, referring to the easiest kind of DAG to define and to the use of Gaussian noise as the exogenous inputs to the simulation. A few examples will suffice for those who want to write their own DAGs. There are also several off-the-shelf DAGs provided in the `{math300}` package, e.g., `dag01` through `dag12` and a few others.
+"Normal DAG" is a double-ententre, referring to the easiest kind of DAG to define and to the use of Gaussian noise as the exogenous inputs to the simulation. A few examples will suffice for those who want to write their own DAGs. There are also several off-the-shelf DAGs provided in the `{LST}` package, e.g., `dag01` through `dag12` and a few others.
 
 Use the `dag_make()` command to construct an R object which can then be drawn as a diagram, sampled from, and so on. The arguments to `dag_make()` are one or more tilde expressions (called "formulas" in most R documentation) that name the variables to be included in the DAG and describe the calculations in the simulations.
 

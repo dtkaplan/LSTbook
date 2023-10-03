@@ -18,7 +18,7 @@ types support "prediction" or even "confidence".}
 \item{...}{additional arguments}
 }
 \description{
-Only used internally in \code{{math300}}
+Only used internally in \code{{LST}}
 }
 \details{
 All of the \code{eval_} functions are ex

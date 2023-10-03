@@ -21,7 +21,7 @@
 #'
 #' @references
 #' -  Imai, Kosuke. 2017. Quantitative Social Science: An Introduction. Princeton University Press. [URL](https://press.princeton.edu/books/hardcover/9780691167039/quantitative-social-science) from whence
-#' these data were added to `{math300}`. In QSS, the data are called `nazis`.
+#' these data were added to `{LST}`. In QSS, the data are called `nazis`.
 #' - G. King, O. Rosen, M. Tanner, A.F. Wagner (2008) “Ordinary economic
 #' voting behavior in the extraordinary election of Adolf Hitler.”
 #' Journal of Economic History, vol. 68, pp. 951–996.#'

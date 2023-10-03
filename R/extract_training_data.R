@@ -13,7 +13,7 @@
 #### extract_training_data.default <- function(model, ...) {
 ####   error_string <- paste0("Model architecture '",
 ####                          paste(class(model), collapse = "', "),
-####                          "' not recognized by math300 package.")
+####                          "' not recognized by LST package.")
 ####   if (inherits(model, "model_train")) return(attr(model, "training_data"))
 ####
 ####   if ( ! "call" %in% names(model) || !"data" %in% names(model$call))

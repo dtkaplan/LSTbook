@@ -1,6 +1,6 @@
-Package: math300
-Title: Utilities for Math 300Z
-Version: 0.2.3.0005
+Package: LST
+Title: Software and data for Lessons in Statistical Thinking
+Version: 0.3.0.9999
 Authors@R: 
     person("Daniel", "Kaplan", , "dtkaplan@gmail.com", role = c("aut", "cre"))
 Description: Creates data from DAGs.
