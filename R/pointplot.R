@@ -130,8 +130,10 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
       Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_alpha,
                                aes(y=.data[[vars[1]]], x=.data[[vars[2]]]))
     }
-      warning("x-axis variable is numerical, so only one violin drawn for all rows.
+    if (!x_is_discrete) {
+    warning("x-axis variable is numerical, so only one violin drawn for all rows.
               Perhaps you want to use ntiles() or factor() on that variable?")
+    }
   }
 
 
