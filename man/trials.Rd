@@ -26,6 +26,6 @@ repeat the calculation for each of the elements of the named parameter.
 mean(rnorm(10)) |> trials(size=3)
 mean(rnorm(lambda)) |> trials(lambda=c(1, 100, 10000))
 mean(rnorm(lambda)) |> trials(size=5, lambda=c(1, 100, 10000))
-sample(Tiny, size=lambda, replace=TRUE) |> select(mass, flipper) |> model_train(mass ~ shuffle(flipper)) |> trial(size=3, lambda=c(10, 20, 40))
+sample(mtcars, size=lambda, replace=TRUE) |> select(mpg, hp) |> model_train(mpg ~ shuffle(hp)) |> trials(size=3, lambda=c(10, 20, 40))
 
 }

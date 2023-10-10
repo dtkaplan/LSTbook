@@ -17,28 +17,37 @@
 #' mean(rnorm(10)) |> trials(size=3)
 #' mean(rnorm(lambda)) |> trials(lambda=c(1, 100, 10000))
 #' mean(rnorm(lambda)) |> trials(size=5, lambda=c(1, 100, 10000))
-#' sample(Tiny, size=lambda, replace=TRUE) |> select(mass, flipper) |> model_train(mass ~ shuffle(flipper)) |> trial(size=3, lambda=c(10, 20, 40))
+#' sample(mtcars, size=lambda, replace=TRUE) |> select(mpg, hp) |> model_train(mpg ~ shuffle(hp)) |> trials(size=3, lambda=c(10, 20, 40))
 #'
 #' @export
 trials <- function(.ex, size = 1, ...) {
+  # capture the left-hand side of pipeline without evaluating it
+  left_side <- substitute(.ex)
+  # if <left_size> is a name, then the %>% pipe is being used. No good
+  if (is.name(left_side)) stop("Cannot use %>% pipe for input to trials(). Use |> instead.")
+  # make sure size value is legitimate
   if (size <= 0 || size != round(size))
-    stop("<size> must be a positive integer.")
+    stop("<size=> must be a positive integer.")
+
+  # create a function to hold the left-hand side of the pipeline
   fun <- function() {}
   body(fun) <- substitute(.ex)
-  params <- c(list(.trial=1:size), list(...))
-
+  params <- c(list(.trial = 1:size), list(...))
+  # data frame with all combinations of 1:size and the parameters (if any)
   param_vals <- expand.grid(params, stringsAsFactors = TRUE)
-  browser()
-  formals(fun) <- as.list(param_vals[1, , drop=FALSE])
-
+  # set arguments for the function
+  formals(fun) <- as.list(param_vals[1, , drop = FALSE])
+  # Accumulator for output
   Res <- list()
 
+  # Iterate over all the combinations of 1:size and the parameters
   for (k in 1:nrow(param_vals)) {
-    vals <- param_vals[k, , drop=FALSE]
+    vals <- param_vals[k, , drop = FALSE]
     output <- do.call(fun, vals) |> mosaic:::cull_for_do()
     Res[[k]] <- cbind(vals, output)
   }
 
+  # Condense accumulator into a data frame
   bind_rows(Res)
 
 }
