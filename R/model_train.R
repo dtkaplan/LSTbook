@@ -11,10 +11,8 @@
 #' @param data Data frame to use as training data
 #' @param tilde Formula for the model
 #' @param family Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...
-#' @param verbose whether to report on decisions being made
-#' @param prob_of which of two levels to use for logistic regression
 #' @export
-model_train <- function(data, tilde, verbose=FALSE, prob_of = NULL,
+model_train <- function(data, tilde, prob_of = NULL,
                       family = "auto", logs=FALSE, ...) {
   # Figure out (or confirm) the model family
   mod_family <- model_family(data, tilde, family)[1]
