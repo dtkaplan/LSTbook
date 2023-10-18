@@ -44,10 +44,10 @@ trials <- function(.ex, size = 1, ...) {
   for (k in 1:nrow(param_vals)) {
     vals <- param_vals[k, , drop = FALSE]
     output <- do.call(fun, vals) |> mosaic:::cull_for_do()
-    Res[[k]] <- cbind(vals, output)
+    Res[[k]] <- dplyr::bind_cols(vals, output)
   }
 
   # Condense accumulator into a data frame
-  bind_rows(Res)
+  dplyr::bind_rows(Res)
 
 }

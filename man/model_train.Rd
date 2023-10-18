@@ -4,24 +4,12 @@
 \alias{model_train}
 \title{train a model, easily}
 \usage{
-model_train(
-  data,
-  tilde,
-  verbose = FALSE,
-  prob_of = NULL,
-  family = "auto",
-  logs = FALSE,
-  ...
-)
+model_train(data, tilde, prob_of = NULL, family = "auto", logs = FALSE, ...)
 }
 \arguments{
 \item{data}{Data frame to use as training data}
 
 \item{tilde}{Formula for the model}
-
-\item{verbose}{whether to report on decisions being made}
-
-\item{prob_of}{which of two levels to use for logistic regression}
 
 \item{family}{Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...}
 }

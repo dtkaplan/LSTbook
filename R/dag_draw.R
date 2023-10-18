@@ -33,8 +33,8 @@ dag_draw <- function(DAG, ...) {
   reveal <- FALSE # default
   if ("show_hidden" %in% names(dots) ) reveal = dots$show_hidden
 
-  ig <- datasim_to_igraph(DAG, show_hidden=reveal)
-  par(mai=c(0,0,0,0)) # have the graph fill the frame
+  ig <- datasim_to_igraph(DAG, show_hidden = reveal)
+  par(mai = c(0,0,0,0)) # have the graph fill the frame
   do.call(plot, c(list(ig), defaults))
 }
 
