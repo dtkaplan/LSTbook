@@ -22,7 +22,8 @@
 #' @param D a data frame
 #' @param tilde tilde expression specifying `y ~ x` or `y ~ x + color`
 #' @param annot Statistical annotation (one of "none", "violin", "model")
-#' @param model_alpha Transparency for the model annotation
+#' @param point_ink Opacity of ink for the data points
+#' @param model_ink Opacity of ink for the model annotation
 #' @param palette Depending on taste and visual capabilities, some people might
 #' prefer to alter the color scheme. There are 8 palettes available: `"A"` through `"H"`.
 #' @param seed (optional) random seed for jittering
@@ -30,17 +31,18 @@
 #' By default, categorical variables are jittered.
 #' @param bw bandwidth for violin plot
 #' @param level confidence level to use (0.95)
-#' @param ... Graphical options for the data points, e.g. alpha, size
+#' @param ... Graphical options for the data points, e.g. size
 #'
 #' @examples
-#' Galton |> pointplot(height ~ mother + sex + father, annot="model", model_alpha=1)
+#' Galton |> pointplot(height ~ mother + sex + father, annot="model", model_ink=1)
 #' mtcars |> pointplot(mpg ~ wt + cyl)
 #' mtcars |> pointplot(mpg ~ wt + cyl + hp, annot="model")
 #' @export
 pointplot <- function(D, tilde, ..., data=NULL, seed=101,
                        annot = c("none", "violin", "model"),
                        jitter = c("default", "none", "all", "x", "y"),
-                       model_alpha = 0.2, palette=LETTERS[1:8], bw = NULL, level=0.95) {
+                       point_ink = 0.5,
+                       model_ink = 0.2, palette=LETTERS[1:8], bw = NULL, level=0.95) {
   annot <- match.arg(annot)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
@@ -109,11 +111,11 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   if (!show_color) {
     Res <- ggplot(data) +
       geom_jitter(aes(y=.data[[vars[1]]], x=.data[[vars[[2]]]]),
-                  width=x_jitter, height=y_jitter, ...)
+                  width=x_jitter, height=y_jitter, alpha = point_ink, ...)
   }  else {
     Res <- ggplot(data) +
       geom_jitter(aes(y=.data[[vars[1]]], x=.data[[vars[[2]]]], color=.data[[vars[3]]]),
-                  width=x_jitter, height=y_jitter, ...)
+                  width=x_jitter, height=y_jitter, alpha = point_ink, ...)
   }
 
 
@@ -124,10 +126,10 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   # Add a violin if called for
   if (annot %in% c("violin")) {
     if (!is.null(bw)) {
-      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_alpha,
+      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_ink,
                                aes(y=.data[[vars[1]]], x=.data[[vars[2]]]), bw = bw)
     } else { # can't always pass bw=NULL to geom_violin.
-      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_alpha,
+      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_ink,
                                aes(y=.data[[vars[1]]], x=.data[[vars[2]]]))
     }
     if (!x_is_discrete) {
@@ -158,13 +160,13 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
     }
     if (show_color) {
       if (x_is_discrete) {
-        if (model_alpha < 0.8) model_alpha <- model_alpha + 0.2 # enhance visibility
+        if (model_ink < 0.8) model_ink <- model_ink + 0.2 # enhance visibility
         Res <- Res +
           geom_linerange(data=mod_vals,
                         aes(x=.data[[vars[2]]],
                             ymin=.lwr, ymax=.upr,
                             color=.data[[vars[3]]]),
-                        alpha = model_alpha, size=6,
+                        alpha = model_ink, size=6,
                         position="dodge") +
           guides(fill="none")
       } else {
@@ -174,7 +176,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
                           ymin=.lwr, ymax=.upr,
                           # color = .data[[vars[3]]],
                           fill=.data[[vars[3]]]),
-                      alpha = model_alpha) +
+                      alpha = model_ink) +
           guides(fill="none")
       }
     } else {
@@ -184,14 +186,14 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
                         aes(x=.data[[vars[2]]],
                             ymin=.lwr, ymax=.upr),
                         size = 4,
-                        color="blue", alpha=model_alpha)
+                        color="blue", alpha=model_ink)
       } else {
         Res <- Res +
           geom_ribbon(data=mod_vals,
                       aes(x=.data[[vars[2]]],
                           ymin=.lwr, ymax=.upr),
                       color=NA,
-                      fill="blue", alpha=model_alpha)
+                      fill="blue", alpha=model_ink)
       }
     }
   }

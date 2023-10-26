@@ -10,7 +10,8 @@
 #' @param jitter Whether to jitter the plotted data (default TRUE)
 #' @param interval One of "none", "prediction", "confidence"
 #' @param level Level to use for interval (default: 0.95)
-#' @param data_alpha Transparency level for data (default: 0.25)
+#' @param model_ink Graphical opacity for model annotations.
+#' @param point_ink Graphical opacity for data points (default: 0.25)
 #'
 #'
 #' @examples
@@ -21,7 +22,7 @@
 model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
                        ..., data = NULL, nlevels=5, show_data=TRUE, jitter=TRUE,
                        interval=c("none", "prediction", "confidence"),
-                       level=0.95, data_alpha=0.25) {
+                       level=0.95, point_ink=0.25, model_ink=0.7) {
   evars <- explanatory_vars(mod)
   # handle case of ~ 1 models, with no explanatory variables
   if (length(evars) == 0) evars <- "No_explan_vars"
@@ -155,7 +156,7 @@ model_plot <- function(mod, x, color=NULL, facet=NULL, facet2=NULL,
 
 
   if (show_data) {
-    P <- data_plot_fun(data_formula, color=color_formula, data = data, alpha=data_alpha)
+    P <- data_plot_fun(data_formula, color=color_formula, data = data, alpha=point_ink)
   } else {
     P <- NULL
   }

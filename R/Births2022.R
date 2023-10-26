@@ -6,7 +6,8 @@
 #'
 #' @docType data
 #'
-#' @format  A data frame with 20,000 observations on the following 38 variables.
+#' @format  A data frame with 20,000 observations on the following 38 variables. The unit of observation
+#' is a birth.
 #' - `month`: 1-12
 #' - `dow`: Day of week: Sun, Mon, Tues, ...
 #' - `place`: hospital, home, clinic, etc.

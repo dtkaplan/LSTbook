@@ -12,7 +12,8 @@ pointplot(
   seed = 101,
   annot = c("none", "violin", "model"),
   jitter = c("default", "none", "all", "x", "y"),
-  model_alpha = 0.2,
+  point_ink = 0.5,
+  model_ink = 0.2,
   palette = LETTERS[1:8],
   bw = NULL,
   level = 0.95
@@ -23,7 +24,7 @@ pointplot(
 
 \item{tilde}{tilde expression specifying \code{y ~ x} or \code{y ~ x + color}}
 
-\item{...}{Graphical options for the data points, e.g. alpha, size}
+\item{...}{Graphical options for the data points, e.g. size}
 
 \item{seed}{(optional) random seed for jittering}
 
@@ -32,7 +33,9 @@ pointplot(
 \item{jitter}{Options for turning on jitter: one of \code{"default"}, \code{"both"}, \code{"none"}, \code{"x"}, \code{"y"}. By default,
 By default, categorical variables are jittered.}
 
-\item{model_alpha}{Transparency for the model annotation}
+\item{point_ink}{Opacity of ink for the data points}
+
+\item{model_ink}{Opacity of ink for the model annotation}
 
 \item{palette}{Depending on taste and visual capabilities, some people might
 prefer to alter the color scheme. There are 8 palettes available: \code{"A"} through \code{"H"}.}
@@ -63,7 +66,7 @@ If you want to use the same explanatory variable for color and faceting
 in the faceting position, e.g. \code{mpg ~ hp + cyl + cyl}.
 }
 \examples{
-Galton |> pointplot(height ~ mother + sex + father, annot="model", model_alpha=1)
+Galton |> pointplot(height ~ mother + sex + father, annot="model", model_ink=1)
 mtcars |> pointplot(mpg ~ wt + cyl)
 mtcars |> pointplot(mpg ~ wt + cyl + hp, annot="model")
 }

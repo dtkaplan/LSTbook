@@ -17,7 +17,8 @@ model_plot(
   jitter = TRUE,
   interval = c("none", "prediction", "confidence"),
   level = 0.95,
-  data_alpha = 0.25
+  point_ink = 0.25,
+  model_ink = 0.7
 )
 }
 \arguments{
@@ -41,7 +42,9 @@ model_plot(
 
 \item{level}{Level to use for interval (default: 0.95)}
 
-\item{data_alpha}{Transparency level for data (default: 0.25)}
+\item{point_ink}{Graphical opacity for data points (default: 0.25)}
+
+\item{model_ink}{Graphical opacity for model annotations.}
 }
 \description{
 Plot model output for representative levels of explanatory variables
