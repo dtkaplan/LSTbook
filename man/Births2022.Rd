@@ -5,7 +5,8 @@
 \alias{Births2022}
 \title{Records on births in the US in 2022}
 \format{
-A data frame with 20,000 observations on the following 38 variables.
+A data frame with 20,000 observations on the following 38 variables. The unit of observation
+is a birth.
 \itemize{
 \item \code{month}: 1-12
 \item \code{dow}: Day of week: Sun, Mon, Tues, ...

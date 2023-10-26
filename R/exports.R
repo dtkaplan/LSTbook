@@ -1,3 +1,2 @@
 #' Things to be exported
-#'
 
