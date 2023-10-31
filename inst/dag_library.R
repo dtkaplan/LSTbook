@@ -77,7 +77,7 @@ dag10 <- datasim_make(
   c <- rnorm(n),
   d <- rnorm(n),
   e <- rnorm(n),
-  f <- 2*bernoulli() - 1,
+  f <- 2*bernoulli(rnorm(n)) - 1,
   y <- bernoulli(2*a - 3*b + c - 1.5*d + 1*e + 0.5*f)
 )
 
@@ -130,13 +130,13 @@ dag_satgpa <- datasim_make(
 )
 
 dag_flights <- datasim_make(
-  ready <- each(10),
-  abortAM <- count_flips(ready, .06),
+  ready <- rep(10, n),
+  abortAM <- rbinom(n, ready, .06),
   AM <- ready - abortAM,
-  brokeAM  <- count_flips(AM, 0.12),
-  PM <- AM - brokeAM + count_flips(abortAM, 0.67) + count_flips(brokeAM, .4),
-  abortPM <- count_flips(PM, .06),
-  brokePM <- count_flips(PM - abortPM, .12)
+  brokeAM  <- rbinom(n, AM, 0.12),
+  PM <- AM - brokeAM + rbinom(n, abortAM, 0.67) + rbinom(n, brokeAM, .4),
+  abortPM <- rbinom(n, PM, .06),
+  brokePM <- rbinom(n, PM - abortPM, .12)
 )
 
 dag_medical_observations <- datasim_make(
