@@ -145,7 +145,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
     mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level=level)
 
     # special case for categorical response variable
-    if (y_is_discrete) {
+    if (!inherits(y_data, "zero_one") && y_is_discrete) {
       if (length(levels(data[[1]])) == 2) {
         # Need to add 1 to model output levels, which are in [0,1],
         # so that they will graph on the same
