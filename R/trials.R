@@ -43,7 +43,7 @@ trials <- function(.ex, size = 1, ...) {
   # Iterate over all the combinations of 1:size and the parameters
   for (k in 1:nrow(param_vals)) {
     vals <- param_vals[k, , drop = FALSE]
-    output <- do.call(fun, vals) |> mosaic:::cull_for_do()
+    output <- do.call(fun, vals) |> mosaic_cull_for_do()
     Res[[k]] <- dplyr::bind_cols(vals, output)
   }
 
