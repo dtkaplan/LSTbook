@@ -14,10 +14,12 @@ datasim_make <- function(...) {
 
   # Put the nodes in topological order so that every call refers
   # only to nodes further down the list.
-
-  new_order <- datasim_to_igraph(sim) |> igraph::topo_sort()
-  sim$names <- sim$names[new_order]
-  sim$calls <- sim$calls[new_order]
+  if (require(igraph)) {
+    # Remove dependency on igraph for WebR compatibility
+    new_order <- datasim_to_igraph(sim) |> igraph::topo_sort()
+    sim$names <- sim$names[new_order]
+    sim$calls <- sim$calls[new_order]
+  }
 
   class(sim) <- c("list", "datasim")
 
@@ -180,12 +182,14 @@ datasim_to_igraph <- function(sim, show_hidden=FALSE) {
 
   }
 
-  g <- igraph::make_empty_graph(n=length(nnames), directed=TRUE) %>%
-    igraph::add_edges(edges) %>%
-    igraph::set_vertex_attr("label", value=nnames)
+  if (require(igraph)) {
+    g <- igraph::make_empty_graph(n=length(nnames), directed=TRUE) %>%
+      igraph::add_edges(edges) %>%
+      igraph::set_vertex_attr("label", value=nnames)
 
 
-  g
+    return(g)
+  }
 }
 
 
