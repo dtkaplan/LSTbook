@@ -1,0 +1,42 @@
+McCredie_Kurtz_Open_Data.sav comes from <https://data.mendeley.com/datasets/rn2bpp6f37/1> and is described in <https://www.sciencedirect.com/science/article/abs/pii/S009265661930131X>
+
+Morgan N. McCredie and John E. Kurtz (2020) "Prospective prediction of academic performance in college using self- and informant-rated personality traits" *Journal of Research in Personality* **85**
+
+https://doi.org/10.1016/j.jrp.2019.103911.
+(https://www.sciencedirect.com/science/article/pii/S009265661930131X)
+Abstract: Five-factor personality ratings were provided by undergraduate freshmen, their parents, and their college peers as predictors of cumulative GPA upon graduation. Conscientiousness ratings were significant predictors of GPA by all three raters; peer ratings of Conscientiousness were the only significant predictor of GPA when self-, parent-, and peer-ratings of Conscientiousness were examined simultaneously. College major was a moderator of this relationship, with self- and parent-ratings of Conscientiousness correlating more strongly with GPA among Social Science majors and parent-ratings of Conscientiousness correlating less strongly with GPA among Science majors. These findings replicate existing research regarding the validity of informant ratings as predictors of behavioral outcomes such as academic performance, while emphasizing the importance of including multiple informants from various life contexts.
+
+## Five-factor personality ratings
+
+1. extraversion: sociability EXTR
+1. neuroticism: sadness or emotional instability NEUR
+1. openness to experience OPEN
+1. agreeableness: kindness AGRE
+1. conscientiousness: thoughtfulness CON
+
+
+## Reading the file
+
+```{r}
+Tmp <- haven::read_sav("McCredie_Kurtz_Open_Data.sav")
+```
+
+I'm going to pull out the ID variables and the parental ratings, as well as the GPA.
+
+```{r}
+
+fields <- c("Arts", "Science", "Business", "Engineering", "Nursing")
+McCredie_Kurtz <- Tmp |>
+  select(subjid, Gender, College, age = AGE, 
+         m_extra = EXTRMOT, f_extra = EXTRFAT,
+         m_agree = AGREMOT, f_agree = AGREMOT,
+         m_cons  = CONSMOT, f_cons  = CONSFAT,
+         m_neur  = NEURMOT, f_neur  = NEURFAT,
+         m_open  = OPENMOT, f_open  = OPENFAT,
+         GPA) |>
+  mutate( sex = ifelse(Gender == 1, "F", "M"),
+          field = fields[College]) |>
+  select(-Gender, -College)
+
+save(McCredie_Kurtz, file="McCredie_Kurtz.rda")
+```
