@@ -16,19 +16,90 @@ knitr::opts_chunk$set(
 
 ```{r include=FALSE}
 library(LST)
+library(tibble)
 ```
 
+Instructors often hear that students should work with "real" data, that is, data from actual observations or experiments. Such "real" data is used throughout *Lessons in Statistical Thinking* and serves several purposes: motivating students, creating verisimilitude, and exercising the statistical thinking skill of recognizing that one's findings from data may not reflect the reality that created the data.
 
-## To Do
+But there is also an important use for "unreal," simulated data. The user-defined rules of the simulation stands for reality, providing a chance to see if the results of analyzing the data correspond with that reality. Another way to say this is that the use of simulated data allows one to look at **accuracy** and **bias**. As well, simulations provide a direct way to observe sampling variation, since a given simulation can be run multiple times.
 
-1. Get dag_intervene() working with the datasim()
+In the `{LST}` package, data simulations are provided by a handful of purpose-written functions, particularly `datasim_make()` and `datasim_run()`. Simulation is always a two-step process: (1) create the rules by which the simulation works and (2) apply those rules using random-number generators to generate data. To illustrate the process, consider a very simple simulation in which a random `x` is generated, which is used to produce a `y` by a linear transformation of the `x`. The two simulated variables are then packaged as a data frame.
 
+```{r}
+Example1 <- datasim_make(
+  x <- rnorm(n, mean = 0, sd = 2), 
+  y <- -3 + 10 * x
+)
+Example1 |> sample(n=6,  seed = 101)
+```
+
+`Example1` is a simulation with two rules: `x` is a random normal variable (with the specified mean and standard deviation) and `y` is an arithmetic transformation of `x`.
+
+For readers interested in details, we'll explain in @sec-why-datasim why the choice was taken to arrange things as this two-step process. For the present, however, we will continue without worrying about the design choices.
+
+## Basics of `datasim_make()`
+
+Each of the rules of a simulation is written in the syntax of an ordinary R statement. Rules must always have a unique name. For example, `x <- rnorm(n, mean=0, sd=2)`, is a perfectly ordinary R statement, storing under the name `x` the rule `rnorm(n, mean=0, sd=2)`. 
+
+`datasim_make()` is a **function**; the simulation rules are given as **arguments** to the function, that is, in parentheses and separated by commas. 
+
+But there are three aspects of using `datasim_make()` that are entirely out of the ordinary. First, the name is given to each of the rules using the storage arrow (`<-`) as opposed to the usual `=` syntax for named arguments. Using `=` will generate an error, like this.
+
+```{r error = TRUE}
+Wrong_way <- datasim_make(x = rnorm(n, mean=0, sd=2)) # don't use =
+```
+
+Second, the quantity `n` does **not** need to be defined previously; it will be defined in the sampling phase.
+
+Third, a rule may make use of a name (like `x`) only when that name has been used for a previous rule. For instance, the second rule in `Example1` is `y <- -3 + 10 * x` and uses the `x` defined in the first rule. More rules, with their own unique names, could be added that make use of `x` and `y`.  
+
+Once a set of rules has been collected using `datasim_make()`, the simulation can be run as many times as you like. 
+
+```{r}
+Example1 |> sample(n = 3)
+Example1 |> sample(n = 2)
+# and so on
+```
+
+## Pre-defined simulations
+
+Although students or instructors may create their own simulations using `datasim_make()`, they will want to get started using some of the pre-defined simulations that come with the `{LST}` package. These are named with the prefix `sim_`, as in `sim_00`, `sim_01`, ..., `sim_12`, `sim_vaccine`, and so on.
+
+There are two ways to see what are the rules of these predefined simulations.
+
+1. Print out the rules, e.g.
+
+```{r}
+print(sim_04)
+```
+
+2. Draw a graph of the connections between rules, e.g. in `dag_04` rule `d` receives inputs from `a`, `b`, and `c`, but none of those other rules are connected to one another.
+
+```{r}
+dag_draw(sim_04)
+```
+
+The term for the mathematical graphs corresponding to data simulation rules is "directed acyclic graph" or DAG for short.
+
+
+## Visualizing a set of simulation rules
+
+With
+
+
+
+## Why `datasim_make()`? {#sec-why-datasim}
+
+
+## Simulations as DAGs {#sec-sims-as-dags}
+
+## Causality and DAGs
 
 A "directed acyclic graph" (DAG) is an almost intuitive way of representing causal connections among variables. For instance, a popular legend holds that there is a correlation between drownings and ice-cream consumption. This legend is used as an example of the principle "correlation is not causation," since drownings don't lead to ice-cream consumption and ice-cream consumption doesn't lead to drownings. Rather, the warmth and relaxation of summer leads to both increased swimming activity and cooling refreshment consumption. In a DAG, the variables (`season`, `drowning`, `ice_cream` consumption) form the nodes of a mathematical graph. The causal links are arrows ("directed edges") between the nodes. @fig-ice-cream-dags show two DAGs representing two distinct hypotheses about the causal connections.
 
 ```{r echo=FALSE}
 Legend2 <- datasim_make(
-  season ~ categorical(n, c("Spring", "Summer", "Fall", "Winter")),
+  season ~ categorical(n, "Spring", "Summer", "Fall", "Winter"),
   drowning ~ rpois(n, lambda = 0.05 + .15 * (season=="Summer")),
   ice_cream ~ signif(runif(n, 1,3) + (season=="Summer") * runif(n, 2,5),2)
 )
@@ -37,9 +108,9 @@ Legend2 <- datasim_make(
 ```{r}
 #| code-fold: true
 Legend <- datasim_make(
-  season ~ categorical(n, c("Spring", "Summer", "Fall", "Winter")),
-  ice_cream ~ signif(runif(1,3) + (season == "Summer") * runif(2,5),2),
-  drowning ~ rpois(n, lambda=ice_cream / 30 + 0.5 * (season=="Summer"))
+  season ~ categorical(n, "Spring", "Summer", "Fall", "Winter"),
+  ice_cream ~ signif(runif(n, 1,3) + (season == "Summer") * runif(n, 2,5)),
+  drowning ~ rpois(n, lambda = ice_cream / 30 + 0.5 * (season=="Summer"))
 )
 ```
 
@@ -65,7 +136,7 @@ In *Lessons*, we use them in a third way as well: as a description of a simulati
 ```{r}
 #| label: tbl-ice-cream
 #| tbl-cap: "A sample of size 10 from the `Legend` DAG. Drownings are per 100,000 people in the season, ice cream is per-capita cone consumption."
-sample(Legend, size=10) |> 
+sample(Legend, n=10, seed=102) |> 
   knitr::kable() # for nice printing
 ```
 
@@ -90,13 +161,13 @@ Simulating data using DAGs is a two-step process:
 
 "Normal DAG" is a double-ententre, referring to the easiest kind of DAG to define and to the use of Gaussian noise as the exogenous inputs to the simulation. A few examples will suffice for those who want to write their own DAGs. There are also several off-the-shelf DAGs provided in the `{LST}` package, e.g., `dag01` through `dag12` and a few others.
 
-Use the `dag_make()` command to construct an R object which can then be drawn as a diagram, sampled from, and so on. The arguments to `dag_make()` are one or more tilde expressions (called "formulas" in most R documentation) that name the variables to be included in the DAG and describe the calculations in the simulations.
+Use the `datasim_make()` command to construct an R object which can then be drawn as a diagram, sampled from, and so on. The arguments to `datasim_make()` are one or more tilde expressions (called "formulas" in most R documentation) that name the variables to be included in the DAG and describe the calculations in the simulations.
 
 ```{r}
-ex1 <- dag_make(
-  C ~ exo(),
-  X ~ C + exo(),
-  Y ~ 2*X - 3*C + exo()
+ex1 <- datasim_make(
+  C ~ exo(n),
+  X ~ C + exo(n),
+  Y ~ 2*X - 3*C + exo(n)
 )
 ```
 

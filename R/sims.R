@@ -6,7 +6,12 @@
 #' @export
 datasim_make <- function(...) {
   steps <- enquos(..., .ignore_empty = "all")
+
+  if (any(nchar(names(steps[[1]])) > 0))
+    stop("Use the storage arrow `<-` (not the equation sign `=`) in arguments to datasim_make().")
+  # Pull out the variable names from the left-hand side of <-
   vnames <- lapply(steps, function(x) rlang::quo_get_expr(x)[[2]])
+  # ... and the simulation rules from the right-hand side.
   vcalls <- lapply(steps, function(x) rlang::quo_get_expr(x)[[3]])
 
 
@@ -53,10 +58,12 @@ print.datasim <- function(x, ..., report_hidden = FALSE) {
 #' @rdname datasim
 #' @export
 datasim_run <- function(sim, n=5, seed=NULL) {
+  # a simple utility function
+  exo <- function(n, sd = 1) {
+    rnorm(n, mean=0, sd=sd)
+  }
   # set random number generator seed, if called for
   if (!is.null(seed)) set.seed(seed)
-  # custom functions
-  exo <- rnorm
 
   # create stub for the output
   values <- vector("list", length(sim$names))
@@ -85,8 +92,21 @@ datasim_run <- function(sim, n=5, seed=NULL) {
 categorical <- function(n=5, ..., exact = TRUE) {
   # specify levels either as a list in <levels> or using ...
   dots <- list(...)
-  levels <- names(dots)
-  probs <- abs(as.numeric(unlist(dots)))
+
+  # handle case where some or all of dots do not have a numeric value.
+
+  probs <- suppressWarnings(as.numeric(unlist(dots)))
+  if (all(is.na(probs))) {
+    # handle case where dots is a list of character strings
+    levels <- unlist(dots)
+    probs <- rep(1, length(levels))
+  } else if (any(is.na(probs))) {
+    # if some of dots are character strings, but not others, balk
+    stop("Give relative probability of all levels, not just some of them.")
+  } else {
+    # all of the dots are numeric
+    levels <- names(dots)
+  }
 
   # Convert to normalized probabilities
   probs <- probs / sum(probs)
@@ -94,7 +114,7 @@ categorical <- function(n=5, ..., exact = TRUE) {
   # generate the levels
   if (exact) { # table of counts should be as exactly as possible matched to probs.
     if (length(unique(probs)) == 1) # all the same
-      return(sample(rep_len(levels, length.out=n)))
+      return(base::sample(rep_len(levels, length.out=n)))
     else {
       counts <- round(probs*n)
       res <- base::sample(rep.int(levels, times=counts))
