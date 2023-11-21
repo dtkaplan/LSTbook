@@ -14,15 +14,22 @@ datasim_make(...)
 
 datasim_run(sim, n = 5, seed = NULL)
 
-categorical(n = 5, levels = NULL, ..., exact = TRUE)
+categorical(n = 5, ..., exact = TRUE)
 
 evaluate(variable, values)
 
-bernoulli(logodds = NULL, prob = 0.5, labels = NULL, n = 0)
+bernoulli(n = 0, logodds = NULL, prob = 0.5, labels = NULL)
 
-block_by(block_var, levels = c("treatment", "control"))
+block_by(block_var, levels = c("treatment", "control"), show_block = FALSE)
 
 datasim_to_igraph(sim, show_hidden = FALSE)
+}
+\arguments{
+\item{variable}{a categorical variable}
+
+\item{values}{a named vector whose names are found in \code{variable}}
+
+\item{\ldots}{named arguments giving relative probability of each category}
 }
 \description{
 Facility to make and run data simulations

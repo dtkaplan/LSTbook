@@ -23,6 +23,7 @@
 #' @importFrom tibble as_tibble
 #' @export
 dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, report_hidden=FALSE, .size_multiplier=10) {
+  lifecycle::deprecate_stop("0.4.0", "dag()")
   # check that DAG is a list of formulas
   if (!is.list(DAG)) stop("DAG must be a list of formulas")
   if (!all(unlist(lapply(DAG, function(x) inherits(x, "formula")))))
@@ -143,12 +144,7 @@ dag_sample <- function(DAG, size=10, seed=NULL, survive=NULL, report_hidden=FALS
   return(Res[, !rid])
 }
 
-#' @importFrom mosaic sample
-#' @export
-sample.dagsystem <- function(x, size, replace = FALSE, ...) {
-  if (missing(size)) size=5
-  dag_sample(x, size=size, ...)
-}
+
 
 #' @export
 print.dagsystem <- function(x, ..., report_hidden=FALSE) {

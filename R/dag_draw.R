@@ -15,14 +15,14 @@
 #' @export
 dag_draw <- function(DAG, ...) {
   dots <- list(...)
-  if (require(igraph)) for_layout <- igraph::layout_nicely()
+  if (require(igraph, quietly = TRUE)) for_layout <- igraph::layout_nicely
   else for_layout <- NULL
-  defaults <- list(vertex.size=40, vertex.color=NA,
-                   vertex.shape="circle",
-                   vertex.label.cex=2,
-                   vertex.label.family="Courier",
-                   vertex.frame.color=NA,
-                   layout=for_layout)
+  defaults <- list(vertex.size = 40, vertex.color=NA,
+                   vertex.shape = "circle",
+                   vertex.label.cex = 2,
+                   vertex.label.family = "Courier",
+                   vertex.frame.color = NA,
+                   layout = for_layout)
   if ("seed" %in% names(dots)) {
     set.seed(dots$seed)
     dots$seed <- NULL

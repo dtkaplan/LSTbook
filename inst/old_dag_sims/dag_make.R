@@ -33,6 +33,7 @@
 #' @export
 dag_make <- function(...) {
   # TO DO. Check the formulas.
+  lifecycle::deprecate_stop("0.4.0", what="dag_make()")
   DAG <- list(...)
   if (!dag_check(DAG)) stop("Variable(s) used but not given formula.")
 

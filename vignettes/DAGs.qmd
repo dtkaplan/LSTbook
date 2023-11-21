@@ -1,5 +1,5 @@
 ---
-title: "Simulations with Directed Acyclic Graphs"
+title: "Simulating data with Directed Acyclic Graphs"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{DAGs}
@@ -18,22 +18,28 @@ knitr::opts_chunk$set(
 library(LST)
 ```
 
+
+## To Do
+
+1. Get dag_intervene() working with the datasim()
+
+
 A "directed acyclic graph" (DAG) is an almost intuitive way of representing causal connections among variables. For instance, a popular legend holds that there is a correlation between drownings and ice-cream consumption. This legend is used as an example of the principle "correlation is not causation," since drownings don't lead to ice-cream consumption and ice-cream consumption doesn't lead to drownings. Rather, the warmth and relaxation of summer leads to both increased swimming activity and cooling refreshment consumption. In a DAG, the variables (`season`, `drowning`, `ice_cream` consumption) form the nodes of a mathematical graph. The causal links are arrows ("directed edges") between the nodes. @fig-ice-cream-dags show two DAGs representing two distinct hypotheses about the causal connections.
 
 ```{r echo=FALSE}
-Legend2 <- dag_make(
-  season ~ categorical(c("Spring", "Summer", "Fall", "Winter")),
-  drowning ~ pois(rate=.05 + .15*(season=="Summer")),
-  ice_cream ~ signif(unif(1,3) + (season=="Summer")*unif(2,5),2)
+Legend2 <- datasim_make(
+  season ~ categorical(n, c("Spring", "Summer", "Fall", "Winter")),
+  drowning ~ rpois(n, lambda = 0.05 + .15 * (season=="Summer")),
+  ice_cream ~ signif(runif(n, 1,3) + (season=="Summer") * runif(n, 2,5),2)
 )
 ```
 
 ```{r}
 #| code-fold: true
-Legend <- dag_make(
-  season ~ categorical(c("Spring", "Summer", "Fall", "Winter")),
-  ice_cream ~ signif(unif(1,3) + (season=="Summer")*unif(2,5),2),
-  drowning ~ pois(rate=ice_cream/30 + .5*(season=="Summer"))
+Legend <- datasim_make(
+  season ~ categorical(n, c("Spring", "Summer", "Fall", "Winter")),
+  ice_cream ~ signif(runif(1,3) + (season == "Summer") * runif(2,5),2),
+  drowning ~ rpois(n, lambda=ice_cream / 30 + 0.5 * (season=="Summer"))
 )
 ```
 

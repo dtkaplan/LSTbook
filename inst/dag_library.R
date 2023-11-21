@@ -140,7 +140,7 @@ dag_flights <- datasim_make(
 )
 
 dag_medical_observations <- datasim_make(
-  .sex <- bernoulli(x=rnorm(n), labels=c("F", "M")),
+  .sex <- bernoulli(n=n, labels=c("F", "M")),
   .cond <- rnorm(n),
   treatment <- bernoulli(1*(.sex=="F")- .cond, labels=c("none", "treat")),
   outcome <- -0.5*(treatment=="treat") - .cond + 1.5*(.sex=="F") + rnorm(n)

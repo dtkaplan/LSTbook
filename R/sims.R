@@ -1,5 +1,7 @@
 #' Facility to make and run data simulations
 #'
+#' @importFrom rlang enquos
+#'
 #' @rdname datasim
 #' @export
 datasim_make <- function(...) {
@@ -8,20 +10,24 @@ datasim_make <- function(...) {
   vcalls <- lapply(steps, function(x) rlang::quo_get_expr(x)[[3]])
 
 
-  sources <- lapply(vcalls, function(x) setdiff(all.vars(x), "n"))
+  # Can't use `n` as a variable because it would be confused with `n` as size placeholder.
+  if ("n" %in% unlist(vnames)) stop("Can't use `n` as a simulation variable name.")
 
   sim <- list(names = vnames, calls = vcalls)
+  class(sim) <- c("list", "datasim")
 
+  put_in_order(sim)
+}
+
+put_in_order <- function(sim) {
   # Put the nodes in topological order so that every call refers
   # only to nodes further down the list.
-  if (require(igraph)) {
+  if (require(igraph, quietly = TRUE)) {
     # Remove dependency on igraph for WebR compatibility
     new_order <- datasim_to_igraph(sim) |> igraph::topo_sort()
     sim$names <- sim$names[new_order]
     sim$calls <- sim$calls[new_order]
   }
-
-  class(sim) <- c("list", "datasim")
 
   sim
 }
@@ -71,24 +77,16 @@ datasim_run <- function(sim, n=5, seed=NULL) {
   as_tibble(values)
 }
 
-#' @importFrom mosaic sample
-#' @export
-sample.datasim <- function(x, size, replace = FALSE, ...) {
-  if (missing(size)) size=5
-  datasim_run(x, n=size, ...)
-}
 
 #' @rdname datasim
+#' @param \ldots named arguments giving relative probability of each category
+#'
 #' @export
-categorical <- function(n=5, levels = NULL, ..., exact = TRUE) {
+categorical <- function(n=5, ..., exact = TRUE) {
   # specify levels either as a list in <levels> or using ...
-  if (!is.null(levels)) { # all values equally likely
-    probs <- 1
-  } else {
-    dots <- list(...)
-    levels <- names(dots)
-    probs <- abs(as.numeric(unlist(dots)))
-  }
+  dots <- list(...)
+  levels <- names(dots)
+  probs <- abs(as.numeric(unlist(dots)))
 
   # Convert to normalized probabilities
   probs <- probs / sum(probs)
@@ -99,16 +97,18 @@ categorical <- function(n=5, levels = NULL, ..., exact = TRUE) {
       return(sample(rep_len(levels, length.out=n)))
     else {
       counts <- round(probs*n)
-      res <- sample(rep.int(levels, times=counts))
-      if (length(res) != n) {
+      res <- base::sample(rep.int(levels, times=counts))
+      # deal with round-off in the counts
+      if (length(res) > n) res <- res[1:n]
+      else if (length(res) != n) {
         res <- c(res,
-                 categorical(n = n-length(res),
-                             levels = dots, exact=FALSE))
+                 categorical(n = n-length(res), ...,
+                             exact=FALSE))
       }
       return(res)
     }
   } else {
-    # When <exact> is FALSE, generate the levels probabilistically
+    # When <exact> is FALSE, generate the levels probabalistically
     cumprobs <- cumsum(probs/(sum(probs)))
     pick <- runif(n)
     choices <- outer(pick, cumprobs, FUN=`<=`) |>
@@ -117,6 +117,8 @@ categorical <- function(n=5, levels = NULL, ..., exact = TRUE) {
   }
 }
 
+#' @param variable a categorical variable
+#' @param values a named vector whose names are found in `variable`
 #' @rdname datasim
 #' @export
 evaluate <- function(variable, values) {
@@ -130,7 +132,7 @@ evaluate <- function(variable, values) {
 
 #' @rdname datasim
 #' @export
-bernoulli <- function(logodds=NULL, prob=0.5, labels=NULL, n=0) {
+bernoulli <- function(n=0, logodds=NULL, prob=0.5, labels=NULL) {
   if (length(logodds) > 0) n <- length(logodds)
   else if (length(prob) == 1L) {
     if (n == 0) stop("Must specify <n=> in bernoulli() unless <logodds=> or <prob=> is used.")
@@ -145,23 +147,22 @@ bernoulli <- function(logodds=NULL, prob=0.5, labels=NULL, n=0) {
   yesno
 }
 
+
 #' @rdname datasim
 #' @export
-block_by <- function(block_var, levels=c("treatment", "control")) {
+block_by <- function(block_var, levels = c("treatment", "control"), show_block=FALSE) {
   orig <- seq_along(block_var)
   inds <- order(block_var)
   block_var <- block_var[inds]
-  if (is.numeric(block_var)) {
-    # divide into even-sized groups
-    block_var <- (seq_along(block_var)-1) %/% length(levels)
-  }
-  orig <- orig[inds]
-  out <- rep_len(levels, length.out=length(block_var))
-  out <- mosaic::sample(out, groups=block_var) # randomize the order within the blocks
-  back_inds <- order(orig)
-  out[back_inds]
-}
+  # divide into even-sized groups
+  Tmp <- tibble::tibble(orig = orig[inds],
+                        block = (seq_along(block_var)-1) %/% length(levels)) |>
+    mutate(out = levels[rank(runif(n()))], .by=block) |>
+    arrange(orig)
 
+  if (show_block) Tmp$block
+  else Tmp$out
+}
 
 #' @rdname datasim
 #' @export
@@ -182,26 +183,40 @@ datasim_to_igraph <- function(sim, show_hidden=FALSE) {
 
   }
 
-  if (require(igraph)) {
+  if (require(igraph, quietly = TRUE)) {
     g <- igraph::make_empty_graph(n=length(nnames), directed=TRUE) %>%
       igraph::add_edges(edges) %>%
       igraph::set_vertex_attr("label", value=nnames)
 
 
     return(g)
+  } else {
+    stop("Package `{igraph} not available to draw datasim.")
   }
 }
 
+#' @export
+datasim_intervene <- function(datasim, ...) {
+  if (!inherits(datasim, "datasim")) stop("Must provide a datasim object")
+  new_steps <- enquos(..., .ignore_empty = "all")
 
+  new_vnames <-
+    lapply(new_steps, function(x) as.character(rlang::quo_get_expr(x)[[2]]))
+  new_vcalls <- lapply(new_steps, function(x) rlang::quo_get_expr(x)[[3]])
+  # replace the calls corresponding to any re-used names
+  reused <- which(as.character(datasim$names) %in% as.character(new_vnames))
+  indices <- which(as.character(new_vnames) %in% as.character(datasim$names))
+  # replace any steps already defined in the input datasim
+  if (length(indices) > 0) {
+    datasim$calls[reused] <- new_vcalls[indices]
+    new_vcalls[indices] <- NULL
+    new_vnames[indices] <- NULL
+  }
 
-categorical(12, a=1, b=2, c=3, d=0.1, exact=TRUE)
-bernoulli(10, labels=c("yes", "no")) |> table()
-block_by(categorical(10, a=1, b=2))
+  datasim$names <- c(datasim$names, new_vnames)
+  datasim$calls <- c(datasim$calls, new_vcalls)
 
-sim <- datasim_make( group <- categorical(n, a=1, b=2),
-                 treat <- block_by(group))
-sim2 <- datasim_make( group <- exo(n),
-                  treat <- block_by(group))
-sim3 <- datasim_make( ,
-                  block_by(group) -> treat,
-                  group <- exo(n),)
+  put_in_order(datasim)
+
+}
+
