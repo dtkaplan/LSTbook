@@ -33,11 +33,10 @@ zero_one <- function(x, one) {
 #' where the y-axis is a zero-one variable.
 #'
 #' @examples
-#' P <- gf_jitter(zero_one(outcome) ~ age, color=~smoker, data = Whickham) %>% label_zero_one() %>% gf_labs(y="Smoker")
-#' mod <- mod_train(zero_one(outcome) ~ age + smoker, data = Whickham)
-#' fun <- makeFun(mod)
-#' P
-#' P %>% mosaicCalc::slice_plot(fun(age, smoker="Yes") ~ age)
+#' Whickham |>
+#'   pointplot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
+#'   label_zero_one() +
+#'   ylab("Prob. alive at 20-year follow-up")
 
 
 #' need to write documentation for the graphics command `label_zero_one()`
@@ -46,7 +45,7 @@ label_zero_one <- function(P) {
   # vertical axis data in P$data[[1]]
   YesNo <- P$data[[1]]
   if (!inherits(YesNo, "zero_one")) return(P)
-  else P + scale_y_continuous(breaks=waiver(),
+  else P + scale_y_continuous(breaks=c(0, 0.5, 1),
                               sec.axis=sec_axis(trans = ~ .,
                                                 breaks=c(0,1), labels=levels(YesNo)))
 }

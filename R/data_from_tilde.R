@@ -23,7 +23,7 @@ eval_exp_list <- function(EL, .data) {
   tmp <- try(class(.data))
   if (inherits(tmp, "try-error")) {
     # Keep track of the names of often-used data frames to help with error messages
-    .PackagesToSearch. <- c("mosaic", "LST", "openintro", "moderndive")
+    .PackagesToSearch. <- c("mosaicData", "LST", "openintro", "moderndive")
     .getDFNames <- function() {
       names <- suppressWarnings(data(package = .PackagesToSearch.))$results[,3]
     }
@@ -98,7 +98,7 @@ best_name_match <- function(nms, msg, starter="`{obj_name}` not found among vari
 }
 
 # Keep track of the names of often-used data frames to help with error messages
-.PackagesToSearch. <- c("mosaic", "LST", "openintro", "moderndive")
+.PackagesToSearch. <- c("mosaicData", "LST", "openintro", "moderndive")
 .getDFNames <- function() {
   names <- suppressWarnings(data(package = .PackagesToSearch.))$results[,3]
 }

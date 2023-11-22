@@ -12,10 +12,9 @@ not clear how to use this. I want an easy way to label the vertical axis of grap
 where the y-axis is a zero-one variable.
 }
 \examples{
-P <- gf_jitter(zero_one(outcome) ~ age, color=~smoker, data = Whickham) \%>\% label_zero_one() \%>\% gf_labs(y="Smoker")
-mod <- mod_train(zero_one(outcome) ~ age + smoker, data = Whickham)
-fun <- makeFun(mod)
-P
-P \%>\% mosaicCalc::slice_plot(fun(age, smoker="Yes") ~ age)
+Whickham |>
+  pointplot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
+  label_zero_one() +
+  ylab("Prob. alive at 20-year follow-up")
 need to write documentation for the graphics command `label_zero_one()`
 }

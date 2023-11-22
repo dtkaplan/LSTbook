@@ -23,8 +23,8 @@
 #' a negative width.)
 #'
 #' @examples
-#' gf_point(mpg ~ hp, data=mtcars) |> add_slope_rose()
-#' gf_point(wt ~ hp, data=mtcars) |> add_slope_rose(keepers="pos", color="blue", x=100, scale=.5 )
+#' mtcars |> pointplot(mpg ~ hp, annot="model") |> add_slope_rose()
+#' mtcars |> pointplot(wt ~ hp) |> add_slope_rose(keepers="pos", color="blue", x=100, scale=.5 )
 #'
 #' @rdname statistical_annotations
 #' @export

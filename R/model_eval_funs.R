@@ -17,7 +17,7 @@ model_eval_fun <- function(model, data=NULL, interval="none", level=0.95, ...) {
 }
 #' @exportS3Method
 model_eval_fun.default <- function(model, data=NULL, interval="none", level=0.95, ...) {
-  stop("The modelMosaic package doesn't have access to an evaluation function for this kind of model object.")
+  stop("The LST package doesn't have access to an evaluation function for this kind of model object.")
 }
 #' @exportS3Method
 model_eval_fun.lm <- function(model, data=NULL, interval="none", level=0.95, ...) {
@@ -160,7 +160,7 @@ model_eval_fun.train <- function(model, data = NULL, interval = "none",
     res <- as.data.frame(
       predict(model, newdata = data, type = "prob" ))
   } else {
-    stop("Caret model is neither classifier nor regression. mosaicModel doesn't know what to do.")
+    stop("Caret model is neither classifier nor regression. LST doesn't know what to do.")
   }
 
   tibble::remove_rownames(res)

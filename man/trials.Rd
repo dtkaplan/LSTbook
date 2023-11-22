@@ -13,7 +13,6 @@ trials(.ex, size = 1, ...)
 \ldots Values for any unbound parameter in the left side of the pipeline.}
 }
 \description{
-DRAFT DRAFT DRAFT This is intended as a pipeline friendly replacement for mosaic::do().
 Write a pipeline to perform some calculation whose result can
 be coerced into one line of a data frame. Add \code{trials(size=3)} to the end
 of the pipeline in order to repeat the calculation multiple times. Typically,
@@ -21,6 +20,9 @@ each trial involves some random component, but another (or an additional)
 capability is to parameterize the pipeline expression by including some
 unbound variable in it, e.g. \code{lambda}. Then call \code{trials(lambda=c(10,20))} to
 repeat the calculation for each of the elements of the named parameter.
+}
+\details{
+This is intended as a pipeline friendly replacement for \code{mosaic::do()}.
 }
 \examples{
 mean(rnorm(10)) |> trials(size=3)

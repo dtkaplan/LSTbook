@@ -37,7 +37,7 @@ conf_interval <- function(mod, level=0.95, show_p = FALSE) {
 #' @rdname regression_summaries
 #' @export
 R2 <- function(model) {
-  r2 <- mosaic::rsquared(model)
+  r2 <- mosaic_rsquared(model)
   k <- length(na.omit(model$coefficients)) - 1
   n <- k + 1 + model$df.residual
   f <- ((r2)/k) / ((1-r2)/(n-k-1))
@@ -45,6 +45,17 @@ R2 <- function(model) {
   adj <- 1 - (1 - r2)*(n-1)/(n-k-1)
   data.frame(n=n, k=k, Rsquared=r2, F=f, adjR2=adj, p=p, df.num=k, df.denom=model$df.residual)
 }
+
+# Copied from {mosaic} package to avoid dependency
+
+mosaic_rsquared <- function(x, ...) {
+  NULLFUN <- function(e) NULL
+  result <- tryCatch(x$r.squared, error = NULLFUN)
+  if (is.null(result))
+    result <- tryCatch(summary(x, ...)$r.squared, error = NULLFUN)
+  return(result)
+}
+
 
 #'
 #'

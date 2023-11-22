@@ -146,7 +146,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
 
     # special case for categorical response variable
     if (!inherits(y_data, "zero_one") && y_is_discrete) {
-      if (length(levels(data[[1]])) == 2) {
+      if (length(unique(data[[1]])) == 2) {
         # Need to add 1 to model output levels, which are in [0,1],
         # so that they will graph on the same
         # axis as the categorical response values which are numerically 1 and 2.
@@ -241,7 +241,8 @@ simple_mod_eval <- function(tilde, data, family=NULL, level=0.95) {
   M <- if (!is.null(family)) model_train(data, tilde, family=family)
   else model_train(data, tilde)
   Dskel <- expand.grid(data_skeleton(data, tilde))
-  Meval <- model_eval(M, data=Dskel, interval="confidence", level=level) |> select(.output, .lwr, .upr)
+  Meval <- model_eval(M, data=Dskel, interval="confidence", level=level) |>
+    select(.output, .lwr, .upr)
   # Rename the skeleton values to correspond to the names in <data>
   D <- data_from_tilde(Dskel, tilde[[3]])
 
