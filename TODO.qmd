@@ -1,0 +1,17 @@
+THINGS TO DO:
+
+November 22
+
+- COMPLETED: Check zero_one() to make sure it stores BOTH levels of a categorical variable even when `one=` is not being used.
+
+- COMPLETED: Add plot labeling function to avoid needing to use either ggformula or the + pipe with ggplot2
+
+- COMPLETED: Add label_zero_one() automatically to pointplot() when response is zero_one()
+
+November 27
+
+- Replace remaining calls to ggformula.
+
+- clone ntiles() from mosaic to avoid dependency
+
+- Arrange for automatic loading of `{ggplot2}` and `{dplyr}`.

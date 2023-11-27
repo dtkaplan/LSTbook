@@ -18,7 +18,7 @@ This is inappropriate for logistic modeling, where we want the levels to
 be on a probability scale.
 }
 \examples{
-mod <- mod_train(zero_one(outcome) ~ age + smoker, data = Whickham, type="linear")
-gf_jitter(zero_one(outcome) ~ age, color=~smoker, data = Whickham) \%>\% label_zero_one()
+Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model") |>
+  label_zero_one()
 
 }

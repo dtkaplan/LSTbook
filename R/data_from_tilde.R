@@ -40,7 +40,7 @@ eval_exp_list <- function(EL, .data) {
       stop(best_name_match(names(.data), tmp,
                            starter = "`{obj_name}` not found among variable names."),
            call. = FALSE)
-    res[[k]] <- as_tibble(tmp, .name_repair = "minimal")
+    res[[k]] <- tibble::as_tibble(tmp, .name_repair = "minimal")
     if (ncol(res[[k]]) == 1) {
       names(res[[k]]) <- deparse(EL[[k]])
     } else {

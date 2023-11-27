@@ -81,7 +81,7 @@ datasim_run <- function(sim, n=5, seed=NULL) {
   if (any(rid)) values[rid] <- NULL
 
   # return a data frame
-  as_tibble(values)
+  tibble::as_tibble(values)
 }
 
 

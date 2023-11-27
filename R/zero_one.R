@@ -9,18 +9,19 @@
 #' @param one character string specifying the level that gets mapped to 1.
 #'
 #' @examples
-#' mod <- mod_train(zero_one(outcome) ~ age + smoker, data = Whickham, type="linear")
-#' gf_jitter(zero_one(outcome) ~ age, color=~smoker, data = Whickham) %>% label_zero_one()
+#' Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model") |>
+#'   label_zero_one()
 #'
 #' @export
 zero_one <- function(x, one) {
   U <- unique(x)
-  if (length(U) > 2) U <- c(U[1], "other")
   if (missing(one)) one <- U[1]
+  if (length(U) > 2) U <- c(one, "other")
+
   if (!one %in% U) {
     stop("Specified level for <one> not one of the levels of the variable.")
   } else {
-    U <- c(one, as.character(U[U!=one])) # as.character() to avoid factors becoming numerical levels
+    U <- c(as.character(one), as.character(U[U!=one])) # as.character() to avoid factors becoming numerical levels
   }
   res <- rep(0, length(x))
   res[x == one] <- 1
@@ -45,9 +46,11 @@ label_zero_one <- function(P) {
   # vertical axis data in P$data[[1]]
   YesNo <- P$data[[1]]
   if (!inherits(YesNo, "zero_one")) return(P)
-  else P + scale_y_continuous(breaks=c(0, 0.5, 1),
+  else {
+    P + scale_y_continuous(breaks=c(0, 0.5, 1),
                               sec.axis=sec_axis(trans = ~ .,
                                                 breaks=c(0,1), labels=levels(YesNo)))
+  }
 }
 
 #' @export

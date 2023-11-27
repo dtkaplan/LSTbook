@@ -70,3 +70,6 @@ Galton |> pointplot(height ~ mother + sex + father, annot="model", model_ink=1)
 mtcars |> pointplot(mpg ~ wt + cyl)
 mtcars |> pointplot(mpg ~ wt + cyl + hp, annot="model")
 }
+\seealso{
+\code{add_plot_labels} to add labels to the plot (without needing the ggplot2 + pipe)
+}

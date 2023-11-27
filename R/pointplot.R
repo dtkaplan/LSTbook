@@ -19,6 +19,8 @@
 #' (this might have pedagogical purposes) merely repeat the name of the color variable
 #' in the faceting position, e.g. `mpg ~ hp + cyl + cyl`.
 #'
+#' @seealso `add_plot_labels` to add labels to the plot (without needing the ggplot2 + pipe)
+#'
 #' @param D a data frame
 #' @param tilde tilde expression specifying `y ~ x` or `y ~ x + color`
 #' @param annot Statistical annotation (one of "none", "violin", "model")
@@ -234,6 +236,14 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   Res
 }
 
+#' Convenience function for adding labels to pointplot or others without needing
+#' the ggplot2 + pipe.
+#' @examples
+#' mtcars |> pointplot(mpg ~ hp + cyl) |> add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
+#' @export
+add_plot_labels <- function(P, ...) {
+  P + labs(...)
+}
 
 # Train and evaluate the model, with evaluation only
 # on a skeleton.
@@ -272,25 +282,3 @@ calls_to_names <- function(tilde) {
   tilde
 }
 
-# Left over from an earlier choice of colors.
-# discrete_palette <- function(n) {
-#   fixed <- list(
-#     c("#1f78b4"),
-#     c('#a6cee3','#1f78b4'),
-#     c('#a6cee3','#1f78b4','#b2df8a'),
-#     c('#a6cee3','#1f78b4','#b2df8a','#33a02c'),
-#     c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99'),
-#     c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c'),
-#     c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f'),
-#     c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00'),
-#     c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6'),
-#     c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a')
-#
-#     )
-#   if (n <= length(fixed)) fixed[[n]]
-#   else if (n <= 12) brewer.pal(n, name="Paired")
-#   else if (n <= 32) c(brewer.pal(12, name="Paired"),
-#                       brewer.pal(12, name="Set3"),
-#                       brewer.pal(8, name="Accent)"))[1:n]
-#   else stop("Can't provide more than 32 discrete colors.")
-# }

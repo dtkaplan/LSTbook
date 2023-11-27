@@ -1,0 +1,85 @@
+---
+title: "LST: R package for *Lessons in Statistical Thinking*"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{LST}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include = FALSE}
+library(LST)
+library(dplyr)
+library(ggplot2)
+```
+
+The `{LST}` package provides support for the style of R computing used in the textbook, [*Lessons in Statistical Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/). This style seeks to reduce the cognitive load on students by reducing to a minimum the number of R functions and the syntax needed to undertake a complete course that includes (simple) data wrangling, visualization, modeling, and causal simulation. At the same time, the style supports using statistical inference in an informal way from the very beginning of the course, *gradually* formalizing it over the semester.
+
+This document is oriented toward instructors or stongly motivated students. The *Lessons* textbook and accompanying [blog posts](https://dtkaplan.github.io/Math300blog) provide an introduction for the typical student. The reader of this document should already know at least a little about R: basics of data frames as well as functions and function calls, named arguments, and R "formulas" (such as `mpg ~ hp + cyl`) which are called **tilde expressions** in *Lessons*. (Statistics students need to use mathematical formulas from time to time, so best not confuse math formulas with an unneeded name for an R syntactical structure.) 
+
+## A command template {#sec-template}
+
+R commands in *Lessons* are well exemplified by the following, which generates a plot of two variables in a dataframe annoted with a simple linear model.
+
+```{r}
+mtcars |> pointplot(mpg ~ hp, annot = "model")
+```
+
+The command illustrates several features of the style of commands in *Lessons*:
+
+* The basic structure involves *piping* a data frame into a function. The pipeline structure is used almost exclusively in *Lessons*. For the reader not acquainted with the R pipe, the object on the left-hand side of the pipe token `|>` becomes the *first* argument to the function call on the right-hand side. 
+    - The left-hand side of the pipe---the **input end** of the pipe--will very often be a data frame, but a handful of other types are used in that role in *Lessons*. (More on this later.)
+    - The right-hand side---the **output end** of the pipe--will *always* be a function call. 
+
+
+* *Variables* in the data frame are referred to by unquoted name. Such variable names are only used in the role of an un-piped argument to the right-hand side function call.
+    - The `$` notation is *never* used in any setting.
+    - For situations in which there is a *response* variable (as in modeling or graphics), the variable names always appear in *tilde expressions*.
+    
+* Often, a tilde expression will be the *only* thing inside the parentheses that follow the function name. But sometimes additional details for the function will be added within the parentheses. In the above example command, the detail to add a statistical model as an annotation is specified by the argument `annot = "model". 
+    
+* `pointplot()` is a omnibus graphics command sufficient for teaching an entire statistics course that includes inference and covariation. 
+    - The output is `{ggplot2}` compatible.
+    - Other such omnibus commands from `{LST}` seen in *Lessons* are `model_train()`, `sample()`, and `trials()`. 
+    - Wrangling functions from `{dplyr}` are also occasionally used, especially `mutate()` and `summarize()`.
+    - Summaries of statistical models are made with the `{LST}` function `conf_interval()` and occasionally `R2()`. (Near the end of the course, `regression_summary()` and `anova_summary()` are introduced, but these play only a very minor, optional role in the course.)
+    
+## Pipe input-ends {#sec-input-end}
+
+I'm using the term **input end** of a pipe to refer to the object on the left-hand side of the `|>` pipe token. There are only a handful of types presented to the input-end of the pipe:
+
+1. A data frame is by far the most common input type.
+2. A statistical model is an input type used frequently in the second-half of the course.
+3. A "data simulation" is another kind of input type.
+4. Optionally, and mainly for enrichment, a data graphic frame (as produced by `pointplot()`) is used at the input of the pipe.
+
+## Pipe output-ends {#sec-output-end}
+
+Just as *input end* refers to the object provided at the left-hand side of the pipe, the object produced by the function call on the right-hand side is the output of the pipe. Two important points about pipe output-ends:
+
+a. The R command given on the right-hand side of `|>` will **always** be a function call. No exceptions. A function call consists of the name of a function (e.g. `pointplot` or `model_train`) followed by an open/close pair of parentheses. Usually there is something such as a *tilde expression* contained in the parentheses, but there are often additional **named arguments** such as the `annot = "model"` in the example command presented in @sec-command-template. 
+
+b. The function call in (a) produces an R object. For the `{LST}` functions, this object will always be one of the four types presented in the previous section (data frame, model, data simulation, graphics frame).
+
+## Multi-stage pipelines
+
+The object produced by the function call at the output-end of the pipe `|>` can provide the input to another pipe.
+
+SHOW EXAMPLES:
+
+pointplot() |> add_plot_labels()
+
+mtcars |> model_train() |> conf_interval()
+
+## What to do with the ultimate output of a pipeline?
+
+Store or print.
+
+    
