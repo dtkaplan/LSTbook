@@ -12,6 +12,12 @@ November 27
 
 - Replace remaining calls to ggformula.
 
-- clone ntiles() from mosaic to avoid dependency
+- COMPLETED: clone ntiles() from mosaic to avoid dependency
 
 - Arrange for automatic loading of `{ggplot2}` and `{dplyr}`.
+
+December 1
+
+- Add a "signif" option to conf_intervals() that will round to the correct number of digits for each coefficient.
+
+- Extend `model_plot()` to accept a one-sided formula to set the aesthetics

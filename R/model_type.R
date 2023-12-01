@@ -23,8 +23,12 @@ model_family <- function(.data, .tilde, family = c("auto", "lm", "binomial", "po
     # It's a numeric type
     allowable <- c("lm", "gaussian", "rlm", "svm")
     if (all(data >= 0, na.rm=TRUE)) {
-      if (all(data <= 1, na.rm = TRUE)) allowable <- c("binomial", allowable)
-      else if (all(data == round(data), na.rm = TRUE)) allowable <- c(allowable, "poisson")
+      if (all(data <= 1, na.rm = TRUE) &&
+          diff(range(data, na.rm = TRUE)) == 1) {
+        allowable <- c("binomial", allowable)
+      } else if (all(data == round(data), na.rm = TRUE)) {
+        allowable <- c(allowable, "poisson")
+      }
     }
   } else {
     # It's categorical

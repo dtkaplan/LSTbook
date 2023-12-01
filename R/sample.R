@@ -18,8 +18,14 @@ sample <- function (x, n = 5, size = n, replace = FALSE, ...) {
   UseMethod('sample')
 }
 
+
 #' @export
-sample.data.frame <- function(x, n = 5, size = n, replace = FALSE, ..., .by = NULL) {
+sample.vector <- function(x, n=length(x), size=n, replace=FALSE, ...) {
+  base::sample(x, size = size, replace = replace, ...)
+}
+
+#' @export
+sample.data.frame <- function(x, n = nrow(x), size = n, replace = FALSE, ..., .by = NULL) {
   if (size != n) lifecycle::deprecate_soft("0.4.0", "sample(size)",
                                            details="Use n= argument instead")
   # slice_sample uses `by` instead of `.by`
