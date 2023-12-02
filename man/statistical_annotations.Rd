@@ -24,7 +24,7 @@ add_violin_ruler(
 )
 }
 \arguments{
-\item{P}{a ggplot2 object made by the ggformula package}
+\item{P}{a ggplot2 object made by the ggplot2 or ggformula packages}
 
 \item{x}{the x-position of the rose. This will be assigned automatically if \code{x} isn't specified.}
 

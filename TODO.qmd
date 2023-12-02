@@ -10,7 +10,7 @@ November 22
 
 November 27
 
-- Replace remaining calls to ggformula.
+- COMPLETED: Replace remaining calls to ggformula.
 
 - COMPLETED: clone ntiles() from mosaic to avoid dependency
 

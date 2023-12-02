@@ -22,9 +22,7 @@ model_plot(
 
 \item{palette}{One of "A" through "F" giving some control for people who don't like or can't see the default palette}
 
-\item{model_ink}{The density of ink used to draw the model. ("alpha" for those in the know.)
-
-@export}
+\item{model_ink}{The density of ink used to draw the model. ("alpha" for those in the know.)}
 }
 \description{
 Every model has an implicit function whose output is the response variable and which has one

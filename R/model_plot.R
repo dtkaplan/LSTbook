@@ -14,7 +14,7 @@
 #' @param palette One of "A" through "F" giving some control for people who don't like or can't see the default palette
 #' @param model_ink The density of ink used to draw the model. ("alpha" for those in the know.)
 #'
-#'  @export
+#' @export
 model_plot <- function(mod, nlevels = 3,
                        interval = c("confidence", "prediction", "none"),
                        level=0.95,
@@ -49,7 +49,6 @@ model_plot <- function(mod, nlevels = 3,
     } else {
       aes_settings$fill <- "blue"
       aes_settings$color <- "blue"
-      aes_settings$linewidth <- 3
     }
   } else {
     # Draw model as a line
@@ -71,7 +70,8 @@ model_plot <- function(mod, nlevels = 3,
   # 1. First explanatory variable numeric, ribbons
   # 2. First explanatory variable not numeric, use error bars
   the_geom <- ifelse(is.numeric(Skeleton[[1]]), geom_ribbon, geom_linerange)
-
+  # Fatten up lines if x-axis is categorical
+  aes_settings$linewidth <- ifelse(is.numeric(Skeleton[[1]]), 0, 3)
   P <- ggplot(Skeleton, do.call(aes, aes_mappings))
 
   P <- P + do.call(the_geom, aes_settings)
@@ -99,6 +99,8 @@ model_plot <- function(mod, nlevels = 3,
 
 
 }
+
+# helper function
 coerce_model_for_graph <- function(mod, nlevels = 5,
                                    interval=c("none", "prediction", "confidence"),
                                    level=0.95) {
