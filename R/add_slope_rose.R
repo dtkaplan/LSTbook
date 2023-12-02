@@ -8,7 +8,7 @@
 #' `+` connector.
 #'
 #'
-#' @param P a ggplot2 object made by the ggformula package
+#' @param P a ggplot2 object made by the ggplot2 or ggformula packages
 #' @param x the x-position of the rose. This will be assigned automatically if `x` isn't specified.
 #' @param y the y-position of the rose, just like `x`.
 #' @param width for rulers, the distance between tick marks (in native units, where

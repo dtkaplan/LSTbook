@@ -43,6 +43,7 @@
 pointplot <- function(D, tilde, ..., data=NULL, seed=101,
                        annot = c("none", "violin", "model"),
                        jitter = c("default", "none", "all", "x", "y"),
+                       .itype = c("confidence", "none", "prediction"),
                        point_ink = 0.5,
                        model_ink = 0.2, palette=LETTERS[1:8], bw = NULL, level=0.95) {
   annot <- match.arg(annot)
@@ -247,11 +248,11 @@ add_plot_labels <- function(P, ...) {
 
 # Train and evaluate the model, with evaluation only
 # on a skeleton.
-simple_mod_eval <- function(tilde, data, family=NULL, level=0.95) {
-  M <- if (!is.null(family)) model_train(data, tilde, family=family)
+simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, .itype="confidence") {
+  M <- if (!is.null(family)) model_train(data, tilde, family = family)
   else model_train(data, tilde)
   Dskel <- expand.grid(data_skeleton(data, tilde))
-  Meval <- model_eval(M, data=Dskel, interval="confidence", level=level) |>
+  Meval <- model_eval(M, data = Dskel, interval = .itype, level = level) |>
     select(.output, .lwr, .upr)
   # Rename the skeleton values to correspond to the names in <data>
   D <- data_from_tilde(Dskel, tilde[[3]])

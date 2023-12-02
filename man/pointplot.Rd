@@ -12,6 +12,7 @@ pointplot(
   seed = 101,
   annot = c("none", "violin", "model"),
   jitter = c("default", "none", "all", "x", "y"),
+  .itype = c("confidence", "none", "prediction"),
   point_ink = 0.5,
   model_ink = 0.2,
   palette = LETTERS[1:8],

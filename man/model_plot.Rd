@@ -2,54 +2,36 @@
 % Please edit documentation in R/model_plot.R
 \name{model_plot}
 \alias{model_plot}
-\title{Plot model output for representative levels of explanatory variables}
+\title{Graph a model function}
 \usage{
 model_plot(
   mod,
-  x,
-  color = NULL,
-  facet = NULL,
-  facet2 = NULL,
-  ...,
-  data = NULL,
-  nlevels = 5,
-  show_data = TRUE,
-  jitter = TRUE,
-  interval = c("none", "prediction", "confidence"),
+  nlevels = 3,
+  interval = c("confidence", "prediction", "none"),
   level = 0.95,
-  point_ink = 0.25,
+  palette = LETTERS[1:8],
   model_ink = 0.7
 )
 }
 \arguments{
-\item{mod}{A model object as constructed by \code{lm()} or \code{glm()}}
+\item{mod}{A model object, made with \code{model_train()}, \code{lm()}, or \code{glm()}}
 
-\item{x}{Name (unquoted) of the explanatory variable to put on the x-axis}
+\item{interval}{The type of interval to draw (default: confidence)}
 
-\item{color}{Like \code{x}, but for color (if any).}
+\item{level}{The level for the interval}
 
-\item{facet}{Like \code{x}, but for first level of facetting (if any).}
+\item{palette}{One of "A" through "F" giving some control for people who don't like or can't see the default palette}
 
-\item{facet2}{Like \code{x}, but for second level of facetting (if any).}
+\item{model_ink}{The density of ink used to draw the model. ("alpha" for those in the know.)
 
-\item{nlevels}{Number of levels to use for categorical variables}
-
-\item{show_data}{Whether to show the data along with the model (default TRUE)}
-
-\item{jitter}{Whether to jitter the plotted data (default TRUE)}
-
-\item{interval}{One of "none", "prediction", "confidence"}
-
-\item{level}{Level to use for interval (default: 0.95)}
-
-\item{point_ink}{Graphical opacity for data points (default: 0.25)}
-
-\item{model_ink}{Graphical opacity for model annotations.}
+@export}
 }
 \description{
-Plot model output for representative levels of explanatory variables
-}
-\examples{
-mod <- lm(time ~ distance*sex*climb, data=Hill_racing)
-model_plot(mod, x=climb, color=sex, facet=distance, nlevels=4, show_data=TRUE)
+Every model has an implicit function whose output is the response variable and which has one
+or more explanatory variables. (Exceptionally, there might be no explanatory variables as in
+\code{response ~ 1}.) One of the explanatory variables can be mapped to the horizontal axis; this can
+be either quantitative or categorical. The remaining explanatory variables will be mapped to color,
+facet-horizontal, and facet-vertical. For visual clarity, any quantitative
+variables among these remaining variables must be coerced
+to categorical, corresponding to a discrete set of colors and a discrete set of facets.
 }

@@ -6,11 +6,12 @@
 #' @param data a data frame. Relevant only when `mod` is a tilde expression
 #' @param ncont minimum number of levels at which to represent continuous variables. (More levels
 #' may be added to "prettify" the choices. See [pretty()].)
+#' @param nfirstcont Like `ncont`, but for the first explanatory variable if it is categorical. This variable is mapped
+#' to the horizontal axis and so should have many levels to produce a smooth graph. (Default: 50)
 #'
 #' @export
-model_skeleton <- function(mod, data=NULL, ncont=3) {
+model_skeleton <- function(mod, data=NULL, ncont=3, nfirstcont=50) {
   if (is.null(data)) {
-    #data <- try(extract_training_data(mod), silent=TRUE)
     data <- try(data_from_model(mod), silent=TRUE)
     if (inherits(data, "try-error")) {
       stop("Your model does not carry its own training data. Use the data= argument to provide it. ")
@@ -28,9 +29,16 @@ model_skeleton <- function(mod, data=NULL, ncont=3) {
     values <- na.omit(data[[var]])
     type <- continuous_or_discrete(values)
     if (type == "continuous") {
-      points <- pretty(values, n=ncont)
+      # For the first explanatory variable, pull out `nfirstcont` levels.
+      # For others, only `ncont` levels.
+      points <- if (length(unique(values)) <= ncont + 1) values
+                else pretty(values,
+                            n = ifelse(var == explan_names[1],
+                                       nfirstcont, ncont - 1),
+                                       bounds = TRUE,
+                                       min.n = pmax(0, ncont - 3))
       # If no actual negative values, don't allow any in the levels
-      if (min(values) > 0) points <- points[points > 0]
+      if (min(values) >= 0) points <- points[points >= 0]
     } else {
       if (inherits(values, "zero_one")) points <- unique.zero_one(values)
       else points <- unique(values)

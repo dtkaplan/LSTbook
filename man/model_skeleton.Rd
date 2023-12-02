@@ -4,7 +4,7 @@
 \alias{model_skeleton}
 \title{Convert a model or a data frame to a skeleton}
 \usage{
-model_skeleton(mod, data = NULL, ncont = 3)
+model_skeleton(mod, data = NULL, ncont = 3, nfirstcont = 50)
 }
 \arguments{
 \item{mod}{A fitted model \strong{or} a tilde expression describing a model structure, e.g. \code{outcome ~ vara+varb}.}
@@ -13,6 +13,9 @@ model_skeleton(mod, data = NULL, ncont = 3)
 
 \item{ncont}{minimum number of levels at which to represent continuous variables. (More levels
 may be added to "prettify" the choices. See \code{\link[=pretty]{pretty()}}.)}
+
+\item{nfirstcont}{Like \code{ncont}, but for the first explanatory variable if it is categorical. This variable is mapped
+to the horizontal axis and so should have many levels to produce a smooth graph. (Default: 50)}
 }
 \description{
 Only explanatory variables are included in the result.
