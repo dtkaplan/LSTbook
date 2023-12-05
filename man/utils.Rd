@@ -5,6 +5,7 @@
 \alias{response_var}
 \alias{response_values}
 \alias{formula_from_mod}
+\alias{get_training_data}
 \title{Utilities}
 \usage{
 explanatory_vars(model, ...)
@@ -14,6 +15,8 @@ response_var(model, ...)
 response_values(model, ...)
 
 formula_from_mod(model, ...)
+
+get_training_data(model, ...)
 }
 \arguments{
 \item{model}{the model in question}

@@ -7,7 +7,6 @@
 #' @param .tilde A model specification as a tilde expression
 #' @param family Requested model type, if any.
 #'
-#' @export
 model_family <- function(.data, .tilde, family = c("auto", "lm", "binomial", "poisson", "svm", "gaussian", "rlm")) {
   family <- match.arg(family)
   # Specification must be a two-sided formula, response variable on the left.

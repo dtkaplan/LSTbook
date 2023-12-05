@@ -54,7 +54,7 @@ eval_exp_list <- function(EL, .data) {
 
   # We allow duplicate names, but start them with dots
   # Turn into a data frame and restore the names if there were any duplicates.
-  Res <- bind_cols(res, .name_repair="minimal")
+  Res <- dplyr::bind_cols(res, .name_repair="minimal")
   fixed_names <- unlist(lapply(res, names))
   # just in case there is a duplicate, or more than one
   fixed_names <- ifelse(duplicated(fixed_names), paste0(".", fixed_names), fixed_names)
@@ -75,7 +75,7 @@ data_from_tilde <- function(.data, .tilde) {
     # Turn each into a data frame
     Left <- eval_exp_list(tmp$left, .data)
     Right <- eval_exp_list(tmp$right, .data)
-    cbind(Left, Right) # using cbind() to avoid the name repair in bind_cols()
+    cbind(Left, Right) # using cbind() to avoid the name repair in dplyr::bind_cols()
   } else {
     eval_exp_list(tmp, .data)
   }

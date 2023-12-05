@@ -11,12 +11,8 @@
 #'
 #' @export
 model_skeleton <- function(mod, data=NULL, ncont=3, nfirstcont=50) {
-  if (is.null(data)) {
-    data <- try(data_from_model(mod), silent=TRUE)
-    if (inherits(data, "try-error")) {
-      stop("Your model does not carry its own training data. Use the data= argument to provide it. ")
-    }
-  }
+  if (is.null(data)) data <- get_training_data(mod)
+
   if (inherits(mod, "formula")) {
     if (length(formula)==2) explan_names <- all.vars(formula)
     else explan_names <- all.vars(formula[[3]])

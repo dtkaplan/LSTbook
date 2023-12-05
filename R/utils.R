@@ -15,13 +15,23 @@ response_var <- function(model, ...) {
 }
 #' @rdname utils
 response_values <- function(model, ...) {
-  eval(parse(text = response_var(model)), envir = data_from_model(model))
+  eval(parse(text = response_var(model)), envir = get_training_data(model))
 }
 #' @rdname utils
 formula_from_mod <- function(model, ...) {
   if ("terms" %in% names(model)) return(formula(model$terms))
   if ("Terms" %in% names(model)) return(formula(model$Terms))
   stop("Model architecture '", class(model), "' not recognized by mosaicModel package.")
+}
+
+#' @rdname utils
+get_training_data <- function(model, ...) {
+  if ("training_data" %in% names(attributes(model))) attributes(model)$training_data
+  else {
+    # Get what you can from the model frame
+    # but this will have transformed variables
+    data_from_model(model)
+  }
 }
 
 #' Extract training data from model
@@ -39,6 +49,7 @@ data_from_model <- function(model, ...) {
 }
 #' @exportS3Method
 data_from_model.lm <- function(model, ...) model.frame(model)
+
 #' @exportS3Method
 data_from_model.glm <- function(model, ...) model.frame(model)
 

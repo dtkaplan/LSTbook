@@ -50,7 +50,7 @@ reasons you may prefer (1-p)^2, in which case set \code{error_type = "mse"}. Cla
 of zero to the actual output, in which case the log-likelihood is \code{-Inf}. The \code{"mse"} error type avoids this.
 }
 \examples{
-mod <- lm(mpg ~ hp + wt, data = mtcars)
+mod <- mtcars |> model_train(mpg ~ hp + wt)
 mod_pe(mod) # In-sample prediction error.
 \dontrun{
 classifier <- rpart::rpart(Species ~ ., data = iris)

@@ -7,6 +7,12 @@ test_that("model_skeleton() generates a skeleton of inputs when requested", {
   expect_true(ncol(Tmp) == 2)
 })
 
+test_that("model_skeleton() gets untransformed explanatory variables", {
+  mod <- Galton |> model_train(height ~ splines::ns(father, 4) * poly(mother,3) * sex)
+  Tmp <- model_skeleton(mod)
+  expect_true(all(names(Tmp) %in% c("father", "mother", "sex")))
+})
+
 # These tests are a legacy from the {mosaicModel} package
 #
 # test_that("continuous_or_discrete() works", {

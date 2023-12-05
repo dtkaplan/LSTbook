@@ -2,15 +2,14 @@
 #'
 #' A convenience function for handling categorical response variables.
 #' Ordinarily, ggplot2 maps categorical levels to numerical values 1, 2, ....
-#' This is inappropriate for logistic modeling, where we want the levels to
+#' Such numerical mapping is inappropriate for logistic modeling, where we want the levels to
 #' be on a probability scale.
 #'
 #' @param x a categorical variable
 #' @param one character string specifying the level that gets mapped to 1.
 #'
 #' @examples
-#' Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model") |>
-#'   label_zero_one()
+#' Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
 #'
 #' @export
 zero_one <- function(x, one) {

@@ -125,7 +125,7 @@ coerce_model_for_graph <- function(mod, nlevels = 5,
 
   for (var in evars[-1]) {
     if (is.numeric(Skeleton[[var]])) {
-      the_levels <- unique(Skeleton[[var]])
+      the_levels <- sort(unique(Skeleton[[var]]))
       Skeleton[[var]] <- factor(Skeleton[[var]], levels = the_levels, ordered = TRUE)
     }
 

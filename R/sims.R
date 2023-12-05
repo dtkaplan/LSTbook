@@ -154,6 +154,7 @@ evaluate <- function(variable, values) {
 #' @export
 bernoulli <- function(n=0, logodds=NULL, prob=0.5, labels=NULL) {
   if (length(logodds) > 0) n <- length(logodds)
+  if (length(prob) > 1) n <- length(prob)
   else if (length(prob) == 1L) {
     if (n == 0) stop("Must specify <n=> in bernoulli() unless <logodds=> or <prob=> is used.")
     prob <- rep(prob, n)

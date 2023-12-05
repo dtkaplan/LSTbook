@@ -20,4 +20,30 @@ December 1
 
 - Add a "signif" option to conf_intervals() that will round to the correct number of digits for each coefficient.
 
-- Extend `model_plot()` to accept a one-sided formula to set the aesthetics
+
+December 3
+
+- YOU WERE LOOKING AT INSTANCES of model_plot() to make sure they are compatible with the new version
+as of Dec 2.
+
+- The hospital_sim wasn't working. THIS HAS BEEN FIXED BUT NOT YET CALIBRATED.
+
+December 4
+
+- COMPLETED: Get this to work
+
+```{r}
+ForMod <- NHANES::NHANES |>
+  dplyr::select(Height, Age, Gender) |>
+  dplyr::filter(Age >=15) |>
+  dplyr::rename(Sex = Gender)
+ForMod |> pointplot(Height ~ splines::ns(Age,3)*Sex, annot = "model", 
+                    point_ink = 0.1, model_ink = 1 )
+
+Mod2 <-  ForMod |> model_train(Height ~ splines::ns(Age,3)*Sex) 
+model_plot(Mod2, interval="confidence") 
+```
+
+
+- `model_cv()` not working
+

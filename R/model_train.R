@@ -17,10 +17,11 @@ model_train <- function(data, tilde, prob_of = NULL,
   # Figure out (or confirm) the model family
   mod_family <- model_family(data, tilde, family)[1]
 
+
   if (mod_family == "lm") {
     mod <- lm(tilde, data = data)
   } else if (mod_family == "binomial") {
-    mod <- glm(tilde, data=data, family="binomial")
+    mod <- glm(tilde, data= data, family="binomial")
     return(mod)
   } else if (mod_family == "poisson") {
     mod <- glm(tilde, data = data, family="poisson")

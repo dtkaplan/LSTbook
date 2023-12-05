@@ -76,41 +76,15 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
     }
   }
 
-  #if (interval == "none") {
-    Fitted <- model_eval_fun(mod, data=eval_data, interval=interval, level=level)
-    if (".lwr" %in% names(Fitted)) Fitted <- Fitted |> select(.lwr, .output, .upr)
-  #  Result <- NULL
-  # } else {
-  #   # Evaluate the model at the selected data values
-  #   dinterval_fun <- add_pi
-  #   if (interval == "confidence") interval_fun = add_ci
-  #   # Try to get a prediction interval
-  #   Result <- try(
-  #     interval_fun(eval_data, mod, yhatName=".output",
-  #                  names=c(".lwr", ".upr"), alpha=1-level, response=TRUE),
-  #     silent=TRUE
-  #   )
-  #   if (inherits(Result, "try-error")) {
-  #     if (interval=="prediction")
-  #       warning("Prediction intervals not available for this model type. Giving confidence intervals instead.")
-  #     Result <- add_ci(eval_data, mod, alpha = 1 - level,
-  #                      names=c(".lwr", ".upr"), yhatName=".output",
-  #                      response=TRUE)
-  #   }
-
-
-#
-#     Fitted <- Result[".output"]
-#     if (".lwr" %in% names(Result)) Result <- Result[c(".lwr", ".upr")]
-#   }
-
+  Fitted <- model_eval_fun(mod, data=eval_data, interval=interval, level=level)
+  if (".lwr" %in% names(Fitted)) Fitted <- Fitted |> select(.lwr, .output, .upr)
 
   if (response_in_data) {
-    Residuals <- data.frame(.resid = eval_data[[1]] - Fitted$.output)
+    Residuals <- data.frame(.resid = eval_data[[response_var_name]] - Fitted$.output)
     names(training_data)[1] <- ".response" # give it a generic name
-    return(bind_cols(training_data, Fitted, Residuals))
+    return(dplyr::bind_cols(training_data, Fitted, Residuals))
   } else {
-    return(bind_cols(eval_data, Fitted))
+    return(dplyr::bind_cols(eval_data, Fitted))
   }
 }
 

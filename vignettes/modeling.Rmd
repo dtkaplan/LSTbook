@@ -23,9 +23,9 @@ Just some notes for now.
 
 1. Use `model_train()` which fits any of a variety of model types. You can either specify the model type or let it be deduced automatically. 
 
-TO DO IN CODE:::: ADD A MODEL_TYPE(data, tilde) that abstracts the choice of model type, then use that in `model_train()`. Use `model_train()` in `model_fit()`.
+TO DO IN CODE:::: ADD A MODEL_TYPE(data, tilde) that abstracts the choice of model type, then use that in `model_train()`. Use `model_train()` in `model_values()`.
 
-2. `model_fit()` is a wrangling-compatible wrapper around `model_train()` and `model_eval()` that lets you use mutate to add model values.
+2. `model_values()` is a wrangling-compatible wrapper around `model_train()` and `model_eval()` that lets you use mutate to add model values.
 
 
 ADD TO TESTS

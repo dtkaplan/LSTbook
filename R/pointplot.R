@@ -257,7 +257,7 @@ simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, .itype="confid
   # Rename the skeleton values to correspond to the names in <data>
   D <- data_from_tilde(Dskel, tilde[[3]])
 
-  bind_cols(D, Meval) # renamed skeleton and model outputs.
+  dplyr::bind_cols(D, Meval) # renamed skeleton and model outputs.
 }
 
 # Replace the innards of a tilde expression with the names of variables

@@ -33,7 +33,7 @@
 #' of zero to the actual output, in which case the log-likelihood is `-Inf`. The `"mse"` error type avoids this.
 #'
 #' @examples
-#' mod <- lm(mpg ~ hp + wt, data = mtcars)
+#' mod <- mtcars |> model_train(mpg ~ hp + wt)
 #' mod_pe(mod) # In-sample prediction error.
 #' \dontrun{
 #' classifier <- rpart::rpart(Species ~ ., data = iris)
@@ -55,7 +55,7 @@ model_pe <- function(model, testdata,
   error_type = match.arg(error_type)
 
   if (missing(testdata)) {
-    testdata <- data_from_model(model)
+    testdata <- get_training_data(model)
     warning("Calculating error from training data.")
   }
   # error functions
