@@ -2,24 +2,40 @@
 % Please edit documentation in R/sample.R
 \name{sample}
 \alias{sample}
+\alias{sample.default}
+\alias{resample}
 \title{Samples from various kinds of objects}
 \usage{
-sample(x, n = 5, size = n, replace = FALSE, ...)
+sample(x, n, replace = FALSE, ...)
+
+\method{sample}{default}(
+  x,
+  n = length(x),
+  replace = FALSE,
+  prob = NULL,
+  .by = NULL,
+  groups = .by,
+  orig.ids = FALSE,
+  ...
+)
+
+resample(..., replace = TRUE)
 }
 \arguments{
 \item{x}{The object from which to sample}
 
-\item{n}{An alias for \code{size}}
-
-\item{size}{The sample size.}
+\item{n}{Size of the sample.}
 
 \item{replace}{Logical flag: whether to sample with replacement. (default: \code{FALSE})}
 
 \item{.by}{Variables to use to define groups for sampling, as in \code{{dplyr}}. The sample size
 applies to each group.}
+
+\item{\ldots}{Arguments to pass along to specific sample methods.}
 }
 \description{
 A set of methods to generate random samples from data frames and data simulations.
+For data frames, individual rows are sampled. For vectors, elements are sampled.
 }
 \details{
 These are based in spirit on the sample functions in the \code{{mosaic}} package,

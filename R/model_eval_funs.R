@@ -6,6 +6,7 @@
 #' not specified, the training data will be used.
 #' @param interval One of "none", "confidence", or "prediction". Not all model
 #' types support "prediction" or even "confidence".
+#' @param level (default 0.95) confidence or prediction level. Must be in [0,1]
 #' @param ... additional arguments
 #'
 #'
@@ -26,7 +27,7 @@ model_eval_fun.lm <- function(model, data=NULL, interval="none", level=0.95, ...
   if (is.null(data)) data <- get_training_data(model)
 
   res <- as.data.frame(
-    predict(model, newdata = data, type = "response", interval = interval, level=level )
+    stats::predict(model, newdata = data, type = "response", interval = interval, level=level )
   )
 
   if (interval == "none" || ncol(res) == 1)
@@ -48,10 +49,10 @@ model_eval_fun.randomForest <- function(model, data = NULL, interval="none",
   if (model$type == "classification") {
     res <- tibble::remove_rownames(
       as.data.frame(
-        predict(model, newdata = data, type = "prob")))
+        stats::predict(model, newdata = data, type = "prob")))
   } else if (model$type == "regression") {
     res <- data.frame(.output =
-                        predict(model, newdata = data, type = "response"))
+                        stats::predict(model, newdata = data, type = "response"))
   }
 
   res
@@ -64,11 +65,11 @@ model_eval_fun.glm <- function(model, data=NULL, interval="none",
 
   if (is.null(data)) data <- get_training_data(model)
 
-  vals <- predict(model, newdata = data,
+  vals <- stats::predict(model, newdata = data,
                   type = "link", se.fit = interval == "confidence")
 
 
-  two <- qnorm(1 - (1-level)/2)
+  two <- stats::qnorm(1 - (1-level)/2)
   if (interval == "confidence") {
     res <- data.frame(.output = model$family$linkinv(vals$fit),
                       .lwr = vals$fit - two * vals$se.fit,
@@ -94,7 +95,7 @@ model_eval_fun.rpart <- function(model, data = NULL, interval = "none",
 
   if (model$method == "class") { # classifier
     res <- as.data.frame(
-      predict(model, newdata = data, type = "prob", ... )
+      stats::predict(model, newdata = data, type = "prob", ... )
     )
   } else {
     res <- as.data.frame(
@@ -116,7 +117,7 @@ model_eval_fun.randomForest <- function(model, data = NULL, interval = "none",
 
   if (model$type == "classification") { # classifier
     res <- as.data.frame(
-      predict(model, newdata = data, type = "prob", ... )
+      stats::predict(model, newdata = data, type = "prob", ... )
     )
   } else {
     res <- as.data.frame(
@@ -137,7 +138,7 @@ model_eval_fun.knn3 <- function(model, data = NULL, interval = "none",
   if (is.null(data)) data <- get_training_data(model)
 
   res <- as.data.frame(
-    predict(model, newdata = data, type = "prob", ... )
+    stats::predict(model, newdata = data, type = "prob", ... )
   )
 
   tibble::remove_rownames(res)
@@ -153,12 +154,12 @@ model_eval_fun.train <- function(model, data = NULL, interval = "none",
 
   if (model$modelInfo$type[1] == "Regression") {
     res <- as.data.frame(
-      predict(model, newdata = data, type = "raw", ...)
+      stats::predict(model, newdata = data, type = "raw", ...)
     )
     names(res) <- ".output"
   } else if (model$modelInfo$type[1] == "Classification") {
     res <- as.data.frame(
-      predict(model, newdata = data, type = "prob" ))
+      stats::predict(model, newdata = data, type = "prob" ))
   } else {
     stop("Caret model is neither classifier nor regression. LST doesn't know what to do.")
   }
@@ -172,7 +173,7 @@ model_eval_fun.lda <- function(model, data = NULL, interval = "none",
                              ...) {
   if (is.null(data)) data <- get_training_data(model)
 
-  res <- as.data.frame(predict(model, newdata = data)$posterior)
+  res <- as.data.frame(stats::predict(model, newdata = data)$posterior)
 
   tibble::remove_rownames(res)
 }
@@ -188,7 +189,7 @@ model_eval_fun.nls <- function(model, data = NULL, interval = "none",
 
   if (is.null(data)) data <- get_training_data(model)
 
-  res <- data.frame(.output = predict(model, newdata = data))
+  res <- data.frame(.output = stats::predict(model, newdata = data))
 
   tibble::remove_rownames(res)
 }

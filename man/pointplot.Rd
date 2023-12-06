@@ -12,7 +12,7 @@ pointplot(
   seed = 101,
   annot = c("none", "violin", "model"),
   jitter = c("default", "none", "all", "x", "y"),
-  .itype = c("confidence", "none", "prediction"),
+  interval = c("confidence", "none", "prediction"),
   point_ink = 0.5,
   model_ink = 0.2,
   palette = LETTERS[1:8],
@@ -25,14 +25,14 @@ pointplot(
 
 \item{tilde}{tilde expression specifying \code{y ~ x} or \code{y ~ x + color}}
 
-\item{...}{Graphical options for the data points, e.g. size}
-
 \item{seed}{(optional) random seed for jittering}
 
 \item{annot}{Statistical annotation (one of "none", "violin", "model")}
 
 \item{jitter}{Options for turning on jitter: one of \code{"default"}, \code{"both"}, \code{"none"}, \code{"x"}, \code{"y"}. By default,
 By default, categorical variables are jittered.}
+
+\item{interval}{the type of interval: default \code{"confidence"}. Others: \code{"none"} or \code{"prediction"}}
 
 \item{point_ink}{Opacity of ink for the data points}
 
@@ -44,6 +44,8 @@ prefer to alter the color scheme. There are 8 palettes available: \code{"A"} thr
 \item{bw}{bandwidth for violin plot}
 
 \item{level}{confidence level to use (0.95)}
+
+\item{\ldots}{Graphical options for the data points, labels, e.g. size}
 }
 \description{
 \code{pointplot()} makes it easy to construct an informative basic graph of a

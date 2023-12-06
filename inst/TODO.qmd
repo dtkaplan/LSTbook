@@ -14,7 +14,7 @@ November 27
 
 - COMPLETED: clone ntiles() from mosaic to avoid dependency
 
-- Arrange for automatic loading of `{ggplot2}` and `{dplyr}`.
+- COMPLETED: Arrange for automatic loading of `{ggplot2}` and `{dplyr}`.
 
 December 1
 
@@ -23,10 +23,7 @@ December 1
 
 December 3
 
-- YOU WERE LOOKING AT INSTANCES of model_plot() to make sure they are compatible with the new version
-as of Dec 2.
-
-- The hospital_sim wasn't working. THIS HAS BEEN FIXED BUT NOT YET CALIBRATED.
+- COMPLETED: The hospital_sim wasn't working. 
 
 December 4
 
@@ -34,9 +31,9 @@ December 4
 
 ```{r}
 ForMod <- NHANES::NHANES |>
-  dplyr::select(Height, Age, Gender) |>
-  dplyr::filter(Age >=15) |>
-  dplyr::rename(Sex = Gender)
+  select(Height, Age, Gender) |>
+  filter(Age >=15) |>
+  rename(Sex = Gender)
 ForMod |> pointplot(Height ~ splines::ns(Age,3)*Sex, annot = "model", 
                     point_ink = 0.1, model_ink = 1 )
 

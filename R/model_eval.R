@@ -2,7 +2,7 @@
 #'
 #'
 #'
-#' @param mod A model as from `lm()` or `glm()`
+#' @param mod A model as from `model_train()`, `lm()` or `glm()`
 #' @param data A data frame of inputs. If missing, the inputs will be assembled from \ldots or
 #' from the training data, or an skeleton will be constructed.
 #' @param \ldots Optional vectors specifying the inputs. See examples.
@@ -22,7 +22,7 @@
 #'
 #' @family {Functions used in Lessons}
 #' @examples
-#' mod <- lm(mpg ~ hp + wt, data=mtcars)
+#' mod <- mtcars |> model_train(mpg ~ hp + wt)
 #' model_eval(mod, hp=100, wt=c(2,3))
 #' model_eval(mod) # training data
 #' model_eval(mod, skeleton=TRUE)
@@ -50,7 +50,7 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
      } else {
        # use the training data
        message("Using training data as input to model_eval().")
-       eval_data <- training_data <- model.frame(mod)
+       eval_data <- training_data <- get_training_data(mod)
        response_in_data <- TRUE
      }
   } else {
@@ -62,7 +62,7 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
 
   explan_names <- explanatory_vars(mod)
   if (!all(explan_names %in% names(eval_data)))
-    stop("Must provide values for all explanatory variables.")
+    stop("Must provide values for all explanatory variables. Try using `model_train()` to construct the model.")
 
   type <- match.arg(type)
   interval = match.arg(interval)

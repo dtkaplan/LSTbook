@@ -14,7 +14,7 @@
 #' emphasize to students that the results are a summary in the form of a regression
 #' report, similar to the summaries produced by `stats::confint()`, `stats::coef()`, etc.
 #'
-#' @param model A model as produced by `lm()`, `glm()`, and so on
+#' @param mod A model as produced by `model_train()`, `lm()`, `glm()`, and so on
 #' @param level Confidence level to use in `conf_interval()` (default: 0.95)
 #' @param show_p For `conf_interval()`, append the p-value to the report.
 #' @param \ldots One or more models (for ANOVA)
@@ -23,7 +23,7 @@
 #' @rdname regression_summaries
 #' @export
 conf_interval <- function(mod, level=0.95, show_p = FALSE) {
-  Raw <- confint(mod, level=level)
+  Raw <- stats::confint(mod, level=level)
   Tmp <- stats::coefficients(mod)
   Res <- tibble::tibble(term = row.names(Raw), .lwr = Raw[, 1], .coef=as.numeric(Tmp),  .upr = Raw[, 2])
 
@@ -38,10 +38,10 @@ conf_interval <- function(mod, level=0.95, show_p = FALSE) {
 #' @export
 R2 <- function(model) {
   r2 <- mosaic_rsquared(model)
-  k <- length(na.omit(model$coefficients)) - 1
+  k <- length(stats::na.omit(model$coefficients)) - 1
   n <- k + 1 + model$df.residual
   f <- ((r2)/k) / ((1-r2)/(n-k-1))
-  p <- 1 - pf(f, k, n)
+  p <- 1 - stats::pf(f, k, n)
   adj <- 1 - (1 - r2)*(n-1)/(n-k-1)
   data.frame(n=n, k=k, Rsquared=r2, F=f, adjR2=adj, p=p, df.num=k, df.denom=model$df.residual)
 }
@@ -69,7 +69,7 @@ regression_summary <- function(model) {
 #' @rdname regression_summaries
 #' @export
 anova_summary <- function(...) {
-  broom::tidy(anova(...))
+  broom::tidy(stats::anova(...))
 }
 
 #' A convenience function to calculate Rsquared and F from a model, along with

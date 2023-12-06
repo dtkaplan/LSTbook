@@ -65,7 +65,7 @@ sim_08 <- datasim_make(
 sim_09 <- datasim_make(
   a <- rnorm(n),
   b <- rnorm(n),
-  c <- bernoulli(2*a+ 3*b)
+  c <- bernoulli(logodds = 2*a+ 3*b)
 )
 
 
@@ -77,8 +77,8 @@ sim_10 <- datasim_make(
   c <- rnorm(n),
   d <- rnorm(n),
   e <- rnorm(n),
-  f <- 2*bernoulli(rnorm(n)) - 1,
-  y <- bernoulli(2*a - 3*b + c - 1.5*d + 1*e + 0.5*f)
+  f <- 2*bernoulli(logodds = rnorm(n)) - 1,
+  y <- bernoulli(logodds = 2*a - 3*b + c - 1.5*d + 1*e + 0.5*f)
 )
 
 sim_11 <- datasim_make(
@@ -116,12 +116,12 @@ sim_school2 <- datasim_make(
 sim_vaccine <- datasim_make(
   .h <- rnorm(n, sd=1),
   .v <- 0.2 + 2* .h + rnorm(n, sd=.25),
-  .f <- -0.5 - 0.5 * bernoulli(.v) - 1*.h,
-  .s <- 2 - 0.2*bernoulli(.f) + 0.4*(.h + 0.5),
-  died <- bernoulli(.s, labels=c("yes", "no")),
-  vaccinated <- bernoulli(.v, labels=c("none", "yes")),
-  health <- bernoulli(.h, labels=c("poor", "good")),
-  flu <- bernoulli(.f)
+  .f <- -0.5 - 0.5 * bernoulli(logodds = .v) - 1*.h,
+  .s <- 2 - 0.2*bernoulli(logodds = .f) + 0.4*(.h + 0.5),
+  died <- bernoulli(logodds = .s, labels=c("yes", "no")),
+  vaccinated <- bernoulli(logodds = .v, labels=c("none", "yes")),
+  health <- bernoulli(logodds = .h, labels=c("poor", "good")),
+  flu <- bernoulli(logodds = .f)
 )
 
 sim_satgpa <- datasim_make(
@@ -130,7 +130,7 @@ sim_satgpa <- datasim_make(
 )
 
 sim_flights <- datasim_make(
-  ready <- for_each(n, 10),
+  ready <- 10,
   abortAM <- rbinom(n, ready, .06),
   AM <- ready - abortAM,
   brokeAM  <- rbinom(n, AM, 0.12),
@@ -143,7 +143,7 @@ sim_flights <- datasim_make(
 sim_medical_observations <- datasim_make(
   .sex <- bernoulli(n=n, labels=c("F", "M")),
   .cond <- rnorm(n),
-  treatment <- bernoulli(1*(.sex=="F")- .cond, labels=c("none", "treat")),
+  treatment <- bernoulli(logodds=1*(.sex=="F")- .cond, labels=c("none", "treat")),
   outcome <- -0.5*(treatment=="treat") - .cond + 1.5*(.sex=="F") + rnorm(n)
 )
 

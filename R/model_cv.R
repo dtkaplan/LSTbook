@@ -158,7 +158,7 @@ n_levels <- function(values, n) {
 
   # finite number of numerical levels
   if (is.numeric(values)) {
-    med <- median(values, na.rm = TRUE)
+    med <- stats::median(values, na.rm = TRUE)
     if (n == 1) {
       return(signif(med, 2))
     } else {

@@ -28,8 +28,9 @@
 #'
 #' @rdname statistical_annotations
 #' @export
-add_slope_rose <-
-function(P, x=NULL, y=NULL, scale=1/4, color="red", keepers=c("both", "pos", "neg")) {
+add_slope_rose <- function(P, x=NULL, y=NULL, scale=1/4,
+                           color="red",
+                           keepers=c("both", "pos", "neg")) {
   keepers <- match.arg(keepers)
   xy <- layer_scales(P)
   xrange <- xy$x$range$range
@@ -39,6 +40,16 @@ function(P, x=NULL, y=NULL, scale=1/4, color="red", keepers=c("both", "pos", "ne
   width <- diff(xrange)*scale
   height <- diff(yrange)*scale
   center <- height / width
+  # define this function to avoid dependency on grDevices
+  extendrange <- function (x, r = range(x, na.rm = TRUE), f = 0.05)
+  {
+    if (!missing(r) && length(r) != 2)
+      stop("'r' must be a \"range\", hence of length 2")
+    f <- if (length(f) == 1L)
+      c(-f, f)
+    else c(-f[1L], f[2L])
+    r + f * diff(r)
+  }
   nice_slopes <- pretty(extendrange(c(-center, center),f=.1 ), n=6) %>% setdiff(0)
   if (keepers == "pos") nice_slopes <- nice_slopes[nice_slopes > 0]
   if (keepers == "neg") nice_slopes <- nice_slopes[nice_slopes < 0]
@@ -56,6 +67,7 @@ function(P, x=NULL, y=NULL, scale=1/4, color="red", keepers=c("both", "pos", "ne
 
 #' Add a ruler (typically on top of a violin plot)
 #' @rdname statistical_annotations
+#' @param \ldots additional graphical parameters, e.g. `color = "blue"`
 #' @export
 add_violin_ruler <-
   function(P, x=NULL, y=NULL,
@@ -86,3 +98,4 @@ add_violin_ruler <-
                 vjust=0, data=Ruler, ...)
 
   }
+

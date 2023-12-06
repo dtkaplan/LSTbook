@@ -16,11 +16,11 @@ regression_summary(model)
 anova_summary(...)
 }
 \arguments{
+\item{mod}{A model as produced by \code{model_train()}, \code{lm()}, \code{glm()}, and so on}
+
 \item{level}{Confidence level to use in \code{conf_interval()} (default: 0.95)}
 
 \item{show_p}{For \code{conf_interval()}, append the p-value to the report.}
-
-\item{model}{A model as produced by \code{lm()}, \code{glm()}, and so on}
 
 \item{\ldots}{One or more models (for ANOVA)}
 }

@@ -9,7 +9,7 @@ test_that("automatic model family selection works", {
 test_that("lm (or gaussian) works", {
   baseline <- lm(mpg ~ hp + cyl, data=mtcars)
   to_test  <- mtcars |> model_train(mpg ~ hp + cyl)
-  expect_identical(coef(baseline), coef(to_test))
+  expect_identical(stats::coef(baseline), stats::coef(to_test))
   expect_identical(conf_interval(baseline), conf_interval(to_test))
 })
 

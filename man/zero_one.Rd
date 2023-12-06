@@ -10,15 +10,16 @@ zero_one(x, one)
 \item{x}{a categorical variable}
 
 \item{one}{character string specifying the level that gets mapped to 1.}
+
+\item{P}{A ggplot2 object made by \code{model_plot()} or \code{pointplot()}}
 }
 \description{
 A convenience function for handling categorical response variables.
 Ordinarily, ggplot2 maps categorical levels to numerical values 1, 2, ....
-This is inappropriate for logistic modeling, where we want the levels to
+Such numerical mapping is inappropriate for logistic modeling, where we want the levels to
 be on a probability scale.
 }
 \examples{
-Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model") |>
-  label_zero_one()
+Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
 
 }

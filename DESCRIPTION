@@ -9,12 +9,17 @@ Encoding: UTF-8
 Depends: R (>= 3.5.0)
 LazyData: true
 Imports: rlang,
-         tibble,
-         ggplot2
+         dplyr,
+         ggplot2, 
+         broom,
+         glue,
+         utils,
+         stats
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests:
     igraph, 
+    graphics,
     testthat (>= 3.0.0),
     moderndive,
     palmerpenguins,

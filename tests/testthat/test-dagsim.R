@@ -40,7 +40,7 @@ test_that("seq() generates a sequence", {
 })
 
 test_that("roll() draws a series of values from a set of levels.", {
-  Foo <- sample(datasim_make(x ~ sample(1:6, size=n, replace = TRUE)), n=5000)
+  Foo <- sample(datasim_make(x ~ sample(1:6, n=n, replace = TRUE)), n=5000)
   expect_gt(mean(Foo$x == 6), 1/8)
   expect_gt(mean(Foo$x == 5), 1/8)
   expect_gt(mean(Foo$x == 4), 1/8)
@@ -49,8 +49,8 @@ test_that("roll() draws a series of values from a set of levels.", {
   expect_gt(mean(Foo$x == 1), 1/8)
 })
 
-test_that("each() runs the expression independently for each row", {
-  Foo <- sample(datasim_make(x <- each(n, sum(runif(2)))), n=1000)
+test_that("replicate() runs the expression independently for each row", {
+  Foo <- sample(datasim_make(x <- replicate(n, sum(runif(2)))), n=1000)
   # Should generate a triangular distribution between 0 and 2
   expect_lt(mean(Foo$x < 0.5), 1/6) # about 1/8 of samples should be here
   expect_lt(mean(Foo$x > 1.5), 1/6)
@@ -59,8 +59,12 @@ test_that("each() runs the expression independently for each row", {
 test_that("Constant patterns are replicated to have nrow", {
   Foo <- sample(datasim_make(x ~ rep(3, n)), n=10)
   expect_equal(nrow(Foo), 10)
-  Foo2 <- sample(datasim_make(x ~ rep(1:3, length.out=n)), n=10)
-  expect_equal(sum(Foo2$x == 1), 4)
+  Foo2 <- sample(datasim_make(x <- 3), n=10)
+  expect_equal(nrow(Foo), 10)
+  Foo3 <- sample(datasim_make(x ~ rep(1:3, length.out=n)), n=10)
+  expect_equal(sum(Foo3$x == 1), 4)
+  Foo4 <- sample(datasim_make(x <- 1:3), n=10)
+  expect_equal(sum(Foo4$x == 1), 4)
 })
 
 test_that("Names starting with dots don't appear in the output.", {
@@ -71,10 +75,13 @@ test_that("Names starting with dots don't appear in the output.", {
 test_that("block_by() generates a new categorical variable with correct levels", {
   Sim <- datasim_make(x <- exo(n), y <- block_by(x))
   Foo <- sample(Sim, n = 100)
+  expect_equal(sum(Foo$y == "treatment"), 50)
+  Goo <- Foo |> arrange(x) |> mutate(row = row_number()) |> summarize(m=mean(row), .by = y)
+  expect_true(all(Goo$m - 50 < 1))
   Sim2 <- datasim_make(x <- exo(n),
                        treatment <- block_by(x, levels = c("a", "b", "c")),
                        block <- block_by(x, levels=c("a", "b", "c"), show_block=TRUE),
-                       z <- evaluate(treatment, values = c(a=1, b=2, c=3)))
+                       z <- cat2value(treatment, a=1, b=2, c=3))
   Foo <- sample(Sim2, n = 102) |> # sample size is multiple of number of blocking levels
     summarize(total = sum(z), .by = block)
   # There should be an a, b, c in each block, so z will be 6 in each block
@@ -82,7 +89,7 @@ test_that("block_by() generates a new categorical variable with correct levels",
 })
 
 test_that("categorical generates levels with right probabilities", {
-  Sim <- datasim_make(g <- categorical(n=n, a=1, b=2, c=3, d=4, exact=TRUE))
+  Sim <- datasim_make(g <- categorical(n, a=1, b=2, c=3, d=4, exact=TRUE))
   Foo <- sample(Sim, n=10000)
 
   expect_true(all(table(Foo$g) == c(1000, 2000, 3000, 4000)))

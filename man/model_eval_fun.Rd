@@ -15,6 +15,8 @@ not specified, the training data will be used.}
 \item{interval}{One of "none", "confidence", or "prediction". Not all model
 types support "prediction" or even "confidence".}
 
+\item{level}{(default 0.95) confidence or prediction level. Must be in \link{0,1}}
+
 \item{...}{additional arguments}
 }
 \description{

@@ -5,7 +5,9 @@
 #' @param data A data frame containing the training data. When used with `mutate()`, `data` will
 #' hold the model specification, instead of `tilde`.
 #' @param tilde A model specification in the form of a tilde expression
-#' @param family The type of model architecture, as in `glm()`.
+#' @param family The type of model architecture: `"linear"`, `"prob"`, or `"counts"`
+#'
+#' @details This is intended to be used ONLY WITHIN `mutate()`
 #'
 #' @returns A **vector** (not a data frame) of the model evaluated on the training data.
 #' This is intended mainly for use within `mutate()`, so that a general model can be used in

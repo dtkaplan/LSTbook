@@ -38,7 +38,7 @@ are included. Only courses with 10 or more students enrolled were included.
 }
 \examples{
 \dontrun{
-GPA <- lm(gradepoint ~ sid - 1, data = College_grades)
+GPA <- College_grades |> model_train(gradepoint ~ sid - 1)
 }
 }
 \keyword{datasets}

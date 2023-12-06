@@ -33,7 +33,8 @@
 #' By default, categorical variables are jittered.
 #' @param bw bandwidth for violin plot
 #' @param level confidence level to use (0.95)
-#' @param ... Graphical options for the data points, e.g. size
+#' @param interval the type of interval: default `"confidence"`. Others: `"none"` or `"prediction"`
+#' @param \ldots Graphical options for the data points, labels, e.g. size
 #'
 #' @examples
 #' Galton |> pointplot(height ~ mother + sex + father, annot="model", model_ink=1)
@@ -43,7 +44,7 @@
 pointplot <- function(D, tilde, ..., data=NULL, seed=101,
                        annot = c("none", "violin", "model"),
                        jitter = c("default", "none", "all", "x", "y"),
-                       .itype = c("confidence", "none", "prediction"),
+                       interval = c("confidence", "none", "prediction"),
                        point_ink = 0.5,
                        model_ink = 0.2, palette=LETTERS[1:8], bw = NULL, level=0.95) {
   annot <- match.arg(annot)
@@ -219,7 +220,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   }
 
   if (ncol(data) > 3) { # facet by the fourth variable
-    Res <- Res + facet_grid(as.formula(glue::glue(". ~ `{vars[4]}`")),
+    Res <- Res + facet_grid(stats::as.formula(glue::glue(". ~ `{vars[4]}`")),
                      labeller = label_both)
   }
 
@@ -239,8 +240,10 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
 
 #' Convenience function for adding labels to pointplot or others without needing
 #' the ggplot2 + pipe.
+#' @param P A ggplot2 object, for instance as made with `pointplot()` or `model_plot()`
 #' @examples
-#' mtcars |> pointplot(mpg ~ hp + cyl) |> add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
+#' mtcars |> pointplot(mpg ~ hp + cyl) |>
+#'   add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
 #' @export
 add_plot_labels <- function(P, ...) {
   P + labs(...)

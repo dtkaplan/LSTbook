@@ -16,9 +16,12 @@ model_plot(
 \arguments{
 \item{mod}{A model object, made with \code{model_train()}, \code{lm()}, or \code{glm()}}
 
+\item{nlevels}{Integer. When quantitative variables need to be converted to
+factors for color or facetting, how many levels in those factors.}
+
 \item{interval}{The type of interval to draw (default: confidence)}
 
-\item{level}{The level for the interval}
+\item{level}{The confidence or prediction level for the interval}
 
 \item{palette}{One of "A" through "F" giving some control for people who don't like or can't see the default palette}
 

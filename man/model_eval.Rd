@@ -16,7 +16,7 @@ model_eval(
 )
 }
 \arguments{
-\item{mod}{A model as from \code{lm()} or \code{glm()}}
+\item{mod}{A model as from \code{model_train()}, \code{lm()} or \code{glm()}}
 
 \item{data}{A data frame of inputs. If missing, the inputs will be assembled from \ldots or
 from the training data, or an skeleton will be constructed.}
@@ -48,7 +48,7 @@ the generic name \code{.response} is used, not the actual name of the model's re
 Evaluate a model on inputs
 }
 \examples{
-mod <- lm(mpg ~ hp + wt, data=mtcars)
+mod <- mtcars |> model_train(mpg ~ hp + wt)
 model_eval(mod, hp=100, wt=c(2,3))
 model_eval(mod) # training data
 model_eval(mod, skeleton=TRUE)

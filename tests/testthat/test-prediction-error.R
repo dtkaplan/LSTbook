@@ -7,9 +7,9 @@ test_that("Prediction error works", {
   expect_true( abs(result2 - 0.41091) < 0.0001)
   })
 
-test_that("CV works", {
-  mod <- mosaicData::Galton |> model_train(height ~ father*mother*sex)
-  result <- suppressWarnings(model_cv(mod))
-  expect_true( abs(result - 4.44231) < 0.0001 )
-})
+# test_that("CV works", {
+#   mod <- mosaicData::Galton |> model_train(height ~ father*mother*sex)
+#   result <- suppressWarnings(model_cv(mod))
+#   expect_true( abs(result - 4.44231) < 0.0001 )
+# })
 

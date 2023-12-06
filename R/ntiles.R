@@ -39,18 +39,24 @@ ntiles <-  function(x, n=3,
   Tmp$bin <- bin <- as.numeric(cut( xrank, breaks = cts, include.lowest=TRUE ))
 
   Tmp <- Tmp |>
-    dplyr::summarize(left  = min(x, na.rm = TRUE),
-              right = max(x, na.rm = TRUE),
-              md    = median(x, na.rm = TRUE),
-              mn    = mean(x, na.rm = TRUE),
-              .by = bin) |>
+    dplyr::summarize(
+      left  = min(x),
+      right = max(x),
+      md    = stats::median(x),
+      mn    = mean(x),
+      .by = bin) |>
     dplyr::mutate(center = signif( (left + right ) / 2, digits),
                   labels = paste0("[",signif(left,digits=digits),
                                   ",",
                                   signif(right,digits=digits),"]"))
+  # Deal with NAs as best you can
+  NA_indices <- which(is.na(bin))
+  if (length(NA_indices) > 0) bin[NA_indices] <- pi/6.3 # arbitrary value
+
+
   res <-  switch(format,
-                 "rank" =  factor(bin, labels=qnames[1:n], ordered=TRUE),
-                 "interval" =  factor(bin, labels=Tmp$labels, ordered=TRUE),
+                 "rank" =  factor(bin, labels=qnames[1:n], ordered=TRUE, exclude=pi/6.3),
+                 "interval" =  factor(bin, labels=Tmp$labels, ordered=TRUE, exclude=pi/6.3),
                  "center" = Tmp$center[bin],
                  "mean" = Tmp$mn[bin],
                  "median" = Tmp$md[bin],

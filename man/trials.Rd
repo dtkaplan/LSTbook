@@ -4,17 +4,18 @@
 \alias{trials}
 \title{Run the left side of the pipeline multiple times.}
 \usage{
-trials(.ex, size = 1, ...)
+trials(.ex, times = 1, ...)
 }
 \arguments{
 \item{.ex}{(Not user-facing.) The left side of the pipeline.}
 
-\item{size}{The number of times to run the trial.
-\ldots Values for any unbound parameter in the left side of the pipeline.}
+\item{times}{The number of times to run the trial.
+\ldots Values for any unbound parameter in the left side of the pipeline. If a
+vector of length > 1, the trials will be run separately for each element of the vector.}
 }
 \description{
 Write a pipeline to perform some calculation whose result can
-be coerced into one line of a data frame. Add \code{trials(size=3)} to the end
+be coerced into one line of a data frame. Add \code{trials(times=3)} to the end
 of the pipeline in order to repeat the calculation multiple times. Typically,
 each trial involves some random component, but another (or an additional)
 capability is to parameterize the pipeline expression by including some
@@ -25,9 +26,12 @@ repeat the calculation for each of the elements of the named parameter.
 This is intended as a pipeline friendly replacement for \code{mosaic::do()}.
 }
 \examples{
-mean(rnorm(10)) |> trials(size=3)
+mean(rnorm(10)) |> trials(times=3)
 mean(rnorm(lambda)) |> trials(lambda=c(1, 100, 10000))
-mean(rnorm(lambda)) |> trials(size=5, lambda=c(1, 100, 10000))
-sample(mtcars, size=lambda, replace=TRUE) |> select(mpg, hp) |> model_train(mpg ~ shuffle(hp)) |> trials(size=3, lambda=c(10, 20, 40))
+mean(rnorm(lambda)) |> trials(times=5, lambda=c(1, 100, 10000))
+sample(mtcars, n=lambda, replace=TRUE) |> select(mpg, hp) |>
+  model_train(mpg ~ resample(hp)) |>
+  regression_summary() |> trials(times=3, lambda=c(10, 20, 40)) |>
+  filter(term == "resample(hp)")
 
 }

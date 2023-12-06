@@ -7,6 +7,7 @@
 #'
 #' @param x a categorical variable
 #' @param one character string specifying the level that gets mapped to 1.
+#' @param P A ggplot2 object made by `model_plot()` or `pointplot()`
 #'
 #' @examples
 #' Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")

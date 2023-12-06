@@ -4,7 +4,7 @@
 \alias{datasim_make}
 \alias{datasim_run}
 \alias{categorical}
-\alias{evaluate}
+\alias{cat2value}
 \alias{bernoulli}
 \alias{block_by}
 \alias{datasim_to_igraph}
@@ -16,7 +16,7 @@ datasim_run(sim, n = 5, seed = NULL)
 
 categorical(n = 5, ..., exact = TRUE)
 
-evaluate(variable, values)
+cat2value(variable, ...)
 
 bernoulli(n = 0, logodds = NULL, prob = 0.5, labels = NULL)
 
@@ -25,11 +25,30 @@ block_by(block_var, levels = c("treatment", "control"), show_block = FALSE)
 datasim_to_igraph(sim, show_hidden = FALSE)
 }
 \arguments{
+\item{sim}{A data simulation as made by \code{datasim_make()}}
+
+\item{n}{The sample size}
+
+\item{exact}{Logical flag. If \code{TRUE}, be scrupulous in dividing up the number of factors}
+
 \item{variable}{a categorical variable}
 
-\item{values}{a named vector whose names are found in \code{variable}}
+\item{logodds}{Numerical vector used to generate bernouilli trials. Can be any real number.}
 
-\item{\ldots}{named arguments giving relative probability of each category}
+\item{prob}{An alternative to \code{logodds}. Values must be in \link{0,1}.}
+
+\item{labels}{Character vector: names for categorical levels, also used to
+replace 0 and 1 in bernouilli()}
+
+\item{block_var}{Which variable to use for blocking}
+
+\item{levels}{Character vector giving names to the blocking levels}
+
+\item{show_block}{Logical. If \code{TRUE}, put the block number in the output.}
+
+\item{show_hidden}{In graphing a dag, show the hidden nodes (nodes whose name begins with \code{.})}
+
+\item{\ldots}{assignments of values to the names in \code{variable}}
 }
 \description{
 Facility to make and run data simulations

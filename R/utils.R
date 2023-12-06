@@ -48,16 +48,16 @@ data_from_model <- function(model, ...) {
   UseMethod("data_from_model")
 }
 #' @exportS3Method
-data_from_model.lm <- function(model, ...) model.frame(model)
+data_from_model.lm <- function(model, ...) get_training_data(model)
 
 #' @exportS3Method
-data_from_model.glm <- function(model, ...) model.frame(model)
+data_from_model.glm <- function(model, ...) get_training_data(model)
 
 
 data_from_model.default <- function(model, ...) {
   error_string <- paste0("Model architecture '",
                          paste(class(model), collapse = "', "),
-                         "' not recognized by mosaicModel.")
+                         "' not recognized by LST.")
   stop(error_string)
 }
 

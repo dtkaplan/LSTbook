@@ -19,15 +19,14 @@ model_train <- function(data, tilde, prob_of = NULL,
 
 
   if (mod_family == "lm") {
-    mod <- lm(tilde, data = data)
+    mod <- stats::lm(tilde, data = data)
   } else if (mod_family == "binomial") {
-    mod <- glm(tilde, data= data, family="binomial")
-    return(mod)
+    mod <- stats::glm(tilde, data= data, family="binomial")
   } else if (mod_family == "poisson") {
-    mod <- glm(tilde, data = data, family="poisson")
+    mod <- stats::glm(tilde, data = data, family="poisson")
     return(mod)
-  } else if (mod_family ==" rlm") {
-    mod <- rlm(tilde, data = data)
+  } else if (mod_family == "rlm") {
+    mod <- MASS::rlm(tilde, data = data)
   } else {
     stop(glue::glue("Model type {mod_family} not yet available."))
   }

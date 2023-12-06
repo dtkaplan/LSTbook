@@ -12,7 +12,7 @@ hold the model specification, instead of \code{tilde}.}
 
 \item{tilde}{A model specification in the form of a tilde expression}
 
-\item{family}{The type of model architecture, as in \code{glm()}.}
+\item{family}{The type of model architecture: \code{"linear"}, \code{"prob"}, or \code{"counts"}}
 }
 \value{
 A \strong{vector} (not a data frame) of the model evaluated on the training data.
@@ -21,6 +21,9 @@ the place of simple reduction verbs like \code{mean()}, \code{median()}
 }
 \description{
 One-stop shopping to fit a model and return the model output on the training data.
+}
+\details{
+This is intended to be used ONLY WITHIN \code{mutate()}
 }
 \examples{
 mtcars |> mutate(mpg_mod = model_values(mpg ~ hp + wt)) |> select(hp, wt, mpg_mod) |> head()

@@ -1,6 +1,14 @@
 #' Facility to make and run data simulations
 #'
-#' @importFrom rlang enquos
+#' @param sim A data simulation as made by `datasim_make()`
+#' @param n The sample size
+#' @param exact Logical flag. If `TRUE`, be scrupulous in dividing up the number of factors
+#' @param logodds Numerical vector used to generate bernouilli trials. Can be any real number.
+#' @param prob An alternative to `logodds`. Values must be in [0,1].
+#' @param labels Character vector: names for categorical levels, also used to
+#' replace 0 and 1 in bernouilli()
+#' @param block_var Which variable to use for blocking
+#' @param show_hidden In graphing a dag, show the hidden nodes (nodes whose name begins with `.`)
 #'
 #' @rdname datasim
 #' @export
@@ -27,7 +35,7 @@ datasim_make <- function(...) {
 put_in_order <- function(sim) {
   # Put the nodes in topological order so that every call refers
   # only to nodes further down the list.
-  if (require(igraph, quietly = TRUE)) {
+  if (requireNamespace("igraph", quietly = TRUE)) {
     # Remove dependency on igraph for WebR compatibility
     new_order <- datasim_to_igraph(sim) |> igraph::topo_sort()
     sim$names <- sim$names[new_order]
@@ -72,7 +80,14 @@ datasim_run <- function(sim, n=5, seed=NULL) {
 
   # construct the values
   for (k in seq_along(sim$names)) {
-    values[[k]] <- eval(sim$calls[[k]], values)
+    tmp <- eval(sim$calls[[k]], values)
+
+    if (length(tmp) < values$n) {
+      # if `tmp` is a scalar or short vector, replicate it so that it has `n` entries
+      values[[k]] <- rep(tmp, length.out = values$n)
+    } else {
+      values[[k]] <- tmp
+    }
   }
 
   # Get rid of unwanted names, such as those starting with a dot (".")
@@ -105,7 +120,7 @@ categorical <- function(n=5, ..., exact = TRUE) {
     stop("Give relative probability of all levels, not just some of them.")
   } else {
     # all of the dots are numeric
-    levels <- names(dots)
+    levels <- names(unlist(dots))
   }
 
   # Convert to normalized probabilities
@@ -138,15 +153,16 @@ categorical <- function(n=5, ..., exact = TRUE) {
 }
 
 #' @param variable a categorical variable
-#' @param values a named vector whose names are found in `variable`
+#' @param \ldots assignments of values to the names in `variable`
 #' @rdname datasim
 #' @export
-evaluate <- function(variable, values) {
+cat2value <- function(variable, ...) {
+  values <- unlist(list(...))
   levels <- names(values)
   missing <- setdiff(variable, levels)
   values[missing] <- NA
 
-  as.vector(unlist(values[variable]))
+  as.vector(values[variable])
 }
 
 
@@ -161,14 +177,15 @@ bernoulli <- function(n=0, logodds=NULL, prob=0.5, labels=NULL) {
   }
   # 1 or 0 output with logistic input
   if (!is.null(logodds))  prob <- exp(logodds)/(1+exp(logodds))
-  yesno <- as.numeric(runif(n) < prob)
+  yesno <- as.numeric(stats::runif(n) < prob)
   if (!is.null(labels) && length(labels)==2)
     yesno <- labels[yesno+1]
 
   yesno
 }
 
-
+#' @param levels Character vector giving names to the blocking levels
+#' @param show_block Logical. If `TRUE`, put the block number in the output.
 #' @rdname datasim
 #' @export
 block_by <- function(block_var, levels = c("treatment", "control"), show_block=FALSE) {
@@ -178,7 +195,7 @@ block_by <- function(block_var, levels = c("treatment", "control"), show_block=F
   # divide into even-sized groups
   Tmp <- tibble::tibble(orig = orig[inds],
                         block = (seq_along(block_var)-1) %/% length(levels)) |>
-    mutate(out = levels[rank(runif(n()))], .by=block) |>
+    mutate(out = levels[rank(stats::runif(n()))], .by=block) |>
     arrange(orig)
 
   if (show_block) Tmp$block
@@ -204,7 +221,7 @@ datasim_to_igraph <- function(sim, show_hidden=FALSE) {
 
   }
 
-  if (require(igraph, quietly = TRUE)) {
+  if (requireNamespace("igraph", quietly = TRUE)) {
     g <- igraph::make_empty_graph(n=length(nnames), directed=TRUE) %>%
       igraph::add_edges(edges) %>%
       igraph::set_vertex_attr("label", value=nnames)

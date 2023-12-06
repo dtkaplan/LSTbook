@@ -10,7 +10,9 @@
 #'
 #' @param mod A model object, made with `model_train()`, `lm()`, or `glm()`
 #' @param interval The type of interval to draw (default: confidence)
-#' @param level The level for the interval
+#' @param level The confidence or prediction level for the interval
+#' @param nlevels Integer. When quantitative variables need to be converted to
+#' factors for color or facetting, how many levels in those factors.
 #' @param palette One of "A" through "F" giving some control for people who don't like or can't see the default palette
 #' @param model_ink The density of ink used to draw the model. ("alpha" for those in the know.)
 #'
@@ -79,10 +81,10 @@ model_plot <- function(mod, nlevels = 3,
   # Facet the plot, if appropriate
   if (!is.na(facet1)) {
     if (is.na(facet2)) {
-      facet_formula <- as.formula(paste("~", facet1))
+      facet_formula <- stats::as.formula(paste("~", facet1))
       P <- P + facet_wrap(facet_formula, labeller = "label_both")
     } else  {
-      facet_formula <- as.formula(paste(facet1, "~", facet2))
+      facet_formula <- stats::as.formula(paste(facet1, "~", facet2))
       P <- P + facet_grid(facet_formula, labeller = "label_both")
     }
   }

@@ -40,6 +40,8 @@ add_violin_ruler(
 categories are separated by a distance of 1.)}
 
 \item{ticks}{Integers, typically \code{0:5}, that label the ticks.}
+
+\item{\ldots}{additional graphical parameters, e.g. \code{color = "blue"}}
 }
 \description{
 To guide a reader in quantifying the slope of components of an x-y graph, a "slope rose" is helpful.

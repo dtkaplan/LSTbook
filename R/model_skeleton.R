@@ -22,7 +22,7 @@ model_skeleton <- function(mod, data=NULL, ncont=3, nfirstcont=50) {
   Skeleton <- list()
 
   for (var in explan_names) {
-    values <- na.omit(data[[var]])
+    values <- stats::na.omit(data[[var]])
     type <- continuous_or_discrete(values)
     if (type == "continuous") {
       # For the first explanatory variable, pull out `nfirstcont` levels.
@@ -106,7 +106,7 @@ get_typical <- function(vals, type=c("continuous", "discrete"), ncont=10, nlevel
 
   val_type <- continuous_or_discrete(vals)
   if (val_type=="continuous") {
-    if (ncont==1) return(median(vals, na.rm=TRUE))
+    if (ncont==1) return(stats::median(vals, na.rm=TRUE))
 
     n <- ifelse(type=="continuous", ncont, nlevels)
     breaks <- compromise_breaks(vals, n = n)

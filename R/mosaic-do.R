@@ -3,11 +3,8 @@
 
 
 utils::globalVariables(c('.row'))
-#' @importFrom mosaicCore vector2df nice_names
-require(parallel)
-require(profvis)
-require(compiler)
-require(rlang)
+require(parallel, quietly = TRUE)
+require(compiler, quietly = TRUE)
 parallel::detectCores()
 NA
 
@@ -210,8 +207,8 @@ if(FALSE) {
 #'
 #'
 #' @examples
-#' cull_for_do(lm(length ~ width, data = KidsFeet))
-#' do(1) * lm(length ~ width, data = KidsFeet)
+#' KidsFeet |> resample() |> model_train(length ~ resample(width)) |>
+#'   R2() |> trials(times=10)
 
 
 mosaic_cull_for_do <- function(object, ...) {
@@ -297,23 +294,7 @@ mosaic_cull_for_do.lme <- function(object, ...) {
 
 #' @export
 mosaic_cull_for_do.lm <- function(object, ...) {
-  sobject <- summary(object)
-  Fstat <- sobject$fstatistic[1]
-  DFE <- sobject$fstatistic["dendf"]
-  DFM <- sobject$fstatistic["numdf"]
-  if (!is.null(Fstat)) {
-    names(Fstat) <- "F"
-    result <-  c(coef(object), sigma=sobject$sigma,
-                 r.squared = sobject$r.squared,
-                 Fstat,
-                 DFM,
-                 DFE)
-  } else {
-    result <-  c(coef(object), sigma=sobject$sigma,
-                 r.squared = sobject$r.squared
-    )
-  }
-  mosaicCore::vector2df(result, nice_names = TRUE)
+  regression_report(objec)
 }
 
 

@@ -30,6 +30,6 @@ the default \code{cull_for_do} extracts the coefficients, coefficient
 of determinism, an the estimate for the variance, etc.
 }
 \examples{
-cull_for_do(lm(length ~ width, data = KidsFeet))
-do(1) * lm(length ~ width, data = KidsFeet)
+KidsFeet |> resample() |> model_train(length ~ resample(width)) |>
+  R2() |> trials(times=10)
 }

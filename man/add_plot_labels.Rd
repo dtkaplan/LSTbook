@@ -7,10 +7,14 @@ the ggplot2 + pipe.}
 \usage{
 add_plot_labels(P, ...)
 }
+\arguments{
+\item{P}{A ggplot2 object, for instance as made with \code{pointplot()} or \code{model_plot()}}
+}
 \description{
 Convenience function for adding labels to pointplot or others without needing
 the ggplot2 + pipe.
 }
 \examples{
-mtcars |> pointplot(mpg ~ hp + cyl) |> add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
+mtcars |> pointplot(mpg ~ hp + cyl) |>
+  add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
 }
