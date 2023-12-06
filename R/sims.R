@@ -4,11 +4,12 @@
 #' @param n The sample size
 #' @param exact Logical flag. If `TRUE`, be scrupulous in dividing up the number of factors
 #' @param logodds Numerical vector used to generate bernouilli trials. Can be any real number.
-#' @param prob An alternative to `logodds`. Values must be in [0,1].
+#' @param prob An alternative to `logodds`. Values must be in `[0,1]`.
 #' @param labels Character vector: names for categorical levels, also used to
 #' replace 0 and 1 in bernouilli()
 #' @param block_var Which variable to use for blocking
 #' @param show_hidden In graphing a dag, show the hidden nodes (nodes whose name begins with `.`)
+#' @param seed Integer to use as a random seed (optional) for reproducibility
 #'
 #' @rdname datasim
 #' @export
@@ -68,7 +69,7 @@ print.datasim <- function(x, ..., report_hidden = FALSE) {
 datasim_run <- function(sim, n=5, seed=NULL) {
   # a simple utility function
   exo <- function(n, sd = 1) {
-    rnorm(n, mean=0, sd=sd)
+    stats::rnorm(n, mean=0, sd=sd)
   }
   # set random number generator seed, if called for
   if (!is.null(seed)) set.seed(seed)
@@ -145,7 +146,7 @@ categorical <- function(n=5, ..., exact = TRUE) {
   } else {
     # When <exact> is FALSE, generate the levels probabalistically
     cumprobs <- cumsum(probs/(sum(probs)))
-    pick <- runif(n)
+    pick <- stats::runif(n)
     choices <- outer(pick, cumprobs, FUN=`<=`) |>
       apply(1, function(x) min(which(x)))
     return(levels[choices])
@@ -176,10 +177,10 @@ bernoulli <- function(n=0, logodds=NULL, prob=0.5, labels=NULL) {
     prob <- rep(prob, n)
   }
   # 1 or 0 output with logistic input
-  if (!is.null(logodds))  prob <- exp(logodds)/(1+exp(logodds))
+  if (!is.null(logodds))  prob <- exp(logodds) / (1 + exp(logodds))
   yesno <- as.numeric(stats::runif(n) < prob)
-  if (!is.null(labels) && length(labels)==2)
-    yesno <- labels[yesno+1]
+  if (!is.null(labels) && length(labels) == 2)
+    yesno <- labels[yesno + 1]
 
   yesno
 }
@@ -188,14 +189,16 @@ bernoulli <- function(n=0, logodds=NULL, prob=0.5, labels=NULL) {
 #' @param show_block Logical. If `TRUE`, put the block number in the output.
 #' @rdname datasim
 #' @export
-block_by <- function(block_var, levels = c("treatment", "control"), show_block=FALSE) {
+block_by <- function(block_var,
+                     levels = c("treatment", "control"),
+                     show_block=FALSE) {
   orig <- seq_along(block_var)
   inds <- order(block_var)
   block_var <- block_var[inds]
   # divide into even-sized groups
   Tmp <- tibble::tibble(orig = orig[inds],
-                        block = (seq_along(block_var)-1) %/% length(levels)) |>
-    mutate(out = levels[rank(stats::runif(n()))], .by=block) |>
+                        block = (seq_along(block_var) - 1) %/% length(levels)) |>
+    mutate(out = levels[rank(stats::runif(n()))], .by = block) |>
     arrange(orig)
 
   if (show_block) Tmp$block
@@ -233,28 +236,30 @@ datasim_to_igraph <- function(sim, show_hidden=FALSE) {
   }
 }
 
+#' @rdname datasim
 #' @export
-datasim_intervene <- function(datasim, ...) {
-  if (!inherits(datasim, "datasim")) stop("Must provide a datasim object")
+datasim_intervene <- function(sim, ...) {
+  if (!inherits(sim, "datasim")) stop("Must provide a datasim object")
   new_steps <- enquos(..., .ignore_empty = "all")
 
   new_vnames <-
     lapply(new_steps, function(x) as.character(rlang::quo_get_expr(x)[[2]]))
   new_vcalls <- lapply(new_steps, function(x) rlang::quo_get_expr(x)[[3]])
   # replace the calls corresponding to any re-used names
-  reused <- which(as.character(datasim$names) %in% as.character(new_vnames))
-  indices <- which(as.character(new_vnames) %in% as.character(datasim$names))
+  reused <- which(as.character(sim$names) %in% as.character(new_vnames))
+  indices <- which(as.character(new_vnames) %in% as.character(sim$names))
   # replace any steps already defined in the input datasim
   if (length(indices) > 0) {
-    datasim$calls[reused] <- new_vcalls[indices]
+    sim$calls[reused] <- new_vcalls[indices]
     new_vcalls[indices] <- NULL
     new_vnames[indices] <- NULL
   }
 
-  datasim$names <- c(datasim$names, new_vnames)
-  datasim$calls <- c(datasim$calls, new_vcalls)
+  sim$names <- c(sim$names, new_vnames)
+  sim$calls <- c(sim$calls, new_vcalls)
 
-  put_in_order(datasim)
+  put_in_order(sim)
 
 }
 
+utils::globalVariables("block")

@@ -1,9 +1,0 @@
-Name: Insert Short answer
-Description: Inserts an inline code for a short answer
-Binding: insertShortAnswer
-Interactive: false
-
-Name: New exercise block
-Description: Inserts a quarto ::: chunk for an exercise
-Binding: insertExercise
-Interactive: false

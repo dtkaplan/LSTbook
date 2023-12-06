@@ -8,8 +8,6 @@ split_tilde(tilde)
 }
 \arguments{
 \item{tilde}{A two-sided tilde expression used for model specification}
-
-\item{data}{A data frame}
 }
 \description{
 Evaluate a tilde expression on a data frame

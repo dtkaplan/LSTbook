@@ -12,7 +12,7 @@
 #'
 #' @param .ex (Not user-facing.) The left side of the pipeline.
 #' @param times The number of times to run the trial.
-#' \ldots Values for any unbound parameter in the left side of the pipeline. If a
+#' @param \ldots Values for any unbound parameter in the left side of the pipeline. If a
 #' vector of length > 1, the trials will be run separately for each element of the vector.
 #'
 #' @examples

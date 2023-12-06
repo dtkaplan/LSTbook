@@ -32,14 +32,12 @@ removed in the future, when there is no need to avoid such dependency, e.g. when
 available on WASM.
 }
 \examples{
-if (require(mosaicData)) {
-tally( ~ ntiles(age, 4), data=HELPrct)
-tally( ~ ntiles(age, 4, format="center"), data=HELPrct)
-tally( ~ ntiles(age, 4, format="interval"), data=HELPrct)
-tally( ~ ntiles(age, 4, format="left"), data=HELPrct)
-tally( ~ ntiles(age, 4, format="right"), data=HELPrct)
-tally( ~ ntiles(age, 4, format="mean"), data=HELPrct)
-tally( ~ ntiles(age, 4, format="median"), data=HELPrct)
-bwplot( i2 ~ ntiles(age, n=5, format="interval"), data=HELPrct)
-}
+# tally( ~ ntiles(age, 4), data=HELPrct)
+# tally( ~ ntiles(age, 4, format="center"), data=HELPrct)
+# tally( ~ ntiles(age, 4, format="interval"), data=HELPrct)
+# tally( ~ ntiles(age, 4, format="left"), data=HELPrct)
+# tally( ~ ntiles(age, 4, format="right"), data=HELPrct)
+# tally( ~ ntiles(age, 4, format="mean"), data=HELPrct)
+# tally( ~ ntiles(age, 4, format="median"), data=HELPrct)
+
 }

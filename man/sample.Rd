@@ -28,8 +28,15 @@ resample(..., replace = TRUE)
 
 \item{replace}{Logical flag: whether to sample with replacement. (default: \code{FALSE})}
 
+\item{prob}{Probabilities to use for sampling, one for each element of \code{x}}
+
 \item{.by}{Variables to use to define groups for sampling, as in \code{{dplyr}}. The sample size
 applies to each group.}
+
+\item{groups}{Variable indicating blocks to sample within}
+
+\item{orig.ids}{Logical. If \code{TRUE}, append a column named "orig.ids" with the
+row from the original \code{x} that the same came from.}
 
 \item{\ldots}{Arguments to pass along to specific sample methods.}
 }

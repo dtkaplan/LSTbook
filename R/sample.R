@@ -49,6 +49,10 @@ sample.datasim <- function(x, n = 5, replace = FALSE, ...) {
 
 #' @param .by Variables to use to define groups for sampling, as in `{dplyr}`. The sample size
 #' applies to each group.
+#' @param groups Variable indicating blocks to sample within
+#' @param orig.ids Logical. If `TRUE`, append a column named "orig.ids" with the
+#' row from the original `x` that the same came from.
+#' @param prob Probabilities to use for sampling, one for each element of `x`
 #'
 #' @rdname sample
 #' @export

@@ -9,8 +9,9 @@ trials(.ex, times = 1, ...)
 \arguments{
 \item{.ex}{(Not user-facing.) The left side of the pipeline.}
 
-\item{times}{The number of times to run the trial.
-\ldots Values for any unbound parameter in the left side of the pipeline. If a
+\item{times}{The number of times to run the trial.}
+
+\item{\ldots}{Values for any unbound parameter in the left side of the pipeline. If a
 vector of length > 1, the trials will be run separately for each element of the vector.}
 }
 \description{

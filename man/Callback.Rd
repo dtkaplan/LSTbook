@@ -3,6 +3,7 @@
 \docType{data}
 \name{Callback}
 \alias{Callback}
+\alias{Names_and_race}
 \title{Resume Experiment Data}
 \format{
 : \code{Callback}: A data frame with 4870 rows and 4 variables. Each row is one fictitious applicant
@@ -12,9 +13,13 @@
 \item callback: whether the potential employer called back to follow up. (1 = yes, 0 = no)
 Another data frame, \code{Names_and_race}: which first names are associated with which race.
 }
+
+An object of class \code{grouped_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 36 rows and 2 columns.
 }
 \usage{
 data("Callback")
+
+Names_and_race
 }
 \description{
 Data from an experimental study in which researchers sent the resumes of fictitious

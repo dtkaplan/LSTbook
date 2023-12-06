@@ -41,7 +41,7 @@
 #' mtcars |> pointplot(mpg ~ wt + cyl)
 #' mtcars |> pointplot(mpg ~ wt + cyl + hp, annot="model")
 #' @export
-pointplot <- function(D, tilde, ..., data=NULL, seed=101,
+pointplot <- function(D, tilde, ..., seed=101,
                        annot = c("none", "violin", "model"),
                        jitter = c("default", "none", "all", "x", "y"),
                        interval = c("confidence", "none", "prediction"),
@@ -52,19 +52,17 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   jitter <- match.arg(jitter)
   set.seed(seed)
 
-  if (is.null(data)) {
-    if (inherits(D, "ggplot")) {
-      # Grab the data from the incoming plot
-      data <- D$data
-    } else if (inherits(D, "data.frame")) {
-      data <- D
-      D <- NULL # this must be the first layer of the plot
-    } else if (inherits(D, "glm")) {
-      data <- data.from.model(D) # Grab the data from the model
-      model <- D
-      D <- NULL
-      warning(as.character(match.call()[[1]]), " not yet set up to take a model as an argument.")
-    }
+  if (inherits(D, "ggplot")) {
+    # Grab the data from the incoming plot
+    data <- D$data
+  } else if (inherits(D, "data.frame")) {
+    data <- D
+    D <- NULL # this must be the first layer of the plot
+  } else if (inherits(D, "glm")) {
+    data <- get_training_data(D) # Grab the data from the model
+    model <- D
+    D <- NULL
+    warning(as.character(match.call()[[1]]), " not yet set up to take a model as an argument.")
   }
 
   data <- data_from_tilde(data, tilde)
@@ -113,12 +111,12 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
   # Color if there is a non-trivial third column
   show_color <- ncol(data) > 2 && length(unique(data[[3]])) > 1
   if (!show_color) {
-    Res <- ggplot(data) +
-      geom_jitter(aes(y=.data[[vars[1]]], x=.data[[vars[[2]]]]),
+    Res <- ggplot2::ggplot(data) +
+      ggplot2::geom_jitter(aes(y=.data[[vars[1]]], x=.data[[vars[[2]]]]),
                   width=x_jitter, height=y_jitter, alpha = point_ink, ...)
   }  else {
-    Res <- ggplot(data) +
-      geom_jitter(aes(y=.data[[vars[1]]], x=.data[[vars[[2]]]], color=.data[[vars[3]]]),
+    Res <- ggplot2::ggplot(data) +
+      ggplot2::geom_jitter(aes(y=.data[[vars[1]]], x=.data[[vars[[2]]]], color=.data[[vars[3]]]),
                   width=x_jitter, height=y_jitter, alpha = point_ink, ...)
   }
 
@@ -168,7 +166,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
         Res <- Res +
           geom_linerange(data=mod_vals,
                         aes(x=.data[[vars[2]]],
-                            ymin=.lwr, ymax=.upr,
+                            ymin=.data$.lwr, ymax=.data$.upr, # for CRAN CMD check
                             color=.data[[vars[3]]]),
                         alpha = model_ink, size=6,
                         position="dodge") +
@@ -177,7 +175,7 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
         Res <- Res +
           geom_ribbon(data=mod_vals,
                       aes(x=.data[[vars[2]]],
-                          ymin=.lwr, ymax=.upr,
+                          ymin=.data$.lwr, ymax=.data$.upr,
                           # color = .data[[vars[3]]],
                           fill=.data[[vars[3]]]),
                       alpha = model_ink) +
@@ -188,14 +186,14 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
         Res <- Res +
           geom_linerange(data=mod_vals,
                         aes(x=.data[[vars[2]]],
-                            ymin=.lwr, ymax=.upr),
+                            ymin=.data$.lwr, ymax=.data$.upr),
                         size = 4,
                         color="blue", alpha=model_ink)
       } else {
         Res <- Res +
           geom_ribbon(data=mod_vals,
                       aes(x=.data[[vars[2]]],
-                          ymin=.lwr, ymax=.upr),
+                          ymin=.data$.lwr, ymax=.data$.upr),
                       color=NA,
                       fill="blue", alpha=model_ink)
       }
@@ -241,6 +239,8 @@ pointplot <- function(D, tilde, ..., data=NULL, seed=101,
 #' Convenience function for adding labels to pointplot or others without needing
 #' the ggplot2 + pipe.
 #' @param P A ggplot2 object, for instance as made with `pointplot()` or `model_plot()`
+#' @param \ldots Label items (e.g. `x = "hello"`) as in ggplot2::labs
+#'
 #' @examples
 #' mtcars |> pointplot(mpg ~ hp + cyl) |>
 #'   add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
@@ -249,14 +249,16 @@ add_plot_labels <- function(P, ...) {
   P + labs(...)
 }
 
+#'
+#'
 # Train and evaluate the model, with evaluation only
 # on a skeleton.
-simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, .itype="confidence") {
+simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confidence") {
   M <- if (!is.null(family)) model_train(data, tilde, family = family)
   else model_train(data, tilde)
   Dskel <- expand.grid(data_skeleton(data, tilde))
-  Meval <- model_eval(M, data = Dskel, interval = .itype, level = level) |>
-    select(.output, .lwr, .upr)
+  Meval <- model_eval(M, data = Dskel, interval = itype, level = level) |>
+    select(".output", ".lwr", ".upr")
   # Rename the skeleton values to correspond to the names in <data>
   D <- data_from_tilde(Dskel, tilde[[3]])
 

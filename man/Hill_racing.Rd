@@ -23,7 +23,7 @@ male and female winner.
 The data were scraped from the \href{http://www.scottishhillracing.co.uk/ResultsSummary.aspx}{Scottish Hill Racing site}.
 }
 \usage{
-data(Hill_races)
+data(Hill_racing)
 }
 \description{
 Winning times in Scottish Hill races, 2005-2017

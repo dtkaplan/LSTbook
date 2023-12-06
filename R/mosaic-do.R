@@ -232,7 +232,7 @@ mosaic_cull_for_do.fitdistr <- function(object, ...) {
 
 #' @export
 mosaic_cull_for_do.aov <- function(object, ...) {
-  mosaic_cull_for_do(anova(object))
+  mosaic_cull_for_do(stats::anova(object))
 }
 
 #' @export
@@ -286,15 +286,8 @@ mosaic_cull_for_do.aggregated.stat <- function(object, ...) {
 }
 
 #' @export
-mosaic_cull_for_do.lme <- function(object, ...) {
-  result <- object
-  names(result) <- mosaicCore::nice_names(names(result))
-  return( object$coef$fixed )
-}
-
-#' @export
 mosaic_cull_for_do.lm <- function(object, ...) {
-  regression_report(objec)
+  regression_summary(object)
 }
 
 

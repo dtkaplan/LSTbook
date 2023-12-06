@@ -14,7 +14,7 @@ model_skeleton <- function(mod, data=NULL, ncont=3, nfirstcont=50) {
   if (is.null(data)) data <- get_training_data(mod)
 
   if (inherits(mod, "formula")) {
-    if (length(formula)==2) explan_names <- all.vars(formula)
+    if (length(formula) == 2) explan_names <- all.vars(formula)
     else explan_names <- all.vars(formula[[3]])
   } else {
     explan_names <- all.vars(formula_from_mod(mod)[[3]])
@@ -45,7 +45,7 @@ model_skeleton <- function(mod, data=NULL, ncont=3, nfirstcont=50) {
   expand.grid(Skeleton)
 }
 
-#' @export
+
 data_skeleton <- function(data, tilde, spreadn=NULL, ..., ncont=10, nlevels=3) {
   # find the names of the explanatory variables in an order implied by the formula
   explan_names <- all.vars(tilde)
@@ -64,12 +64,14 @@ data_skeleton <- function(data, tilde, spreadn=NULL, ..., ncont=10, nlevels=3) {
   # is the first explanatory variable continuous or discrete?
   first_vals <- data[[explan_names[1]]]
   first_type <- continuous_or_discrete(first_vals)
-  Vals[[explan_names[[1]]]] <- get_typical(data[[explan_names[1]]], type="continuous", ncont=ncont, nlevels=nlevels)
+  Vals[[explan_names[[1]]]] <- get_typical(data[[explan_names[1]]],
+                                           type = "continuous", ncont = ncont,
+                                           nlevels = nlevels)
   if (spreadn > 1) {
-    for (k in 2:spreadn){
+    for (k in 2:spreadn) {
       Vals[[explan_names[[k]]]] <-
-        get_typical(data[[explan_names[k]]], type="discrete",
-                    ncont=ncont, nlevels=nlevels)
+        get_typical(data[[explan_names[k]]], type = "discrete",
+                    ncont = ncont, nlevels = nlevels)
 
     }
   }
@@ -90,14 +92,14 @@ data_skeleton <- function(data, tilde, spreadn=NULL, ..., ncont=10, nlevels=3) {
 
 }
 
-#' @export
+#'
 continuous_or_discrete <- function(vals) {
   ifelse(inherits(vals, c("character", "logical", "factor", "zero_one")),
          "discrete",
          "continuous")
 }
 
-#' @export
+#'
 get_typical <- function(vals, type=c("continuous", "discrete"), ncont=10, nlevels=3) {
   type <- match.arg(type)
   # special cases
@@ -123,11 +125,13 @@ get_typical <- function(vals, type=c("continuous", "discrete"), ncont=10, nlevel
   }
 }
 
-#' @export
+#'
 compromise_breaks <- function(vals, n) {
-  breaks = quantile(vals, seq(0, 1, length=n), na.rm=TRUE)
+  breaks = stats::quantile(vals, seq(0, 1, length=n), na.rm=TRUE)
   # evenly spread throughout the value range
-  breaks2 <- seq(min(vals, na.rm=TRUE), max(vals, na.rm=TRUE), length=n)
+  breaks2 <- seq(min(vals, na.rm = TRUE),
+                 max(vals, na.rm = TRUE),
+                 length=n)
 
   # compromise
   as.numeric((breaks + breaks2)/2)

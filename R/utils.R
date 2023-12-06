@@ -19,14 +19,15 @@ response_values <- function(model, ...) {
 }
 #' @rdname utils
 formula_from_mod <- function(model, ...) {
-  if ("terms" %in% names(model)) return(formula(model$terms))
-  if ("Terms" %in% names(model)) return(formula(model$Terms))
+  if ("terms" %in% names(model)) return(stats::formula(model$terms))
+  if ("Terms" %in% names(model)) return(stats::formula(model$Terms))
   stop("Model architecture '", class(model), "' not recognized by mosaicModel package.")
 }
 
 #' @rdname utils
 get_training_data <- function(model, ...) {
-  if ("training_data" %in% names(attributes(model))) attributes(model)$training_data
+  if ("training_data" %in% names(attributes(model)))
+    attributes(model)$training_data
   else {
     # Get what you can from the model frame
     # but this will have transformed variables

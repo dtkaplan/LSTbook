@@ -9,6 +9,8 @@ add_plot_labels(P, ...)
 }
 \arguments{
 \item{P}{A ggplot2 object, for instance as made with \code{pointplot()} or \code{model_plot()}}
+
+\item{\ldots}{Label items (e.g. \code{x = "hello"}) as in ggplot2::labs}
 }
 \description{
 Convenience function for adding labels to pointplot or others without needing

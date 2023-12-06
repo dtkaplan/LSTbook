@@ -10,8 +10,6 @@ zero_one(x, one)
 \item{x}{a categorical variable}
 
 \item{one}{character string specifying the level that gets mapped to 1.}
-
-\item{P}{A ggplot2 object made by \code{model_plot()} or \code{pointplot()}}
 }
 \description{
 A convenience function for handling categorical response variables.

@@ -6,23 +6,23 @@
 \title{Parking summonses in New York City in 2022}
 \format{
 A data frame with 16,427 rows and 16 columns:
-\describe{
-\item{plate}{License-plate of the offending vehicle}
-\item{state}{Two letter code for US state or Canadian province of the vehicle}
-\item{license_type}{Three letter code for the "type" of license plate. Many of the types
-are in honor of groups, e.g. Purple-Heart veterans. Vanity plates are SRF.}
-\item{date}{Date on which the summons was issued.}
-\item{time}{Time of day, in decimal hours. 0.5 means 30 minutes past midnight, 15 means 3pm.}
-\item{violation}{Type of parking violation, e.g. fire hydrant}
-\item{fine}{Dollar amount of fine}
-\item{penalty}{Additional dollar amount (for late payment?)}
-\item{reduction}{Amount (in dollars) by which fine was reduced. (Mitigating circumstances: see status.)}
-\item{payment}{Amount actually paid (as of Aug 1, 2023).}
-\item{precinct}{Location in NYC by police precinct}
-\item{county}{Somewhat mysterious}
-\item{agency}{Which government issued the summons.}
-\item{status}{Indicates whether the summons was appealled and, if so, what the outcome was.}
-\item{summons}{URL with a facsimile of the actual summons, that is, what gets placed on the windshield.}
+\itemize{
+\item plate License-plate of the offending vehicle
+\item state Two letter code for US state or Canadian province of the vehicle
+\item license_type Three letter code for the "type" of license plate. Many of the types
+are in honor of groups, e.g. Purple-Heart veterans. Vanity plates are SRF.
+\item date Date on which the summons was issued.
+\item time Time of day, in decimal hours. 0.5 means 30 minutes past midnight, 15 means 3pm.
+\item violation Type of parking violation, e.g. fire hydrant
+\item fine Dollar amount of fine
+\item penalty Additional dollar amount (for late payment?)
+\item reduction Amount (in dollars) by which fine was reduced. (Mitigating circumstances: see status.)
+\item payment Amount actually paid (as of Aug 1, 2023).
+\item precinct Location in NYC by police precinct
+\item county Somewhat mysterious
+\item agency Which government issued the summons.
+\item status Indicates whether the summons was appealled and, if so, what the outcome was.
+\item summons URL with a facsimile of the actual summons, that is, what gets placed on the windshield.
 }
 }
 \source{

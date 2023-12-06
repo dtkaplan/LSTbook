@@ -11,7 +11,7 @@
 #' nodes, use the argument `show_hidden=TRUE`.
 #'
 #' @examples
-#' dag_draw(dag03)
+#' dag_draw(sim_03)
 #' @export
 dag_draw <- function(DAG, ...) {
   dots <- list(...)
@@ -36,7 +36,7 @@ dag_draw <- function(DAG, ...) {
   if ("show_hidden" %in% names(dots) ) reveal = dots$show_hidden
 
   ig <- datasim_to_igraph(DAG, show_hidden = reveal)
-  if (requireNamespace(graphics)) {
+  if (requireNamespace("graphics")) {
     graphics::par(mai = c(0,0,0,0)) # have the graph fill the frame
   }
   do.call(plot, c(list(ig), defaults))

@@ -5,7 +5,7 @@
 \alias{Boston_marathon}
 \title{Winning times in the Boston Marathon}
 \format{
-A data.frame
+A data frame
 \itemize{
 \item year
 \item name: the winner's name
@@ -19,7 +19,7 @@ A data.frame
 \href{https://www.baa.org/races/boston-marathon/results/champions}{Boston Athletic Association}
 }
 \usage{
-data(Boston_marathon)
+Boston_marathon
 }
 \description{
 The Boston marathon is the oldest continuing marathon in the US.

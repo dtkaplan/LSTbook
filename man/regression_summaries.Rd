@@ -7,7 +7,7 @@
 \alias{anova_summary}
 \title{Summaries of regression models}
 \usage{
-conf_interval(mod, level = 0.95, show_p = FALSE)
+conf_interval(model, level = 0.95, show_p = FALSE)
 
 R2(model)
 
@@ -16,7 +16,7 @@ regression_summary(model)
 anova_summary(...)
 }
 \arguments{
-\item{mod}{A model as produced by \code{model_train()}, \code{lm()}, \code{glm()}, and so on}
+\item{model}{A model as produced by \code{model_train()}, \code{lm()}, \code{glm()}, and so on}
 
 \item{level}{Confidence level to use in \code{conf_interval()} (default: 0.95)}
 

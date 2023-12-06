@@ -8,12 +8,14 @@
 #' function. In order to be able to access the training data in such cases, the
 #' training data is assigned to an attribute of the resulting model, "training_data".
 #'
+#' @importFrom stats lm glm predict formula
+#'
 #' @param data Data frame to use as training data
 #' @param tilde Formula for the model
 #' @param family Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...
 #' @export
-model_train <- function(data, tilde, prob_of = NULL,
-                      family = "auto", logs=FALSE, ...) {
+model_train <- function(data, tilde,
+                      family = "auto") {
   # Figure out (or confirm) the model family
   mod_family <- model_family(data, tilde, family)[1]
 

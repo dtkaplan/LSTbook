@@ -4,9 +4,8 @@
 #'
 #' @docType data
 #'
-#' @usage data(Boston_marathon)
 #'
-#' @format A data.frame
+#' @format A data frame
 #' - year
 #' - name: the winner's name
 #' - country from which the winner registered

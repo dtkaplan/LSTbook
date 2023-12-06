@@ -71,10 +71,10 @@ model_plot <- function(mod, nlevels = 3,
   # Two major situations:
   # 1. First explanatory variable numeric, ribbons
   # 2. First explanatory variable not numeric, use error bars
-  the_geom <- ifelse(is.numeric(Skeleton[[1]]), geom_ribbon, geom_linerange)
+  the_geom <- ifelse(is.numeric(Skeleton[[1]]), ggplot2::geom_ribbon, ggplot2::geom_linerange)
   # Fatten up lines if x-axis is categorical
   aes_settings$linewidth <- ifelse(is.numeric(Skeleton[[1]]), 0, 3)
-  P <- ggplot(Skeleton, do.call(aes, aes_mappings))
+  P <- ggplot2::ggplot(Skeleton, do.call(aes, aes_mappings))
 
   P <- P + do.call(the_geom, aes_settings)
 

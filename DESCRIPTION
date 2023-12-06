@@ -4,17 +4,18 @@ Version: 0.3.1.9999
 Authors@R: 
     person("Daniel", "Kaplan", , "dtkaplan@gmail.com", role = c("aut", "cre"))
 Description: Creates data from DAGs.
-License: `use_mit_license()`
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 LazyData: true
+LazyDataCompression: xz
 Imports: rlang,
          dplyr,
          ggplot2, 
          broom,
          glue,
-         utils,
-         stats
+         stats, 
+         MASS,
+         tibble,
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests:
@@ -30,3 +31,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://dtkaplan.github.io/LST/
+License: MIT + file LICENSE

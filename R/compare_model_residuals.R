@@ -14,9 +14,10 @@
 #' compare_model_residuals(mtcars,
 #'   mpg ~ 1, mpg ~ hp, mpg ~ hp + wt,
 #'   measure="SS")
-#' compare_model_residuals(sample(sim_07, n=100),
-#'   c ~ 1, c ~ a, c ~ a + b, c ~ a + b + d,
-#'   measure="SS", testing="out-of-sample")
+#'   # This won't work until cross-validation is set up
+#' # compare_model_residuals(sample(sim_07, n=100),
+#'   # c ~ 1, c ~ a, c ~ a + b, c ~ a + b + d,
+#'   # measure="SS", testing="out-of-sample")
 
 #' @export
 compare_model_residuals <- function(source, ...,  n=500,

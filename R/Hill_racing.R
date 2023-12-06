@@ -2,7 +2,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(Hill_races)
+#' @usage data(Hill_racing)
 #'
 #' @format A data.frame object with one row for each race winner. Most races have both a
 #' male and female winner.

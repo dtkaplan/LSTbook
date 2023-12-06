@@ -8,6 +8,7 @@
 \alias{bernoulli}
 \alias{block_by}
 \alias{datasim_to_igraph}
+\alias{datasim_intervene}
 \title{Facility to make and run data simulations}
 \usage{
 datasim_make(...)
@@ -23,11 +24,15 @@ bernoulli(n = 0, logodds = NULL, prob = 0.5, labels = NULL)
 block_by(block_var, levels = c("treatment", "control"), show_block = FALSE)
 
 datasim_to_igraph(sim, show_hidden = FALSE)
+
+datasim_intervene(sim, ...)
 }
 \arguments{
 \item{sim}{A data simulation as made by \code{datasim_make()}}
 
 \item{n}{The sample size}
+
+\item{seed}{Integer to use as a random seed (optional) for reproducibility}
 
 \item{exact}{Logical flag. If \code{TRUE}, be scrupulous in dividing up the number of factors}
 
@@ -35,7 +40,7 @@ datasim_to_igraph(sim, show_hidden = FALSE)
 
 \item{logodds}{Numerical vector used to generate bernouilli trials. Can be any real number.}
 
-\item{prob}{An alternative to \code{logodds}. Values must be in \link{0,1}.}
+\item{prob}{An alternative to \code{logodds}. Values must be in \verb{[0,1]}.}
 
 \item{labels}{Character vector: names for categorical levels, also used to
 replace 0 and 1 in bernouilli()}

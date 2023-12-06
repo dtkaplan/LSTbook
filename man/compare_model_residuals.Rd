@@ -28,6 +28,11 @@ Compare a set of models, all with the same response variable, using either
 RMS residuals or the sum-of-square residuals
 }
 \examples{
-compare_model_residuals(mtcars, mpg ~ 1, mpg ~ hp, mpg ~ hp + wt, measure="SS")
-compare_model_residuals(sample(sim_07, n=100), c ~ 1, c ~ a, c ~ a + b, c ~ a + b + d, measure="SS", testing="out-of-sample")
+compare_model_residuals(mtcars,
+  mpg ~ 1, mpg ~ hp, mpg ~ hp + wt,
+  measure="SS")
+  # This won't work until cross-validation is set up
+# compare_model_residuals(sample(sim_07, n=100),
+  # c ~ 1, c ~ a, c ~ a + b, c ~ a + b + d,
+  # measure="SS", testing="out-of-sample")
 }

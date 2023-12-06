@@ -1,7 +1,7 @@
 #' Evaluate a tilde expression on a data frame
 #'
 #' @param tilde A two-sided tilde expression used for model specification
-#' @param data A data frame
+
 
 split_tilde <- function(tilde) {
   if (is.null(tilde)) return(c())
@@ -14,7 +14,6 @@ split_tilde <- function(tilde) {
   } else if (! deparse(tilde[[1]]) %in% c("+", "-", "*")) tilde
     else c(split_tilde(tilde[[2]]), split_tilde(tilde[[3]]))
 }
-
 
 #'
 eval_exp_list <- function(EL, data) {

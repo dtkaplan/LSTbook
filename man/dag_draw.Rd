@@ -21,5 +21,5 @@ By default, edges are not drawn to hidden nodes. To show the hidden
 nodes, use the argument \code{show_hidden=TRUE}.
 }
 \examples{
-dag_draw(dag03)
+dag_draw(sim_03)
 }

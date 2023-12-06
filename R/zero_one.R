@@ -7,7 +7,6 @@
 #'
 #' @param x a categorical variable
 #' @param one character string specifying the level that gets mapped to 1.
-#' @param P A ggplot2 object made by `model_plot()` or `pointplot()`
 #'
 #' @examples
 #' Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
@@ -39,8 +38,8 @@ zero_one <- function(x, one) {
 #'   label_zero_one() +
 #'   ylab("Prob. alive at 20-year follow-up")
 
+#' @param P A ggplot2 object made by `model_plot()` or `pointplot()`
 
-#' need to write documentation for the graphics command `label_zero_one()`
 #' @export
 label_zero_one <- function(P) {
   # vertical axis data in P$data[[1]]

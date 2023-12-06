@@ -8,7 +8,6 @@ pointplot(
   D,
   tilde,
   ...,
-  data = NULL,
   seed = 101,
   annot = c("none", "violin", "model"),
   jitter = c("default", "none", "all", "x", "y"),

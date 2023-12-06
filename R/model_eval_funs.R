@@ -6,7 +6,7 @@
 #' not specified, the training data will be used.
 #' @param interval One of "none", "confidence", or "prediction". Not all model
 #' types support "prediction" or even "confidence".
-#' @param level (default 0.95) confidence or prediction level. Must be in [0,1]
+#' @param level (default 0.95) confidence or prediction level. Must be in `[0,1]`
 #' @param ... additional arguments
 #'
 #'
