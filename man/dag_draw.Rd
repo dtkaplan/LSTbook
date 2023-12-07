@@ -4,7 +4,7 @@
 \alias{dag_draw}
 \title{Draw a DAG}
 \usage{
-dag_draw(DAG, ...)
+dag_draw(DAG, ..., report_hidden = FALSE)
 }
 \arguments{
 \item{DAG}{The DAG to draw}

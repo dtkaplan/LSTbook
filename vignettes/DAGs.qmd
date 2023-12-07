@@ -28,7 +28,7 @@ In the `{LST}` package, data simulations are provided by a handful of purpose-wr
 ```{r}
 Example1 <- datasim_make(
   x <- rnorm(n, mean = 0, sd = 2), 
-  y <- -3 + 10 * x
+  y <- -3 + 10 * x + rnorm(n, mean = 0, sd = 5)
 )
 Example1 |> sample(n=6,  seed = 101)
 ```
@@ -39,7 +39,7 @@ For readers interested in details, we'll explain in @sec-why-datasim why the cho
 
 ## Basics of `datasim_make()`
 
-Each of the rules of a simulation is written in the syntax of an ordinary R statement. Rules must always have a unique name. For example, `x <- rnorm(n, mean=0, sd=2)`, is a perfectly ordinary R statement, storing under the name `x` the rule `rnorm(n, mean=0, sd=2)`. 
+Each of the rules of a simulation is written in the syntax of an ordinary R statement. Within any one simulation objects, each rule must have a unique name. For example, `x <- rnorm(n, mean=0, sd=2)`, is a perfectly ordinary R statement, storing under the name `x` the rule `rnorm(n, mean=0, sd=2)`. 
 
 `datasim_make()` is a **function**; the simulation rules are given as **arguments** to the function, that is, in parentheses and separated by commas. 
 
@@ -51,7 +51,7 @@ Wrong_way <- datasim_make(x = rnorm(n, mean=0, sd=2)) # don't use =
 
 Second, the quantity `n` does **not** need to be defined previously; it will be defined in the sampling phase.
 
-Third, a rule may make use of a name (like `x`) only when that name has been used for a previous rule. For instance, the second rule in `Example1` is `y <- -3 + 10 * x` and uses the `x` defined in the first rule. More rules, with their own unique names, could be added that make use of `x` and `y`.  
+Third, a rule may make use of a name (like `x`) only when that name has been used for a previous rule. For instance, the second rule in `Example1` is `y <- -3 + 10 * x` and uses the `x` defined in the first rule. More rules, each with its own unique name, can be added that make use of `x` and `y`.  
 
 Once a set of rules has been collected using `datasim_make()`, the simulation can be run as many times as you like. 
 
@@ -70,104 +70,184 @@ There are two ways to see what are the rules of these predefined simulations.
 1. Print out the rules, e.g.
 
 ```{r}
-print(sim_04)
+print(sim_04) # One of the simulations in {LST}
 ```
 
-2. Draw a graph of the connections between rules, e.g. in `dag_04` rule `d` receives inputs from `a`, `b`, and `c`, but none of those other rules are connected to one another.
+2. Draw a **graph** of the connections between rules, e.g. in `dag_04` rule `d` receives inputs from `a`, `b`, and `c`, but none of those other rules are connected to one another.
 
 ```{r}
 dag_draw(sim_04)
 ```
 
-The term for the mathematical graphs corresponding to data simulation rules is "directed acyclic graph" or DAG for short.
+The term for the mathematical graphs corresponding to data simulation rules is "directed acyclic graph" (DAG, for short).
 
+## Introducing causality
 
-## Visualizing a set of simulation rules
+The rules of a data simulation form a network; some variables depend on others. In mathematics, networks are often represented by **graphs**, that is, systems with nodes and edges connecting the nodes. In data simulations, each rule specifies the inputs (if any) on the right-hand side of `<-` and how those inputs specify the value of the variable named on the left-hand side of `<-`. In other words, data simulations correspond to the mathematical idea of a **directed graph**.
 
-With
+But not all directed graphs are admissible. For instance, the following statement attempts to make a simulation with two variables, each of which sets the values of the other.
 
+```{r error = TRUE}
+cycle <- datasim_make(x <- y, y <- -x)
+```
 
+The mathematically oriented reader may be tempted to interpret the above as a set of *differential equation*, for instance the similar looking  $$\frac{dx}{dt} = y, \ \frac{dy}{dt} = -x$$. The differential equation is a legitimate mathematical object and has solutions, that is $x(t)$ and $y(t)$. And in the differential equation, $y$ clearly influences $x$ and *vice versa*. Or, to be precise, the *present$ value of $x$ influences the *future values* of $y$. (For R functions pertaining to differential equations, see the `{mosaicCalc}` package, which is not related to `{LST}` other than by authorship and affiliation with [Project MOSAIC]{https://www.mosaic-web.org/}.)
+
+In a data simulation, in contrast, the rows in the output data are all independent realizations of the simulation rules. For instance, in `sim_04` (graphed above), for each row a value of `a` is generated autonomously ("exogenously"), as are the values of `b` and `c`. The `d` variable for that row is the arithmetic sum `a + b + c` with a bit of exogenous noise added as well.
+
+The problem with the proposed simulation `cycle` is that to find `x` for a row, you must first know `y`, and to find `y` for a row, you must already know `x`. In order to avoid the impossible situation of a cycle in a data simulation, each successive rule can depend only on the rules that come before it. Such a network is called **acyclic**: without cycles. Consequently, data simulations correspond to Directed Acyclic Graphs (DAGs).
+
+As you may know, DAGs play an important role in statistical **causal inference**. Consequently, DAGs are an important theme in *Lessons in Statistical Thinking*.
+
+Data simulations can be useful in teaching causal concepts. To illustrate, consider the `sim_vaccine` simulation provided by the `{LST}` package. The simulation is a cartoon about how flu vaccinations might reduce mortality from the flu. We can look at `sim_vaccine` in the usual ways:
+
+```{r}
+print(sim_vaccine)
+dag_draw(sim_vaccine)
+```
+
+To judge from the graph, which shows no arrows, there are no connections among the four variables involved in the simulation. This is a good starting point for a classroom discussion of how the four variables might be connected in the real world. Different people have different opinions about this, for example, "vaccine deniers" might insist that vaccination causes `health` to deteriorate. A person more in touch with medical science would see that vaccination effects the chances of getting the flu, and depending on the person's health a person with the flu is more likely to die.
+
+We can run the simulation and model the resulting data to see if the data show any connections among the four variables. For instance, it's easy to simulate a study with 10,000 participants whose baseline health is measured and then are observed: do they get vaccinated, do they get the flu, do they die?
+
+```{r}
+sim_data <- sim_vaccine |> sample(n = 10000)
+```
+
+Modeling the data helps us address questions of interest. For instance, is vaccination associated with reduced odds of getting the flu?
+
+```{r}
+sim_data |> model_train(flu ~ vaccinated) |> conf_interval()
+```
+
+The negative coefficient on `vaccinated` indicates that vaccination (in the simulation) is associated with lower odds of getting the flu. Similarly, getting the flu is associated with dieing:
+
+```{r}
+sim_data |> model_train(zero_one(died, one="yes") ~ flu) |> conf_interval()
+```
+
+The positive coefficient on `flu` demonstrates the association: getting flu means larger odds of dieing.
+
+You might wonder how associations are formed among the variables in the simulation when the graph has no edges connecting them. You can write your own simulation to verify that unconnected variables almost always produce a confidence interval that includes zero. Only about 5% of such simulation runs will result in a confidence interval not including zero. These runs lead to Type I errors.
+
+The reason for the associations seen in the `sim_vaccine` data is that there are in fact connections, but they involve variables in the simulation that aren't being reported in the data, so called "lurking" variables. Unlike the real world, in the simulation we can look at such variables
+
+```{r}
+print(sim_vaccine, report_hidden = TRUE)
+dag_draw(sim_vaccine, report_hidden = TRUE)
+```
+
+The variables `health`, `vaccinated`, `flu`, and `died` are merely readouts of internal variables `.h`, `.v`, `.f` and `.s`. Dots starting a variable name are what keeps those variables hidden, until revealed by the `report_hidden = TRUE` argument. 
+
+The hidden variables are a nest of connections. For example, better health (`.h`) makes vaccination (`.v`) more likely.
+
+To generate simulated data that includes the hidden variables, use the `report_hidden=TRUE` argument to `sample()`.
+
+In a proper clinical trial, vaccination would be assigned at random, or maybe even blocked with respect to health, age, .... As it stands, `sim_vaccine` is an observational study. To create a randomized clinical trial---that is, an experiment---we would need to intervene to set `.v`. This can be done with the `datasim_intervene()` function, which allows us to specify new rules and modify existing ones. Like this:
+
+```{r}
+Randomized_trial_sim <- datasim_intervene(sim_vaccine, .v <- c(-5, 5))
+dag_draw(Randomized_trial_sim, report_hidden = TRUE)
+```
+
+Note how the graph of `RCT`differs from the graph of that of `sim_vaccine`: there is now no direct connection between the health variable and vaccination. Generating data from the randomized clinical trial and modeling the connections between the flu variable (`.f`) and the vaccinated variable (`.v`) shows a much smaller connection between vaccination and the flu than was seen with the observational data generated by `sim_vaccine`.
+
+```{r}
+RTdata <- Randomized_trial_sim |> sample(n=10000, report_hidden = TRUE)
+RTdata |> model_train(.f ~ .v + .h) |> conf_interval()
+```
+
+Of course, `sim_vaccine` is just a simulation and may not accord with how things work in the real world. But if the real world were like `sim_vaccine`, we would be able to untangle the confounded connections by running the experiment. Such untangling can also be done by the appropriate choice of covariates in a model.
 
 ## Why `datasim_make()`? {#sec-why-datasim}
 
-
-## Simulations as DAGs {#sec-sims-as-dags}
-
-## Causality and DAGs
-
-A "directed acyclic graph" (DAG) is an almost intuitive way of representing causal connections among variables. For instance, a popular legend holds that there is a correlation between drownings and ice-cream consumption. This legend is used as an example of the principle "correlation is not causation," since drownings don't lead to ice-cream consumption and ice-cream consumption doesn't lead to drownings. Rather, the warmth and relaxation of summer leads to both increased swimming activity and cooling refreshment consumption. In a DAG, the variables (`season`, `drowning`, `ice_cream` consumption) form the nodes of a mathematical graph. The causal links are arrows ("directed edges") between the nodes. @fig-ice-cream-dags show two DAGs representing two distinct hypotheses about the causal connections.
-
-```{r echo=FALSE}
-Legend2 <- datasim_make(
-  season ~ categorical(n, "Spring", "Summer", "Fall", "Winter"),
-  drowning ~ rpois(n, lambda = 0.05 + .15 * (season=="Summer")),
-  ice_cream ~ signif(runif(n, 1,3) + (season=="Summer") * runif(n, 2,5),2)
-)
-```
+Many textbooks that use R simulations arrange the code as a sequence of R statements. For instance, the simulation `Example1` shown at the start of this document could be written in three statements.
 
 ```{r}
-#| code-fold: true
-Legend <- datasim_make(
-  season ~ categorical(n, "Spring", "Summer", "Fall", "Winter"),
-  ice_cream ~ signif(runif(n, 1,3) + (season == "Summer") * runif(n, 2,5)),
-  drowning ~ rpois(n, lambda = ice_cream / 30 + 0.5 * (season=="Summer"))
-)
+n <- 100
+x <- rnorm(n, mean = 0, sd = 2) 
+y <- -3 + 10 * x + rnorm(n, mean = 0, sd = 5)
 ```
 
-```{r echo=FALSE}
-#| label: fig-ice-cream-dags
-#| layout-ncol: 2
-#| fig-cap: "Two different DAGs about the ice-cream/drowning legend."
-#| fig-subcap:
-#|   - "Possibly a direct connection between ice-cream and drowning"
-#|   - "No direct connection"
+This approach is viable in terms of the numbers generated for `x` and `y`, but it has several shortcomings.
 
+- The variables have not been assembled in a data frame, so graphing, summarizing, and modeling of the variables has to be done accordingly.
+- There is no name for the simulation itself, so referring to a simulation or comparing simulations with different rules is awkward.
+- Repeated runs of the simulation are tedious and book-keeping has to be done by hand.
+- Analyzing the rules to draw a DAG or to check for cycles is not easy.
 
-  
+`datasim_make()` and `sample()` avoids such problems with a very small minimum of extra code, as seen in `Example1`.
 
-dag_draw(Legend, vertex.label.cex=1)
-dag_draw(Legend2, vertex.label.cex=1)
-```
+## Functions for simulation rules
 
-DAGs are often used as simple depictions for hypotheses about causal connections among variables. In the field of causal inference, they can be used more formally as mathematical structures, for instance to select appropriate covariates when estimating a causal link between two variables.
+Many of the rules in simulation can be expressed in mainstream R code. For example, random numbers can be generated with `rnorm()`, `rexp()`, `rbinom()`, and the many other such functions provided by the `{stats}` package or other packages. Similarly, arithmetic and other mathematical operations can be written in the ordinary way.
 
-In *Lessons*, we use them in a third way as well: as a description of a simulation. For instance, the DAG drawn in @fig-ice-cream-dags(a) was implemented in R as a list of formulas named `Legend`. We'll go into what those formulas signify later in this document. For now, note that given the R list, generating (simulated) data from the DAG is straightforward. We use such simulations throughout *Lessons*, for very specific reasons explained in the next section. `r set.seed(101)`
+It is convenient, however, to use special functions provided by `{LST}` for writing simulations. These functions simplify any common situations in simulations.
+
+- `categorical()` generates specified categorical levels at random. We'll give examples using `n = 10`
 
 ```{r}
-#| label: tbl-ice-cream
-#| tbl-cap: "A sample of size 10 from the `Legend` DAG. Drownings are per 100,000 people in the season, ice cream is per-capita cone consumption."
-sample(Legend, n=10, seed=102) |> 
-  knitr::kable() # for nice printing
-```
-
-## Simulations?
-
-"Simulation methods" in teaching statistics are usually taken to refer to resampling and permutation-test approaches to statistical inference. We use these, as appropriate in *Lessons*. But the meaning of "simulation" relevant to this document is the generation of made-up data that possesses specified properties such as being consistent with a given causal hypothesis.
-
-The statistics education community has become familiar with the advice to "use real data." *Lessons* is primarily oriented toward the use of real data. However, made-up data can serve important pedagogical purposes.
-
-1. Learn about sampling variation and confidence intervals.
-2. Observe the uses of covariates in statistical modeling.
-3. Confirm the causal inference principles about the choice of covariates.
-
-A key feature of simulations is that the results of data analysis can be compared to the *actual mechanism* that generates the data.
-
-Simulating data using DAGs is a two-step process:
-
-1. Define the DAG, which is mostly a matter of writing formulas describing the relationships among variables.
-2. Sample from the DAG defined in (1). 
-
-## Defining normal DAGs
-
-"Normal DAG" is a double-ententre, referring to the easiest kind of DAG to define and to the use of Gaussian noise as the exogenous inputs to the simulation. A few examples will suffice for those who want to write their own DAGs. There are also several off-the-shelf DAGs provided in the `{LST}` package, e.g., `dag01` through `dag12` and a few others.
-
-Use the `datasim_make()` command to construct an R object which can then be drawn as a diagram, sampled from, and so on. The arguments to `datasim_make()` are one or more tilde expressions (called "formulas" in most R documentation) that name the variables to be included in the DAG and describe the calculations in the simulations.
+n <- 10
+color <- categorical(n, "red", "blue", "green")
+color
+```      
+By default, each level is equally likely to occur. You can specify probabilities directly using an argument notation:
 
 ```{r}
-ex1 <- datasim_make(
-  C ~ exo(n),
-  X ~ C + exo(n),
-  Y ~ 2*X - 3*C + exo(n)
-)
+color <- categorical(n, red = .1, blue = .2, green = .7)
+color
 ```
+
+- `bernoulli()` generates zero-one variables or two-level categorical variables. The simple default is to make 0 and 1 with equal probability.
+
+```{r}
+flip <- bernoulli(n)
+flip
+```
+
+You can provide labels for zero and one, producing a categorical variable:
+
+```{r}
+flip <- bernoulli(n, labels = c("bad", "good"))
+flip
+```
+
+`bernoulli()` can also generate outcomes that depend on other variables, using those variables as either log-odds inputs or probability [0,1] inputs. See the `sim_vaccine` presented above for examples.
+
+- `cat2value()` Sometimes you want to use a categorical variable as an input and translate it to numerical values as an output or, for instance, to specify log-odds in `bernoulli()`.
+
+```{r}
+vals <- cat2value(flip, good = 2, bad = -1 )
+vals
+result <- bernoulli(logodds = vals, labels = c("fail", "succeed"))
+result
+```
+
+If you don't need `vals` elsewhere in your simulation, you can combine the two statements into one:
+
+```{r}
+result <- bernoulli(logodds = cat2value(flip, good=2, bad = -1))
+result
+```
+
+- `block_by()` assigns categorical levels randomly, but arranged in blocks defined by some other variable. 
+
+```{r}
+treatment <- block_by(color, levels = c("glue", "nails", "screws"))
+treatment
+```
+
+Using these same rules in `datasim_make()` facilitates running the simulation multiple times and packing each simulation's data as a data frame. To illustrate, it's hard to see from the `treatment` variable alone that it has been blocked by `color`. But once the data are in a data frame, we can use wrangling or modeling to reveal such patterns. (Don't forget the commas between the rules! Each rule is an argument to `datasim_make()`.)
+
+```{r}
+all_together <- datasim_make(
+  color <- categorical(n, red = .1, blue = .2, green = .7),
+  flip <- bernoulli(n, labels = c("bad", "good")),
+  result <- bernoulli(logodds = cat2value(flip, good=2, bad = -1)),
+  treatment <- block_by(color, levels = c("glue", "nails", "screws"))
+)
+all_together |> sample(n = 20) |> arrange(color)
+```
+
+In the above data frame, you can see that all the treatments have been assigned as evenly as possible for each of the colors.
 

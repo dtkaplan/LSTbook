@@ -11,6 +11,11 @@ test_that("Transformations work", {
   expect_snapshot_file(ggsave("transform-plot.png", P))
 })
 
+test_that("Categorical responses trigger logistic regression", {
+  P <- Birdkeepers |> pointplot(LC ~ YR, annot = "model")
+  # Check that model function curves between NoCancer and Lung Cancer
+  expect_snapshot_file(ggsave("bird-logistic-plot.png"))
+})
 
 # Logistic models show up in the right spot compared to the data
 test_that("Logistic model values are 0-1", {

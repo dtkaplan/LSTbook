@@ -13,7 +13,7 @@
 \usage{
 datasim_make(...)
 
-datasim_run(sim, n = 5, seed = NULL)
+datasim_run(sim, n = 5, seed = NULL, report_hidden = FALSE)
 
 categorical(n = 5, ..., exact = TRUE)
 
@@ -33,6 +33,9 @@ datasim_intervene(sim, ...)
 \item{n}{The sample size}
 
 \item{seed}{Integer to use as a random seed (optional) for reproducibility}
+
+\item{report_hidden}{logical. If \code{TRUE}, show the values of hidden variables (that is, variables whose name
+begins with a dot)}
 
 \item{exact}{Logical flag. If \code{TRUE}, be scrupulous in dividing up the number of factors}
 

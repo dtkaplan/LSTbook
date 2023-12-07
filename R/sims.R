@@ -64,9 +64,11 @@ print.datasim <- function(x, ..., report_hidden = FALSE) {
     paste(components, collapse="\n")))
 
 }
+#' @param report_hidden logical. If `TRUE`, show the values of hidden variables (that is, variables whose name
+#' begins with a dot)
 #' @rdname datasim
 #' @export
-datasim_run <- function(sim, n=5, seed=NULL) {
+datasim_run <- function(sim, n=5, seed=NULL, report_hidden = FALSE) {
   # a simple utility function
   exo <- function(n, sd = 1) {
     stats::rnorm(n, mean=0, sd=sd)
@@ -93,8 +95,10 @@ datasim_run <- function(sim, n=5, seed=NULL) {
 
   # Get rid of unwanted names, such as those starting with a dot (".")
   values$n <- NULL
-  rid <- grepl("^\\.", names(values))
-  if (any(rid)) values[rid] <- NULL
+  if (!report_hidden) {
+    rid <- grepl("^\\.", names(values))
+    if (any(rid)) values[rid] <- NULL
+  }
 
   # return a data frame
   tibble::as_tibble(values)

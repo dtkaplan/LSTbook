@@ -6,14 +6,16 @@
 #'
 #' @param DAG The DAG to draw
 #' @param \ldots Additional arguments to plot.igraph()
+#' @param show_hidden logical. If `TRUE`, show the hidden nodes.
 #'
-#' @details By default, edges are not drawn to hidden nodes. To show the hidden
+#' @details By default, edges are not drawn to hidden nodes, that is, those whose
+#' names begin with a dot. To show the hidden
 #' nodes, use the argument `show_hidden=TRUE`.
 #'
 #' @examples
 #' dag_draw(sim_03)
 #' @export
-dag_draw <- function(DAG, ...) {
+dag_draw <- function(DAG, ..., report_hidden = FALSE) {
   dots <- list(...)
   if (requireNamespace("igraph", quietly = TRUE)) for_layout <- igraph::layout_nicely
   else for_layout <- NULL
@@ -32,10 +34,7 @@ dag_draw <- function(DAG, ...) {
     defaults[[nm]] <- dots[[nm]]
   }
 
-  reveal <- FALSE # default
-  if ("show_hidden" %in% names(dots) ) reveal = dots$show_hidden
-
-  ig <- datasim_to_igraph(DAG, show_hidden = reveal)
+  ig <- datasim_to_igraph(DAG, show_hidden = report_hidden)
   if (requireNamespace("graphics")) {
     graphics::par(mai = c(0,0,0,0)) # have the graph fill the frame
   }

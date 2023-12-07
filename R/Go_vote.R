@@ -17,9 +17,9 @@
 #'
 #' - sex of the voter (female or male)
 #' - yearofbirth: year of birth of the voter
-#' - primary2004: whether the voter voted in the 2004 primary election (1=voted, 0=abstained)
+#' - primary2004: whether the voter voted in the 2004 primary election (voted, abstained)
 #' - messages: Get-out-the-vote message the voter received (Civic Duty, Control, Neighbors, Hawthorne)
-#' - primary2006: whether the voter turned out in the 2006 primary election (1=voted, 0=abstained)
+#' - primary2006: whether the voter turned out in the 2006 primary election (voted, abstained)
 #' - hhsize: household size of the voter
 #'
 #' @references

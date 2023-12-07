@@ -1,0 +1,6 @@
+load("/Users/kaplan/Packages/LST/data/Book-examples.rda")
+ls()
+Big
+Tiny
+ls()
+Nats

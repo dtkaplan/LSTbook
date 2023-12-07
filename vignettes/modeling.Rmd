@@ -14,22 +14,71 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message=FALSE}
 library(LST)
 ```
 
+To "train a model" involves three components:
 
-Just some notes for now. 
+1. A data frame with training data
+2. A model specification naming the response variable and the explanatory variables. This is formatted in the same tilde-expression manner as for `lm()` and `glm()`.
+3. A model-fitting function that puts (1) and (2) together into a **model object**. Examples of model-fitting functions are `lm()` and `glm()`. In *Lessons in Statistical Thinking* and the corresponding `{LST}` package, we almost always use `model_train()`
 
-1. Use `model_train()` which fits any of a variety of model types. You can either specify the model type or let it be deduced automatically. 
+Once the model object has been constructed, you can plot the model, create summaries such as regression reports or ANOVA reports, and evaluate the model for new inputs, etc.
 
-TO DO IN CODE:::: ADD A MODEL_TYPE(data, tilde) that abstracts the choice of model type, then use that in `model_train()`. Use `model_train()` in `model_values()`.
+## Using `model_train()`
 
-2. `model_values()` is a wrangling-compatible wrapper around `model_train()` and `model_eval()` that lets you use mutate to add model values.
+`model_train()` is a wrapper around some commonly used model-fitting functions from the `{stats}` package, particularly `lm()` and `glm()`. It's worth explaining motivation for introducing a new model-fitting function.
+
+1. `model_train()` is pipeline ready. Example: `Galton |> model_train(height ~ mother)`
+2. `model_train()` has internal logic to figure out automatically which type of model (e.g. linear, binomial, poisson) to fit. (You can also specify this with the `family=` argument.) The automatic nature of `model_train()` means, e.g., you can use it with neophyte students for logistic regression without having to introduce a new function.
+3. `model_train()` saves a copy of the training data as an attribute of the model object being produced. This is helpful in plotting the model, cross-validation, etc., particularly when the model specification involves nonlinear explanatory terms (e.g., `splines::ns(mother, 3)`) 
+
+## Using a model object
+
+As examples, consider these two models:
+
+- modeling `height` of a (fully grown) child with the `sex` of the child, and the `mother`'s and `father`'s height. Linear regression is an appropriate technique here.
+
+```{r}
+height_model <- Galton |> model_train(height ~ sex + mother + father)
+```
+
+- modeling the probability that a voter will vote in an election (`primary2006`) given the household size (`hhsize`), `yearofbirth` and whether the voter voted in a previous primary election (`primary2004`). Since having voted is a yes or no proposition, *logistic* regression is an appropriate technique.
+
+```{r}
+vote_model <- 
+  Go_vote |> 
+  model_train(zero_one(primary2006, one = "voted") ~ yearofbirth * primary2004 * hhsize * yearofbirth )
+```
+
+Note that the `zero_one()` marks the response variable as a candidate for logistic regression.
+
+The output of `model_train()` is in the format of whichever `{stats}` package function has been used, e.g. `lm()` or `glm()`. (The training data is stored as an "attribute," meaning that it is invisible.) Consequently, you can use the model object as an input to whatever model-plotting or summarizing function you like. 
+
+In *Lessons in Statistical Thinking* we use `{LST}` functions for plotting and summarizing:
+
+- `model_plot()`
+- `R2()`
+- `conf_interval()`
+- Late in *Lessons*, `regression_summary()` and `anova_summary()`
+
+Let's apply some of these to the modeling examples introduced above.
+
+```{r}
+height_model |> model_plot()
+height_model |> conf_interval()
+vote_model |> model_plot()
+vote_model |> R2()
+```
 
 
-ADD TO TESTS
+The `model_eval()` function from this package allows you to provide inputs and receive the model output, with a prediction interval by default. (For logistic regression, only a confidence interval is available.)
 
-Birdkeepers |> pointplot(YR ~ LC, annot="model") make sure it's a linear model
+```{r}
+vote_model |> model_eval(yearofbirth=c(1960, 1980), primary2004="voted", hhsize=4)
+```
 
-Birdkeepers |> pointplot(LC ~ YR, annot="model") make sure it's a linear model
+
+
+

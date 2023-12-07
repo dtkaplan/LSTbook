@@ -9,9 +9,9 @@ A data frame with 305866 rows and 6 variables:
 \itemize{
 \item sex of the voter (female or male)
 \item yearofbirth: year of birth of the voter
-\item primary2004: whether the voter voted in the 2004 primary election (1=voted, 0=abstained)
+\item primary2004: whether the voter voted in the 2004 primary election (voted, abstained)
 \item messages: Get-out-the-vote message the voter received (Civic Duty, Control, Neighbors, Hawthorne)
-\item primary2006: whether the voter turned out in the 2006 primary election (1=voted, 0=abstained)
+\item primary2006: whether the voter turned out in the 2006 primary election (voted, abstained)
 \item hhsize: household size of the voter
 }
 }

@@ -39,7 +39,11 @@ conf_interval <- function(model, level=0.95, show_p = FALSE) {
 #' @rdname regression_summaries
 #' @export
 R2 <- function(model) {
-  r2 <- mosaic_rsquared(model)
+  if (inherits(model, "glm") && model$family$family == "binomial") {
+    r2 <- with(summary(model), 1 - deviance/null.deviance)
+  } else {
+    r2 <- mosaic_rsquared(model)
+  }
   k <- length(stats::na.omit(model$coefficients)) - 1
   n <- k + 1 + model$df.residual
   f <- ((r2)/k) / ((1-r2)/(n-k-1))
