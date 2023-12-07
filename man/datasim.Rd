@@ -23,7 +23,7 @@ bernoulli(n = 0, logodds = NULL, prob = 0.5, labels = NULL)
 
 block_by(block_var, levels = c("treatment", "control"), show_block = FALSE)
 
-datasim_to_igraph(sim, show_hidden = FALSE)
+datasim_to_igraph(sim, report_hidden = FALSE)
 
 datasim_intervene(sim, ...)
 }
@@ -53,8 +53,6 @@ replace 0 and 1 in bernouilli()}
 \item{levels}{Character vector giving names to the blocking levels}
 
 \item{show_block}{Logical. If \code{TRUE}, put the block number in the output.}
-
-\item{show_hidden}{In graphing a dag, show the hidden nodes (nodes whose name begins with \code{.})}
 
 \item{\ldots}{assignments of values to the names in \code{variable}}
 }

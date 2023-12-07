@@ -7,8 +7,10 @@
 #' @param .tilde A model specification as a tilde expression
 #' @param family Requested model type, if any.
 #'
-model_family <- function(.data, .tilde, family = c("auto", "lm", "binomial", "poisson", "svm", "gaussian", "rlm")) {
+model_family <- function(.data, .tilde,
+                         family = c("auto", "lm", "linear", "binomial", "poisson", "svm", "gaussian", "rlm")) {
   family <- match.arg(family)
+
   # Specification must be a two-sided formula, response variable on the left.
   if (!inherits(.tilde, "formula")) stop("Must provide a tilde formula specification.")
   if (length(.tilde) == 2) stop("Specification must be two sided.")
@@ -17,10 +19,10 @@ model_family <- function(.data, .tilde, family = c("auto", "lm", "binomial", "po
   data <- data_from_tilde(.data, .tilde)[[1]]
 
 
-  if (inherits(data, "zero_one")) allowable <- c("binomial", "lm")
+  if (inherits(data, "zero_one")) allowable <- c("binomial", "lm", "linear")
   else if (is.numeric(data) || is.logical(data)) {
     # It's a numeric type
-    allowable <- c("lm", "gaussian", "rlm", "svm")
+    allowable <- c("lm", "linear", "gaussian", "rlm", "svm")
     if (all(data >= 0, na.rm=TRUE)) {
       if (all(data <= 1, na.rm = TRUE) &&
           diff(range(data, na.rm = TRUE)) == 1) {
@@ -50,7 +52,7 @@ not_allowed <- function(data, family) {
     else glue::glue("software error. Model type {family} not anticipated.")
   } else {
     if (family == "binomial") "categorical response does not have *two* levels"
-    else if (family %in% c("lm", "gaussian", "rlm", "svm"))
+    else if (family %in% c("lm", "linear", "gaussian", "rlm", "svm"))
       glue::glue("can't use model type {family} with categorical response variable")
     else glue::glue("software error. Model type {family} not anticipated.")
   }

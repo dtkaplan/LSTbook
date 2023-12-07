@@ -17,7 +17,8 @@
 #' @export
 dag_draw <- function(DAG, ..., report_hidden = FALSE) {
   dots <- list(...)
-  if (requireNamespace("igraph", quietly = TRUE)) for_layout <- igraph::layout_nicely
+  if (requireNamespace("igraph", quietly = TRUE))
+    for_layout <- igraph::layout_nicely
   else for_layout <- NULL
   defaults <- list(vertex.size = 40, vertex.color=NA,
                    vertex.shape = "circle",
@@ -34,7 +35,7 @@ dag_draw <- function(DAG, ..., report_hidden = FALSE) {
     defaults[[nm]] <- dots[[nm]]
   }
 
-  ig <- datasim_to_igraph(DAG, show_hidden = report_hidden)
+  ig <- datasim_to_igraph(DAG, report_hidden = report_hidden)
   if (requireNamespace("graphics")) {
     graphics::par(mai = c(0,0,0,0)) # have the graph fill the frame
   }

@@ -8,7 +8,7 @@
 #' @param labels Character vector: names for categorical levels, also used to
 #' replace 0 and 1 in bernouilli()
 #' @param block_var Which variable to use for blocking
-#' @param show_hidden In graphing a dag, show the hidden nodes (nodes whose name begins with `.`)
+#' @param report_hidden In graphing a dag, show the hidden nodes (nodes whose name begins with `.`)
 #' @param seed Integer to use as a random seed (optional) for reproducibility
 #'
 #' @rdname datasim
@@ -33,12 +33,13 @@ datasim_make <- function(...) {
   put_in_order(sim)
 }
 
-put_in_order <- function(sim) {
+put_in_order <- function(sim, report_hidden=TRUE) {
   # Put the nodes in topological order so that every call refers
   # only to nodes further down the list.
+  # the "hidden" nodes are included when putting them in order
   if (requireNamespace("igraph", quietly = TRUE)) {
     # Remove dependency on igraph for WebR compatibility
-    new_order <- datasim_to_igraph(sim) |> igraph::topo_sort()
+    new_order <- datasim_to_igraph(sim, report_hidden=TRUE) |> igraph::topo_sort()
     sim$names <- sim$names[new_order]
     sim$calls <- sim$calls[new_order]
   }
@@ -211,10 +212,10 @@ block_by <- function(block_var,
 
 #' @rdname datasim
 #' @export
-datasim_to_igraph <- function(sim, show_hidden=FALSE) {
+datasim_to_igraph <- function(sim, report_hidden=FALSE) {
   nnames <- sim$names |> unlist()
   # Get rid of the hidden ones
-  if (!show_hidden) nnames[grepl("^\\.", nnames)] <- " "
+  if (!report_hidden) nnames[grepl("^\\.", nnames)] <- " "
 
   edges <- numeric(0)
   for (k in 1:length(nnames)) {
@@ -262,7 +263,7 @@ datasim_intervene <- function(sim, ...) {
   sim$names <- c(sim$names, new_vnames)
   sim$calls <- c(sim$calls, new_vcalls)
 
-  put_in_order(sim)
+  put_in_order(sim, report_hidden = TRUE)
 
 }
 

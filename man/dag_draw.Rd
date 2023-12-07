@@ -10,6 +10,8 @@ dag_draw(DAG, ..., report_hidden = FALSE)
 \item{DAG}{The DAG to draw}
 
 \item{\ldots}{Additional arguments to plot.igraph()}
+
+\item{show_hidden}{logical. If \code{TRUE}, show the hidden nodes.}
 }
 \description{
 Make a simple drawing of a DAG.
@@ -17,7 +19,8 @@ Make a simple drawing of a DAG.
 \details{
 See the igraph package for more details.
 
-By default, edges are not drawn to hidden nodes. To show the hidden
+By default, edges are not drawn to hidden nodes, that is, those whose
+names begin with a dot. To show the hidden
 nodes, use the argument \code{show_hidden=TRUE}.
 }
 \examples{

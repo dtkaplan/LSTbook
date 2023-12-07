@@ -4,7 +4,11 @@
 \alias{model_train}
 \title{train a model, easily}
 \usage{
-model_train(data, tilde, family = "auto")
+model_train(
+  data,
+  tilde,
+  family = c("auto", "lm", "linear", "binomial", "poisson", "rlm")
+)
 }
 \arguments{
 \item{data}{Data frame to use as training data}

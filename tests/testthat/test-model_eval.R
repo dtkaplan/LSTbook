@@ -32,3 +32,9 @@ test_that("model_eval() deals with transforms when generating a skeleton of inpu
   expect_true(length(unique(Tmp$hp)) >= 5)
   expect_true(nrow(Tmp) > 25)
 })
+
+test_that("model_eval() only outputs explanatory variables in the model, no matter what else is in the training data frame.", {
+  mod <- mtcars |> model_train(hp ~ mpg)
+  Res <- model_eval(mod) |> select(-".response", -".output", -".lwr", -".upr", -".resid")
+  expect_true(names(Res) == "mpg")
+})

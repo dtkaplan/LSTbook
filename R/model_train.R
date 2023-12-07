@@ -15,12 +15,13 @@
 #' @param family Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...
 #' @export
 model_train <- function(data, tilde,
-                      family = "auto") {
+                      family = c("auto", "lm", "linear", "binomial", "poisson", "rlm")) {
   # Figure out (or confirm) the model family
+  family <- match.arg(family)
   mod_family <- model_family(data, tilde, family)[1]
 
 
-  if (mod_family == "lm") {
+  if (mod_family %in% c("lm", "linear")) {
     mod <- stats::lm(tilde, data = data)
   } else if (mod_family == "binomial") {
     mod <- stats::glm(tilde, data= data, family="binomial")

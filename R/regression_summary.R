@@ -25,9 +25,18 @@
 conf_interval <- function(model, level=0.95, show_p = FALSE) {
   Raw <- stats::confint(model, level=level)
   Tmp <- stats::coefficients(model)
-  Res <- tibble::tibble(term = row.names(Raw),
-                        .lwr = Raw[, 1], .coef=as.numeric(Tmp),
-                        .upr = Raw[, 2])
+  terms <- row.names(Raw)
+  # Handle the case where there is just an intercept
+  Res <- if (length(terms) == 0) {
+    terms <- "(Intercept)"
+    tibble::tibble(term = "(Intercept)",
+                   .lwr = Raw[1], .coef=as.numeric(Tmp),
+                   .upr = Raw[2])
+  } else {
+    tibble::tibble(term = row.names(Raw),
+                   .lwr = Raw[, 1], .coef=as.numeric(Tmp),
+                   .upr = Raw[, 2])
+  }
 
   if (show_p) { # add the p-values to the report
     Res$p.value <- regression_summary(model)$p.value

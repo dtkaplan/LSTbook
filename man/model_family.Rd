@@ -7,7 +7,7 @@
 model_family(
   .data,
   .tilde,
-  family = c("auto", "lm", "binomial", "poisson", "svm", "gaussian", "rlm")
+  family = c("auto", "lm", "linear", "binomial", "poisson", "svm", "gaussian", "rlm")
 )
 }
 \arguments{

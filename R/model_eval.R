@@ -50,7 +50,10 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
      } else {
        # use the training data
        message("Using training data as input to model_eval().")
-       eval_data <- training_data <- get_training_data(mod)
+       # Keep only those variables in the data.
+       training_data <- data_from_tilde(get_training_data(mod),
+                                        formula_from_mod(mod))
+       eval_data <- training_data
        response_in_data <- TRUE
      }
   } else {
