@@ -6,7 +6,7 @@
 #'
 #' @param DAG The DAG to draw
 #' @param \ldots Additional arguments to plot.igraph()
-#' @param show_hidden logical. If `TRUE`, show the hidden nodes.
+#' @param report_hidden logical. If `TRUE`, show the hidden nodes.
 #'
 #' @details By default, edges are not drawn to hidden nodes, that is, those whose
 #' names begin with a dot. To show the hidden

@@ -27,7 +27,7 @@ model_skeleton <- function(mod, data=NULL, ncont=3, nfirstcont=50) {
     if (type == "continuous") {
       # For the first explanatory variable, pull out `nfirstcont` levels.
       # For others, only `ncont` levels.
-      points <- if (length(unique(values)) <= ncont + 1) unique(values)
+      points <- if (length(unique(values)) <= ncont + 1) sort(unique(values))
                 else pretty(values,
                             n = ifelse(var == explan_names[1],
                                        nfirstcont, ncont - 1),

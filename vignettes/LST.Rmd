@@ -58,10 +58,8 @@ I'm using the term **input end** of a pipe to refer to the object on the left-ha
 1. A data frame is by far the most common input type.
 2. A statistical model is an input type used frequently in the second-half of the course.
 3. A "data simulation" is another kind of input type.
-4. Optionally, and mainly for enrichment, a data graphic frame (as produced by `pointplot()`) is used at the input of the pipe.
-```{r}
+4. Optionally, and mainly for enrichment, a data graphic frame (as produced by `pointplot()`) is used at the input of the pipe towards a command to add labels or to add another `{ggplot2}` layer.
 
-```
 
 ## Pipe output-ends {#sec-output-end}
 
@@ -114,7 +112,7 @@ Instructions for constructing data simulations are given in the *Simulating data
 
 A popular feature of the `{mosaic}` package is the `do()` function, which provides syntax and logic for repeating a command multiple times, accumulating the results into a data frame. For instance:
 
-```{r}
+```r
 mosaic::do(3) * sum(runif(5))
 ```
 

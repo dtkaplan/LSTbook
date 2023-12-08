@@ -44,3 +44,13 @@ model_plot(Mod2, interval="confidence")
 
 - `model_cv()` not working
 
+December 8
+
+- COMPLETED: The colors aren't ordered properly in `pointplot()`
+
+```{r}
+Penguins |> 
+  pointplot(flipper ~ mass + sex + species , annot = "model")
+```
+
+- COMPLETED: `ntiles()` not producing ordered factors for intervals.

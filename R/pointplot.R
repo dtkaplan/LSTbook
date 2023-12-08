@@ -205,19 +205,9 @@ pointplot <- function(D, tilde, ..., seed=101,
 
   if (show_color) {
     Res <- Res +
-      scale_color_viridis_d(option=palette, begin=0, end=0.75)
-
-    # BUG workarounds?
-    # if (length(unique(data[[3]])) > 2) {
-    #   Res <- Res +
-    #     scale_fill_viridis_d(option=palette, begin=0.75, end=0.0)
-    # } else {
-    Res <- Res +
+      scale_color_viridis_d(option=palette, begin=0, end=0.75) +
       scale_fill_viridis_d(option=palette, begin=0.0, end=0.75)
-    # }
-    # The reversal of <begin> and <end> in the fill_viridis_d() command
-    # compensates for geom_jitter() and geom_ribbon() making different choices
-    # for color and fill respectively. I know that sounds crazy!
+
   }
 
   if (ncol(data) > 3) { # facet by the fourth variable

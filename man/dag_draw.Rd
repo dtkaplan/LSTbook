@@ -9,9 +9,9 @@ dag_draw(DAG, ..., report_hidden = FALSE)
 \arguments{
 \item{DAG}{The DAG to draw}
 
-\item{\ldots}{Additional arguments to plot.igraph()}
+\item{report_hidden}{logical. If \code{TRUE}, show the hidden nodes.}
 
-\item{show_hidden}{logical. If \code{TRUE}, show the hidden nodes.}
+\item{\ldots}{Additional arguments to plot.igraph()}
 }
 \description{
 Make a simple drawing of a DAG.

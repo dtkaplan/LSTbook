@@ -2,7 +2,7 @@
 title: "Simulating data with Directed Acyclic Graphs"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{DAGs}
+  %\VignetteIndexEntry{Simulating data with Directed Acyclic Graphs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -46,7 +46,8 @@ ntiles <-  function(x, n=3,
     dplyr::mutate(center = signif( (left + right ) / 2, digits),
                   labels = paste0("[",signif(left,digits=digits),
                                   ",",
-                                  signif(right,digits=digits),"]"))
+                                  signif(right,digits=digits),"]")) |>
+    arrange(bin)
   # Deal with NAs as best you can
   NA_indices <- which(is.na(bin))
   if (length(NA_indices) > 0) bin[NA_indices] <- pi/6.3 # arbitrary value

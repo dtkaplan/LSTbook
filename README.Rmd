@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# LST: *Lessons in Statistical Thinking*
+# {LST}: An R package for *Lessons in Statistical Thinking*
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -22,17 +22,94 @@ The `{LST}` package provides software and datasets for *Lessons in Statistical T
 
 ## Installation
 
-You can install the development version of LST from [GitHub](https://github.com/) with:
+We hope to have `{LST}` available on CRAN by early 2004. In the meanwhile,
+you can install the development version of LST from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("dtkaplan/LST")
 ```
 
-## Example
+## Overview
 
-```{r example}
+The `{LST}` package has been developed to help students and instructors learn and teach statistics and early data science. `{LST}` supports the new textbook (still in draft) *Lessons in Statistical Thinking*, but instructors may want to use `{LST}` even with other textbooks.
+
+The statistics component of *Lessons* may fairly be called a radical innovation. As an [introductory, university-level course](https://dtkaplan.github.io/Math300blog/posts/StatChat-10-2023/), *Lessons* gives students access to important modern themes in statistics including modeling, simulation, co-variation, and causal inference. Data scientists, who use data to make genuine decisions, will get the tools they need. This includes a complete rethinking of statistical inference, starting with confidence intervals very early in the course, then gently introducing the structure of Bayesian inference. The coverage of hypothesis testing has greatly benefited from the discussions prompted by the American Statistical Association's [*Statement on P-values*](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf) and is approached in a way that, I hope, will be appreciated by all sides of the debate.
+
+The data-science part of the course includes the concepts and wrangling needed to undertake statistical investigations (not including data cleaning). It is based, as you might expect, on the tidyverse and `{dplyr}`.
+
+Some readers may be familiar with the `{mosaic}` suite of packages which provides, for many students and instructors, their first framework for statistical computation. But there have been many R developments since 2011 when `{mosaic}` was introduced. These include pipes and the tidyverse style of referring to variables. `{mosaic}` has an uneasy equilibrium with the tidyverse. In contrast, the statistical functions in `{LST}` fit in with the tidyverse style and mesh well with `{dplyr}` commands.
+
+The `{LST}` function set is highly streamlined and internally consistent. There is a tight set of only four object types produced by the `{LST}` computations:
+
+- Data frames 
+- Graphic frames (`{ggplot2}` compatible but much streamlined)
+- Models, which are summarized to produce either data frames or graphic frames. 
+- Data simulations (via DAGs) which are sampled from to produce data frames
+
+Vignettes provide an instructor-level tutorial introduction to `{LST}`. The student-facing introduction is the *Lessons in Statistical Thinking* textbook.
+
+## Quick introduction
+
+```{r label='READMEi5Psym', message = FALSE}
 library(LST)
-## basic example code
+```
+
+From the start of the course, students make data graphics designed to support modeling. The `pointplot()` function provides access to powerful graphics intended to develop statistical reasoning abilities but is very easy to use. For instance, using Francis Galton's data from the 1880s, let's look at a (fully-grown) child's height as a function of his or her parents height. (This example moves faster than we do with students!) Relationships are clear when the data are annotated with a model.
+
+```{r label='README6cfsz6'}
+Galton |>
+  pointplot(height ~ mother + father + sex, annot = "model")
+```
+
+Quantitative modeling has the same syntax, but rather than rely on the default R reports for models, `{LST}` offers concise summaries.
+
+```{r label='READMED8whZg'}
+Galton |> 
+  model_train(height ~ mother + father + sex) |>
+  conf_interval()
+```
+
+To develop an appreciation of the importance of covariates, we can turn to data-generating simulations where we know the rules behind the data and can check whether modeling reveals them faithfully.
+
+```{r}
+print(sim_08)
+dag_draw(sim_08)
+```
+
+From the rules, we can see that `y` increases directly with `x`, the coefficient being 1. A simple model gets this wrong:
+
+```{r label='READMEmxhF2G'}
+sim_08 |> 
+  sample(n = 100) |>
+  model_train(y ~ x) |>
+  conf_interval()
+```
+
+I'll leave it as an exercise to the reader to see what happens when `c` is included in the model as a covariate.
+
+Finally, an advanced example that's used as a demonstration but illustrates the flexibility of unifying modeling, simulation, and wrangling. We'll calculate the width of the `x` confidence interval as a function of the sample size `n` and averaging over 100 trials.
+
+```{r label='READMEQs5OUX'}
+sim_08 |> 
+  sample(n = n) |>
+  model_train(y ~ x) |>
+  conf_interval() |>
+  trials(times = 2, n = c(100, 400, 1600)) |> 
+  filter(term == "x") |> 
+  mutate(width = .upr - .lwr)
+```
+
+I've used only two trials to show the output of `trials()`, but increase it to, say, `times = 100` and finish off the wrangling with the `{dplyr}` function `summarize(mean(width), .by = n)`.
+
+```{r label='READMEnYSY5E', echo = FALSE}
+sim_08 |> 
+  sample(n = n) |>
+  model_train(y ~ x) |>
+  conf_interval() |>
+  trials(times = 100, n = c(100, 400, 1600, 6400, 25600)) |> 
+  filter(term == "x") |> 
+  mutate(width = .upr - .lwr) |>
+  summarize(mean(width), .by = n)
 ```
 
