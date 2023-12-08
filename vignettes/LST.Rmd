@@ -2,7 +2,7 @@
 title: "LST: R package for *Lessons in Statistical Thinking*"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{LST}
+  %\VignetteIndexEntry{LST: R package for *Lessons in Statistical Thinking*}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

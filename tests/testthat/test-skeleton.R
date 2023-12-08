@@ -8,7 +8,7 @@ test_that("model_skeleton() generates a skeleton of inputs when requested", {
 })
 
 test_that("model_skeleton() gets untransformed explanatory variables", {
-  mod <- Galton |> model_train(height ~ splines::ns(father, 4) * poly(mother,3) * sex)
+  mod <- mosaicData::Galton |> model_train(height ~ splines::ns(father, 4) * poly(mother,3) * sex)
   Tmp <- model_skeleton(mod)
   expect_true(all(names(Tmp) %in% c("father", "mother", "sex")))
 })

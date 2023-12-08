@@ -27,7 +27,8 @@ Suggests:
     babynames,
     knitr,
     rmarkdown, 
-    stringdist
+    stringdist,
+    mosaicData
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://dtkaplan.github.io/LST/

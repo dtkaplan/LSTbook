@@ -86,7 +86,7 @@ parents height. (This example moves faster than we do with students!)
 Relationships are clear when the data are annotated with a model.
 
 ``` r
-Galton |>
+mosaicData::Galton |>
   pointplot(height ~ mother + father + sex, annot = "model")
 ```
 
@@ -96,7 +96,7 @@ Quantitative modeling has the same syntax, but rather than rely on the
 default R reports for models, `{LST}` offers concise summaries.
 
 ``` r
-Galton |> 
+mosaicData::Galton |> 
   model_train(height ~ mother + father + sex) |>
   conf_interval()
 #> # A tibble: 4 × 4

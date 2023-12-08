@@ -3,7 +3,7 @@
 
 # test_that("Prediction error works", {
 #   require("mosaicData")
-#   mod <- Galton |>
+#   mod <- mosaicData::Galton |>
 #     model_train(height ~ splines::ns(father,3) * poly(mother, 2) * sex)
 #   result <- suppressWarnings(model_pe(mod))
 #   expect_true( abs(result - 4.44231) < 0.0001 )
@@ -15,7 +15,7 @@
 # Still working on `model_cv()`
 
 # test_that("CV works", {
-#   mod <- Galton |> model_train(height ~ father*mother*sex)
+#   mod <- mosaicData::Galton |> model_train(height ~ father*mother*sex)
 #   result <- suppressWarnings(model_cv(mod))
 #   expect_true( abs(result - 4.44231) < 0.0001 )
 # })

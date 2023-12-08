@@ -41,7 +41,7 @@ As examples, consider these two models:
 - modeling `height` of a (fully grown) child with the `sex` of the child, and the `mother`'s and `father`'s height. Linear regression is an appropriate technique here.
 
 ```{r}
-height_model <- Galton |> model_train(height ~ sex + mother + father)
+height_model <- mosaicData::Galton |> model_train(height ~ sex + mother + father)
 ```
 
 - modeling the probability that a voter will vote in an election (`primary2006`) given the household size (`hhsize`), `yearofbirth` and whether the voter voted in a previous primary election (`primary2004`). Since having voted is a yes or no proposition, *logistic* regression is an appropriate technique.

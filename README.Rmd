@@ -58,14 +58,14 @@ library(LST)
 From the start of the course, students make data graphics designed to support modeling. The `pointplot()` function provides access to powerful graphics intended to develop statistical reasoning abilities but is very easy to use. For instance, using Francis Galton's data from the 1880s, let's look at a (fully-grown) child's height as a function of his or her parents height. (This example moves faster than we do with students!) Relationships are clear when the data are annotated with a model.
 
 ```{r label='README6cfsz6'}
-Galton |>
+mosaicData::Galton |>
   pointplot(height ~ mother + father + sex, annot = "model")
 ```
 
 Quantitative modeling has the same syntax, but rather than rely on the default R reports for models, `{LST}` offers concise summaries.
 
 ```{r label='READMED8whZg'}
-Galton |> 
+mosaicData::Galton |> 
   model_train(height ~ mother + father + sex) |>
   conf_interval()
 ```
