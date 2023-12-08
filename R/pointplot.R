@@ -82,10 +82,13 @@ pointplot <- function(D, tilde, ..., seed=101,
     for (k in columns) {
       if  (continuous_or_discrete(data[[k]]) == "continuous") {
         if (length(unique(data[[k]])) < 5) {
-          data[[k]] <- as.factor(data[[k]])
+          data[[k]] <- factor(data[[k]], ordered = TRUE)
         } else {
           data[[k]] <- ntiles(signif(data[[k]],2), 3, format="interval")
         }
+      } else {
+        # make sure that color and fill aesthetics are aligned
+        data[[k]] <- factor(data[[k]], ordered = TRUE)
       }
     }
   }
@@ -205,13 +208,13 @@ pointplot <- function(D, tilde, ..., seed=101,
       scale_color_viridis_d(option=palette, begin=0, end=0.75)
 
     # BUG workarounds?
-    if (length(unique(data[[3]])) > 2) {
-      Res <- Res +
-        scale_fill_viridis_d(option=palette, begin=0.0, end=0.75)
-    } else {
-      Res <- Res +
-        scale_fill_viridis_d(option=palette, begin=0.75, end=0.0)
-    }
+    # if (length(unique(data[[3]])) > 2) {
+    #   Res <- Res +
+    #     scale_fill_viridis_d(option=palette, begin=0.75, end=0.0)
+    # } else {
+    Res <- Res +
+      scale_fill_viridis_d(option=palette, begin=0.0, end=0.75)
+    # }
     # The reversal of <begin> and <end> in the fill_viridis_d() command
     # compensates for geom_jitter() and geom_ribbon() making different choices
     # for color and fill respectively. I know that sounds crazy!
