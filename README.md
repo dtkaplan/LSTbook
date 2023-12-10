@@ -71,46 +71,114 @@ Vignettes provide an instructor-level tutorial introduction to `{LST}`.
 The student-facing introduction is the *Lessons in Statistical Thinking*
 textbook.
 
-## Quick introduction
+## Statistics for data science
+
+Every instructor of introductory statistics is familiar with textbooks
+that devote separate chapters to each of a half-dozen basic tests:
+means, differences in means, proportions, differences in proportions,
+and simple regression. It’s been known for a century that these topics
+invoke the same statistical concepts. Moreover, they are merely
+precursors to the essential multivariable modeling techniques used in
+mainstream data-science tasks such as dealing with confounding.
+
+To illustrate how `{LST}` supports teaching such topics in a unified and
+streamlined way, consider to datasets provided by the `{mosaicData}`
+package: `Galton`, which contains the original data used by Francis
+Galton in the 1880s to study the heritability of genetic traits,
+specifically, human height; and `Whickham` results from a 20-year
+follow-up survey to study smoking and health.
+
+Start by installing `{LST}` as described above, then loading it into the
+R session:
 
 ``` r
 library(LST)
 ```
 
-From the start of the course, students make data graphics designed to
-support modeling. The `pointplot()` function provides access to powerful
-graphics intended to develop statistical reasoning abilities but is very
-easy to use. For instance, using Francis Galton’s data from the 1880s,
-let’s look at a (fully-grown) child’s height as a function of his or her
-parents height. (This example moves faster than we do with students!)
-Relationships are clear when the data are annotated with a model.
+In the examples that follow, we will use the `{LST}` function
+`pointplot()` which handles both numerical and categorical variables
+using one syntax. Here’s a graphic for looking at the difference between
+two means.
 
 ``` r
-mosaicData::Galton |>
-  pointplot(height ~ mother + father + sex, annot = "model")
+Galton |> pointplot(height ~ sex)
 ```
 
-<img src="man/figures/README-README6cfsz6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+Point plots can be easily annotated with models. To illustrate the
+difference between the two means, add a model annotation:
+
+``` r
+Galton |> pointplot(height ~ sex, annot = "model")
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+Other `pointplot()` annotations are `violin` and `bw`.
+
+In *Lessons*, models are always graphed in the context of the underlying
+data and shown as confidence intervals.
+
+The same graphics and modeling conventions apply to categorical
+variables:
+
+``` r
+Whickham |> pointplot(outcome ~ smoker, annot = "model")
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+Simple regression works in the same way:
+
+``` r
+Galton |> pointplot(height ~ mother, annot = "model")
+```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+
+``` r
+Whickham |> pointplot(outcome ~ age, annot = "model")
+```
+
+<img src="man/figures/README-unnamed-chunk-8-2.png" width="100%" />
+
+The syntax extends naturally to handle the inclusion of covariates. For
+example, the simple calculation of difference between two proportions is
+misleading; `age`, not smoking status, plays the primary role in
+explaning mortality.
+
+``` r
+Whickham |> pointplot(outcome ~ age + smoker, annot = "model")
+```
+
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+
+NOTE: To highlight statistical inference, we have been working with an
+n=200 sub-sample of Galton:
+
+``` r
+Galton <- Galton |> sample(n=100, .by = sex)
+```
 
 Quantitative modeling has the same syntax, but rather than rely on the
 default R reports for models, `{LST}` offers concise summaries.
 
 ``` r
-mosaicData::Galton |> 
-  model_train(height ~ mother + father + sex) |>
-  conf_interval()
-#> # A tibble: 4 × 4
-#>   term         .lwr  .coef   .upr
-#>   <chr>       <dbl>  <dbl>  <dbl>
-#> 1 (Intercept) 9.95  15.3   20.7  
-#> 2 mother      0.260  0.321  0.383
-#> 3 father      0.349  0.406  0.463
-#> 4 sexM        4.94   5.23   5.51
+Whickham |> model_train(outcome ~ age + smoker) |> conf_interval()
+#> Waiting for profiling to be done...
+#> # A tibble: 3 × 4
+#>   term          .lwr  .coef   .upr
+#>   <chr>        <dbl>  <dbl>  <dbl>
+#> 1 (Intercept) -8.50  -7.60  -6.77 
+#> 2 age          0.110  0.124  0.138
+#> 3 smokerYes   -0.124  0.205  0.537
 ```
 
-To develop an appreciation of the importance of covariates, we can turn
-to data-generating simulations where we know the rules behind the data
-and can check whether modeling reveals them faithfully.
+To help students develop an deeper appreciation of the importance of
+covariates, we can turn to data-generating simulations where we know the
+rules behind the data and can check whether modeling reveals them
+faithfully.
 
 ``` r
 print(sim_08)
@@ -122,7 +190,7 @@ print(sim_08)
 dag_draw(sim_08)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 From the rules, we can see that `y` increases directly with `x`, the
 coefficient being 1. A simple model gets this wrong:
@@ -135,8 +203,8 @@ sim_08 |>
 #> # A tibble: 2 × 4
 #>   term         .lwr .coef  .upr
 #>   <chr>       <dbl> <dbl> <dbl>
-#> 1 (Intercept)  2.74  2.98  3.22
-#> 2 x            1.30  1.45  1.60
+#> 1 (Intercept)  2.75  3.01  3.27
+#> 2 x            1.14  1.32  1.51
 ```
 
 I’ll leave it as an exercise to the reader to see what happens when `c`
@@ -149,28 +217,32 @@ function of the sample size `n` and averaging over 100 trials.
 
 ``` r
 sim_08 |> 
-  sample(n = n) |>
+  sample(n = sample_size) |>
   model_train(y ~ x) |>
   conf_interval() |>
-  trials(times = 2, n = c(100, 400, 1600)) |> 
+  trials(times = 2, sample_size = c(100, 400, 1600, 6400, 25600)) |> 
   filter(term == "x") |> 
   mutate(width = .upr - .lwr)
-#>   .trial    n term     .lwr    .coef     .upr      width
-#> 1      1  100    x 1.521538 1.717093 1.912649 0.39111092
-#> 2      2  100    x 1.234374 1.417474 1.600574 0.36620068
-#> 3      1  400    x 1.390188 1.478836 1.567485 0.17729708
-#> 4      2  400    x 1.519035 1.603670 1.688305 0.16926959
-#> 5      1 1600    x 1.430024 1.472944 1.515865 0.08584056
-#> 6      2 1600    x 1.436323 1.478510 1.520697 0.08437371
+#>    .trial sample_size term     .lwr    .coef     .upr      width
+#> 1       1         100    x 1.372233 1.560350 1.748467 0.37623423
+#> 2       2         100    x 1.332790 1.490733 1.648677 0.31588668
+#> 3       1         400    x 1.421812 1.505607 1.589403 0.16759077
+#> 4       2         400    x 1.499239 1.580337 1.661436 0.16219628
+#> 5       1        1600    x 1.424356 1.466122 1.507888 0.08353176
+#> 6       2        1600    x 1.436348 1.477919 1.519491 0.08314316
+#> 7       1        6400    x 1.474246 1.494887 1.515529 0.04128310
+#> 8       2        6400    x 1.487190 1.508327 1.529465 0.04227480
+#> 9       1       25600    x 1.495289 1.505822 1.516355 0.02106636
+#> 10      2       25600    x 1.498624 1.509280 1.519937 0.02131267
 ```
 
 I’ve used only two trials to show the output of `trials()`, but increase
 it to, say, `times = 100` and finish off the wrangling with the
-`{dplyr}` function `summarize(mean(width), .by = n)`.
+`{dplyr}` function `summarize(mean(width), .by = sample_size)`.
 
-    #>       n mean(width)
-    #> 1   100  0.35343367
-    #> 2   400  0.17076383
-    #> 3  1600  0.08503046
-    #> 4  6400  0.04251642
-    #> 5 25600  0.02119462
+    #>   sample_size mean(width)
+    #> 1         100  0.34800368
+    #> 2         400  0.17059320
+    #> 3        1600  0.08483481
+    #> 4        6400  0.04251015
+    #> 5       25600  0.02123563

@@ -9,11 +9,11 @@ pointplot(
   tilde,
   ...,
   seed = 101,
-  annot = c("none", "violin", "model"),
+  annot = c("none", "violin", "model", "bw"),
   jitter = c("default", "none", "all", "x", "y"),
   interval = c("confidence", "none", "prediction"),
   point_ink = 0.5,
-  model_ink = 0.2,
+  model_ink = 0.4,
   palette = LETTERS[1:8],
   bw = NULL,
   level = 0.95
@@ -26,7 +26,7 @@ pointplot(
 
 \item{seed}{(optional) random seed for jittering}
 
-\item{annot}{Statistical annotation (one of "none", "violin", "model")}
+\item{annot}{Statistical annotation (one of "none", "violin", "model", "bw")}
 
 \item{jitter}{Options for turning on jitter: one of \code{"default"}, \code{"both"}, \code{"none"}, \code{"x"}, \code{"y"}. By default,
 By default, categorical variables are jittered.}

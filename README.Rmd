@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(LST)
 ```
 
 # {LST}: An R package for *Lessons in Statistical Thinking*
@@ -49,28 +50,83 @@ The `{LST}` function set is highly streamlined and internally consistent. There 
 
 Vignettes provide an instructor-level tutorial introduction to `{LST}`. The student-facing introduction is the *Lessons in Statistical Thinking* textbook.
 
-## Quick introduction
+## Statistics for data science
 
-```{r label='READMEi5Psym', message = FALSE}
+Every instructor of introductory statistics is familiar with textbooks that devote separate chapters to each of a half-dozen basic tests: means, differences in means, proportions, differences in proportions, and simple regression. It's been known for a century that these topics invoke the same statistical concepts. Moreover, they are merely precursors to the essential multivariable modeling techniques used in mainstream data-science tasks such as dealing with confounding. 
+
+To illustrate how `{LST}` supports teaching such topics in a unified and streamlined way, consider to datasets provided by the `{mosaicData}` package: `Galton`, which contains the original data used by Francis Galton in the 1880s to study the heritability of genetic traits, specifically, human height; and `Whickham` results from a 20-year follow-up survey to study smoking and health.
+
+Start by installing `{LST}` as described above, then loading it into the R session:
+
+```{r label='READMEi5Psym'}
 library(LST)
 ```
 
-From the start of the course, students make data graphics designed to support modeling. The `pointplot()` function provides access to powerful graphics intended to develop statistical reasoning abilities but is very easy to use. For instance, using Francis Galton's data from the 1880s, let's look at a (fully-grown) child's height as a function of his or her parents height. (This example moves faster than we do with students!) Relationships are clear when the data are annotated with a model.
 
-```{r label='README6cfsz6'}
-mosaicData::Galton |>
-  pointplot(height ~ mother + father + sex, annot = "model")
+```{r echo=FALSE}
+Galton <- Galton |> sample(n=100, .by = sex)
+Whickham <- Whickham |> mutate(outcome = zero_one(outcome, one = "Dead"))
 ```
+
+
+In the examples that follow, we will use the `{LST}` function `pointplot()` which handles both numerical and categorical variables using one syntax. Here's a graphic for looking at the difference between two means. 
+
+```{r}
+Galton |> pointplot(height ~ sex)
+```
+
+Point plots can be easily annotated with models. To illustrate the difference between the two means, add a model annotation: 
+
+```{r eval=FALSE}
+Galton |> pointplot(height ~ sex, annot = "model")
+```
+
+```{r echo = FALSE}
+Galton |> pointplot(height ~ sex, annot = "model", model_ink = 1)
+```
+
+Other `pointplot()` annotations are `violin` and `bw`.
+
+In *Lessons*, models are always graphed in the context of the underlying data and shown as confidence intervals.
+
+The same graphics and modeling conventions apply to categorical variables:
+
+```{r eval=FALSE}
+Whickham |> pointplot(outcome ~ smoker, annot = "model")
+```
+
+```{r echo=FALSE}
+Whickham |> pointplot(outcome ~ smoker, annot = "model", model_ink =1, point_ink=.2)
+```
+
+Simple regression works in the same way:
+
+```{r}
+Galton |> pointplot(height ~ mother, annot = "model")
+Whickham |> pointplot(outcome ~ age, annot = "model")
+```
+
+The syntax extends naturally to handle the inclusion of covariates. For example, the simple calculation of difference between two proportions is misleading; `age`, not smoking status, plays the primary role in explaning mortality.
+
+```{r results = "hide"}
+Whickham |> pointplot(outcome ~ age + smoker, annot = "model")
+```
+
+
+NOTE: To highlight statistical inference, we have been working with an n=200 sub-sample of Galton: 
+
+```{r}
+Galton <- Galton |> sample(n=100, .by = sex)
+```
+
 
 Quantitative modeling has the same syntax, but rather than rely on the default R reports for models, `{LST}` offers concise summaries.
 
 ```{r label='READMED8whZg'}
-mosaicData::Galton |> 
-  model_train(height ~ mother + father + sex) |>
-  conf_interval()
+Whickham |> model_train(outcome ~ age + smoker) |> conf_interval()
 ```
 
-To develop an appreciation of the importance of covariates, we can turn to data-generating simulations where we know the rules behind the data and can check whether modeling reveals them faithfully.
+To help students develop an deeper appreciation of the importance of covariates, we can turn to data-generating simulations where we know the rules behind the data and can check whether modeling reveals them faithfully.
 
 ```{r}
 print(sim_08)
@@ -92,24 +148,24 @@ Finally, an advanced example that's used as a demonstration but illustrates the 
 
 ```{r label='READMEQs5OUX'}
 sim_08 |> 
-  sample(n = n) |>
+  sample(n = sample_size) |>
   model_train(y ~ x) |>
   conf_interval() |>
-  trials(times = 2, n = c(100, 400, 1600)) |> 
+  trials(times = 2, sample_size = c(100, 400, 1600, 6400, 25600)) |> 
   filter(term == "x") |> 
   mutate(width = .upr - .lwr)
 ```
 
-I've used only two trials to show the output of `trials()`, but increase it to, say, `times = 100` and finish off the wrangling with the `{dplyr}` function `summarize(mean(width), .by = n)`.
+I've used only two trials to show the output of `trials()`, but increase it to, say, `times = 100` and finish off the wrangling with the `{dplyr}` function `summarize(mean(width), .by = sample_size)`.
 
 ```{r label='READMEnYSY5E', echo = FALSE}
 sim_08 |> 
-  sample(n = n) |>
+  sample(n = sample_size) |>
   model_train(y ~ x) |>
   conf_interval() |>
-  trials(times = 100, n = c(100, 400, 1600, 6400, 25600)) |> 
+  trials(times = 100, sample_size = c(100, 400, 1600, 6400, 25600)) |> 
   filter(term == "x") |> 
   mutate(width = .upr - .lwr) |>
-  summarize(mean(width), .by = n)
+  summarize(mean(width), .by = sample_size)
 ```
 

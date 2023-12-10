@@ -23,7 +23,7 @@
 #'
 #' @param D a data frame
 #' @param tilde tilde expression specifying `y ~ x` or `y ~ x + color`
-#' @param annot Statistical annotation (one of "none", "violin", "model")
+#' @param annot Statistical annotation (one of "none", "violin", "model", "bw")
 #' @param point_ink Opacity of ink for the data points
 #' @param model_ink Opacity of ink for the model annotation
 #' @param palette Depending on taste and visual capabilities, some people might
@@ -42,11 +42,11 @@
 #' mtcars |> pointplot(mpg ~ wt + cyl + hp, annot="model")
 #' @export
 pointplot <- function(D, tilde, ..., seed=101,
-                       annot = c("none", "violin", "model"),
+                       annot = c("none", "violin", "model", "bw"),
                        jitter = c("default", "none", "all", "x", "y"),
                        interval = c("confidence", "none", "prediction"),
                        point_ink = 0.5,
-                       model_ink = 0.2, palette=LETTERS[1:8], bw = NULL, level=0.95) {
+                       model_ink = 0.4, palette=LETTERS[1:8], bw = NULL, level=0.95) {
   annot <- match.arg(annot)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
@@ -131,14 +131,29 @@ pointplot <- function(D, tilde, ..., seed=101,
   # Add a violin if called for
   if (annot %in% c("violin")) {
     if (!is.null(bw)) {
-      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_ink,
+      Res <- Res + ggplot2::geom_violin(fill="blue", color=NA, alpha=model_ink,
                                aes(y=.data[[vars[1]]], x=.data[[vars[2]]]), bw = bw)
     } else { # can't always pass bw=NULL to geom_violin.
-      Res <- Res + geom_violin(fill="blue", color=NA, alpha=model_ink,
+      Res <- Res + ggplot2::geom_violin(fill="blue", color=NA, alpha=model_ink,
                                aes(y=.data[[vars[1]]], x=.data[[vars[2]]]))
     }
     if (!x_is_discrete) {
     warning("x-axis variable is numerical, so only one violin drawn for all rows.
+              Perhaps you want to use ntiles() or factor() on that variable?")
+    }
+  }
+
+  # Add a box-and-whisker plot if called for
+  if (annot %in% c("bw")) {
+    if (!is.null(bw)) {
+      Res <- Res + ggplot2::geom_boxplot(fill=NA, color="blue", alpha=model_ink,
+                               aes(y=.data[[vars[1]]], x=.data[[vars[2]]]), bw = bw)
+    } else { # can't always pass bw=NULL to geom_violin.
+      Res <- Res + ggplot2::geom_boxplot(fill=NA, color="blue", alpha=model_ink,
+                               aes(y=.data[[vars[1]]], x=.data[[vars[2]]]))
+    }
+    if (!x_is_discrete) {
+      warning("x-axis variable is numerical, so only one box-and-whiskers is drawn for all rows.
               Perhaps you want to use ntiles() or factor() on that variable?")
     }
   }
@@ -249,7 +264,13 @@ add_plot_labels <- function(P, ...) {
 simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confidence") {
   M <- if (!is.null(family)) model_train(data, tilde, family = family)
   else model_train(data, tilde)
-  Dskel <- expand.grid(data_skeleton(data, tilde))
+  # Construct a skeleton of explanatory variable values
+  if (length(all.vars(rlang::f_rhs(tilde))) == 0) {
+    # there are no explanatory variables, that is, the tilde is y ~ 1
+    Dskel <- tibble::tibble(1)
+  } else {
+    Dskel <- expand.grid(data_skeleton(data, tilde))
+  }
   Meval <- model_eval(M, data = Dskel, interval = itype, level = level) |>
     select(".output", ".lwr", ".upr")
   # Rename the skeleton values to correspond to the names in <data>

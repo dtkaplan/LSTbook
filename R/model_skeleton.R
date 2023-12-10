@@ -94,6 +94,9 @@ data_skeleton <- function(data, tilde, spreadn=NULL, ..., ncont=10, nlevels=3) {
 
 #'
 continuous_or_discrete <- function(vals) {
+  # special case: all values are 1 should be handled as "discrete"
+  if (all(vals == 1)) return("discrete")
+
   ifelse(inherits(vals, c("character", "logical", "factor", "zero_one")),
          "discrete",
          "continuous")
