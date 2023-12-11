@@ -75,7 +75,7 @@ print(sim_04) # One of the simulations in {LST}
 
 2. Draw a **graph** of the connections between rules, e.g. in `dag_04` rule `d` receives inputs from `a`, `b`, and `c`, but none of those other rules are connected to one another.
 
-```{r}
+```{r label='DAGsMFIYTT'}
 dag_draw(sim_04)
 ```
 
@@ -101,7 +101,7 @@ As you may know, DAGs play an important role in statistical **causal inference**
 
 Data simulations can be useful in teaching causal concepts. To illustrate, consider the `sim_vaccine` simulation provided by the `{LST}` package. The simulation is a cartoon about how flu vaccinations might reduce mortality from the flu. We can look at `sim_vaccine` in the usual ways:
 
-```{r}
+```{r label='DAGswTgvGw'}
 print(sim_vaccine)
 dag_draw(sim_vaccine)
 ```
@@ -132,7 +132,7 @@ You might wonder how associations are formed among the variables in the simulati
 
 The reason for the associations seen in the `sim_vaccine` data is that there are in fact connections, but they involve variables in the simulation that aren't being reported in the data, so called "lurking" variables. Unlike the real world, in the simulation we can look at such variables
 
-```{r}
+```{r label='DAGsJsATe2'}
 print(sim_vaccine, report_hidden = TRUE)
 dag_draw(sim_vaccine, report_hidden = TRUE)
 ```

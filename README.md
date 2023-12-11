@@ -104,7 +104,7 @@ two means.
 Galton |> pointplot(height ~ sex)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-READMEDfxgmm-1.png" width="100%" />
 
 Point plots can be easily annotated with models. To illustrate the
 difference between the two means, add a model annotation:
@@ -113,7 +113,7 @@ difference between the two means, add a model annotation:
 Galton |> pointplot(height ~ sex, annot = "model")
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-README1euiBE-1.png" width="100%" />
 
 Other `pointplot()` annotations are `violin` and `bw`.
 
@@ -127,7 +127,7 @@ variables:
 Whickham |> pointplot(outcome ~ smoker, annot = "model")
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-README1OriL5-1.png" width="100%" />
 
 Simple regression works in the same way:
 
@@ -135,13 +135,13 @@ Simple regression works in the same way:
 Galton |> pointplot(height ~ mother, annot = "model")
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-README2lz92Z-1.png" width="100%" />
 
 ``` r
 Whickham |> pointplot(outcome ~ age, annot = "model")
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-2.png" width="100%" />
+<img src="man/figures/README-README2lz92Z-2.png" width="100%" />
 
 The syntax extends naturally to handle the inclusion of covariates. For
 example, the simple calculation of difference between two proportions is
@@ -152,7 +152,7 @@ explaning mortality.
 Whickham |> pointplot(outcome ~ age + smoker, annot = "model")
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+<img src="man/figures/README-READMEtrysVK-1.png" width="100%" />
 
 NOTE: To highlight statistical inference, we have been working with an
 n=200 sub-sample of Galton:
@@ -190,7 +190,7 @@ print(sim_08)
 dag_draw(sim_08)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-READMEoXTf5e-1.png" width="100%" />
 
 From the rules, we can see that `y` increases directly with `x`, the
 coefficient being 1. A simple model gets this wrong:

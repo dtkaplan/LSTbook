@@ -63,7 +63,7 @@ library(LST)
 ```
 
 
-```{r echo=FALSE}
+```{r label='READMEwZqoH2', echo=FALSE}
 Galton <- Galton |> sample(n=100, .by = sex)
 Whickham <- Whickham |> mutate(outcome = zero_one(outcome, one = "Dead"))
 ```
@@ -71,17 +71,17 @@ Whickham <- Whickham |> mutate(outcome = zero_one(outcome, one = "Dead"))
 
 In the examples that follow, we will use the `{LST}` function `pointplot()` which handles both numerical and categorical variables using one syntax. Here's a graphic for looking at the difference between two means. 
 
-```{r}
+```{r label='READMEDfxgmm', }
 Galton |> pointplot(height ~ sex)
 ```
 
 Point plots can be easily annotated with models. To illustrate the difference between the two means, add a model annotation: 
 
-```{r eval=FALSE}
+```{r label='READMEy0xKQ8', eval=FALSE}
 Galton |> pointplot(height ~ sex, annot = "model")
 ```
 
-```{r echo = FALSE}
+```{r label='README1euiBE', echo = FALSE}
 Galton |> pointplot(height ~ sex, annot = "model", model_ink = 1)
 ```
 
@@ -91,31 +91,31 @@ In *Lessons*, models are always graphed in the context of the underlying data an
 
 The same graphics and modeling conventions apply to categorical variables:
 
-```{r eval=FALSE}
+```{r label='READMEpNE437', eval=FALSE}
 Whickham |> pointplot(outcome ~ smoker, annot = "model")
 ```
 
-```{r echo=FALSE}
+```{r label='README1OriL5', echo=FALSE}
 Whickham |> pointplot(outcome ~ smoker, annot = "model", model_ink =1, point_ink=.2)
 ```
 
 Simple regression works in the same way:
 
-```{r}
+```{r label='README2lz92Z', }
 Galton |> pointplot(height ~ mother, annot = "model")
 Whickham |> pointplot(outcome ~ age, annot = "model")
 ```
 
 The syntax extends naturally to handle the inclusion of covariates. For example, the simple calculation of difference between two proportions is misleading; `age`, not smoking status, plays the primary role in explaning mortality.
 
-```{r results = "hide"}
+```{r label='READMEtrysVK', results = "hide"}
 Whickham |> pointplot(outcome ~ age + smoker, annot = "model")
 ```
 
 
 NOTE: To highlight statistical inference, we have been working with an n=200 sub-sample of Galton: 
 
-```{r}
+```{r label='READMEcO84YG', }
 Galton <- Galton |> sample(n=100, .by = sex)
 ```
 
@@ -128,7 +128,7 @@ Whickham |> model_train(outcome ~ age + smoker) |> conf_interval()
 
 To help students develop an deeper appreciation of the importance of covariates, we can turn to data-generating simulations where we know the rules behind the data and can check whether modeling reveals them faithfully.
 
-```{r}
+```{r label='READMEoXTf5e', }
 print(sim_08)
 dag_draw(sim_08)
 ```
