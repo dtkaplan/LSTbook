@@ -69,7 +69,7 @@ print.datasim <- function(x, ..., report_hidden = FALSE) {
 #' begins with a dot)
 #' @rdname datasim
 #' @export
-datasim_run <- function(sim, n=5, seed=NULL, report_hidden = FALSE) {
+datasim_run <- function(sim, n=5, seed = NULL, report_hidden = FALSE) {
   # a simple utility function
   exo <- function(n, sd = 1) {
     stats::rnorm(n, mean=0, sd=sd)
@@ -85,12 +85,31 @@ datasim_run <- function(sim, n=5, seed=NULL, report_hidden = FALSE) {
   # construct the values
   for (k in seq_along(sim$names)) {
     tmp <- eval(sim$calls[[k]], values)
-
-    if (length(tmp) < values$n) {
-      # if `tmp` is a scalar or short vector, replicate it so that it has `n` entries
-      values[[k]] <- rep(tmp, length.out = values$n)
+    if (inherits(tmp, "each-object")) {
+      # <tmp> is a function that when evaluated gives a single value
+      # in return
+      # put the output so far into a convenient form for accessing by row
+      if (k > 1) sofar <- tibble::as_tibble(values[1:(k-1)])
+      else sofar <- list() # if this is the first variable, don't need any context
+      sofar$n <- n # restore this component
+      # We don't know the type of the result, so store the n items as a list
+      results <- lapply(1:n, function(x) 1) # a list for the results
+      for (i in 1:n) {
+        # Evaluate the function <tmp> separately for each row
+        if (length(sofar) > 0) foo <- tmp(sofar[i,])
+        else foo <- tmp(sofar)
+        if (length(foo) > 1) stop("Expression in `each()` must return a scalar.")
+        results[[i]] <- foo
+      }
+      values[[k]] <- unlist(results)
     } else {
-      values[[k]] <- tmp
+      # ordinary direct arithmetic on values
+      if (length(tmp) < values$n) {
+        # if `tmp` is a scalar or short vector, replicate it so that it has `n` entries
+        values[[k]] <- rep(tmp, length.out = values$n)
+      } else {
+        values[[k]] <- tmp
+      }
     }
   }
 
@@ -189,6 +208,52 @@ bernoulli <- function(n=0, logodds=NULL, prob=0.5, labels=NULL) {
 
   yesno
 }
+
+#' Mix two variables together. The output will have the specified R-squared
+#' with var1 and variance one.
+#' @param input The part of the mixture that will be correlated with
+#' the output.
+#' @param noise The rest of the mixture. This will be **uncorrelated**
+#' with the output only if you specify it as pure noise.
+#' @param R2 The target R-squared.
+#' @param var The target variance.
+#'
+#' @details The target R-squared and variance will be achieved only
+#' if `exact=TRUE` or the sample size goes to infinity.
+
+#' @export
+mix_with <- function(signal, noise = NULL, R2 = 0.5, var = 1, exact=FALSE) {
+  if (R2 < 0 || R2 > 1) stop("R2 must be between zero and one.")
+  if (var < 0) {
+    var <- abs(var)
+    warning("Negative variance specified with `var`. Taking absolute value")
+  }
+  if (is.null(noise)) noise <- rnorm(length(signal))
+  if(exact) {
+    noise <- resid(lm(noise ~ signal))
+  }
+
+  sd_signal <- sd(signal, na.rm = TRUE)
+  sd_noise  <- sd(noise, na.rm = TRUE)
+  mix <- sqrt(R2) * signal/sd_signal + sqrt(1-R2)*noise/sd_noise
+
+  mix * sqrt(var) / sd(mix)
+}
+#' Evaluate an expression separately for each case
+#' @param ex an expression potentially involving other variables.
+#' @export
+each <- function(ex) {
+  ex <- substitute(ex)
+  f <- function(env) {
+    eval(ex, envir = env)
+  }
+  class(f) <- c(class(f), "each-object")
+
+  f # returns a function which, when evaluated, gives a
+    # value for one row of the data frame based on the values already
+    # in that row
+}
+
 
 #' @param levels Character vector giving names to the blocking levels
 #' @param show_block Logical. If `TRUE`, put the block number in the output.

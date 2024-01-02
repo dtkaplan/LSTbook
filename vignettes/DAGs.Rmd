@@ -251,3 +251,61 @@ all_together |> sample(n = 20) |> arrange(color)
 
 In the above data frame, you can see that all the treatments have been assigned as evenly as possible for each of the colors.
 
+- `mix_with()` will mix noise with a signal so that the output has the specified R^2^ and variance. 
+
+```{r}
+Mix_them <- datasim_make(
+  x <- rnorm(n),
+  y <- mix_with(x, R2 = 0.71, var = 4.35)
+)
+Dat <- Mix_them |> sample(n = 100)
+Dat |> model_train(y ~ x) |> R2()
+Dat |> summarize(var(y))
+```
+The noise being mixed with the signal may incidentally be correlated with the signal. This leads to R^2^ varying around the specified value. You can avoid this variation (not that you necessarily want to) by providing the optional argument `exact = TRUE`.
+
+## Doubly stochastic processes
+
+There are many situations where the conditions for a random outcome are themselves set at random. The `bernoulli()` process provides an illustration. Suppose that an outcome ill-vs-healthy is to be determined at random, but the patient's general health condition sets the probability of falling ill. For instance:
+
+```{r}
+Sick_sim <- datasim_make(
+  health <- rnorm(n, sd=2), 
+  sick   <- bernoulli(logodds = health, labels = c("ill", "OK"))
+)
+Sim_dat <- Sick_sim |> sample(n = 1000)
+Sim_dat |> point_plot(sick ~ health)
+```
+
+A hallmark of such processes is that the `n` argument isn't needed; the number of random values produced is determined by the length of an input variable, in this case `health`.
+
+`bernoulli()` was written specially to achieve this behavior. It's helpful to have a mechanism that will enable any doubly stochastic behavior. For instance, suppose we want to generate `k` a random positive integer and based on `k`, another variable `y` which will be the sum of `k` normal processes. It's tempting to try to write this as follows:
+
+```{r}
+# This won't work!
+sum_sim <- datasim_make(
+  k <- sample(c(1, 4, 16, 32, 64, 128), n = n, replace = TRUE),
+  y <- sum(rnorm(k))
+)
+sum_sim |> sample(n = 5)
+```
+
+This hasn't performed as might be expected. All the supposedly random `y` values are the same. The reason can be seen from the documentation for `rnorm()`. When the `n` argument to `rnorm()` is a vector---and `k` will be a vector of length n = 5 when the sample is generated---the length of the vector determines the number of random numbers generated. Consequently, `sum(rnorm(k))` is a simple sum of n random numbers, rather than a n sums of a varying number of random numbers.
+
+The `each()` function sets things up so that a separate calculation is done for each of the n rows in the sample. Each such calculation draws on the values of the variables for that particular row. To illustrate:
+
+```{r}
+# This will do what we want!
+sum_sim <- datasim_make(
+  k <- sample(c(1, 4, 16, 32, 64, 128), n = n, replace = TRUE),
+  y <- each(sum(rnorm(k)))
+)
+sum_sim |> sample(n = 5)
+```
+
+We would need a bigger sample to see the `k` dependence of `y`:
+
+```{r}
+sum_sim |> sample(n = 10000) |>
+  point_plot(y ~ k, point_ink = 0.1)
+```

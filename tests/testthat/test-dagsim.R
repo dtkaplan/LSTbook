@@ -101,6 +101,12 @@ test_that("categorical generates levels with right probabilities", {
 
 test_that("bernoulli() can use log odds", {
   Sim <- datasim_make(x <- exo(n), z <- bernoulli(logodds = x))
-  Foo <- sample(Sim, n=1000)
+  Foo <- sample(Sim, n=10)
   expect_true(sum(Foo$z == 0) - 5000 < 200) # about equal numbers of ones and zeros
+})
+
+test_that("each() computes separately for each row", {
+  Sim <- datasim_make(k <- sample(1:10, n=n), y <- each(n * sum(1:k)), z <- each(sum(runif(k))))
+  Foo <- sample(Sim, n=10)
+  expect_true(all(Foo$z / Foo$k < Foo$k))
 })

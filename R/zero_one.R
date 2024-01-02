@@ -9,7 +9,7 @@
 #' @param one character string specifying the level that gets mapped to 1.
 #'
 #' @examples
-#' Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
+#' Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
 #'
 #' @export
 zero_one <- function(x, one) {
@@ -34,11 +34,11 @@ zero_one <- function(x, one) {
 #'
 #' @examples
 #' Whickham |>
-#'   pointplot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
+#'   point_plot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
 #'   label_zero_one() +
 #'   ylab("Prob. alive at 20-year follow-up")
 
-#' @param P A ggplot2 object made by `model_plot()` or `pointplot()`
+#' @param P A ggplot2 object made by `model_plot()` or `point_plot()`
 
 #' @export
 label_zero_one <- function(P) {

@@ -35,7 +35,7 @@ model_train <- function(data, tilde,
   }
 
   attr(mod, "training_data") <- data
-  class(mod) <- c(class(mod), "model_train")
+  class(mod) <- c("model_object", class(mod))
 
   mod
 }

@@ -6,7 +6,7 @@ November 22
 
 - COMPLETED: Add plot labeling function to avoid needing to use either ggformula or the + pipe with ggplot2
 
-- COMPLETED: Add label_zero_one() automatically to pointplot() when response is zero_one()
+- COMPLETED: Add label_zero_one() automatically to point_plot() when response is zero_one()
 
 November 27
 
@@ -34,7 +34,7 @@ ForMod <- NHANES::NHANES |>
   select(Height, Age, Gender) |>
   filter(Age >=15) |>
   rename(Sex = Gender)
-ForMod |> pointplot(Height ~ splines::ns(Age,3)*Sex, annot = "model", 
+ForMod |> point_plot(Height ~ splines::ns(Age,3)*Sex, annot = "model", 
                     point_ink = 0.1, model_ink = 1 )
 
 Mod2 <-  ForMod |> model_train(Height ~ splines::ns(Age,3)*Sex) 
@@ -46,11 +46,11 @@ model_plot(Mod2, interval="confidence")
 
 December 8
 
-- COMPLETED: The colors aren't ordered properly in `pointplot()`
+- COMPLETED: The colors aren't ordered properly in `point_plot()`
 
 ```{r}
 Penguins |> 
-  pointplot(flipper ~ mass + sex + species , annot = "model")
+  point_plot(flipper ~ mass + sex + species , annot = "model")
 ```
 
 - COMPLETED: `ntiles()` not producing ordered factors for intervals.

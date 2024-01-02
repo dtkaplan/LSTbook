@@ -58,7 +58,7 @@ Use the pipe operator to send a previously made plot to have a rose added. Don't
 \code{+} connector.
 }
 \examples{
-mtcars |> pointplot(mpg ~ hp, annot="model") |> add_slope_rose()
-mtcars |> pointplot(wt ~ hp) |> add_slope_rose(keepers="pos", color="blue", x=100, scale=.5 )
+mtcars |> point_plot(mpg ~ hp, annot="model") |> add_slope_rose()
+mtcars |> point_plot(wt ~ hp) |> add_slope_rose(keepers="pos", color="blue", x=100, scale=.5 )
 
 }

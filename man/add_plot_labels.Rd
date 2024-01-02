@@ -2,21 +2,21 @@
 % Please edit documentation in R/pointplot.R
 \name{add_plot_labels}
 \alias{add_plot_labels}
-\title{Convenience function for adding labels to pointplot or others without needing
+\title{Convenience function for adding labels to point_plot or others without needing
 the ggplot2 + pipe.}
 \usage{
 add_plot_labels(P, ...)
 }
 \arguments{
-\item{P}{A ggplot2 object, for instance as made with \code{pointplot()} or \code{model_plot()}}
+\item{P}{A ggplot2 object, for instance as made with \code{point_plot()} or \code{model_plot()}}
 
 \item{\ldots}{Label items (e.g. \code{x = "hello"}) as in ggplot2::labs}
 }
 \description{
-Convenience function for adding labels to pointplot or others without needing
+Convenience function for adding labels to point_plot or others without needing
 the ggplot2 + pipe.
 }
 \examples{
-mtcars |> pointplot(mpg ~ hp + cyl) |>
+mtcars |> point_plot(mpg ~ hp + cyl) |>
   add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
 }

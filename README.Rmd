@@ -69,47 +69,47 @@ Whickham <- Whickham |> mutate(outcome = zero_one(outcome, one = "Dead"))
 ```
 
 
-In the examples that follow, we will use the `{LST}` function `pointplot()` which handles both numerical and categorical variables using one syntax. Here's a graphic for looking at the difference between two means. 
+In the examples that follow, we will use the `{LST}` function `point_plot()` which handles both numerical and categorical variables using one syntax. Here's a graphic for looking at the difference between two means. 
 
 ```{r label='READMEDfxgmm', }
-Galton |> pointplot(height ~ sex)
+Galton |> point_plot(height ~ sex)
 ```
 
 Point plots can be easily annotated with models. To illustrate the difference between the two means, add a model annotation: 
 
 ```{r label='READMEy0xKQ8', eval=FALSE}
-Galton |> pointplot(height ~ sex, annot = "model")
+Galton |> point_plot(height ~ sex, annot = "model")
 ```
 
 ```{r label='README1euiBE', echo = FALSE}
-Galton |> pointplot(height ~ sex, annot = "model", model_ink = 1)
+Galton |> point_plot(height ~ sex, annot = "model", model_ink = 1)
 ```
 
-Other `pointplot()` annotations are `violin` and `bw`.
+Other `point_plot()` annotations are `violin` and `bw`.
 
 In *Lessons*, models are always graphed in the context of the underlying data and shown as confidence intervals.
 
 The same graphics and modeling conventions apply to categorical variables:
 
 ```{r label='READMEpNE437', eval=FALSE}
-Whickham |> pointplot(outcome ~ smoker, annot = "model")
+Whickham |> point_plot(outcome ~ smoker, annot = "model")
 ```
 
 ```{r label='README1OriL5', echo=FALSE}
-Whickham |> pointplot(outcome ~ smoker, annot = "model", model_ink =1, point_ink=.2)
+Whickham |> point_plot(outcome ~ smoker, annot = "model", model_ink =1, point_ink=.2)
 ```
 
 Simple regression works in the same way:
 
 ```{r label='README2lz92Z', }
-Galton |> pointplot(height ~ mother, annot = "model")
-Whickham |> pointplot(outcome ~ age, annot = "model")
+Galton |> point_plot(height ~ mother, annot = "model")
+Whickham |> point_plot(outcome ~ age, annot = "model")
 ```
 
 The syntax extends naturally to handle the inclusion of covariates. For example, the simple calculation of difference between two proportions is misleading; `age`, not smoking status, plays the primary role in explaning mortality.
 
 ```{r label='READMEtrysVK', results = "hide"}
-Whickham |> pointplot(outcome ~ age + smoker, annot = "model")
+Whickham |> point_plot(outcome ~ age + smoker, annot = "model")
 ```
 
 

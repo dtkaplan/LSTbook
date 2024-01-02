@@ -8,7 +8,7 @@ where the y-axis is a zero-one variable.}
 label_zero_one(P)
 }
 \arguments{
-\item{P}{A ggplot2 object made by \code{model_plot()} or \code{pointplot()}}
+\item{P}{A ggplot2 object made by \code{model_plot()} or \code{point_plot()}}
 }
 \description{
 not clear how to use this. I want an easy way to label the vertical axis of graphs
@@ -16,7 +16,7 @@ where the y-axis is a zero-one variable.
 }
 \examples{
 Whickham |>
-  pointplot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
+  point_plot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
   label_zero_one() +
   ylab("Prob. alive at 20-year follow-up")
 }

@@ -29,7 +29,7 @@ This document is oriented toward instructors or strongly motivated students. The
 R commands in *Lessons* are well exemplified by the following: generating a plot of two variables in a data frame and then annotating the plot with a simple linear model.
 
 ```{r}
-mtcars |> pointplot(mpg ~ hp, annot = "model")
+mtcars |> point_plot(mpg ~ hp, annot = "model")
 ```
 
 The command illustrates several features of the style of commands in *Lessons*:
@@ -45,7 +45,7 @@ The command illustrates several features of the style of commands in *Lessons*:
     
 * Often, a tilde expression will be the *only* thing inside the parentheses that follow the function name. But sometimes additional details for the function will be added within the parentheses. In the above example command, the detail to add a statistical model as an annotation is specified by the argument `annot = "model". 
     
-* `pointplot()` is a omnibus graphics command sufficient for teaching an entire statistics course that includes inference and covariation. 
+* `point_plot()` is a omnibus graphics command sufficient for teaching an entire statistics course that includes inference and covariation. 
     - The output is `{ggplot2}` compatible.
     - Other such omnibus commands from `{LST}` seen in *Lessons* are `model_train()`, `sample()`, and `trials()`. 
     - Wrangling functions from `{dplyr}` are also occasionally used, especially `mutate()` and `summarize()`.
@@ -58,14 +58,14 @@ I'm using the term **input end** of a pipe to refer to the object on the left-ha
 1. A data frame is by far the most common input type.
 2. A statistical model is an input type used frequently in the second-half of the course.
 3. A "data simulation" is another kind of input type.
-4. Optionally, and mainly for enrichment, a data graphic frame (as produced by `pointplot()`) is used at the input of the pipe towards a command to add labels or to add another `{ggplot2}` layer.
+4. Optionally, and mainly for enrichment, a data graphic frame (as produced by `point_plot()`) is used at the input of the pipe towards a command to add labels or to add another `{ggplot2}` layer.
 
 
 ## Pipe output-ends {#sec-output-end}
 
 Just as *input end* refers to the object provided at the left-hand side of the pipe, the object produced by the function call on the right side is the pipe's output. Two essential points about pipe output-ends:
 
-a. The R command given on the right-hand side of `|>` will **always** be a function call. No exceptions. A function call consists of the name of a function (e.g., `pointplot` or `model_train`) followed by an open/closed pair of parentheses. Usually, there is something such as a *tilde expression* contained in the parentheses, but there are often additional **named arguments** such as the `annot = "model"` in the example command presented in @sec-command-template. 
+a. The R command given on the right-hand side of `|>` will **always** be a function call. No exceptions. A function call consists of the name of a function (e.g., `point_plot` or `model_train`) followed by an open/closed pair of parentheses. Usually, there is something such as a *tilde expression* contained in the parentheses, but there are often additional **named arguments** such as the `annot = "model"` in the example command presented in @sec-command-template. 
 
 b. The function call in (a) produces an R object. For the `{LST}` functions, this object will always be one of the four types presented in the previous section (data frame, model, data simulation, graphics frame).
 
@@ -80,11 +80,11 @@ mtcars |>
   conf_interval()
 ```
 
-For convenience, the `add_plot_labels()` function will modify the labels in a plot, taking as input a plot (as produced by `pointplot()`, for instance) and returning as output the modified plot. (Perhaps of interest to those familiar with `{ggplot2}` ... `add_plot_labels()` is merely a wrapper on `ggplot2::labs()` that avoids the non-standard `+` pipe system.)
+For convenience, the `add_plot_labels()` function will modify the labels in a plot, taking as input a plot (as produced by `point_plot()`, for instance) and returning as output the modified plot. (Perhaps of interest to those familiar with `{ggplot2}` ... `add_plot_labels()` is merely a wrapper on `ggplot2::labs()` that avoids the non-standard `+` pipe system.)
 
 ```{r}
 mtcars |> 
-  pointplot(mpg ~ hp * wt) |> 
+  point_plot(mpg ~ hp * wt) |> 
   add_plot_labels(x = "Engine power (hp)", y = "Fuel economy (mpg)")
 ```
 
@@ -137,15 +137,15 @@ An excellent way to develop the statement to be repeated: write the pipeline *ex
   
 ## Graphics in `{LST}`
 
-Instructors may feel obliged by convention to introduce the menagerie of plotting modalities, such as bar charts, line charts, histograms, etc. *Lessons* was written to use only a single primary graphic modality: the point plot (a.k.a. "scatter plot") as produced by `pointplot()`. Three other modalities---confidence intervals, confidence bands, and violin plots of density---are provided by the annotation feature of `pointplot()`. These are `annot = "violin"` and `"annot = "model"`.
+Instructors may feel obliged by convention to introduce the menagerie of plotting modalities, such as bar charts, line charts, histograms, etc. *Lessons* was written to use only a single primary graphic modality: the point plot (a.k.a. "scatter plot") as produced by `point_plot()`. Three other modalities---confidence intervals, confidence bands, and violin plots of density---are provided by the annotation feature of `point_plot()`. These are `annot = "violin"` and `"annot = "model"`.
 
-The output of `pointplot()` is a `{ggplot2}` graphical object. Consequently, you can use the various `{ggplot2}` functions to set a graphics theme, label axes, and so on. Unfortunately, `{ggplot2}` functions use the `+` pipe rather than `|>`. This can be confusing and frustrating for students. 
+The output of `point_plot()` is a `{ggplot2}` graphical object. Consequently, you can use the various `{ggplot2}` functions to set a graphics theme, label axes, and so on. Unfortunately, `{ggplot2}` functions use the `+` pipe rather than `|>`. This can be confusing and frustrating for students. 
 
 I recommend use of the `{ggformula}` package which re-packages the `{ggplot2}` facilities in a way that can be used with the R pipe `|>` and which employe tilde-expressions for specifying response and explanatory variables. 
 
 ## `{LST}`, `{mosaic}`, and `{ggformula}`
 
-The MOSAIC suite of packages---including `{mosaic}` and `{ggformula}`---are widely used in teaching statistics with R. Many of the pedagogical principles behind `{LST}` are shared with `{mosaic}` and `{ggformula}`. You are of course welcome to use `{mosaic}` and `{ggformula}` along with `{LST}`, particularly if you want to teach other graphics modalities than those provided by `LST::pointplot()`. 
+The MOSAIC suite of packages---including `{mosaic}` and `{ggformula}`---are widely used in teaching statistics with R. Many of the pedagogical principles behind `{LST}` are shared with `{mosaic}` and `{ggformula}`. You are of course welcome to use `{mosaic}` and `{ggformula}` along with `{LST}`, particularly if you want to teach other graphics modalities than those provided by `LST::point_plot()`. 
 
 Other than shared pedagogical principles, there is no connection of `{LST}` with either `{mosaic}` and `{ggformula}`. One reason for this is the pipe `|>`, which prominently features in *Lessons*. `{mosaic}` is not pipe-ready because many functions require a `data =` argument.
 

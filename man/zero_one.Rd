@@ -18,6 +18,6 @@ Such numerical mapping is inappropriate for logistic modeling, where we want the
 be on a probability scale.
 }
 \examples{
-Whickham |> pointplot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
+Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
 
 }

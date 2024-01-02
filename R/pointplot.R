@@ -1,6 +1,6 @@
 #' One-step data graphics
 #'
-#' `pointplot()` makes it easy to construct an informative basic graph of a
+#' `point_plot()` makes it easy to construct an informative basic graph of a
 #' data frame. "Making it easy" means that the user only needs to specify
 #' two things: 1) the data frame to be used and 2) a tilde expression with the response variable on the left and up to
 #' three explanatory variables on the right. The response variable is mapped to
@@ -34,46 +34,58 @@
 #' @param bw bandwidth for violin plot
 #' @param level confidence level to use (0.95)
 #' @param interval the type of interval: default `"confidence"`. Others: `"none"` or `"prediction"`
+#' @param nx Number of places to evaluate any x-axis quantitative vars. Default 50. Use higher
+#' if graph isn't smooth enough.
 #' @param \ldots Graphical options for the data points, labels, e.g. size
 #'
 #' @examples
-#' mosaicData::Galton |> pointplot(height ~ mother + sex + father, annot="model", model_ink=1)
-#' mtcars |> pointplot(mpg ~ wt + cyl)
-#' mtcars |> pointplot(mpg ~ wt + cyl + hp, annot="model")
+#' mosaicData::Galton |> point_plot(height ~ mother + sex + father, annot="model", model_ink=1)
+#' mtcars |> point_plot(mpg ~ wt + cyl)
+#' mtcars |> point_plot(mpg ~ wt + cyl + hp, annot="model")
 #' @export
-pointplot <- function(D, tilde, ..., seed=101,
+point_plot <- function(D, tilde, ..., seed=101,
                        annot = c("none", "violin", "model", "bw"),
                        jitter = c("default", "none", "all", "x", "y"),
                        interval = c("confidence", "none", "prediction"),
                        point_ink = 0.5,
-                       model_ink = 0.4, palette=LETTERS[1:8], bw = NULL, level=0.95) {
+                       model_ink = 0.4, palette=LETTERS[1:8], bw = NULL, level=0.95,
+                       nx = 50) {
   annot <- match.arg(annot)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
   set.seed(seed)
+  # tilde_vars <- all.vars(tilde, unique = FALSE) # get list of variables (with repeats, if any)
+
 
   if (inherits(D, "ggplot")) {
     # Grab the data from the incoming plot
     data <- D$data
   } else if (inherits(D, "data.frame")) {
     data <- D
-    D <- NULL # this must be the first layer of the plot
+    D <- NULL # this will be the first layer of the plot
   } else if (inherits(D, "glm")) {
     data <- get_training_data(D) # Grab the data from the model
     model <- D
-    D <- NULL
-    warning(as.character(match.call()[[1]]), " not yet set up to take a model as an argument.")
+    D <- NULL # this will be the first layer of the plot
   }
 
   data <- data_from_tilde(data, tilde)
-  y_data <- data[[1]]
-  x_data <- data[[2]]
-  x_is_discrete <- continuous_or_discrete(x_data) == "discrete"
-  y_is_discrete <- continuous_or_discrete(y_data) == "discrete"
+
   vars <- names(data)
   if (length(vars) > 4)
     stop("data_graphics() can handle at most four variables, you have",
          length(vars), ".")
+  # Handle case where response variable is the same as one of the explanatory vars.
+  if (vars[1] %in% vars[-1]) {
+    vars[1] <- paste0(vars[1], ".")
+    names(data)[1] <- vars[1]
+  }
+
+  y_data <- data[[1]]
+  x_data <- data[[2]]
+  x_is_discrete <- continuous_or_discrete(x_data) == "discrete"
+  y_is_discrete <- continuous_or_discrete(y_data) == "discrete"
+
 
   # Convert color and faceting (columns 3 and 4) to discrete values
 
@@ -162,7 +174,7 @@ pointplot <- function(D, tilde, ..., seed=101,
   if (annot == "model") {
     # calls_to_names() rejiggers the model formula so that it contains
     # references to the <names> of the already transformed data.
-    mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level=level)
+    mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level=level, nx=nx)
 
     # special case for categorical response variable
     if (!inherits(y_data, "zero_one") && y_is_discrete) {
@@ -244,13 +256,13 @@ pointplot <- function(D, tilde, ..., seed=101,
   Res
 }
 
-#' Convenience function for adding labels to pointplot or others without needing
+#' Convenience function for adding labels to point_plot or others without needing
 #' the ggplot2 + pipe.
-#' @param P A ggplot2 object, for instance as made with `pointplot()` or `model_plot()`
+#' @param P A ggplot2 object, for instance as made with `point_plot()` or `model_plot()`
 #' @param \ldots Label items (e.g. `x = "hello"`) as in ggplot2::labs
 #'
 #' @examples
-#' mtcars |> pointplot(mpg ~ hp + cyl) |>
+#' mtcars |> point_plot(mpg ~ hp + cyl) |>
 #'   add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
 #' @export
 add_plot_labels <- function(P, ...) {
@@ -261,7 +273,7 @@ add_plot_labels <- function(P, ...) {
 #'
 # Train and evaluate the model, with evaluation only
 # on a skeleton.
-simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confidence") {
+simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confidence", nx=50) {
   M <- if (!is.null(family)) model_train(data, tilde, family = family)
   else model_train(data, tilde)
   # Construct a skeleton of explanatory variable values
@@ -269,7 +281,7 @@ simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confide
     # there are no explanatory variables, that is, the tilde is y ~ 1
     Dskel <- tibble::tibble(1)
   } else {
-    Dskel <- expand.grid(data_skeleton(data, tilde))
+    Dskel <- expand.grid(data_skeleton(data, tilde, ncont=nx))
   }
   Meval <- model_eval(M, data = Dskel, interval = itype, level = level) |>
     select(".output", ".lwr", ".upr")

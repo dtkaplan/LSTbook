@@ -96,12 +96,12 @@ library(LST)
 ```
 
 In the examples that follow, we will use the `{LST}` function
-`pointplot()` which handles both numerical and categorical variables
+`point_plot()` which handles both numerical and categorical variables
 using one syntax. Here’s a graphic for looking at the difference between
 two means.
 
 ``` r
-Galton |> pointplot(height ~ sex)
+Galton |> point_plot(height ~ sex)
 ```
 
 <img src="man/figures/README-READMEDfxgmm-1.png" width="100%" />
@@ -110,12 +110,12 @@ Point plots can be easily annotated with models. To illustrate the
 difference between the two means, add a model annotation:
 
 ``` r
-Galton |> pointplot(height ~ sex, annot = "model")
+Galton |> point_plot(height ~ sex, annot = "model")
 ```
 
 <img src="man/figures/README-README1euiBE-1.png" width="100%" />
 
-Other `pointplot()` annotations are `violin` and `bw`.
+Other `point_plot()` annotations are `violin` and `bw`.
 
 In *Lessons*, models are always graphed in the context of the underlying
 data and shown as confidence intervals.
@@ -124,7 +124,7 @@ The same graphics and modeling conventions apply to categorical
 variables:
 
 ``` r
-Whickham |> pointplot(outcome ~ smoker, annot = "model")
+Whickham |> point_plot(outcome ~ smoker, annot = "model")
 ```
 
 <img src="man/figures/README-README1OriL5-1.png" width="100%" />
@@ -132,13 +132,13 @@ Whickham |> pointplot(outcome ~ smoker, annot = "model")
 Simple regression works in the same way:
 
 ``` r
-Galton |> pointplot(height ~ mother, annot = "model")
+Galton |> point_plot(height ~ mother, annot = "model")
 ```
 
 <img src="man/figures/README-README2lz92Z-1.png" width="100%" />
 
 ``` r
-Whickham |> pointplot(outcome ~ age, annot = "model")
+Whickham |> point_plot(outcome ~ age, annot = "model")
 ```
 
 <img src="man/figures/README-README2lz92Z-2.png" width="100%" />
@@ -149,7 +149,7 @@ misleading; `age`, not smoking status, plays the primary role in
 explaning mortality.
 
 ``` r
-Whickham |> pointplot(outcome ~ age + smoker, annot = "model")
+Whickham |> point_plot(outcome ~ age + smoker, annot = "model")
 ```
 
 <img src="man/figures/README-READMEtrysVK-1.png" width="100%" />
