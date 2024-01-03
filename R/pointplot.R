@@ -138,7 +138,7 @@ point_plot <- function(D, tilde, ..., seed=101,
 
   # Eliminate x-axis label and ticks if trivial x-variable
   if (length(unique(x_data)) == 1 && x_data[1] == 1)
-    Res <- Res + scale_x_discrete() + xlab("")
+    Res <- Res +  scale_x_discrete() + xlab("")
 
   # Add a violin if called for
   if (annot %in% c("violin")) {
@@ -244,8 +244,8 @@ point_plot <- function(D, tilde, ..., seed=101,
 
   # turn off horizontal axis if there are no explanatory variables
   if (vars[[2]] == 1 && all(data[[2]] == 1, na.rm=TRUE)){
-    Res + theme_update(axis.ticks.x = element_blank(),
-                       axis.text.x = element_blank())
+    Res + theme(axis.ticks.x = element_blank(),
+                axis.text.x = element_blank())
 
   }
 
