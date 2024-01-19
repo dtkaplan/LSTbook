@@ -36,6 +36,7 @@
 #' @param interval the type of interval: default `"confidence"`. Others: `"none"` or `"prediction"`
 #' @param nx Number of places to evaluate any x-axis quantitative vars. Default 50. Use higher
 #' if graph isn't smooth enough.
+#' @param model_family Override the default model type. See `model_train()`
 #' @param \ldots Graphical options for the data points, labels, e.g. size
 #'
 #' @examples
@@ -49,7 +50,7 @@ point_plot <- function(D, tilde, ..., seed=101,
                        interval = c("confidence", "none", "prediction"),
                        point_ink = 0.5,
                        model_ink = 0.4, palette=LETTERS[1:8], bw = NULL, level=0.95,
-                       nx = 50) {
+                       nx = 50, model_family = NULL) {
   annot <- match.arg(annot)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
@@ -91,7 +92,11 @@ point_plot <- function(D, tilde, ..., seed=101,
 
   if (ncol(data) > 2) {
     columns <- 3:ncol(data)
+    # See if there are any NA in the color and faceting variables
+    na_present <- rep(FALSE, nrow(data))
     for (k in columns) {
+      # Update na_present for each column
+      na_present <- na_present | is.na(data[[k]])
       if  (continuous_or_discrete(data[[k]]) == "continuous") {
         if (length(unique(data[[k]])) < 5) {
           data[[k]] <- factor(data[[k]], ordered = TRUE)
@@ -103,7 +108,10 @@ point_plot <- function(D, tilde, ..., seed=101,
         data[[k]] <- factor(data[[k]], ordered = TRUE)
       }
     }
+    # Eliminate the rows with the NAs in color or faceting
+    data <- data[!na_present, ]
   }
+
 
   default_jitter <- 0.15 # default jitter size for categorical variables
 
@@ -174,7 +182,8 @@ point_plot <- function(D, tilde, ..., seed=101,
   if (annot == "model") {
     # calls_to_names() rejiggers the model formula so that it contains
     # references to the <names> of the already transformed data.
-    mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level=level, nx=nx)
+    mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level = level,
+                                nx = nx, family = model_family)
 
     # special case for categorical response variable
     if (!inherits(y_data, "zero_one") && y_is_discrete) {
@@ -284,7 +293,7 @@ simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confide
     Dskel <- expand.grid(data_skeleton(data, tilde, ncont=nx))
   }
   Meval <- model_eval(M, data = Dskel, interval = itype, level = level) |>
-    select(".output", ".lwr", ".upr")
+    dplyr::select(".output", ".lwr", ".upr")
   # Rename the skeleton values to correspond to the names in <data>
   D <- data_from_tilde(Dskel, tilde[[3]])
 
