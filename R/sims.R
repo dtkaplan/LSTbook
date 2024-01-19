@@ -57,7 +57,7 @@ print.datasim <- function(x, ..., report_hidden = FALSE) {
     vcalls <- vcalls[!rid]
   }
 
-  RHS <- lapply(vcalls, deparse) |> unlist()
+  RHS <- lapply(vcalls, deparse, width.cutoff = 500) |> unlist()
   components <- glue::glue("[{seq_along(vnames)}] {vnames} <- {RHS}")
 
   cat(paste0(
@@ -330,6 +330,20 @@ datasim_intervene <- function(sim, ...) {
 
   put_in_order(sim, report_hidden = TRUE)
 
+}
+
+#' @rdname datasim
+#' @param k Number of distinct levels
+#' @param replace if `TRUE`, use resampling on the set of k levels
+#' @export
+random_levels <- function(n, k = NULL, replace = FALSE) {
+  if (is.null(k)) stop("Must specify k as number of distinct levels.")
+  rlevels <- stringi::stri_rand_strings(k, 6, pattern = "[A-Za-z0-9]")
+  if (replace) {
+    sample(rlevels, n, replace = TRUE)
+  } else {
+    sample(rep(rlevels, length.out = n))
+  }
 }
 
 utils::globalVariables("block")

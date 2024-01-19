@@ -18,7 +18,7 @@ November 27
 
 December 1
 
-- Add a "signif" option to conf_intervals() that will round to the correct number of digits for each coefficient.
+- Add a "signif" option to conf_interval() that will round to the correct number of digits for each coefficient.
 
 
 December 3

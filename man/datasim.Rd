@@ -9,6 +9,7 @@
 \alias{block_by}
 \alias{datasim_to_igraph}
 \alias{datasim_intervene}
+\alias{random_levels}
 \title{Facility to make and run data simulations}
 \usage{
 datasim_make(...)
@@ -26,6 +27,8 @@ block_by(block_var, levels = c("treatment", "control"), show_block = FALSE)
 datasim_to_igraph(sim, report_hidden = FALSE)
 
 datasim_intervene(sim, ...)
+
+random_levels(n, k = NULL, replace = FALSE)
 }
 \arguments{
 \item{sim}{A data simulation as made by \code{datasim_make()}}
@@ -53,6 +56,10 @@ replace 0 and 1 in bernouilli()}
 \item{levels}{Character vector giving names to the blocking levels}
 
 \item{show_block}{Logical. If \code{TRUE}, put the block number in the output.}
+
+\item{k}{Number of distinct levels}
+
+\item{replace}{if \code{TRUE}, use resampling on the set of k levels}
 
 \item{\ldots}{assignments of values to the names in \code{variable}}
 }

@@ -81,7 +81,7 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
 
   Fitted <- model_eval_fun(mod, data=eval_data, interval=interval, level=level)
   if (".lwr" %in% names(Fitted))
-    Fitted <- Fitted |> select(".lwr", ".output", ".upr")
+    Fitted <- Fitted |> dplyr::select(".lwr", ".output", ".upr")
 
   if (response_in_data) {
     Residuals <- data.frame(.resid = eval_data[[response_var_name]] - Fitted$.output)

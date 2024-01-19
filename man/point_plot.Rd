@@ -17,7 +17,8 @@ point_plot(
   palette = LETTERS[1:8],
   bw = NULL,
   level = 0.95,
-  nx = 50
+  nx = 50,
+  model_family = NULL
 )
 }
 \arguments{
@@ -47,6 +48,8 @@ prefer to alter the color scheme. There are 8 palettes available: \code{"A"} thr
 
 \item{nx}{Number of places to evaluate any x-axis quantitative vars. Default 50. Use higher
 if graph isn't smooth enough.}
+
+\item{model_family}{Override the default model type. See \code{model_train()}}
 
 \item{\ldots}{Graphical options for the data points, labels, e.g. size}
 }

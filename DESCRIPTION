@@ -10,7 +10,7 @@ LazyData: true
 LazyDataCompression: xz
 Imports: rlang,
          dplyr,
-         ggplot2, 
+         ggplot2 (>= 3.4.4), 
          broom,
          glue,
          stats, 

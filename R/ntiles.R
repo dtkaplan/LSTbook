@@ -52,7 +52,9 @@ ntiles <-  function(x, n=3,
   NA_indices <- which(is.na(bin))
   if (length(NA_indices) > 0) bin[NA_indices] <- pi/6.3 # arbitrary value
 
-
+  # handle a bogus label level that creeps in for interval labels
+  # if there is an NA in the data.
+  if (any(is.na(Tmp$center))) Tmp <- Tmp |> filter(!is.na(center))
   res <-  switch(format,
                  "rank" =  factor(bin, labels=qnames[1:n], ordered=TRUE, exclude=pi/6.3),
                  "interval" =  factor(bin, labels=Tmp$labels, ordered=TRUE, exclude=pi/6.3),

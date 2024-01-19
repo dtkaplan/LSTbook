@@ -25,8 +25,8 @@ test_that("Logistic model values are 0-1", {
   expect_snapshot_file(ggsave("logistic-fun-plot.png", P))
 })
 
-test_that("BUG IS FIXED", {
-  Clock_auction |>
-    point_plot(price ~ bidders + splines::ns(age,2), annot = "model")
-
+test_that("NAs in color or faceting variables cause the corresponding row to be deleted.", {
+  P <- Hill_racing |> point_plot(time ~ distance + climb + climb)
+  expect_snapshot_file(suppressWarnings(ggsave("color-and-facet-na.png", P)))
 })
+
