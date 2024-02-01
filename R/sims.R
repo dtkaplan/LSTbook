@@ -16,7 +16,7 @@
 datasim_make <- function(...) {
   steps <- enquos(..., .ignore_empty = "all")
 
-  if (any(nchar(names(steps[[1]])) > 0))
+  if (any(nchar(names(steps)) > 0))
     stop("Use the storage arrow `<-` (not the equation sign `=`) in arguments to datasim_make().")
   # Pull out the variable names from the left-hand side of <-
   vnames <- lapply(steps, function(x) rlang::quo_get_expr(x)[[2]])
@@ -211,16 +211,17 @@ bernoulli <- function(n=0, logodds=NULL, prob=0.5, labels=NULL) {
 
 #' Mix two variables together. The output will have the specified R-squared
 #' with var1 and variance one.
-#' @param input The part of the mixture that will be correlated with
+#' @param signal The part of the mixture that will be correlated with
 #' the output.
 #' @param noise The rest of the mixture. This will be **uncorrelated**
 #' with the output only if you specify it as pure noise.
 #' @param R2 The target R-squared.
 #' @param var The target variance.
+#' @param exact if `TRUE`, make R-squared or the target variance exactly as specified.
 #'
 #' @details The target R-squared and variance will be achieved only
 #' if `exact=TRUE` or the sample size goes to infinity.
-
+#' @importFrom stats resid rnorm sd
 #' @export
 mix_with <- function(signal, noise = NULL, R2 = 0.5, var = 1, exact=FALSE) {
   if (R2 < 0 || R2 > 1) stop("R2 must be between zero and one.")

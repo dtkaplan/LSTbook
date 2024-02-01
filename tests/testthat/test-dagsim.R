@@ -110,3 +110,15 @@ test_that("each() computes separately for each row", {
   Foo <- sample(Sim, n=10)
   expect_true(all(Foo$z / Foo$k < Foo$k))
 })
+
+test_that("arguments with = instead of <- produce a useful error message", {
+  expect_error(datasim_make(x = rnorm(n, mean=0, sd=2)),
+               regex = "not the equation sign")
+})
+
+test_that("cycles are detected and produce a useful error message", {
+  expect_error(datasim_make(x <- y, y <- -x),
+               regex = "The graph has cycles")
+})
+
+

@@ -1,7 +1,10 @@
 #' A printing method for model objects
 #'
+#' @param x The object to print
+#' @param ... Not used, but here for consistency with generic print()
 #' @export
-print.model_object <- function(model) {
+print.model_object <- function(x, ...) {
+  model <- x
   response_name <- as.character(deparse(response_var(model)))
   explanatory_names <- explanatory_vars(model)
   plural <- ifelse(length(explanatory_names) > 1, "s", "")

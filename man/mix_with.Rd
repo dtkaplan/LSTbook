@@ -8,6 +8,9 @@ with var1 and variance one.}
 mix_with(signal, noise = NULL, R2 = 0.5, var = 1, exact = FALSE)
 }
 \arguments{
+\item{signal}{The part of the mixture that will be correlated with
+the output.}
+
 \item{noise}{The rest of the mixture. This will be \strong{uncorrelated}
 with the output only if you specify it as pure noise.}
 
@@ -15,8 +18,7 @@ with the output only if you specify it as pure noise.}
 
 \item{var}{The target variance.}
 
-\item{input}{The part of the mixture that will be correlated with
-the output.}
+\item{exact}{if \code{TRUE}, make R-squared or the target variance exactly as specified.}
 }
 \description{
 Mix two variables together. The output will have the specified R-squared

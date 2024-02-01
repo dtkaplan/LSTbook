@@ -11,7 +11,7 @@ Statistical Thinking*.
 
 ## Installation
 
-We hope to have `{LST}` available on CRAN by early 2004. In the
+We hope to have `{LST}` available on CRAN by February 2024. In the
 meanwhile, you can install the development version of LST from
 [GitHub](https://github.com/) with:
 

@@ -4,7 +4,12 @@
 \alias{print.model_object}
 \title{A printing method for model objects}
 \usage{
-\method{print}{model_object}(model)
+\method{print}{model_object}(x, ...)
+}
+\arguments{
+\item{x}{The object to print}
+
+\item{...}{Not used, but here for consistency with generic print()}
 }
 \description{
 A printing method for model objects

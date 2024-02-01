@@ -23,8 +23,7 @@ The `{LST}` package provides software and datasets for *Lessons in Statistical T
 
 ## Installation
 
-We hope to have `{LST}` available on CRAN by early 2004. In the meanwhile,
-you can install the development version of LST from [GitHub](https://github.com/) with:
+We hope to have `{LST}` available on CRAN by February 2024. In the meanwhile, you can install the development version of LST from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")

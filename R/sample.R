@@ -43,8 +43,8 @@ sample.data.frame <- function(x, n = nrow(x), replace = FALSE, ..., .by = NULL) 
 }
 
 #' @export
-sample.datasim <- function(x, n = 5, replace = FALSE, ..., seed = NULL) {
-   datasim_run(x, n = n, seed = seed)
+sample.datasim <- function(x, n = 5, replace = FALSE, ..., seed = NULL, report_hidden=FALSE) {
+   datasim_run(x, n = n, seed = seed, report_hidden = report_hidden)
 }
 
 #' @param .by Variables to use to define groups for sampling, as in `{dplyr}`. The sample size

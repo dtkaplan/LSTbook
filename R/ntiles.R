@@ -66,3 +66,5 @@ ntiles <-  function(x, n=3,
   )
   return(res)
 }
+
+utils::globalVariables("center")
