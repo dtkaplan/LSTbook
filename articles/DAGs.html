@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">LST</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.9999</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.99999</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,7 +140,7 @@ usual <code>=</code> syntax for named arguments. Using <code>=</code>
 will generate an error, like this.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Wrong_way</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/datasim.html">datasim_make</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean<span class="op">=</span><span class="fl">0</span>, sd<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># don't use =</span></span>
-<span><span class="co">#&gt; Error in datasim_make(x = rnorm(n, mean = 0, sd = 2)): Can't use `n` as a simulation variable name.</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in datasim_make(x = rnorm(n, mean = 0, sd = 2)): Use the storage arrow `&lt;-` (not the equation sign `=`) in arguments to datasim_make().</span></span></code></pre></div>
 <p>Second, the quantity <code>n</code> does <strong>not</strong> need to
 be defined previously; it will be defined in the sampling phase.</p>
 <p>Third, a rule may make use of a name (like <code>x</code>) only when
@@ -218,7 +218,7 @@ following statement attempts to make a simulation with two variables,
 each of which sets the values of the other.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cycle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/datasim.html">datasim_make</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">y</span>, <span class="va">y</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in igraph::topo_sort(datasim_to_igraph(sim, report_hidden = TRUE)): At core/properties/dag.c:114 : The graph has cycles; topological sorting is only possible in acyclic graphs, Invalid value</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in igraph::topo_sort(datasim_to_igraph(sim, report_hidden = TRUE)): At vendor/cigraph/src/properties/dag.c:115 : The graph has cycles; topological sorting is only possible in acyclic graphs, Invalid value</span></span></code></pre></div>
 <p>The mathematically oriented reader may be tempted to interpret the
 above as a set of <em>differential equation</em>, for instance the
 similar looking <span class="math display">\[\frac{dx}{dt} = y, \
@@ -227,7 +227,7 @@ mathematical object and has solutions, that is <span class="math inline">\(x(t)\
 <span class="math inline">\(y\)</span> clearly influences <span class="math inline">\(x\)</span> and <em>vice versa</em>. Or, to be
 precise, the <em>present$ value of <span class="math inline">\(x\)</span> influences the </em>future values* of
 <span class="math inline">\(y\)</span>. (For R functions pertaining to
-differential equations, see the <a href="https://github.com/ProjectMOSAIC/mosaicCalc" class="external-link">mosaicCalc</a> package, which
+differential equations, see the <code>{mosaicCalc}</code> package, which
 is not related to <a href="https://dtkaplan.github.io/LST/">LST</a> other than by authorship and
 affiliation with [Project MOSAIC]{<a href="https://www.mosaic-web.org/" class="external-link uri">https://www.mosaic-web.org/</a>}.)</p>
 <p>In a data simulation, in contrast, the rows in the output data are
@@ -524,6 +524,104 @@ between the rules! Each rule is an argument to
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> red   good  glue           1</span></span></code></pre></div>
 <p>In the above data frame, you can see that all the treatments have
 been assigned as evenly as possible for each of the colors.</p>
+<ul>
+<li>
+<code><a href="../reference/mix_with.html">mix_with()</a></code> will mix noise with a signal so that the
+output has the specified R<sup>2</sup> and variance.</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Mix_them</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/datasim.html">datasim_make</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mix_with.html">mix_with</a></span><span class="op">(</span><span class="va">x</span>, R2 <span class="op">=</span> <span class="fl">0.71</span>, var <span class="op">=</span> <span class="fl">4.35</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">Dat</span> <span class="op">&lt;-</span> <span class="va">Mix_them</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">Dat</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/model_train.html">model_train</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/regression_summaries.html">R2</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     n k  Rsquared        F     adjR2 p df.num df.denom</span></span>
+<span><span class="co">#&gt; 1 100 1 0.7595083 309.4984 0.7570543 0      1       98</span></span>
+<span><span class="va">Dat</span> <span class="op">|&gt;</span> <span class="fu">summarize</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span></span></span>
+<span><span class="co">#&gt;   `var(y)`</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4.35</span></span></code></pre></div>
+<p>The noise being mixed with the signal may incidentally be correlated
+with the signal. This leads to R<sup>2</sup> varying around the
+specified value. You can avoid this variation (not that you necessarily
+want to) by providing the optional argument
+<code>exact = TRUE</code>.</p>
+</div>
+<div class="section level2">
+<h2 id="doubly-stochastic-processes">Doubly stochastic processes<a class="anchor" aria-label="anchor" href="#doubly-stochastic-processes"></a>
+</h2>
+<p>There are many situations where the conditions for a random outcome
+are themselves set at random. The <code><a href="../reference/datasim.html">bernoulli()</a></code> process
+provides an illustration. Suppose that an outcome ill-vs-healthy is to
+be determined at random, but the patient’s general health condition sets
+the probability of falling ill. For instance:</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sick_sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/datasim.html">datasim_make</a></span><span class="op">(</span></span>
+<span>  <span class="va">health</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, sd<span class="op">=</span><span class="fl">2</span><span class="op">)</span>, </span>
+<span>  <span class="va">sick</span>   <span class="op">&lt;-</span> <span class="fu"><a href="../reference/datasim.html">bernoulli</a></span><span class="op">(</span>logodds <span class="op">=</span> <span class="va">health</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ill"</span>, <span class="st">"OK"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">Sim_dat</span> <span class="op">&lt;-</span> <span class="va">Sick_sim</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">Sim_dat</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">sick</span> <span class="op">~</span> <span class="va">health</span><span class="op">)</span></span></code></pre></div>
+<p><img src="DAGs_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
+<p>A hallmark of such processes is that the <code>n</code> argument
+isn’t needed; the number of random values produced is determined by the
+length of an input variable, in this case <code>health</code>.</p>
+<p><code><a href="../reference/datasim.html">bernoulli()</a></code> was written specially to achieve this
+behavior. It’s helpful to have a mechanism that will enable any doubly
+stochastic behavior. For instance, suppose we want to generate
+<code>k</code> a random positive integer and based on <code>k</code>,
+another variable <code>y</code> which will be the sum of <code>k</code>
+normal processes. It’s tempting to try to write this as follows:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This won't work!</span></span>
+<span><span class="va">sum_sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/datasim.html">datasim_make</a></span><span class="op">(</span></span>
+<span>  <span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">16</span>, <span class="fl">32</span>, <span class="fl">64</span>, <span class="fl">128</span><span class="op">)</span>, n <span class="op">=</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">sum_sim</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
+<span><span class="co">#&gt;       k     y</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   128  2.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  2.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     4  2.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    64  2.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    32  2.37</span></span></code></pre></div>
+<p>This hasn’t performed as might be expected. All the supposedly random
+<code>y</code> values are the same. The reason can be seen from the
+documentation for <code><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm()</a></code>. When the <code>n</code> argument
+to <code><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm()</a></code> is a vector—and <code>k</code> will be a vector
+of length n = 5 when the sample is generated—the length of the vector
+determines the number of random numbers generated. Consequently,
+<code>sum(rnorm(k))</code> is a simple sum of n random numbers, rather
+than a n sums of a varying number of random numbers.</p>
+<p>The <code><a href="../reference/each.html">each()</a></code> function sets things up so that a separate
+calculation is done for each of the n rows in the sample. Each such
+calculation draws on the values of the variables for that particular
+row. To illustrate:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This will do what we want!</span></span>
+<span><span class="va">sum_sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/datasim.html">datasim_make</a></span><span class="op">(</span></span>
+<span>  <span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">16</span>, <span class="fl">32</span>, <span class="fl">64</span>, <span class="fl">128</span><span class="op">)</span>, n <span class="op">=</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/each.html">each</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">sum_sim</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
+<span><span class="co">#&gt;       k      y</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 -<span style="color: #BB0000;">1.32</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    32 14.9  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    32  0.862</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    64 -<span style="color: #BB0000;">2.63</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    16  1.39</span></span></code></pre></div>
+<p>We would need a bigger sample to see the <code>k</code> dependence of
+<code>y</code>:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sum_sim</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">k</span>, point_ink <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
+<p><img src="DAGs_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

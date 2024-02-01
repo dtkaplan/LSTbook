@@ -58,6 +58,9 @@
     <loc>https://dtkaplan.github.io/LST/reference/Econ_outlook_poll.html</loc>
   </url>
   <url>
+    <loc>https://dtkaplan.github.io/LST/reference/FARS.html</loc>
+  </url>
+  <url>
     <loc>https://dtkaplan.github.io/LST/reference/FEV.html</loc>
   </url>
   <url>
@@ -91,9 +94,6 @@
     <loc>https://dtkaplan.github.io/LST/reference/Monocacy_river.html</loc>
   </url>
   <url>
-    <loc>https://dtkaplan.github.io/LST/reference/NYC_parking.html</loc>
-  </url>
-  <url>
     <loc>https://dtkaplan.github.io/LST/reference/Offspring.html</loc>
   </url>
   <url>
@@ -124,13 +124,7 @@
     <loc>https://dtkaplan.github.io/LST/reference/US_wildfires.html</loc>
   </url>
   <url>
-    <loc>https://dtkaplan.github.io/LST/reference/Vertebrates.html</loc>
-  </url>
-  <url>
     <loc>https://dtkaplan.github.io/LST/reference/Wheat.html</loc>
-  </url>
-  <url>
-    <loc>https://dtkaplan.github.io/LST/reference/World_cities.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LST/reference/add_plot_labels.html</loc>
@@ -151,10 +145,16 @@
     <loc>https://dtkaplan.github.io/LST/reference/datasim.html</loc>
   </url>
   <url>
+    <loc>https://dtkaplan.github.io/LST/reference/each.html</loc>
+  </url>
+  <url>
     <loc>https://dtkaplan.github.io/LST/reference/index.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LST/reference/label_zero_one.html</loc>
+  </url>
+  <url>
+    <loc>https://dtkaplan.github.io/LST/reference/mix_with.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LST/reference/model_eval.html</loc>
@@ -184,7 +184,10 @@
     <loc>https://dtkaplan.github.io/LST/reference/ntiles.html</loc>
   </url>
   <url>
-    <loc>https://dtkaplan.github.io/LST/reference/pointplot.html</loc>
+    <loc>https://dtkaplan.github.io/LST/reference/point_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://dtkaplan.github.io/LST/reference/print.model_object.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LST/reference/regression_summaries.html</loc>

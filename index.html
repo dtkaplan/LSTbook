@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">LST</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.9999</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.99999</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>We hope to have <a href="https://dtkaplan.github.io/LST/">LST</a> available on CRAN by early 2004. In the meanwhile, you can install the development version of LST from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>We hope to have <a href="https://dtkaplan.github.io/LST/">LST</a> available on CRAN by February 2024. In the meanwhile, you can install the development version of LST from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"dtkaplan/LST"</span><span class="op">)</span></span></code></pre></div>
@@ -99,30 +99,30 @@
 <p>Start by installing <a href="https://dtkaplan.github.io/LST/">LST</a> as described above, then loading it into the R session:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dtkaplan.github.io/LST/">LST</a></span><span class="op">)</span></span></code></pre></div>
-<p>In the examples that follow, we will use the <a href="https://dtkaplan.github.io/LST/">LST</a> function <code><a href="reference/pointplot.html">pointplot()</a></code> which handles both numerical and categorical variables using one syntax. Here’s a graphic for looking at the difference between two means.</p>
+<p>In the examples that follow, we will use the <a href="https://dtkaplan.github.io/LST/">LST</a> function <code><a href="reference/point_plot.html">point_plot()</a></code> which handles both numerical and categorical variables using one syntax. Here’s a graphic for looking at the difference between two means.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-READMEDfxgmm-1.png" width="100%"></p>
 <p>Point plots can be easily annotated with models. To illustrate the difference between the two means, add a model annotation:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README1euiBE-1.png" width="100%"></p>
-<p>Other <code><a href="reference/pointplot.html">pointplot()</a></code> annotations are <code>violin</code> and <code>bw</code>.</p>
+<p>Other <code><a href="reference/point_plot.html">point_plot()</a></code> annotations are <code>violin</code> and <code>bw</code>.</p>
 <p>In <em>Lessons</em>, models are always graphed in the context of the underlying data and shown as confidence intervals.</p>
 <p>The same graphics and modeling conventions apply to categorical variables:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README1OriL5-1.png" width="100%"></p>
 <p>Simple regression works in the same way:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">mother</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">mother</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README2lz92Z-1.png" width="100%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README2lz92Z-2.png" width="100%"></p>
 <p>The syntax extends naturally to handle the inclusion of covariates. For example, the simple calculation of difference between two proportions is misleading; <code>age</code>, not smoking status, plays the primary role in explaning mortality.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-READMEtrysVK-1.png" width="100%"></p>
 <p>NOTE: To highlight statistical inference, we have been working with an n=200 sub-sample of Galton:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">

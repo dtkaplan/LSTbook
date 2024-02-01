@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">LST</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.9999</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.99999</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,9 @@
 <span></span>
 <span><span class="fu">datasim_to_igraph</span><span class="op">(</span><span class="va">sim</span>, report_hidden <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">datasim_intervene</span><span class="op">(</span><span class="va">sim</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">datasim_intervene</span><span class="op">(</span><span class="va">sim</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">random_levels</span><span class="op">(</span><span class="va">n</span>, k <span class="op">=</span> <span class="cn">NULL</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -119,6 +121,14 @@ replace 0 and 1 in bernouilli()</p></dd>
 
 <dt>show_block</dt>
 <dd><p>Logical. If <code>TRUE</code>, put the block number in the output.</p></dd>
+
+
+<dt>k</dt>
+<dd><p>Number of distinct levels</p></dd>
+
+
+<dt>replace</dt>
+<dd><p>if <code>TRUE</code>, use resampling on the set of k levels</p></dd>
 
 
 <dt>...</dt>

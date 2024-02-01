@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">LST</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.9999</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.9.99999</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,7 +99,7 @@ formulas with an unneeded name for an R syntactical structure.)</p>
 generating a plot of two variables in a data frame and then annotating
 the plot with a simple linear model.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="LST_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>The command illustrates several features of the style of commands in
 <em>Lessons</em>:</p>
@@ -137,9 +137,9 @@ details for the function will be added within the parentheses. In the
 above example command, the detail to add a statistical model as an
 annotation is specified by the argument `annot = “model”.</p></li>
 <li>
-<p><code><a href="../reference/pointplot.html">pointplot()</a></code> is a omnibus graphics command sufficient
-for teaching an entire statistics course that includes inference and
-covariation.</p>
+<p><code><a href="../reference/point_plot.html">point_plot()</a></code> is a omnibus graphics command
+sufficient for teaching an entire statistics course that includes
+inference and covariation.</p>
 <ul>
 <li>The output is <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> compatible.</li>
 <li>Other such omnibus commands from <a href="https://dtkaplan.github.io/LST/">LST</a> seen in
@@ -171,7 +171,7 @@ pipe:</p>
 second-half of the course.</li>
 <li>A “data simulation” is another kind of input type.</li>
 <li>Optionally, and mainly for enrichment, a data graphic frame (as
-produced by <code><a href="../reference/pointplot.html">pointplot()</a></code>) is used at the input of the pipe
+produced by <code><a href="../reference/point_plot.html">point_plot()</a></code>) is used at the input of the pipe
 towards a command to add labels or to add another <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>
 layer.</li>
 </ol>
@@ -187,7 +187,7 @@ output-ends:</p>
 <li><p>The R command given on the right-hand side of <code>|&gt;</code>
 will <strong>always</strong> be a function call. No exceptions. A
 function call consists of the name of a function (e.g.,
-<code>pointplot</code> or <code>model_train</code>) followed by an
+<code>point_plot</code> or <code>model_train</code>) followed by an
 open/closed pair of parentheses. Usually, there is something such as a
 <em>tilde expression</em> contained in the parentheses, but there are
 often additional <strong>named arguments</strong> such as the
@@ -221,14 +221,14 @@ response variable in a model.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> wt           1.92    2.70   3.48</span></span></code></pre></div>
 <p>For convenience, the <code><a href="../reference/add_plot_labels.html">add_plot_labels()</a></code> function will
 modify the labels in a plot, taking as input a plot (as produced by
-<code><a href="../reference/pointplot.html">pointplot()</a></code>, for instance) and returning as output the
+<code><a href="../reference/point_plot.html">point_plot()</a></code>, for instance) and returning as output the
 modified plot. (Perhaps of interest to those familiar with
 <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> … <code><a href="../reference/add_plot_labels.html">add_plot_labels()</a></code> is merely a
 wrapper on <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggplot2::labs()</a></code> that avoids the non-standard
 <code>+</code> pipe system.)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/pointplot.html">pointplot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">*</span> <span class="va">wt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">*</span> <span class="va">wt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/add_plot_labels.html">add_plot_labels</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Engine power (hp)"</span>, y <span class="op">=</span> <span class="st">"Fuel economy (mpg)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="LST_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
@@ -332,11 +332,11 @@ stage back in.</p>
 of plotting modalities, such as bar charts, line charts, histograms,
 etc. <em>Lessons</em> was written to use only a single primary graphic
 modality: the point plot (a.k.a. “scatter plot”) as produced by
-<code><a href="../reference/pointplot.html">pointplot()</a></code>. Three other modalities—confidence intervals,
+<code><a href="../reference/point_plot.html">point_plot()</a></code>. Three other modalities—confidence intervals,
 confidence bands, and violin plots of density—are provided by the
-annotation feature of <code><a href="../reference/pointplot.html">pointplot()</a></code>. These are
+annotation feature of <code><a href="../reference/point_plot.html">point_plot()</a></code>. These are
 <code>annot = "violin"</code> and <code>"annot = "model"</code>.</p>
-<p>The output of <code><a href="../reference/pointplot.html">pointplot()</a></code> is a <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>
+<p>The output of <code><a href="../reference/point_plot.html">point_plot()</a></code> is a <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>
 graphical object. Consequently, you can use the various
 <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> functions to set a graphics theme, label axes,
 and so on. Unfortunately, <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> functions use the
@@ -359,7 +359,7 @@ with <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mos
 course welcome to use <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and <a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>
 along with <a href="https://dtkaplan.github.io/LST/">LST</a>, particularly if you want to teach other
 graphics modalities than those provided by
-<code><a href="../reference/pointplot.html">LST::pointplot()</a></code>.</p>
+<code><a href="../reference/point_plot.html">LST::point_plot()</a></code>.</p>
 <p>Other than shared pedagogical principles, there is no connection of
 <a href="https://dtkaplan.github.io/LST/">LST</a> with either <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and
 <a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>. One reason for this is the pipe
