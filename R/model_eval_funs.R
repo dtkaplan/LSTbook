@@ -1,6 +1,6 @@
 #' Helper functions to evaluate models
 #'
-#' Only used internally in `{LST}`
+#' Only used internally in `{LSTbook}`
 #' @param model A model object of the classes permitted
 #' @param data Usually, a data table specifying the inputs to the model. But if
 #' not specified, the training data will be used.
@@ -18,7 +18,7 @@ model_eval_fun <- function(model, data=NULL, interval="none", level=0.95, ...) {
 }
 #' @exportS3Method
 model_eval_fun.default <- function(model, data=NULL, interval="none", level=0.95, ...) {
-  stop("The LST package doesn't have access to an evaluation function for this kind of model object.")
+  stop("The LSTbook package doesn't have access to an evaluation function for this kind of model object.")
 }
 #' @exportS3Method
 model_eval_fun.lm <- function(model, data=NULL, interval="none", level=0.95, ...) {
@@ -161,7 +161,7 @@ model_eval_fun.train <- function(model, data = NULL, interval = "none",
     res <- as.data.frame(
       stats::predict(model, newdata = data, type = "prob" ))
   } else {
-    stop("Caret model is neither classifier nor regression. LST doesn't know what to do.")
+    stop("Caret model is neither classifier nor regression. LSTbook doesn't know what to do.")
   }
 
   tibble::remove_rownames(res)

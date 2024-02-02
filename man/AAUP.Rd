@@ -17,7 +17,7 @@
 }
 }
 \source{
-George Cobb (2011) "Teaching statistics: some important tensions" \emph{Chilean Journal of Statistics} \strong{2}(1):31-62 \href{http://soche.cl/chjs/volumes/02/01/Cobb(2011).pdf}{link}
+George Cobb (2011) "Teaching statistics: some important tensions" \emph{Chilean Journal of Statistics} \strong{2}(1):31-62 \href{https://soche.cl/chjs/volumes/02/01/Cobb(2011).pdf}{link}
 }
 \usage{
 data(AAUP)

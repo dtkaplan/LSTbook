@@ -16,22 +16,20 @@
 #' @source The data were helpfully provided by the registrar of the college with the proviso
 #' that the de-identification steps outlined above be performed.
 #'
-#' @format
-#'   A data frame with 6146 Grades for 443 students.
-#'   \itemize{
-#'     \item{\code{grade}} {The letter grade for the student in this course: A is the highest.}
-#'     \item{\code{sessionID}} {An identifier for the course taken. Courses
-#'     offered multiple times in one semester or across semesters have individual IDs.}
-#'     \item{\code{sid}} {The student ID}
-#'     \item{\code{dept}} {The department in which the course was offered. 100 is entry-level,
-#'     200 sophomore-level, 300 junior-level, 400 senior-level.}
-#'     \item{\code{enroll}} {Student enrollment in the course. This includes students who are not
-#'     part of this sample.}
-#'     \item{\code{iid}} {Instructor ID}
-#'     \item{\code{gradepoint}} {A translation of the letter grade into a numerical scale. 4 is high.
+#' @format A data frame with 6146 Grades for 443 students.
+#'
+#'     -grade The letter grade for the student in this course: A is the highest.
+#'     - sessionID An identifier for the course taken. Courses
+#'     offered multiple times in one semester or across semesters have individual IDs.
+#'     -sid The student ID
+#'     -dept The department in which the course was offered. 100 is entry-level,
+#'     200 sophomore-level, 300 junior-level, 400 senior-level.
+#'     -enroll Student enrollment in the course. This includes students who are not
+#'     part of this sample.
+#'     -iid Instructor ID
+#'     -gradepoint A translation of the letter grade into a numerical scale. 4 is high.
 #'     Some letter grades are not counted in a student's gradepoint average. These have \code{NA} for
-#'     the gradepoint.}
-#'   }
+#'     the gradepoint.
 #'
 #' @examples
 #' \dontrun{

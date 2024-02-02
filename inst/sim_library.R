@@ -2,7 +2,7 @@
 #'
 #'
 #'
-library(LST)
+library(LSTbook)
 
 
 sim_00 <- datasim_make(

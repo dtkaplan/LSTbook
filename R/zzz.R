@@ -32,3 +32,5 @@ utils::globalVariables(c("data", "pf", "xend", "yend",
                          "label", "xticks", "ybase", "ymid",
                          "ytop", ".lwr", ".output", ".response", ".resid",
                          "na.exclude", "left", "right"))
+
+####

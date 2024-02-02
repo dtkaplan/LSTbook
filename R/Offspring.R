@@ -19,5 +19,5 @@
 #' @keywords datasets
 #'
 #' @source Shai Meiri, "Endothermy, offspring size and evolution of parental provisioning in vertebrates",
-#' *Biological Journal of the Linnean Society*, **128**:4, pp. 1052-6 [link](https://doi.org/10.1093/biolinnean/blz138). See Appendix S1.
+#' *Biological Journal of the Linnean Society*, **128**:4, pp. 1052-6 \doi{/10.1093/biolinnean/blz138}. See Appendix S1.
 "Offspring"

@@ -15,7 +15,8 @@ A data.frame with one row for each of 645 youngsters.
 }
 }
 \source{
-Cummiskey, et al. (2020) "Causal Inference in Introductory Statistics Courses" \emph{Journal of Statistics Education} \strong{28}(1) \href{https://www.tandfonline.com/doi/full/10.1080/10691898.2020.1713936}{link}
+Cummiskey, et al. (2020) "Causal Inference in Introductory Statistics Courses"
+\emph{Journal of Statistics Education} \strong{28}(1) \doi{10.1080/10691898.2020.1713936}
 }
 \usage{
 data(FEV)

@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r include=FALSE}
-library(LST)
+library(LSTbook)
 library(tibble)
 ```
 

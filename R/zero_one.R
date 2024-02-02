@@ -9,7 +9,7 @@
 #' @param one character string specifying the level that gets mapped to 1.
 #'
 #' @examples
-#' Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
+#' mosaicData::Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
 #'
 #' @export
 zero_one <- function(x, one) {
@@ -29,17 +29,14 @@ zero_one <- function(x, one) {
   res
 }
 
-#' not clear how to use this. I want an easy way to label the vertical axis of graphs
-#' where the y-axis is a zero-one variable.
-#'
+
+#' @rdname zero_one
+#' @param P A ggplot2 object made by `model_plot()` or `point_plot()`
 #' @examples
-#' Whickham |>
+#' mosaicData::Whickham |>
 #'   point_plot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
 #'   label_zero_one() +
 #'   ylab("Prob. alive at 20-year follow-up")
-
-#' @param P A ggplot2 object made by `model_plot()` or `point_plot()`
-
 #' @export
 label_zero_one <- function(P) {
   # vertical axis data in P$data[[1]]

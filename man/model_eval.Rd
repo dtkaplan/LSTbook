@@ -54,4 +54,3 @@ model_eval(mod) # training data
 model_eval(mod, skeleton=TRUE)
 
 }
-\concept{{Functions used in Lessons}}

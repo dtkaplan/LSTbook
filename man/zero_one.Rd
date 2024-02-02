@@ -2,14 +2,19 @@
 % Please edit documentation in R/zero_one.R
 \name{zero_one}
 \alias{zero_one}
+\alias{label_zero_one}
 \title{Zero-one transformation for categorical variable}
 \usage{
 zero_one(x, one)
+
+label_zero_one(P)
 }
 \arguments{
 \item{x}{a categorical variable}
 
 \item{one}{character string specifying the level that gets mapped to 1.}
+
+\item{P}{A ggplot2 object made by \code{model_plot()} or \code{point_plot()}}
 }
 \description{
 A convenience function for handling categorical response variables.
@@ -18,6 +23,10 @@ Such numerical mapping is inappropriate for logistic modeling, where we want the
 be on a probability scale.
 }
 \examples{
-Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
+mosaicData::Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
 
+mosaicData::Whickham |>
+  point_plot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
+  label_zero_one() +
+  ylab("Prob. alive at 20-year follow-up")
 }

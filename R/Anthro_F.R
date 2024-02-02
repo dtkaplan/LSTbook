@@ -11,6 +11,7 @@
 #' Slack (1997) who used the standards recommended by Lohman, Roche and
 #' Martrell (1988).
 #'
+#'
 #' @docType data
 #'
 #' @usage data(Anthro_F)
@@ -41,5 +42,5 @@
 #' @keywords datasets
 #'
 #' @source Roger W. Johnson (2021) "Fitting Percentage of Body Fat to Simple Body Measurements: College Women"
-#' *Journal of Statistics and Data Science Education* **29**(3) \href{https://doi.org/10.1080/26939169.2021.1971585}{link}
+#' *Journal of Statistics and Data Science Education* **29**(3) \doi{10.1080/26939169.2021.1971585}
 "Anthro_F"

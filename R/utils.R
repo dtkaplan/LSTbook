@@ -58,7 +58,7 @@ data_from_model.glm <- function(model, ...) get_training_data(model)
 data_from_model.default <- function(model, ...) {
   error_string <- paste0("Model architecture '",
                          paste(class(model), collapse = "', "),
-                         "' not recognized by LST.")
+                         "' not recognized by LSTbook.")
   stop(error_string)
 }
 

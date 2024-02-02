@@ -26,7 +26,7 @@ levels on educational performance and personal development
 \references{
 \itemize{
 \item Imai, Kosuke. 2017. Quantitative Social Science: An Introduction. Princeton University Press. \href{https://press.princeton.edu/books/hardcover/9780691167039/quantitative-social-science}{URL} from whence
-these data were added to \code{{LST}}.
+these data were added to this package.
 \item Mosteller, Frederick. 1997. “The Tennessee Study of Class Size in the Early School Grades.” Bulletin of the American Academy of Arts and Sciences 50(7): 14-25. doi = 10.2307/3824562
 }
 }

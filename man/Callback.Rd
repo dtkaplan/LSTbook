@@ -29,7 +29,7 @@ set randomly to sound either Black or white.
 \references{
 \itemize{
 \item Imai, Kosuke. 2017. Quantitative Social Science: An Introduction. Princeton University Press.  \href{https://press.princeton.edu/books/hardcover/9780691167039/quantitative-social-science}{URL} from whence
-these data were added to \code{{LST}}. In QSS, the data are called \code{resume}.
+these data were added to this package. In QSS, the data are called \code{resume}.
 \item Marianne Bertrand and Sendhil Mullainathan (2004) “Are Emily and Greg more employable than Lakisha and Jamal? A field experiment on labor market discrimination.” American Economic Review, vol. 94, no. 4, pp. 991–1013. doi: 10.3386/w9873
 }
 }

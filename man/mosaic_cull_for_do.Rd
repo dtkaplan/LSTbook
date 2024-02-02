@@ -30,6 +30,6 @@ the default \code{cull_for_do} extracts the coefficients, coefficient
 of determinism, an the estimate for the variance, etc.
 }
 \examples{
-KidsFeet |> resample() |> model_train(length ~ resample(width)) |>
+Clock_auction |> model_train(price ~ resample(bidders)) |>
   R2() |> trials(times=10)
 }

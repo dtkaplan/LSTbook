@@ -20,6 +20,6 @@
 #'
 #' @keywords datasets
 #'
-#' @source  The data were scraped from the \href{http://www.scottishhillracing.co.uk/ResultsSummary.aspx}{Scottish Hill Racing site}.
+#' @source  The data were scraped from the \href{https://www.scottishhillracing.co.uk/ResultsSummary.aspx}{Scottish Hill Racing site}.
 #'
 "Hill_racing"

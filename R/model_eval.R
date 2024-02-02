@@ -20,7 +20,6 @@
 #' - if training data is used as the input, the `.response` variable and the `.resid`. Note that
 #' the generic name `.response` is used, not the actual name of the model's response variable.
 #'
-#' @family {Functions used in Lessons}
 #' @examples
 #' mod <- mtcars |> model_train(mpg ~ hp + wt)
 #' model_eval(mod, hp=100, wt=c(2,3))

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(LST)
+library(LSTbook)
 
-test_check("LST")
+test_check("LSTbook")

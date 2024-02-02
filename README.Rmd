@@ -11,19 +11,19 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-library(LST)
+library(LSTbook)
 ```
 
-# {LST}: An R package for *Lessons in Statistical Thinking*
+# {LSTbook}: An R package for *Lessons in Statistical Thinking*
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The `{LST}` package provides software and datasets for *Lessons in Statistical Thinking*.
+The `{LSTbook}` package provides software and datasets for [*Lessons in Statistical Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/).
 
 ## Installation
 
-We hope to have `{LST}` available on CRAN by February 2024. In the meanwhile, you can install the development version of LST from [GitHub](https://github.com/) with:
+We hope to have `{LSTbook}` available on CRAN by February 2024. In the meanwhile, you can install the development version of `{LSTbook}` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -32,33 +32,33 @@ devtools::install_github("dtkaplan/LST")
 
 ## Overview
 
-The `{LST}` package has been developed to help students and instructors learn and teach statistics and early data science. `{LST}` supports the new textbook (still in draft) *Lessons in Statistical Thinking*, but instructors may want to use `{LST}` even with other textbooks.
+The `{LSTbook}` package has been developed to help students and instructors learn and teach statistics and early data science. `{LSTbook}` supports the 2024 textbook  *Lessons in Statistical Thinking*, but instructors may want to use `{LSTbook}` even with other textbooks.
 
 The statistics component of *Lessons* may fairly be called a radical innovation. As an [introductory, university-level course](https://dtkaplan.github.io/Math300blog/posts/StatChat-10-2023/), *Lessons* gives students access to important modern themes in statistics including modeling, simulation, co-variation, and causal inference. Data scientists, who use data to make genuine decisions, will get the tools they need. This includes a complete rethinking of statistical inference, starting with confidence intervals very early in the course, then gently introducing the structure of Bayesian inference. The coverage of hypothesis testing has greatly benefited from the discussions prompted by the American Statistical Association's [*Statement on P-values*](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf) and is approached in a way that, I hope, will be appreciated by all sides of the debate.
 
 The data-science part of the course includes the concepts and wrangling needed to undertake statistical investigations (not including data cleaning). It is based, as you might expect, on the tidyverse and `{dplyr}`.
 
-Some readers may be familiar with the `{mosaic}` suite of packages which provides, for many students and instructors, their first framework for statistical computation. But there have been many R developments since 2011 when `{mosaic}` was introduced. These include pipes and the tidyverse style of referring to variables. `{mosaic}` has an uneasy equilibrium with the tidyverse. In contrast, the statistical functions in `{LST}` fit in with the tidyverse style and mesh well with `{dplyr}` commands.
+Some readers may be familiar with the `{mosaic}` suite of packages which provides, for many students and instructors, their first framework for statistical computation. But there have been many R developments since 2011 when `{mosaic}` was introduced. These include pipes and the tidyverse style of referring to variables. `{mosaic}` has an uneasy equilibrium with the tidyverse. In contrast, the statistical functions in `{LSTbook}` fit in with the tidyverse style and mesh well with `{dplyr}` commands.
 
-The `{LST}` function set is highly streamlined and internally consistent. There is a tight set of only four object types produced by the `{LST}` computations:
+The `{LSTbook}` function set is highly streamlined and internally consistent. There is a tight set of only four object types produced by the `{LSTbook}` computations:
 
 - Data frames 
 - Graphic frames (`{ggplot2}` compatible but much streamlined)
 - Models, which are summarized to produce either data frames or graphic frames. 
 - Data simulations (via DAGs) which are sampled from to produce data frames
 
-Vignettes provide an instructor-level tutorial introduction to `{LST}`. The student-facing introduction is the *Lessons in Statistical Thinking* textbook.
+Vignettes provide an instructor-level tutorial introduction to `{LSTbook}`. The student-facing introduction is the *Lessons in Statistical Thinking* textbook.
 
 ## Statistics for data science
 
 Every instructor of introductory statistics is familiar with textbooks that devote separate chapters to each of a half-dozen basic tests: means, differences in means, proportions, differences in proportions, and simple regression. It's been known for a century that these topics invoke the same statistical concepts. Moreover, they are merely precursors to the essential multivariable modeling techniques used in mainstream data-science tasks such as dealing with confounding. 
 
-To illustrate how `{LST}` supports teaching such topics in a unified and streamlined way, consider to datasets provided by the `{mosaicData}` package: `Galton`, which contains the original data used by Francis Galton in the 1880s to study the heritability of genetic traits, specifically, human height; and `Whickham` results from a 20-year follow-up survey to study smoking and health.
+To illustrate how `{LSTbook}` supports teaching such topics in a unified and streamlined way, consider to datasets provided by the `{mosaicData}` package: `Galton`, which contains the original data used by Francis Galton in the 1880s to study the heritability of genetic traits, specifically, human height; and `Whickham` results from a 20-year follow-up survey to study smoking and health.
 
-Start by installing `{LST}` as described above, then loading it into the R session:
+Start by installing `{LSTbook}` as described above, then loading it into the R session:
 
 ```{r label='READMEi5Psym'}
-library(LST)
+library(LSTbook)
 ```
 
 
@@ -68,7 +68,7 @@ Whickham <- Whickham |> mutate(outcome = zero_one(outcome, one = "Dead"))
 ```
 
 
-In the examples that follow, we will use the `{LST}` function `point_plot()` which handles both numerical and categorical variables using one syntax. Here's a graphic for looking at the difference between two means. 
+In the examples that follow, we will use the `{LSTbook}` function `point_plot()` which handles both numerical and categorical variables using one syntax. Here's a graphic for looking at the difference between two means. 
 
 ```{r label='READMEDfxgmm', }
 Galton |> point_plot(height ~ sex)
@@ -119,7 +119,7 @@ Galton <- Galton |> sample(n=100, .by = sex)
 ```
 
 
-Quantitative modeling has the same syntax, but rather than rely on the default R reports for models, `{LST}` offers concise summaries.
+Quantitative modeling has the same syntax, but rather than rely on the default R reports for models, `{LSTbook}` offers concise summaries.
 
 ```{r label='READMED8whZg'}
 Whickham |> model_train(outcome ~ age + smoker) |> conf_interval()

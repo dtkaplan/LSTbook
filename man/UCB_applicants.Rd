@@ -33,6 +33,7 @@ a data table where the unit of observation is an individual applicant. The origi
 \code{datasets::UCBAdmissions} is not clear; those data are not explicitly provided in Bickel et al.
 }
 \references{
-Bickel, P. J., Hammel, E. A., and O'Connell, J. W. (1975). Sex bias in graduate admissions: Data from Berkeley. Science, 187, 398–403. \url{http://www.jstor.org/stable/1739581}.
+Bickel, P. J., Hammel, E. A., and O'Connell, J. W. (1975).
+Sex bias in graduate admissions: Data from Berkeley. Science, 187, 398–403. \href{https://www.jstor.org/stable/1739581}{link to JSTOR}.
 }
 \keyword{datasets}

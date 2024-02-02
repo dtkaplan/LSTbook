@@ -1,18 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# {LST}: An R package for *Lessons in Statistical Thinking*
+# {LSTbook}: An R package for *Lessons in Statistical Thinking*
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The `{LST}` package provides software and datasets for *Lessons in
-Statistical Thinking*.
+The `{LSTbook}` package provides software and datasets for [*Lessons in
+Statistical
+Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/).
 
 ## Installation
 
-We hope to have `{LST}` available on CRAN by February 2024. In the
-meanwhile, you can install the development version of LST from
+We hope to have `{LSTbook}` available on CRAN by February 2024. In the
+meanwhile, you can install the development version of `{LSTbook}` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -22,10 +23,11 @@ devtools::install_github("dtkaplan/LST")
 
 ## Overview
 
-The `{LST}` package has been developed to help students and instructors
-learn and teach statistics and early data science. `{LST}` supports the
-new textbook (still in draft) *Lessons in Statistical Thinking*, but
-instructors may want to use `{LST}` even with other textbooks.
+The `{LSTbook}` package has been developed to help students and
+instructors learn and teach statistics and early data science.
+`{LSTbook}` supports the 2024 textbook *Lessons in Statistical
+Thinking*, but instructors may want to use `{LSTbook}` even with other
+textbooks.
 
 The statistics component of *Lessons* may fairly be called a radical
 innovation. As an [introductory, university-level
@@ -53,12 +55,12 @@ statistical computation. But there have been many R developments since
 2011 when `{mosaic}` was introduced. These include pipes and the
 tidyverse style of referring to variables. `{mosaic}` has an uneasy
 equilibrium with the tidyverse. In contrast, the statistical functions
-in `{LST}` fit in with the tidyverse style and mesh well with `{dplyr}`
-commands.
+in `{LSTbook}` fit in with the tidyverse style and mesh well with
+`{dplyr}` commands.
 
-The `{LST}` function set is highly streamlined and internally
+The `{LSTbook}` function set is highly streamlined and internally
 consistent. There is a tight set of only four object types produced by
-the `{LST}` computations:
+the `{LSTbook}` computations:
 
 - Data frames
 - Graphic frames (`{ggplot2}` compatible but much streamlined)
@@ -67,9 +69,9 @@ the `{LST}` computations:
 - Data simulations (via DAGs) which are sampled from to produce data
   frames
 
-Vignettes provide an instructor-level tutorial introduction to `{LST}`.
-The student-facing introduction is the *Lessons in Statistical Thinking*
-textbook.
+Vignettes provide an instructor-level tutorial introduction to
+`{LSTbook}`. The student-facing introduction is the *Lessons in
+Statistical Thinking* textbook.
 
 ## Statistics for data science
 
@@ -81,21 +83,21 @@ invoke the same statistical concepts. Moreover, they are merely
 precursors to the essential multivariable modeling techniques used in
 mainstream data-science tasks such as dealing with confounding.
 
-To illustrate how `{LST}` supports teaching such topics in a unified and
-streamlined way, consider to datasets provided by the `{mosaicData}`
+To illustrate how `{LSTbook}` supports teaching such topics in a unified
+and streamlined way, consider to datasets provided by the `{mosaicData}`
 package: `Galton`, which contains the original data used by Francis
 Galton in the 1880s to study the heritability of genetic traits,
 specifically, human height; and `Whickham` results from a 20-year
 follow-up survey to study smoking and health.
 
-Start by installing `{LST}` as described above, then loading it into the
-R session:
+Start by installing `{LSTbook}` as described above, then loading it into
+the R session:
 
 ``` r
-library(LST)
+library(LSTbook)
 ```
 
-In the examples that follow, we will use the `{LST}` function
+In the examples that follow, we will use the `{LSTbook}` function
 `point_plot()` which handles both numerical and categorical variables
 using one syntax. Here’s a graphic for looking at the difference between
 two means.
@@ -162,7 +164,7 @@ Galton <- Galton |> sample(n=100, .by = sex)
 ```
 
 Quantitative modeling has the same syntax, but rather than rely on the
-default R reports for models, `{LST}` offers concise summaries.
+default R reports for models, `{LSTbook}` offers concise summaries.
 
 ``` r
 Whickham |> model_train(outcome ~ age + smoker) |> conf_interval()

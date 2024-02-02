@@ -23,5 +23,5 @@
 #'
 #' @references M Bellas & BF Reskin (1994) "On comparable worth" *Academe* **80**:83-85
 #'
-#' @source George Cobb (2011) "Teaching statistics: some important tensions" *Chilean Journal of Statistics* **2**(1):31-62 [link](http://soche.cl/chjs/volumes/02/01/Cobb(2011).pdf)
+#' @source George Cobb (2011) "Teaching statistics: some important tensions" *Chilean Journal of Statistics* **2**(1):31-62 [link](https://soche.cl/chjs/volumes/02/01/Cobb(2011).pdf)
 "AAUP"

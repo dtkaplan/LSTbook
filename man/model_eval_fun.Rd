@@ -20,7 +20,7 @@ types support "prediction" or even "confidence".}
 \item{...}{additional arguments}
 }
 \description{
-Only used internally in \code{{LST}}
+Only used internally in \code{{LSTbook}}
 }
 \details{
 All of the \code{eval_} functions are ex

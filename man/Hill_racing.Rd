@@ -20,7 +20,7 @@ male and female winner.
 }
 }
 \source{
-The data were scraped from the \href{http://www.scottishhillracing.co.uk/ResultsSummary.aspx}{Scottish Hill Racing site}.
+The data were scraped from the \href{https://www.scottishhillracing.co.uk/ResultsSummary.aspx}{Scottish Hill Racing site}.
 }
 \usage{
 data(Hill_racing)

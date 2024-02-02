@@ -30,7 +30,7 @@ A data.frame with one row for each of 184 woman
 }
 \source{
 Roger W. Johnson (2021) "Fitting Percentage of Body Fat to Simple Body Measurements: College Women"
-\emph{Journal of Statistics and Data Science Education} \strong{29}(3) \href{https://doi.org/10.1080/26939169.2021.1971585}{link}
+\emph{Journal of Statistics and Data Science Education} \strong{29}(3) \doi{10.1080/26939169.2021.1971585}
 }
 \usage{
 data(Anthro_F)

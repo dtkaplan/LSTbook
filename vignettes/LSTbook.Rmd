@@ -15,14 +15,14 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, include = FALSE}
-library(LST)
+library(LSTbook)
 library(dplyr)
 library(ggplot2)
 ```
 
 The `{LST}` package provides support for the style of R computing used in the textbook, [*Lessons in Statistical Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/). This style seeks to reduce the cognitive load on students by reducing to a minimum the number of R functions and the syntax needed to undertake a complete course that includes (simple) data wrangling, visualization, modeling, and causal simulation. At the same time, the style supports using statistical inference in an informal way from the very beginning of the course, *gradually* formalizing it over the semester.
 
-This document is oriented toward instructors or strongly motivated students. The *Lessons* textbook and accompanying [blog posts](https://dtkaplan.github.io/Math300blog) provide an introduction for the typical student. The reader of this document should already know at least a little about R: basics of data frames as well as functions and function calls, named arguments, and R "formulas" (such as `mpg ~ hp + cyl`) which are called **tilde expressions** in *Lessons*. (Statistics students need to use mathematical formulas from time to time, so best not confuse math formulas with an unneeded name for an R syntactical structure.) 
+This document is oriented toward instructors or strongly motivated students. The *Lessons* textbook and accompanying [blog posts](https://dtkaplan.github.io/Math300blog/) provide an introduction for the typical student. The reader of this document should already know at least a little about R: basics of data frames as well as functions and function calls, named arguments, and R "formulas" (such as `mpg ~ hp + cyl`) which are called **tilde expressions** in *Lessons*. (Statistics students need to use mathematical formulas from time to time, so best not confuse math formulas with an unneeded name for an R syntactical structure.) 
 
 ## A command template {#sec-template}
 
