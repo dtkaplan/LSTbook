@@ -21,5 +21,5 @@
 #'
 #' @keywords datasets
 #'
-#' @source P. J. Taylor (1980)  "A Pedagogic Application of Multiple Regression Analysis: Precipitation in California" *Geography* **65** (3) 203-212 \href{https://www.jstor.org/stable/40569273}{link on JSTOR}
+#' @source P. J. Taylor (1980)  "A Pedagogic Application of Multiple Regression Analysis: Precipitation in California" *Geography* **65** (3) 203-212
 "Calif_precip"

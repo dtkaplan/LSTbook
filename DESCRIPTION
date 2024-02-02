@@ -3,7 +3,7 @@ Title: Data and Software for 'Lessons in Statistical Thinking'
 Version: 0.5.0
 Authors@R: 
     person("Daniel", "Kaplan", , "dtkaplan@gmail.com", role = c("aut", "cre", "cph"))
-Description: 'Lessons in Statistical Thinking' (LST) is a textbook for a first or
+Description: 'Lessons in Statistical Thinking' is a textbook for a first or
     second course in statistics that embraces data wrangling, causal
     reasoning, statistical adjustment, and simulation. It minimizes the 
     role of p-values. 'LSTbook' supports a tidy- and pipeline-oriented 
@@ -21,8 +21,7 @@ Imports: rlang,
          stats, 
          MASS,
          tibble,
-         stringi,
-         mosaicData
+         stringi
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests:
@@ -34,9 +33,10 @@ Suggests:
     babynames,
     knitr,
     rmarkdown, 
-    stringdist
+    stringdist,
+    mosaicData
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://dtkaplan.github.io/LSTbook/
-BugReports: https://github.com/dtkaplan/LST/issues
+BugReports: https://github.com/dtkaplan/LSTbook/issues/
 License: MIT + file LICENSE

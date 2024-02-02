@@ -34,6 +34,6 @@ a data table where the unit of observation is an individual applicant. The origi
 }
 \references{
 Bickel, P. J., Hammel, E. A., and O'Connell, J. W. (1975).
-Sex bias in graduate admissions: Data from Berkeley. Science, 187, 398–403. \href{https://www.jstor.org/stable/1739581}{link to JSTOR}.
+Sex bias in graduate admissions: Data from Berkeley. Science, 187, 398–403.
 }
 \keyword{datasets}

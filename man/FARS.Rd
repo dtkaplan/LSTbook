@@ -24,7 +24,7 @@ involved in an incident or not. (billions of miles)
 }
 }
 \source{
-From the Fatality Analysis Reporting System \url{https://www-fars.nhtsa.dot.gov/Main/index.aspx}
+From the Fatality Analysis Reporting System
 of the US Department of Transportation (DOT). The
 data have been put into a tidy form from the untidy version published by the DOT,
 removing columns calculated from other columns and so on.

@@ -42,5 +42,5 @@
 #' Morgan N. McCredie and John E. Kurtz (2020) "Prospective prediction of academic performance in college using self- and informant-rated personality traits" *Journal of Research in Personality* **85**
 #'
 #' @source
-#' McCredie_Kurtz_Open_Data.sav comes from <https://data.mendeley.com/datasets/rn2bpp6f37/1> and is described in <https://www.sciencedirect.com/science/article/abs/pii/S009265661930131X>
+#' McCredie_Kurtz_Open_Data.sav comes from <https://data.mendeley.com/datasets/rn2bpp6f37/1>
 "McCredie_Kurtz"

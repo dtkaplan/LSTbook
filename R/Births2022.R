@@ -53,8 +53,8 @@
 #'
 #' @keywords datasets
 #'
-#' @source US Centers for Disease Control "Natality Public Use File" <https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Births>
+#' @source US Centers for Disease Control "Natality Public Use File", CDC vital stats online
 #'
-#' @references "User Guide to the 2022 Natality Public Use File" <https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/DVS/natality/UserGuide2022.pdf>
+#' @references "User Guide to the 2022 Natality Public Use File"
 "Births2022"
 

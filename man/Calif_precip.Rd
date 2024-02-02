@@ -18,7 +18,7 @@ facing away from the prevailing winds.
 }
 }
 \source{
-P. J. Taylor (1980)  "A Pedagogic Application of Multiple Regression Analysis: Precipitation in California" \emph{Geography} \strong{65} (3) 203-212 \href{https://www.jstor.org/stable/40569273}{link on JSTOR}
+P. J. Taylor (1980)  "A Pedagogic Application of Multiple Regression Analysis: Precipitation in California" \emph{Geography} \strong{65} (3) 203-212
 }
 \usage{
 Calif_precip

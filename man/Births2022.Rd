@@ -53,7 +53,7 @@ attempt at labor.
 }
 }
 \source{
-US Centers for Disease Control "Natality Public Use File" \url{https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Births}
+US Centers for Disease Control "Natality Public Use File", CDC vital stats online
 }
 \usage{
 Births2022
@@ -64,6 +64,6 @@ all 3,699,040 (known) births in the US in 2022. \code{Births2022} is a random
 sample of size 20,000 from the comprehensive file
 }
 \references{
-"User Guide to the 2022 Natality Public Use File" \url{https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/DVS/natality/UserGuide2022.pdf}
+"User Guide to the 2022 Natality Public Use File"
 }
 \keyword{datasets}

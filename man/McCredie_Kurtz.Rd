@@ -17,7 +17,7 @@ mothers rating on the extraversion scale. Other variables are:
 }
 }
 \source{
-McCredie_Kurtz_Open_Data.sav comes from \url{https://data.mendeley.com/datasets/rn2bpp6f37/1} and is described in \url{https://www.sciencedirect.com/science/article/abs/pii/S009265661930131X}
+McCredie_Kurtz_Open_Data.sav comes from \url{https://data.mendeley.com/datasets/rn2bpp6f37/1}
 }
 \usage{
 data(McCredie_Kurtz)

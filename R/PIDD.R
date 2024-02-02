@@ -33,7 +33,6 @@
 #' @references Smith, J.W., Everhart, J.E., Dickson, W.C., Knowler, W.C., & Johannes, R.S. (1988)
 #' "Using the ADAP learning algorithm to forecast the onset of diabetes mellitus"
 #' *Proceedings of the Symposium on Computer Applications and Medical Care*
-#' [link](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2245318/pdf/procascamc00018-0276.pdf)
 #'
-#' @source [Kaggle](kaggle.com/datasets/uciml/pima-indians-diabetes-database)
+#' @source [Kaggle](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database/)
 "PIDD"

@@ -24,7 +24,7 @@
 #'
 #' @keywords datasets
 #'
-#' @source  From the Fatality Analysis Reporting System <https://www-fars.nhtsa.dot.gov/Main/index.aspx>
+#' @source  From the Fatality Analysis Reporting System
 #' of the US Department of Transportation (DOT). The
 #' data have been put into a tidy form from the untidy version published by the DOT,
 #' removing columns calculated from other columns and so on.
