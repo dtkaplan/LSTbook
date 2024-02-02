@@ -3,10 +3,10 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   DAGs: DAGs.html
-  LST: LST.html
+  LSTbook: LSTbook.html
   modeling: modeling.html
-last_built: 2024-02-01T18:25Z
+last_built: 2024-02-02T00:15Z
 urls:
-  reference: https://dtkaplan.github.io/LST/reference
-  article: https://dtkaplan.github.io/LST/articles
+  reference: https://dtkaplan.github.io/LSTbook/reference
+  article: https://dtkaplan.github.io/LSTbook/articles
 
