@@ -28,6 +28,9 @@
     <loc>https://dtkaplan.github.io/LSTbook/index.html</loc>
   </url>
   <url>
+    <loc>https://dtkaplan.github.io/LSTbook/news/index.html</loc>
+  </url>
+  <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/AAUP.html</loc>
   </url>
   <url>
@@ -91,6 +94,9 @@
     <loc>https://dtkaplan.github.io/LSTbook/reference/Minneapolis2013.html</loc>
   </url>
   <url>
+    <loc>https://dtkaplan.github.io/LSTbook/reference/Monocacy_river.html</loc>
+  </url>
+  <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/Offspring.html</loc>
   </url>
   <url>
@@ -146,9 +152,6 @@
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://dtkaplan.github.io/LSTbook/reference/label_zero_one.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/mix_with.html</loc>

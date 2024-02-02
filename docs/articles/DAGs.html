@@ -48,12 +48,22 @@
     <a class="dropdown-item" href="../articles/modeling.html">Training models</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/dtkaplan/LST/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -68,7 +78,7 @@
       <img src="" class="logo" alt=""><h1>Simulating data with Directed Acyclic Graphs</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LST/blob/HEAD/vignettes/DAGs.Rmd" class="external-link"><code>vignettes/DAGs.Rmd</code></a></small>
       <div class="d-none name"><code>DAGs.Rmd</code></div>
     </div>
 
@@ -89,7 +99,7 @@ allows one to look at <strong>accuracy</strong> and
 <strong>bias</strong>. As well, simulations provide a direct way to
 observe sampling variation, since a given simulation can be run multiple
 times.</p>
-<p>In the <a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a> package, data simulations are provided by a
+<p>In the <code>{LST}</code> package, data simulations are provided by a
 handful of purpose-written functions, particularly
 <code><a href="../reference/datasim.html">datasim_make()</a></code> and <code><a href="../reference/datasim.html">datasim_run()</a></code>. Simulation
 is always a two-step process: (1) create the rules by which the
@@ -174,7 +184,7 @@ you like.</p>
 <p>Although students or instructors may create their own simulations
 using <code><a href="../reference/datasim.html">datasim_make()</a></code>, they will want to get started using
 some of the pre-defined simulations that come with the
-<a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a> package. These are named with the prefix
+<code>{LST}</code> package. These are named with the prefix
 <code>sim_</code>, as in <code>sim_00</code>, <code>sim_01</code>, …,
 <code>sim_12</code>, <code>sim_vaccine</code>, and so on.</p>
 <p>There are two ways to see what are the rules of these predefined
@@ -228,7 +238,7 @@ mathematical object and has solutions, that is <span class="math inline">\(x(t)\
 precise, the <em>present$ value of <span class="math inline">\(x\)</span> influences the </em>future values* of
 <span class="math inline">\(y\)</span>. (For R functions pertaining to
 differential equations, see the <a href="https://github.com/ProjectMOSAIC/mosaicCalc" class="external-link">mosaicCalc</a> package, which
-is not related to <a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a> other than by authorship and
+is not related to <code>{LST}</code> other than by authorship and
 affiliation with [Project MOSAIC]{<a href="https://www.mosaic-web.org/" class="external-link uri">https://www.mosaic-web.org/</a>}.)</p>
 <p>In a data simulation, in contrast, the rows in the output data are
 all independent realizations of the simulation rules. For instance, in
@@ -250,7 +260,7 @@ Acyclic Graphs (DAGs).</p>
 theme in <em>Lessons in Statistical Thinking</em>.</p>
 <p>Data simulations can be useful in teaching causal concepts. To
 illustrate, consider the <code>sim_vaccine</code> simulation provided by
-the <a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a> package. The simulation is a cartoon about how
+the <code>{LST}</code> package. The simulation is a cartoon about how
 flu vaccinations might reduce mortality from the flu. We can look at
 <code>sim_vaccine</code> in the usual ways:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -412,7 +422,7 @@ the many other such functions provided by the <code>{stats}</code>
 package or other packages. Similarly, arithmetic and other mathematical
 operations can be written in the ordinary way.</p>
 <p>It is convenient, however, to use special functions provided by
-<a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a> for writing simulations. These functions simplify any
+<code>{LST}</code> for writing simulations. These functions simplify any
 common situations in simulations.</p>
 <ul>
 <li>

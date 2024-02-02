@@ -48,12 +48,22 @@
     <a class="dropdown-item" href="../articles/modeling.html">Training models</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/dtkaplan/LST/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -68,14 +78,14 @@
       <img src="" class="logo" alt=""><h1>Training models</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LST/blob/HEAD/vignettes/modeling.Rmd" class="external-link"><code>vignettes/modeling.Rmd</code></a></small>
       <div class="d-none name"><code>modeling.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a></span><span class="op">)</span></span></code></pre></div>
 <p>To “train a model” involves three components:</p>
 <ol style="list-style-type: decimal">
 <li>A data frame with training data</li>
@@ -85,7 +95,7 @@ manner as for <code><a href="https://rdrr.io/r/stats/lm.html" class="external-li
 <li>A model-fitting function that puts (1) and (2) together into a
 <strong>model object</strong>. Examples of model-fitting functions are
 <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>. In <em>Lessons in Statistical
-Thinking</em> and the corresponding <a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a> package, we
+Thinking</em> and the corresponding <code>{LST}</code> package, we
 almost always use <code><a href="../reference/model_train.html">model_train()</a></code>
 </li>
 </ol>
@@ -151,7 +161,7 @@ e.g. <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()
 stored as an “attribute,” meaning that it is invisible.) Consequently,
 you can use the model object as an input to whatever model-plotting or
 summarizing function you like.</p>
-<p>In <em>Lessons in Statistical Thinking</em> we use <a href="https://dtkaplan.github.io/LST/" class="external-link">LST</a>
+<p>In <em>Lessons in Statistical Thinking</em> we use <code>{LST}</code>
 functions for plotting and summarizing:</p>
 <ul>
 <li><code><a href="../reference/model_plot.html">model_plot()</a></code></li>
