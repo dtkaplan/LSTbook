@@ -37,6 +37,6 @@ Suggests:
     stringdist
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-URL: https://dtkaplan.github.io/LST/
+URL: https://dtkaplan.github.io/LSTbook/
 BugReports: https://github.com/dtkaplan/LST/issues
 License: MIT + file LICENSE

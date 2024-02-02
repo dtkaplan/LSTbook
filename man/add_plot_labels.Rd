@@ -5,10 +5,12 @@
 \title{Convenience function for adding labels to point_plot or others without needing
 the ggplot2 + pipe.}
 \usage{
-add_plot_labels(P, ...)
+add_plot_labels(P, ..., color = NULL)
 }
 \arguments{
 \item{P}{A ggplot2 object, for instance as made with \code{point_plot()} or \code{model_plot()}}
+
+\item{color}{Name for color legend (works for \code{point_plot()})}
 
 \item{\ldots}{Label items (e.g. \code{x = "hello"}) as in ggplot2::labs}
 }

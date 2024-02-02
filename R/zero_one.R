@@ -9,7 +9,8 @@
 #' @param one character string specifying the level that gets mapped to 1.
 #'
 #' @examples
-#' mosaicData::Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
+#' Birdkeepers |>
+#'   point_plot(zero_one(LC, one="LungCancer") ~ AG + BK, annot = "model")
 #'
 #' @export
 zero_one <- function(x, one) {
@@ -33,19 +34,23 @@ zero_one <- function(x, one) {
 #' @rdname zero_one
 #' @param P A ggplot2 object made by `model_plot()` or `point_plot()`
 #' @examples
-#' mosaicData::Whickham |>
-#'   point_plot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
-#'   label_zero_one() +
-#'   ylab("Prob. alive at 20-year follow-up")
+#' Birdkeepers |>
+#'   mutate(Condition = zero_one(LC, one = "LungCancer")) |>
+#'   point_plot(Condition ~ AG + BK, annot = "model") |>
+#'   label_zero_one() |>
+#'   add_plot_labels(x="age", color = "Birdkeeper?")
 #' @export
 label_zero_one <- function(P) {
   # vertical axis data in P$data[[1]]
   YesNo <- P$data[[1]]
   if (!inherits(YesNo, "zero_one")) return(P)
   else {
-    P + scale_y_continuous(breaks=c(0, 0.5, 1),
-                              sec.axis=sec_axis(trans = ~ .,
-                                                breaks=c(0,1), labels=levels(YesNo)))
+    suppressMessages(
+      P +
+        scale_y_continuous(breaks=c(0, 0.5, 1),
+                           sec.axis=sec_axis(
+                             trans = ~ ., breaks=c(0,1), labels=levels(YesNo)))
+    )
   }
 }
 

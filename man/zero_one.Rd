@@ -23,10 +23,12 @@ Such numerical mapping is inappropriate for logistic modeling, where we want the
 be on a probability scale.
 }
 \examples{
-mosaicData::Whickham |> point_plot(zero_one(outcome, one="Alive") ~ age + smoker, annot = "model")
+Birdkeepers |>
+  point_plot(zero_one(LC, one="LungCancer") ~ AG + BK, annot = "model")
 
-mosaicData::Whickham |>
-  point_plot(zero_one(outcome, one = "Alive") ~ age + smoker, annot = "model") |>
-  label_zero_one() +
-  ylab("Prob. alive at 20-year follow-up")
+Birdkeepers |>
+  mutate(Condition = zero_one(LC, one = "LungCancer")) |>
+  point_plot(Condition ~ AG + BK, annot = "model") |>
+  label_zero_one() |>
+  add_plot_labels(x="age", color = "Birdkeeper?")
 }

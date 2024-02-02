@@ -109,7 +109,7 @@ point_plot <- function(D, tilde, ..., seed=101,
       }
     }
     # Eliminate the rows with the NAs in color or faceting
-    data <- data[!na_present, ]
+    data <- data |> filter(!na_present)
   }
 
 
@@ -269,13 +269,16 @@ point_plot <- function(D, tilde, ..., seed=101,
 #' the ggplot2 + pipe.
 #' @param P A ggplot2 object, for instance as made with `point_plot()` or `model_plot()`
 #' @param \ldots Label items (e.g. `x = "hello"`) as in ggplot2::labs
+#' @param color Name for color legend (works for `point_plot()`)
 #'
 #' @examples
 #' mtcars |> point_plot(mpg ~ hp + cyl) |>
 #'   add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
 #' @export
-add_plot_labels <- function(P, ...) {
-  P + labs(...)
+add_plot_labels <- function(P, ..., color=NULL) {
+  P <- P + labs(...)
+  if (is.null(color)) P
+  else P + suppressMessages(scale_colour_discrete(name=color))
 }
 
 #'
