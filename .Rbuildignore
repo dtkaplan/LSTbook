@@ -8,3 +8,5 @@
 ^LICENSE\.md$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^data-raw$
+^TODO\.qmd$
