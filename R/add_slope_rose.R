@@ -26,6 +26,7 @@
 #' mtcars |> point_plot(mpg ~ hp, annot="model") |> add_slope_rose()
 #' mtcars |> point_plot(wt ~ hp) |> add_slope_rose(keepers="pos", color="blue", x=100, scale=.5 )
 #'
+#' @returns A ggplot graphics object
 #' @rdname statistical_annotations
 #' @export
 add_slope_rose <- function(P, x=NULL, y=NULL, scale=1/4,

@@ -31,8 +31,4 @@
 #'     Some letter grades are not counted in a student's gradepoint average. These have \code{NA} for
 #'     the gradepoint.
 #'
-#' @examples
-#' \dontrun{
-#' GPA <- College_grades |> model_train(gradepoint ~ sid - 1)
-#' }
 "College_grades"

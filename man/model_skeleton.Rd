@@ -2,7 +2,7 @@
 % Please edit documentation in R/model_skeleton.R
 \name{model_skeleton}
 \alias{model_skeleton}
-\title{Convert a model or a data frame to a skeleton}
+\title{Convert a model to a skeleton}
 \usage{
 model_skeleton(mod, data = NULL, ncont = 3, nfirstcont = 50)
 }
@@ -17,6 +17,14 @@ may be added to "prettify" the choices. See \code{\link[=pretty]{pretty()}}.)}
 \item{nfirstcont}{Like \code{ncont}, but for the first explanatory variable if it is categorical. This variable is mapped
 to the horizontal axis and so should have many levels to produce a smooth graph. (Default: 50)}
 }
+\value{
+a data frame
+}
 \description{
-Only explanatory variables are included in the result.
+A "skeleton" is a data frame containing "nicely spaced" values for the explanatory variables
+in a model.
+}
+\examples{
+Model <- FEV |> model_train(FEV ~ sex + age + height)
+Model |> model_skeleton()
 }

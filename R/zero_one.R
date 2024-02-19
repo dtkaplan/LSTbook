@@ -12,6 +12,7 @@
 #' Birdkeepers |>
 #'   point_plot(zero_one(LC, one="LungCancer") ~ AG + BK, annot = "model")
 #'
+#' @returns A numerical vector of 0s and 1s.
 #' @export
 zero_one <- function(x, one) {
   U <- unique(x)

@@ -1,14 +1,15 @@
 Package: LSTbook
-Title: Data and Software for 'Lessons in Statistical Thinking' 
+Title: Data and Software for "Lessons in Statistical Thinking" 
 Version: 0.5.0
-Authors@R: 
-    person("Daniel", "Kaplan", , "dtkaplan@gmail.com", role = c("aut", "cre", "cph"))
-Description: 'Lessons in Statistical Thinking' is a textbook for a first or
-    second course in statistics that embraces data wrangling, causal
-    reasoning, statistical adjustment, and simulation. It minimizes the 
-    role of p-values. 'LSTbook' supports a tidy- and pipeline-oriented 
-    computing style used in the book. Modeling and data/model graphics 
-    are made particularly simple, to provide a gentle learning curve.
+Authors@R: c(
+    person(given = "Daniel", family = "Kaplan", email = "dtkaplan@gmail.com", role = c("aut", "cre")),
+    person(given = "Randall", family = "Pruim", email = "rpruim@calvin.edu", role = "aut") )
+Description: "Lessons in Statistical Thinking" D.T. Kaplan (2014) 
+    <https://dtkaplan.github.io/Lessons-in-statistical-thinking/> 
+    is a textbook for a first or second course in statistics that embraces 
+    data wrangling, causal reasoning, modeling, statistical adjustment, 
+    and simulation. 'LSTbook' supports the student-centered, tidy, 
+    pipeline-oriented computing style featured in the book.
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 LazyData: true

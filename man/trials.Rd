@@ -14,6 +14,9 @@ trials(.ex, times = 1, ...)
 \item{\ldots}{Values for any unbound parameter in the left side of the pipeline. If a
 vector of length > 1, the trials will be run separately for each element of the vector.}
 }
+\value{
+a dataframe with one row for each trial. (But see the \ldots argument.)
+}
 \description{
 Write a pipeline to perform some calculation whose result can
 be coerced into one line of a data frame. Add \code{trials(times=3)} to the end

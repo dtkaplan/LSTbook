@@ -1,7 +1,5 @@
 #' Evaluate a model on inputs
 #'
-#'
-#'
 #' @param mod A model as from `model_train()`, `lm()` or `glm()`
 #' @param data A data frame of inputs. If missing, the inputs will be assembled from \ldots or
 #' from the training data, or an skeleton will be constructed.

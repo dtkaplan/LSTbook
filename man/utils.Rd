@@ -24,5 +24,7 @@ get_training_data(model, ...)
 \item{...}{(not used)}
 }
 \description{
-These are mostly pulled from the original mosaicModel package
+Functions for pulling various components from model objects.
+These work mainly for lm and glm objects. It's a future project
+to add facilities for other object types.
 }

@@ -19,6 +19,13 @@
 #' @param show_p For `conf_interval()`, append the p-value to the report.
 #' @param \ldots One or more models (for ANOVA)
 #'
+#' @returns a data frame
+#'
+#' @examples
+#' Model <- FEV |> model_train(FEV ~ age + smoker)
+#' Model |> conf_interval()
+#' Model |> R2()
+#' Model |> anova_summary()
 #'
 #' @rdname regression_summaries
 #' @export

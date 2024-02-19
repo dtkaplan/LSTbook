@@ -12,6 +12,12 @@
 #' @param \ldots Arguments to pass along to specific sample methods.
 #' @param replace Logical flag: whether to sample with replacement. (default: `FALSE`)
 #'
+#' @examples
+#' sample(sim_03, n=5) # run a simulation
+#' sample(Clock_auction, n = 3) # from a data frame
+#' sample(1:6, n = 6) # sample from a vector
+#'
+#' @returns A vector or a data frame depending on the nature of the `x` argument.
 #' @export
 sample <- function (x, n, replace = FALSE, ...) {
   UseMethod('sample')

@@ -38,3 +38,4 @@ test_that("model_eval() only outputs explanatory variables in the model, no matt
   Res <- model_eval(mod) |> select(-".response", -".output", -".lwr", -".upr", -".resid")
   expect_true(names(Res) == "mpg")
 })
+

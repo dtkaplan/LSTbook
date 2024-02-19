@@ -19,11 +19,11 @@ types support "prediction" or even "confidence".}
 
 \item{...}{additional arguments}
 }
-\description{
-Only used internally in \code{{LSTbook}}
+\value{
+a data frame
 }
-\details{
-All of the \code{eval_} functions are ex
-These functions return a numerical vector (for regression types) or
-a matrix of probabilities (for classifiers)
+\description{
+Only used internally in \code{{LSTbook}}. These were originally arranged as S3
+methods, but now the dispatch is done "by hand" in order to eliminate any
+exported S3 methods.
 }

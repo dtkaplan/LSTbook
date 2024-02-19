@@ -16,6 +16,9 @@ label_zero_one(P)
 
 \item{P}{A ggplot2 object made by \code{model_plot()} or \code{point_plot()}}
 }
+\value{
+A numerical vector of 0s and 1s.
+}
 \description{
 A convenience function for handling categorical response variables.
 Ordinarily, ggplot2 maps categorical levels to numerical values 1, 2, ....

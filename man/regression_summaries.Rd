@@ -24,6 +24,9 @@ anova_summary(...)
 
 \item{\ldots}{One or more models (for ANOVA)}
 }
+\value{
+a data frame
+}
 \description{
 The summaries are always in the form of a data frame
 \itemize{
@@ -41,4 +44,11 @@ to the next.
 Many of these are  wrappers around \code{broom::tidy()} used to
 emphasize to students that the results are a summary in the form of a regression
 report, similar to the summaries produced by \code{stats::confint()}, \code{stats::coef()}, etc.
+}
+\examples{
+Model <- FEV |> model_train(FEV ~ age + smoker)
+Model |> conf_interval()
+Model |> R2()
+Model |> anova_summary()
+
 }

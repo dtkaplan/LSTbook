@@ -16,7 +16,8 @@ ntiles(
 
 \item{n}{(approximate) number of quantiles}
 
-\item{format}{a specification of desired output format.}
+\item{format}{a specification of desired output format. One of
+"center", "interval", "left", "right", "mean", or "median.}
 
 \item{digits}{desired number of digits for labeling of factors.}
 }
@@ -32,12 +33,7 @@ removed in the future, when there is no need to avoid such dependency, e.g. when
 available on WASM.
 }
 \examples{
-# tally( ~ ntiles(age, 4), data=HELPrct)
-# tally( ~ ntiles(age, 4, format="center"), data=HELPrct)
-# tally( ~ ntiles(age, 4, format="interval"), data=HELPrct)
-# tally( ~ ntiles(age, 4, format="left"), data=HELPrct)
-# tally( ~ ntiles(age, 4, format="right"), data=HELPrct)
-# tally( ~ ntiles(age, 4, format="mean"), data=HELPrct)
-# tally( ~ ntiles(age, 4, format="median"), data=HELPrct)
+FEV |> head(20) |> mutate(group = ntiles(height, 3, format="center"))
+FEV |> head(20) |> mutate(group = ntiles(height, 3, format="interval"))
 
 }

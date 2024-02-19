@@ -13,8 +13,11 @@ dag_draw(DAG, ..., report_hidden = FALSE)
 
 \item{\ldots}{Additional arguments to plot.igraph()}
 }
+\value{
+No return value. Called for graphics side-effects.
+}
 \description{
-Make a simple drawing of a DAG.
+Make a simple drawing of a Directed Acyclic Graph as constructed by \code{datasim_make}.
 }
 \details{
 See the igraph package for more details.

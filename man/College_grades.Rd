@@ -36,9 +36,4 @@ ID, and the name of the department. Typically a graduating student has taken abo
 As another form of de-identification, only half of the courses each student, selected randomly,
 are included. Only courses with 10 or more students enrolled were included.
 }
-\examples{
-\dontrun{
-GPA <- College_grades |> model_train(gradepoint ~ sid - 1)
-}
-}
 \keyword{datasets}

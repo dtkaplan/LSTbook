@@ -14,6 +14,9 @@ add_plot_labels(P, ..., color = NULL)
 
 \item{\ldots}{Label items (e.g. \code{x = "hello"}) as in ggplot2::labs}
 }
+\value{
+A ggplot graphics object
+}
 \description{
 Convenience function for adding labels to point_plot or others without needing
 the ggplot2 + pipe.

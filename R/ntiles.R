@@ -6,17 +6,13 @@
 #'
 #' @param x a numeric vector
 #' @param n (approximate) number of quantiles
-#' @param format a specification of desired output format.
+#' @param format a specification of desired output format. One of
+#' "center", "interval", "left", "right", "mean", or "median.
 #' @param digits desired number of digits for labeling of factors.
 #' @return a vector.  The type of vector will depend on `format`.
 #' @examples
-#' # tally( ~ ntiles(age, 4), data=HELPrct)
-#' # tally( ~ ntiles(age, 4, format="center"), data=HELPrct)
-#' # tally( ~ ntiles(age, 4, format="interval"), data=HELPrct)
-#' # tally( ~ ntiles(age, 4, format="left"), data=HELPrct)
-#' # tally( ~ ntiles(age, 4, format="right"), data=HELPrct)
-#' # tally( ~ ntiles(age, 4, format="mean"), data=HELPrct)
-#' # tally( ~ ntiles(age, 4, format="median"), data=HELPrct)
+#' FEV |> head(20) |> mutate(group = ntiles(height, 3, format="center"))
+#' FEV |> head(20) |> mutate(group = ntiles(height, 3, format="interval"))
 #'
 #' @export
 

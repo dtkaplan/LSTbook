@@ -1,12 +1,14 @@
 #' Draw a DAG
 #'
-#' Make a simple drawing of a DAG.
+#' Make a simple drawing of a Directed Acyclic Graph as constructed by `datasim_make`.
 #'
 #' @details See the igraph package for more details.
 #'
 #' @param DAG The DAG to draw
 #' @param \ldots Additional arguments to plot.igraph()
 #' @param report_hidden logical. If `TRUE`, show the hidden nodes.
+#'
+#' @returns No return value. Called for graphics side-effects.
 #'
 #' @details By default, edges are not drawn to hidden nodes, that is, those whose
 #' names begin with a dot. To show the hidden
@@ -37,7 +39,8 @@ dag_draw <- function(DAG, ..., report_hidden = FALSE) {
 
   ig <- datasim_to_igraph(DAG, report_hidden = report_hidden)
   if (requireNamespace("graphics")) {
-    graphics::par(mai = c(0,0,0,0)) # have the graph fill the frame
+    oldpar <- graphics::par(mai = c(0,0,0,0)) # have the graph fill the frame
+    on.exit(par(oldpar))
   }
   do.call(plot, c(list(ig), defaults))
 }

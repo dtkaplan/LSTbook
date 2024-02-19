@@ -40,6 +40,9 @@ row from the original \code{x} that the same came from.}
 
 \item{\ldots}{Arguments to pass along to specific sample methods.}
 }
+\value{
+A vector or a data frame depending on the nature of the \code{x} argument.
+}
 \description{
 A set of methods to generate random samples from data frames and data simulations.
 For data frames, individual rows are sampled. For vectors, elements are sampled.
@@ -48,4 +51,10 @@ For data frames, individual rows are sampled. For vectors, elements are sampled.
 These are based in spirit on the sample functions in the \code{{mosaic}} package,
 but are redefined here to 1) avoid a dependency on \code{{mosaic}} and 2) bring the arguments in
 line with the \verb{.by =} features of \code{{dplyr}}.
+}
+\examples{
+sample(sim_03, n=5) # run a simulation
+sample(Clock_auction, n = 3) # from a data frame
+sample(1:6, n = 6) # sample from a vector
+
 }

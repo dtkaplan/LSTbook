@@ -43,6 +43,9 @@ categories are separated by a distance of 1.)}
 
 \item{\ldots}{additional graphical parameters, e.g. \code{color = "blue"}}
 }
+\value{
+A ggplot graphics object
+}
 \description{
 To guide a reader in quantifying the slope of components of an x-y graph, a "slope rose" is helpful.
 Several radiating lines are drawn, each marked with a numerical slope. A suitable choice of slopes

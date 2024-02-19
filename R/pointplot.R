@@ -271,6 +271,8 @@ point_plot <- function(D, tilde, ..., seed=101,
 #' @param \ldots Label items (e.g. `x = "hello"`) as in ggplot2::labs
 #' @param color Name for color legend (works for `point_plot()`)
 #'
+#' @returns A ggplot graphics object
+#'
 #' @examples
 #' mtcars |> point_plot(mpg ~ hp + cyl) |>
 #'   add_plot_labels(x = "The X axis", y = "Vertical", color = "# cylinders")
