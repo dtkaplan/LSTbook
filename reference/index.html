@@ -232,40 +232,24 @@
 the ggplot2 + pipe.</dd>
       </dl><dl><dt>
           
-          <code><a href="compare_model_residuals.html">compare_model_residuals()</a></code> 
-        </dt>
-        <dd>Compare models based on the size of their residuals</dd>
-      </dl><dl><dt>
-          
-          <code><a href="construct_fitting_call.html">construct_fitting_call()</a></code> 
-        </dt>
-        <dd>Construct a call for refitting a model from the model itself</dd>
-      </dl><dl><dt>
-          
           <code><a href="dag_draw.html">dag_draw()</a></code> 
         </dt>
         <dd>Draw a DAG</dd>
       </dl><dl><dt>
           
-          <code><a href="data_from_model.html">data_from_model()</a></code> 
+          <code><a href="datasim_helpers.html">categorical()</a></code> <code><a href="datasim_helpers.html">cat2value()</a></code> <code><a href="datasim_helpers.html">bernoulli()</a></code> <code><a href="datasim_helpers.html">mix_with()</a></code> <code><a href="datasim_helpers.html">each()</a></code> <code><a href="datasim_helpers.html">block_by()</a></code> <code><a href="datasim_helpers.html">random_levels()</a></code> 
         </dt>
-        <dd>Extract training data from model</dd>
+        <dd>Helpers for specifying nodes in simulations</dd>
       </dl><dl><dt>
           
-          <code><a href="datasim.html">datasim_make()</a></code> <code><a href="datasim.html">datasim_run()</a></code> <code><a href="datasim.html">categorical()</a></code> <code><a href="datasim.html">cat2value()</a></code> <code><a href="datasim.html">bernoulli()</a></code> <code><a href="datasim.html">block_by()</a></code> <code><a href="datasim.html">datasim_to_igraph()</a></code> <code><a href="datasim.html">datasim_intervene()</a></code> <code><a href="datasim.html">random_levels()</a></code> 
+          <code><a href="datasim_make.html">datasim_make()</a></code> <code><a href="datasim_make.html">datasim_to_igraph()</a></code> <code><a href="datasim_make.html">datasim_intervene()</a></code> 
         </dt>
-        <dd>Facility to make and run data simulations</dd>
+        <dd>Construct and modify data simulations</dd>
       </dl><dl><dt>
           
-          <code><a href="each.html">each()</a></code> 
+          <code><a href="datasim_run.html">datasim_run()</a></code> 
         </dt>
-        <dd>Evaluate an expression separately for each case</dd>
-      </dl><dl><dt>
-          
-          <code><a href="mix_with.html">mix_with()</a></code> 
-        </dt>
-        <dd>Mix two variables together. The output will have the specified R-squared
-with var1 and variance one.</dd>
+        <dd>Run a datasim simulation, producing a data frame</dd>
       </dl><dl><dt>
           
           <code><a href="model_eval.html">model_eval()</a></code> 
@@ -290,7 +274,7 @@ with var1 and variance one.</dd>
           
           <code><a href="model_skeleton.html">model_skeleton()</a></code> 
         </dt>
-        <dd>Convert a model or a data frame to a skeleton</dd>
+        <dd>Convert a model to a skeleton</dd>
       </dl><dl><dt>
           
           <code><a href="model_train.html">model_train()</a></code> 
@@ -316,6 +300,11 @@ with var1 and variance one.</dd>
           <code><a href="point_plot.html">point_plot()</a></code> 
         </dt>
         <dd>One-step data graphics</dd>
+      </dl><dl><dt>
+          
+          <code><a href="print.datasim.html">print(<i>&lt;datasim&gt;</i>)</a></code> 
+        </dt>
+        <dd>Nice printing of some internal objects</dd>
       </dl><dl><dt>
           
           <code><a href="print.model_object.html">print(<i>&lt;model_object&gt;</i>)</a></code> 
@@ -366,7 +355,7 @@ with var1 and variance one.</dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Daniel Kaplan.</p>
+  <p></p><p>Developed by Daniel Kaplan, Randall Pruim.</p>
 </div>
 
 <div class="pkgdown-footer-right">

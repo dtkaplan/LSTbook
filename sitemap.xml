@@ -130,28 +130,19 @@
     <loc>https://dtkaplan.github.io/LSTbook/reference/add_plot_labels.html</loc>
   </url>
   <url>
-    <loc>https://dtkaplan.github.io/LSTbook/reference/compare_model_residuals.html</loc>
-  </url>
-  <url>
-    <loc>https://dtkaplan.github.io/LSTbook/reference/construct_fitting_call.html</loc>
-  </url>
-  <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/dag_draw.html</loc>
   </url>
   <url>
-    <loc>https://dtkaplan.github.io/LSTbook/reference/data_from_model.html</loc>
+    <loc>https://dtkaplan.github.io/LSTbook/reference/datasim_helpers.html</loc>
   </url>
   <url>
-    <loc>https://dtkaplan.github.io/LSTbook/reference/datasim.html</loc>
+    <loc>https://dtkaplan.github.io/LSTbook/reference/datasim_make.html</loc>
   </url>
   <url>
-    <loc>https://dtkaplan.github.io/LSTbook/reference/each.html</loc>
+    <loc>https://dtkaplan.github.io/LSTbook/reference/datasim_run.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://dtkaplan.github.io/LSTbook/reference/mix_with.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/model_eval.html</loc>
@@ -182,6 +173,9 @@
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/point_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://dtkaplan.github.io/LSTbook/reference/print.datasim.html</loc>
   </url>
   <url>
     <loc>https://dtkaplan.github.io/LSTbook/reference/print.model_object.html</loc>

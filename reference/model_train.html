@@ -84,6 +84,12 @@ designed to make it easy to construct.</p>
 <dt>family</dt>
 <dd><p>Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...</p></dd>
 
+
+<dt>An</dt>
+<dd><p>object of class "model_object". This is much the same as an "lm" or "glm" object
+but with the additional attribute of the training data and a printing method that
+encourages the use of the regression summary methods <code><a href="regression_summaries.html">conf_interval()</a></code>, <code><a href="regression_summaries.html">R2()</a></code>, or <code><a href="regression_summaries.html">anova_summary()</a></code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -98,7 +104,7 @@ training data is assigned to an attribute of the resulting model, "training_data
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Daniel Kaplan.</p>
+  <p></p><p>Developed by Daniel Kaplan, Randall Pruim.</p>
 </div>
 
 <div class="pkgdown-footer-right">
