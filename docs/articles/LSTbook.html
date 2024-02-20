@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">LSTbook</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/dtkaplan/LST/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/dtkaplan/LSTbook/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -78,7 +78,7 @@
       <img src="" class="logo" alt=""><h1>{LST}: R package for *Lessons in Statistical Thinking*</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LST/blob/HEAD/vignettes/LSTbook.Rmd" class="external-link"><code>vignettes/LSTbook.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LSTbook/blob/HEAD/vignettes/LSTbook.Rmd" class="external-link"><code>vignettes/LSTbook.Rmd</code></a></small>
       <div class="d-none name"><code>LSTbook.Rmd</code></div>
     </div>
 
@@ -281,17 +281,41 @@ whether the confidence interval includes zero, using the
 relating one variable to the others. Like this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sim_06</span></span>
-<span><span class="co">#&gt; Simulation object</span></span>
-<span><span class="co">#&gt; ------------</span></span>
-<span><span class="co">#&gt; [1] a &lt;- rnorm(n)</span></span>
-<span><span class="co">#&gt; [2] b &lt;- a + rnorm(n)</span></span>
-<span><span class="co">#&gt; [3] c &lt;- b + rnorm(n)</span></span>
-<span><span class="co">#&gt; [4] d &lt;- c + a + rnorm(n)</span></span></code></pre></div>
+<span><span class="co">#&gt; $names</span></span>
+<span><span class="co">#&gt; $names[[1]]</span></span>
+<span><span class="co">#&gt; a</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $names[[2]]</span></span>
+<span><span class="co">#&gt; b</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $names[[3]]</span></span>
+<span><span class="co">#&gt; c</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $names[[4]]</span></span>
+<span><span class="co">#&gt; d</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $calls</span></span>
+<span><span class="co">#&gt; $calls[[1]]</span></span>
+<span><span class="co">#&gt; rnorm(n)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $calls[[2]]</span></span>
+<span><span class="co">#&gt; a + rnorm(n)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $calls[[3]]</span></span>
+<span><span class="co">#&gt; b + rnorm(n)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $calls[[4]]</span></span>
+<span><span class="co">#&gt; c + a + rnorm(n)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "list"    "datasim"</span></span></code></pre></div>
 <p>Instructions for constructing data simulations are given in the
 <em>Simulating data with Directed Acyclic Graphs</em> vignette of this
 package. Many pre-built simulations are provided with this
 <code>{LST}</code> package. New ones can be constructed using
-<code><a href="../reference/datasim.html">datasim_make()</a></code>. Except in the most straightforward cases,
+<code><a href="../reference/datasim_make.html">datasim_make()</a></code>. Except in the most straightforward cases,
 such construction is an instructor-level task.</p>
 </div>
 <div class="section level2">
@@ -393,7 +417,7 @@ acknowledge its aunts and uncles.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Daniel Kaplan.</p>
+<p>Developed by Daniel Kaplan, Randall Pruim.</p>
 </div>
 
 <div class="pkgdown-footer-right">

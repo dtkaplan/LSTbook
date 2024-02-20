@@ -22,7 +22,7 @@ classes of objects."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
     
     <a class="navbar-brand me-2" href="../index.html">LSTbook</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@ classes of objects."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/dtkaplan/LST/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/dtkaplan/LSTbook/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -63,7 +63,7 @@ classes of objects."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Cull objects used with do()</h1>
-      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LST/blob/HEAD/R/mosaic-do.R" class="external-link"><code>R/mosaic-do.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LSTbook/blob/HEAD/R/mosaic-do.R" class="external-link"><code>R/mosaic-do.R</code></a></small>
       <div class="d-none name"><code>mosaic_cull_for_do.Rd</code></div>
     </div>
 
@@ -107,17 +107,17 @@ of determinism, an the estimate for the variance, etc.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">Clock_auction</span> <span class="op">|&gt;</span> <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">price</span> <span class="op">~</span> <span class="fu"><a href="sample.html">resample</a></span><span class="op">(</span><span class="va">bidders</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="regression_summaries.html">R2</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="trials.html">trials</a></span><span class="op">(</span>times<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .trial  n k     Rsquared           F       adjR2          p df.num df.denom</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 32 1 0.0139264121 0.423692886 -0.01894271 0.51974712      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 32 1 0.0003331277 0.009997161 -0.03298910 0.92097939      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       3 32 1 0.0158320062 0.482600724 -0.01697359 0.49226021      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       4 32 1 0.0001459478 0.004379072 -0.03318252 0.94765057      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       5 32 1 0.0043049635 0.129707289 -0.02888487 0.72110201      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       6 32 1 0.0042886645 0.129214091 -0.02890171 0.72160963      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7       7 32 1 0.0001517343 0.004552720 -0.03317654 0.94662432      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8       8 32 1 0.0159607024 0.486587347 -0.01684061 0.49049119      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       9 32 1 0.0798867647 2.604682608  0.04921632 0.11636784      1       30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10     10 32 1 0.1223372245 4.181693515  0.09308180 0.04916054      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .trial  n k     Rsquared          F         adjR2         p df.num df.denom</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 32 1 0.0272469030 0.84030274 -0.0051782002 0.3661674      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 32 1 0.0005793999 0.01739208 -0.0327346201 0.8959057      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       3 32 1 0.0107625143 0.32638819 -0.0222120686 0.5717847      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       4 32 1 0.0408865813 1.27888674  0.0089161340 0.2665108      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       5 32 1 0.0314786869 0.97505403 -0.0008053569 0.3308309      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       6 32 1 0.0107889079 0.32719734 -0.0221847951 0.5713109      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7       7 32 1 0.0053843910 0.16240619 -0.0277694626 0.6896307      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8       8 32 1 0.0845673859 2.77139086  0.0540529654 0.1057257      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       9 32 1 0.0194090616 0.59379689 -0.0132773031 0.4466069      1       30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     10 32 1 0.0110352039 0.33475015 -0.0219302893 0.5669256      1       30</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -125,7 +125,7 @@ of determinism, an the estimate for the variance, etc.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Daniel Kaplan.</p>
+  <p></p><p>Developed by Daniel Kaplan, Randall Pruim.</p>
 </div>
 
 <div class="pkgdown-footer-right">

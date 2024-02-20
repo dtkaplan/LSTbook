@@ -13,6 +13,11 @@ datasim_to_igraph(sim, report_hidden = FALSE)
 datasim_intervene(sim, ...)
 }
 \arguments{
+\item{sim}{The data simulation object to be modified.}
+
+\item{report_hidden}{If \code{TRUE}, show the hidden nodes (nodes whose names
+begin with a dot.)}
+
 \item{\ldots}{Descriptions of the nodes in the simulation, written in assignment form. See details.}
 }
 \value{

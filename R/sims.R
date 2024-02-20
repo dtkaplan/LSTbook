@@ -17,7 +17,9 @@
 #' Remember to use *commas* to separate the arguments in the normal way.
 #'
 #' @param \ldots Descriptions of the nodes in the simulation, written in assignment form. See details.
-
+#' @param sim The data simulation object to be modified.
+#' @param report_hidden If `TRUE`, show the hidden nodes (nodes whose names
+#' begin with a dot.)
 
 #' @returns an object of class "datasim". Internally, this is a list of the R
 #' assignment expressions used when running the simulation.

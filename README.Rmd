@@ -27,7 +27,7 @@ We hope to have `{LSTbook}` available on CRAN by February 2024. In the meanwhile
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("dtkaplan/LST")
+devtools::install_github("dtkaplan/LSTbook")
 ```
 
 ## Overview

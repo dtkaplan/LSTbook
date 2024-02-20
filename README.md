@@ -18,7 +18,7 @@ meanwhile, you can install the development version of `{LSTbook}` from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("dtkaplan/LST")
+devtools::install_github("dtkaplan/LSTbook")
 ```
 
 ## Overview
@@ -184,11 +184,30 @@ faithfully.
 
 ``` r
 print(sim_08)
-#> Simulation object
-#> ------------
-#> [1] c <- rnorm(n)
-#> [2] x <- c + rnorm(n)
-#> [3] y <- x + c + 3 + rnorm(n)
+#> $names
+#> $names[[1]]
+#> c
+#> 
+#> $names[[2]]
+#> x
+#> 
+#> $names[[3]]
+#> y
+#> 
+#> 
+#> $calls
+#> $calls[[1]]
+#> rnorm(n)
+#> 
+#> $calls[[2]]
+#> c + rnorm(n)
+#> 
+#> $calls[[3]]
+#> x + c + 3 + rnorm(n)
+#> 
+#> 
+#> attr(,"class")
+#> [1] "list"    "datasim"
 dag_draw(sim_08)
 ```
 

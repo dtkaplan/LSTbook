@@ -16,10 +16,11 @@ model_train(
 \item{tilde}{Formula for the model}
 
 \item{family}{Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...}
-
-\item{An}{object of class "model_object". This is much the same as an "lm" or "glm" object
+}
+\value{
+An object of class "model_object". This is much the same as an "lm" or "glm" object
 but with the additional attribute of the training data and a printing method that
-encourages the use of the regression summary methods \code{conf_interval()}, \code{R2()}, or \code{anova_summary()}}
+encourages the use of the regression summary methods \code{conf_interval()}, \code{R2()}, or \code{anova_summary()}
 }
 \description{
 An interface to several of the most often used model-fitting routines

@@ -14,7 +14,7 @@
 #' @param tilde Formula for the model
 #' @param family Character string: the family of model to fit, e.g. "lm", "binomial", "poisson", "rlm", ...
 
-#' @param An object of class "model_object". This is much the same as an "lm" or "glm" object
+#' @returns An object of class "model_object". This is much the same as an "lm" or "glm" object
 #' but with the additional attribute of the training data and a printing method that
 #' encourages the use of the regression summary methods `conf_interval()`, `R2()`, or `anova_summary()`
 

@@ -40,7 +40,7 @@ dag_draw <- function(DAG, ..., report_hidden = FALSE) {
   ig <- datasim_to_igraph(DAG, report_hidden = report_hidden)
   if (requireNamespace("graphics")) {
     oldpar <- graphics::par(mai = c(0,0,0,0)) # have the graph fill the frame
-    on.exit(par(oldpar))
+    on.exit(graphics::par(oldpar))
   }
   do.call(plot, c(list(ig), defaults))
 }
