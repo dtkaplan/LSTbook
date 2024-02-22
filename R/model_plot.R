@@ -16,6 +16,7 @@
 #' @param palette One of "A" through "F" giving some control for people who don't like or can't see the default palette
 #' @param model_ink The density of ink used to draw the model. ("alpha" for those in the know.)
 #'
+#' @returns A ggplot graphics object
 #' @export
 model_plot <- function(mod, nlevels = 3,
                        interval = c("confidence", "prediction", "none"),

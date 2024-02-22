@@ -53,6 +53,9 @@ if graph isn't smooth enough.}
 
 \item{\ldots}{Graphical options for the data points, labels, e.g. size}
 }
+\value{
+A ggplot graphics object
+}
 \description{
 \code{point_plot()} makes it easy to construct an informative basic graph of a
 data frame. "Making it easy" means that the user only needs to specify

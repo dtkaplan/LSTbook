@@ -39,6 +39,8 @@
 #' @param model_family Override the default model type. See `model_train()`
 #' @param \ldots Graphical options for the data points, labels, e.g. size
 #'
+#' @returns A ggplot graphics object
+#'
 #' @examples
 #' mosaicData::Galton |> point_plot(height ~ mother + sex + father, annot="model", model_ink=1)
 #' mtcars |> point_plot(mpg ~ wt + cyl)

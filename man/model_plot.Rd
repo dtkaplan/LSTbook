@@ -27,6 +27,9 @@ factors for color or facetting, how many levels in those factors.}
 
 \item{model_ink}{The density of ink used to draw the model. ("alpha" for those in the know.)}
 }
+\value{
+A ggplot graphics object
+}
 \description{
 Every model has an implicit function whose output is the response variable and which has one
 or more explanatory variables. (Exceptionally, there might be no explanatory variables as in
