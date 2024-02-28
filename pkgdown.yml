@@ -1,11 +1,11 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   DAGs: DAGs.html
   LSTbook: LSTbook.html
   modeling: modeling.html
-last_built: 2024-02-22T21:52Z
+last_built: 2024-02-28T22:41Z
 urls:
   reference: https://dtkaplan.github.io/LSTbook/reference
   article: https://dtkaplan.github.io/LSTbook/articles

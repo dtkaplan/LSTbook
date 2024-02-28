@@ -219,17 +219,18 @@
 <span><span class="co">#&gt; 9       1       25600    x 1.495289 1.505822 1.516355 0.02106636</span></span>
 <span><span class="co">#&gt; 10      2       25600    x 1.498624 1.509280 1.519937 0.02131267</span></span></code></pre></div>
 <p>I’ve used only two trials to show the output of <code><a href="reference/trials.html">trials()</a></code>, but increase it to, say, <code>times = 100</code> and finish off the wrangling with the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> function <code>summarize(mean(width), .by = sample_size)</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   sample_size mean(width)</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         100  0.34800368</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         400  0.17059320</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1600  0.08483481</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        6400  0.04251015</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       25600  0.02123563</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co">#&gt;   sample_size mean(width)</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt; 1         100  0.34800368</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; 2         400  0.17059320</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; 3        1600  0.08483481</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; 4        6400  0.04251015</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; 5       25600  0.02123563</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=LSTbook" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/dtkaplan/LSTbook/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/dtkaplan/LSTbook/issues/" class="external-link">Report a bug</a></li>
 </ul>
