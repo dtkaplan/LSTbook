@@ -71,8 +71,7 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
 
   if (interval == "prediction") {
     if (inherits(mod, "glm") && mod$call[[3]] == "binomial") {
-      warning("No prediction interval available. Using confidence interval.")
-      interval="confidence"
+      stop("No prediction interval available, since the response variable is effectively categorical, not quantitative.")
     }
   }
 
