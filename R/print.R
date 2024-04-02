@@ -3,6 +3,7 @@
 #' @param x A data simulation as made by `datasim_make()`
 #' @param \ldots for compatibility with generic `print()`
 #' @param report_hidden Show the hidden nodes (nodes whose name begins with `.`)
+#' @export
 print.datasim <- function(x, ..., report_hidden = FALSE) {
   vnames <- lapply(x$names, as.character) |> unlist()
   vcalls <- x$calls
