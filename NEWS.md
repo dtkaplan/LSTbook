@@ -8,4 +8,4 @@ First CRAN release
 
 # LSTbook 0.5.1.9001
 
-* print.datasim() was not being exported. Now is.
+* print.datasim(), print.model_object() were not being exported. Now they are.
