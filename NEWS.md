@@ -9,3 +9,7 @@ First CRAN release
 # LSTbook 0.5.1.9001
 
 * print.datasim(), print.model_object() were not being exported. Now they are.
+
+# LSTbook 0.5.1.9002
+
+* Adding documentation stubs for data sources that are too big to include in the package but are available on the web, such as `Natality_2014`. 
