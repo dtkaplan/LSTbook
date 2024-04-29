@@ -13,3 +13,5 @@ First CRAN release
 # LSTbook 0.5.1.9002
 
 * Adding documentation stubs for data sources that are too big to include in the package but are available on the web, such as `Natality_2014`. 
+
+* Changed the name of the FEV data frame to CRDS ("childhood respiratory disease study") to avoid confusion with the FEV variable.

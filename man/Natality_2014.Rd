@@ -58,7 +58,7 @@ A data frame with a random sample of size 100000 from the complete CDC set of 3,
 Natality_2014
 }
 \description{
-When using Web-R, load this dataset with \code{load("https://www.mosaic-web.org/go/datasets/natality_2014.rda")}
+When using Web-R, load this dataset with \code{load("https://www.mosaic-web.org/go/datasets/Natality_2014.rda")}
 }
 \details{
 The Centers for Disease Control collects data on all births registered
