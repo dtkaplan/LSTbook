@@ -18,15 +18,15 @@
 #' @examples
 #'  mtcars |> model_train(mpg ~ wt + random_terms(4)) |> conf_interval()
 #'  mtcars |> model_train(mpg ~ wt + random_terms(4)) |> anova_report()
-#'  # must state number of rows if not part of a modeling tilde expression
-#'  goo <- mtcars |> bind_cols(r = random_terms(3))
+#'  head(mtcars) |> select(wt, mpg) |> mutate(r = random_terms(3))
 #' @export
 random_terms <- function (df = 1, rdist = rnorm, args = list(), n, seed = NULL)
 {
   if (missing(n)) {
     arg <- sys.call(1)[[2]]
     # walk down the stack until reaching the first argument to this function
-    while(length(arg) > 1) arg <- arg[[2]]
+    # that won't be a recursive call involving "random_terms"
+    while("random_terms" %in% all.names(arg)) arg <- arg[[2]]
     # if it's a data frame, we have our answer.
     if (inherits(eval(arg), "data.frame")) n = nrow(eval(arg))
     else stop("Need to specify argument <n> in random_terms().")
