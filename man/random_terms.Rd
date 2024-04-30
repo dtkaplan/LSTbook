@@ -30,7 +30,6 @@ the calling function.
 }
 \examples{
  mtcars |> model_train(mpg ~ wt + random_terms(4)) |> conf_interval()
- mtcars |> model_train(mpg ~ wt + random_terms(4)) |> anova_report()
- # must state number of rows if not part of a modeling tilde expression
- goo <- mtcars |> bind_cols(r = random_terms(3, n=nrow(mtcars)))
+ mtcars |> model_train(mpg ~ wt + random_terms(4)) |> anova_summary()
+ head(mtcars) |> select(wt, mpg) |> mutate(r = random_terms(3))
 }

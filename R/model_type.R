@@ -16,7 +16,9 @@ model_family <- function(.data, .tilde,
   if (length(.tilde) == 2) stop("Specification must be two sided.")
 
   # get the response variable
-  data <- data_from_tilde(.data, .tilde)[[1]]
+  data <- .data[[deparse(.tilde[[2]])]]
+  # Don't need the complexity involved in this line
+  # data <- data_from_tilde(.data, .tilde)[[1]]
 
 
   if (inherits(data, "zero_one")) allowable <- c("binomial", "lm", "linear")

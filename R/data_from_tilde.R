@@ -79,12 +79,16 @@ data_from_tilde <- function(data, tilde) {
   tmp <- split_tilde(tilde)
   if ("right" %in% names(tmp)) {
     # Turn each into a data frame
-    Left <- eval_exp_list(tmp$left, data)
+    Res <- Left <- eval_exp_list(tmp$left, data)
     Right <- eval_exp_list(tmp$right, data)
-    cbind(Left, Right) # using cbind() to avoid the name repair in dplyr::bind_cols()
+    if (nrow(Right) > 0) {
+      # using cbind() to avoid the name repair in dplyr::bind_cols()
+      Res <- cbind(Left, Right)
+    }
   } else {
-    eval_exp_list(tmp, data)
+    Res <- eval_exp_list(tmp, data)
   }
+  Res
 }
 
 get_error_object_name <- function(msg) {

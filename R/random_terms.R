@@ -17,16 +17,17 @@
 #'
 #' @examples
 #'  mtcars |> model_train(mpg ~ wt + random_terms(4)) |> conf_interval()
-#'  mtcars |> model_train(mpg ~ wt + random_terms(4)) |> anova_report()
+#'  mtcars |> model_train(mpg ~ wt + random_terms(4)) |> anova_summary()
 #'  head(mtcars) |> select(wt, mpg) |> mutate(r = random_terms(3))
 #' @export
 random_terms <- function (df = 1, rdist = rnorm, args = list(), n, seed = NULL)
 {
+  my_name <- deparse(sys.call(0)[[1]]) # the name of this function
   if (missing(n)) {
     arg <- sys.call(1)[[2]]
     # walk down the stack until reaching the first argument to this function
-    # that won't be a recursive call involving "random_terms"
-    while("random_terms" %in% all.names(arg)) arg <- arg[[2]]
+    # that won't be a recursive call involving this function
+    while(my_name %in% all.names(arg)) arg <- arg[[2]]
     # if it's a data frame, we have our answer.
     if (inherits(eval(arg), "data.frame")) n = nrow(eval(arg))
     else stop("Need to specify argument <n> in random_terms().")
