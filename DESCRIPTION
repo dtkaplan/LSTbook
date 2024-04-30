@@ -27,15 +27,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests:
     igraph, 
-    graphics,
-    testthat (>= 3.0.0),
+    mosaicData,
     moderndive,
     palmerpenguins,
-    babynames,
-    knitr,
-    rmarkdown, 
-    stringdist,
-    mosaicData
+    stringdist
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://dtkaplan.github.io/LSTbook/

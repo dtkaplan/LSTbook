@@ -19,7 +19,7 @@
 #' involved in an incident or not. (billions of miles)
 #' - `population` the population of the US (thousands of people)
 #' - `registered_vehicles` the number of motor vehicles registered in the US (thousands)
-#' - `licenced_drivers` the number of licenced drivers in the US (thousands)
+#' - `licensed_drivers` the number of licenced drivers in the US (thousands)
 #'
 #'
 #' @keywords datasets

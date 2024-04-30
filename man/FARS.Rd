@@ -20,7 +20,7 @@ A data.frame object with one row per year from 1994 to 2016
 involved in an incident or not. (billions of miles)
 \item \code{population} the population of the US (thousands of people)
 \item \code{registered_vehicles} the number of motor vehicles registered in the US (thousands)
-\item \code{licenced_drivers} the number of licenced drivers in the US (thousands)
+\item \code{licensed_drivers} the number of licenced drivers in the US (thousands)
 }
 }
 \source{

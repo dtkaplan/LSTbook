@@ -45,11 +45,16 @@ eval_exp_list <- function(EL, data) {
     if (ncol(res[[k]]) == 1) {
       names(res[[k]]) <- deparse(EL[[k]])
     } else {
-      # just pull out the variable as one column, leaving the multi-column
+      # just pull out one column, leaving the multi-column
       # stuff for the annotation based on the model
       the_var <- all.vars(EL[[k]])[1]
-      res[[k]] <- data[the_var]
-      names(res[[k]]) <- the_var
+      if (is.na(the_var)) {
+        # the column is not based on a variable
+        res[[k]] <- NULL
+      } else {
+        res[[k]] <- data[the_var]
+        names(res[[k]]) <- the_var
+      }
     }
   }
 

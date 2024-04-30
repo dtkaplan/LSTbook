@@ -15,3 +15,7 @@ First CRAN release
 * Adding documentation stubs for data sources that are too big to include in the package but are available on the web, such as `Natality_2014`. 
 
 * Changed the name of the FEV data frame to CRDS ("childhood respiratory disease study") to avoid confusion with the FEV variable.
+
+* model_eval() mistakenly changed name of first column to .response even when handed evaluation data directly. Fixed.
+
+* Added random_terms() to generate random columns in a model matrix.

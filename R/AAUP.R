@@ -19,7 +19,7 @@
 #' - `fem`: fraction of the workforce that is female
 #' - `unemp`: unemployment rate in the discipline
 #' - `nonac`: fraction of the workforce that is non-academic,
-#' - `licenced`: Does work in the profession require a license (from George Cobb's paper)
+#' - `licensed`: Does work in the profession require a license (from George Cobb's paper)
 #'
 #' @references M Bellas & BF Reskin (1994) "On comparable worth" *Academe* **80**:83-85
 #'

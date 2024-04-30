@@ -13,7 +13,7 @@
 \item \code{fem}: fraction of the workforce that is female
 \item \code{unemp}: unemployment rate in the discipline
 \item \code{nonac}: fraction of the workforce that is non-academic,
-\item \code{licenced}: Does work in the profession require a license (from George Cobb's paper)
+\item \code{licensed}: Does work in the profession require a license (from George Cobb's paper)
 }
 }
 \source{

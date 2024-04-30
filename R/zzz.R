@@ -2,7 +2,7 @@
 
 pkgs_to_attach <- c("ggplot2", "dplyr")
 optional_packages <- c("ggformula", "mosaicData", "moderndive",
-                       "palmerpenguins", "babynames")
+                       "palmerpenguins")
 # if an optional package is installed, .onLoad() will attach it.
 add_to_attach <- function(pkg) {
   if (requireNamespace(pkg, quietly = TRUE))
