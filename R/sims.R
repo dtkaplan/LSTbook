@@ -3,7 +3,7 @@
 #' @details Simulations in `LSTbook` are first specified by providing the
 #' code for each node (which can be written in terms of the values of other nodes). Once
 #' constructed, data can be extracted from the simulation using `datasim_run(n)` or the
-#' generic `sample(n)`.
+#' generic `take_sample(n)`.
 #'
 #' Each argument defines one node in the simulation. The argument syntax is unusual, using
 #' *assignment*. For instance, an argument `y <- 3*x + rnorm(n)` defines a node named `y`. The R code

@@ -31,7 +31,7 @@ Construct and modify data simulations
 Simulations in \code{LSTbook} are first specified by providing the
 code for each node (which can be written in terms of the values of other nodes). Once
 constructed, data can be extracted from the simulation using \code{datasim_run(n)} or the
-generic \code{sample(n)}.
+generic \code{take_sample(n)}.
 
 Each argument defines one node in the simulation. The argument syntax is unusual, using
 \emph{assignment}. For instance, an argument \code{y <- 3*x + rnorm(n)} defines a node named \code{y}. The R code

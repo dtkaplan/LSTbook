@@ -63,7 +63,7 @@ library(LSTbook)
 
 
 ```{r label='READMEwZqoH2', echo=FALSE}
-Galton <- Galton |> sample(n=100, .by = sex)
+Galton <- Galton |> take_sample(n=100, .by = sex)
 Whickham <- Whickham |> mutate(outcome = zero_one(outcome, one = "Dead"))
 ```
 
@@ -115,7 +115,7 @@ Whickham |> point_plot(outcome ~ age + smoker, annot = "model")
 NOTE: To highlight statistical inference, we have been working with an n=200 sub-sample of Galton: 
 
 ```{r label='READMEcO84YG', }
-Galton <- Galton |> sample(n=100, .by = sex)
+Galton <- Galton |> take_sample(n=100, .by = sex)
 ```
 
 
@@ -136,7 +136,7 @@ From the rules, we can see that `y` increases directly with `x`, the coefficient
 
 ```{r label='READMEmxhF2G'}
 sim_08 |> 
-  sample(n = 100) |>
+  take_sample(n = 100) |>
   model_train(y ~ x) |>
   conf_interval()
 ```
@@ -147,7 +147,7 @@ Finally, an advanced example that's used as a demonstration but illustrates the 
 
 ```{r label='READMEQs5OUX'}
 sim_08 |> 
-  sample(n = sample_size) |>
+  take_sample(n = sample_size) |>
   model_train(y ~ x) |>
   conf_interval() |>
   trials(times = 2, sample_size = c(100, 400, 1600, 6400, 25600)) |> 
@@ -159,7 +159,7 @@ I've used only two trials to show the output of `trials()`, but increase it to, 
 
 ```{r label='READMEnYSY5E', echo = FALSE}
 sim_08 |> 
-  sample(n = sample_size) |>
+  take_sample(n = sample_size) |>
   model_train(y ~ x) |>
   conf_interval() |>
   trials(times = 100, sample_size = c(100, 400, 1600, 6400, 25600)) |> 

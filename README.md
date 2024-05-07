@@ -160,7 +160,7 @@ NOTE: To highlight statistical inference, we have been working with an
 n=200 sub-sample of Galton:
 
 ``` r
-Galton <- Galton |> sample(n=100, .by = sex)
+Galton <- Galton |> take_sample(n=100, .by = sex)
 ```
 
 Quantitative modeling has the same syntax, but rather than rely on the
@@ -218,7 +218,7 @@ coefficient being 1. A simple model gets this wrong:
 
 ``` r
 sim_08 |> 
-  sample(n = 100) |>
+  take_sample(n = 100) |>
   model_train(y ~ x) |>
   conf_interval()
 #> # A tibble: 2 × 4
@@ -238,7 +238,7 @@ function of the sample size `n` and averaging over 100 trials.
 
 ``` r
 sim_08 |> 
-  sample(n = sample_size) |>
+  take_sample(n = sample_size) |>
   model_train(y ~ x) |>
   conf_interval() |>
   trials(times = 2, sample_size = c(100, 400, 1600, 6400, 25600)) |> 

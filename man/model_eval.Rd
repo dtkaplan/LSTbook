@@ -40,8 +40,8 @@ columns include
 \item the explanatory variables
 \item \code{.output} --- the output of the model that corresponds to the explanatory value
 \item the \code{.lwr} and \code{.upr} bounds of the prediction or confidence interval
-\item if training data is used as the input, the \code{.response} variable and the \code{.resid}. Note that
-the generic name \code{.response} is used, not the actual name of the model's response variable.
+\item if training data is used as the input, then it's possible to calculate the residual. This
+will be called \code{.resid}.
 }
 }
 \description{

@@ -15,7 +15,7 @@
 #'   mpg ~ 1, mpg ~ hp, mpg ~ hp + wt,
 #'   measure="SS")
 #'   # This won't work until cross-validation is set up
-#' # compare_model_residuals(sample(sim_07, n=100),
+#' # compare_model_residuals(take_sample(sim_07, n=100),
 #'   # c ~ 1, c ~ a, c ~ a + b, c ~ a + b + d,
 #'   # measure="SS", testing="out-of-sample")
 
@@ -32,9 +32,9 @@ compare_model_residuals <- function(source, ...,  n=500,
   if (length(responses) > 1) stop("All model specifications must have the same response variable.")
   else response <- as.name(responses) # convert to a name so it can be inserted in the formula
   if (inherits(source, "datasim")) {
-    Training <- sample(source, n=n)
+    Training <- take_sample(source, n=n)
     if (testing == "in-sample") Testing <- Training
-    else Testing <- sample(source, n=2*n) # a bit bigger, because we can
+    else Testing <- take_sample(source, n=2*n) # a bit bigger, because we can
   } else {
     if (testing != "in-sample") {
       message("Cross-validation being used.")

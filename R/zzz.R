@@ -30,7 +30,7 @@ is_attached <- function(x) {
 # to avoid notes in CRAN checks
 utils::globalVariables(c("data", "pf", "xend", "yend",
                          "label", "xticks", "ybase", "ymid",
-                         "ytop", ".lwr", ".output", ".response", ".resid",
+                         "ytop", ".lwr", ".output", ".resid",
                          "na.exclude", "left", "right"))
 
 ####

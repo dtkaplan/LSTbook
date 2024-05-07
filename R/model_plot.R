@@ -31,8 +31,8 @@ model_plot <- function(mod, nlevels = 3,
   Skeleton <- coerce_model_for_graph(mod, nlevels = nlevels,
                                       interval = interval,
                                       level = level)
-  # Get rid of response and residual if they are in the Skeleton
-  if (".response" %in% names(Skeleton))
+  # Get rid of any residuals if they are in the Skeleton
+  if (".resid" %in% names(Skeleton))
     Skeleton <- Skeleton |> dplyr::select(-.response, -.resid)
   # Add a placeholder explanatory variable if model has none.
   if (names(Skeleton)[1] == ".output")

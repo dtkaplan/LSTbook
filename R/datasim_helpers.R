@@ -192,8 +192,8 @@ random_levels <- function(n, k = NULL, replace = FALSE) {
   if (is.null(k)) stop("Must specify k as number of distinct levels.")
   rlevels <- stringi::stri_rand_strings(k, 6, pattern = "[A-Za-z0-9]")
   if (replace) {
-    sample(rlevels, n, replace = TRUE)
+    take_sample(rlevels, n, replace = TRUE)
   } else {
-    sample(rep(rlevels, length.out = n))
+    take_sample(rep(rlevels, length.out = n))
   }
 }

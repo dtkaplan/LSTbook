@@ -18,4 +18,9 @@ First CRAN release
 
 * model_eval() mistakenly changed name of first column to .response even when handed evaluation data directly. Fixed.
 
+# LSTbook 0.5.1.9003
+
 * Added random_terms() to generate random columns in a model matrix.
+
+* Changed the name of the LSTbook function for sampling from "sample()" (which conflicts with other packages) to "take_sample()." All this just because I wanted the size parameter to be named "n" rather than "size"!
+

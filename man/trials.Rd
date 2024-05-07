@@ -33,7 +33,7 @@ This is intended as a pipeline friendly replacement for \code{mosaic::do()}.
 mean(rnorm(10)) |> trials(times=3)
 mean(rnorm(lambda)) |> trials(lambda=c(1, 100, 10000))
 mean(rnorm(lambda)) |> trials(times=5, lambda=c(1, 100, 10000))
-sample(mtcars, n=lambda, replace=TRUE) |> select(mpg, hp) |>
+take_sample(mtcars, n=lambda, replace=TRUE) |> select(mpg, hp) |>
   model_train(mpg ~ resample(hp)) |>
   regression_summary() |> trials(times=3, lambda=c(10, 20, 40)) |>
   filter(term == "resample(hp)")

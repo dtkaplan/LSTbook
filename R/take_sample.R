@@ -13,24 +13,24 @@
 #' @param replace Logical flag: whether to sample with replacement. (default: `FALSE`)
 #'
 #' @examples
-#' sample(sim_03, n=5) # run a simulation
-#' sample(Clock_auction, n = 3) # from a data frame
-#' sample(1:6, n = 6) # sample from a vector
+#' take_sample(sim_03, n=5) # run a simulation
+#' take_sample(Clock_auction, n = 3) # from a data frame
+#' take_sample(1:6, n = 6) # sample from a vector
 #'
 #' @returns A vector or a data frame depending on the nature of the `x` argument.
 #' @export
-sample <- function (x, n, replace = FALSE, ...) {
-  UseMethod('sample')
+take_sample <- function (x, n, replace = FALSE, ...) {
+  UseMethod('take_sample')
 }
 
 
 #' @export
-sample.vector <- function(x, n=length(x), replace=FALSE, ...) {
+take_sample.vector <- function(x, n=length(x), replace=FALSE, ...) {
   base::sample(x, size = n, replace = replace, ...)
 }
 
 #' @export
-sample.data.frame <- function(x, n = nrow(x), replace = FALSE, ..., .by = NULL) {
+take_sample.data.frame <- function(x, n = nrow(x), replace = FALSE, ..., .by = NULL) {
 
   # slice_sample uses `by` instead of `.by`
   # I can get this to work only by turning `.by` into a character string
@@ -49,7 +49,7 @@ sample.data.frame <- function(x, n = nrow(x), replace = FALSE, ..., .by = NULL) 
 }
 
 #' @export
-sample.datasim <- function(x, n = 5, replace = FALSE, ..., seed = NULL, report_hidden=FALSE) {
+take_sample.datasim <- function(x, n = 5, replace = FALSE, ..., seed = NULL, report_hidden=FALSE) {
    datasim_run(x, n = n, seed = seed, report_hidden = report_hidden)
 }
 
@@ -60,9 +60,9 @@ sample.datasim <- function(x, n = 5, replace = FALSE, ..., seed = NULL, report_h
 #' row from the original `x` that the same came from.
 #' @param prob Probabilities to use for sampling, one for each element of `x`
 #'
-#' @rdname sample
+#' @rdname take_sample
 #' @export
-sample.default <- function(x, n = length(x), replace=FALSE, prob=NULL, .by = NULL,
+take_sample.default <- function(x, n = length(x), replace=FALSE, prob=NULL, .by = NULL,
                            groups = .by, orig.ids=FALSE, ...) {
   size <- n
   missingSize <- missing(size)
@@ -97,8 +97,8 @@ sample.default <- function(x, n = length(x), replace=FALSE, prob=NULL, .by = NUL
 }
 
 #' A convenience function for sampling with replacement
-#' @rdname sample
+#' @rdname take_sample
 #' @export
 resample <- function(..., replace = TRUE) {
-  sample(..., replace = replace)
+  take_sample(..., replace = replace)
 }
