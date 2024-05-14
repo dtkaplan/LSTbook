@@ -54,6 +54,7 @@ point_plot <- function(D, tilde, ..., seed=101,
                        model_ink = 0.4, palette=LETTERS[1:8], bw = NULL, level=0.95,
                        nx = 50, model_family = NULL) {
   annot <- match.arg(annot)
+  interval <- match.arg(interval)
   palette <- match.arg(palette)
   jitter <- match.arg(jitter)
   set.seed(seed)
@@ -184,7 +185,8 @@ point_plot <- function(D, tilde, ..., seed=101,
   if (annot == "model") {
     # calls_to_names() rejiggers the model formula so that it contains
     # references to the <names> of the already transformed data.
-    mod_vals <- simple_mod_eval(calls_to_names(tilde), data, level = level,
+    mod_vals <- simple_mod_eval(calls_to_names(tilde), data,
+                                level = level, itype = interval,
                                 nx = nx, family = model_family)
 
     # special case for categorical response variable
@@ -210,7 +212,7 @@ point_plot <- function(D, tilde, ..., seed=101,
                             ymin=.data$.lwr, ymax=.data$.upr, # for CRAN CMD check
                             color=.data[[vars[3]]]),
                         alpha = model_ink, size=6,
-                        position="dodge") +
+                        position=position_dodge(width = 2)) +  +
           guides(fill="none")
       } else {
         Res <- Res +
