@@ -71,7 +71,8 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
 
   if (interval == "prediction") {
     if (inherits(mod, "glm") && mod$call[[3]] == "binomial") {
-      stop("No prediction interval available, since the response variable is effectively categorical, not quantitative.")
+      interval <- "none"
+      warning("No prediction interval available, since the response variable is effectively categorical, not quantitative.")
     }
   }
 
@@ -80,12 +81,16 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
     Fitted <- Fitted |> dplyr::select(".lwr", ".output", ".upr")
 
   if (response_in_data) {
-    Residuals <- data.frame(.resid = eval_data[[response_var_name]] - Fitted$.output)
-    # names(training_data)[names(training_data) == response_var_name] <- ".response" # give it a generic name
-    return(dplyr::bind_cols(training_data, Fitted, Residuals))
-  } else {
-    return(dplyr::bind_cols(eval_data, Fitted))
+    response_values <- eval_data[[response_var_name]]
+    if (is.numeric(response_values)) {
+      Residuals <- data.frame(.resid = response_values - Fitted$.output)
+      # names(training_data)[names(training_data) == response_var_name] <- ".response" # give it a generic name
+      return(dplyr::bind_cols(training_data, Fitted, Residuals))
+    }
   }
+
+  dplyr::bind_cols(eval_data, Fitted)
+
 }
 
 

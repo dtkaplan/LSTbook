@@ -24,6 +24,7 @@ First CRAN release
 
 * Changed the name of the LSTbook function for sampling from "sample()" (which conflicts with other packages) to "take_sample()." All this just because I wanted the size parameter to be named "n" rather than "size"!
 
+* Fixed a warning in "model_eval()" that led residuals not being calculated for zero-one response variables.
 
 TO DO
 
