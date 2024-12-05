@@ -64,10 +64,18 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>We hope to have <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> available on CRAN by February 2024. In the meanwhile, you can install the development version of <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Version 0.6 of <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> was released on CRAN by February 2024. Note that previous versions did not include the <code><a href="reference/take_sample.html">take_sample()</a></code> function, which is used extensively in <em>Lessons</em>. The CRAN version is also published for use with webr (as are most CRAN packages).</p>
+<p>For more recent updates:</p>
+<ul>
+<li>Install the development version of <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> from <a href="https://github.com/" class="external-link">GitHub</a> with:</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"dtkaplan/LSTbook"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Via r-universe.dev: <a href="https://dtkaplan.r-universe.dev/LSTbook" class="external-link uri">https://dtkaplan.r-universe.dev/LSTbook</a></p></li>
+<li><p>In the YAML for a webr document, refer to the repository thus under the <code>webr</code> index: <code>repos: ["https://dtkaplan.r-universe.dev"]</code></p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -134,30 +142,11 @@
 <p>To help students develop an deeper appreciation of the importance of covariates, we can turn to data-generating simulations where we know the rules behind the data and can check whether modeling reveals them faithfully.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sim_08</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $names</span></span>
-<span><span class="co">#&gt; $names[[1]]</span></span>
-<span><span class="co">#&gt; c</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $names[[2]]</span></span>
-<span><span class="co">#&gt; x</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $names[[3]]</span></span>
-<span><span class="co">#&gt; y</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $calls</span></span>
-<span><span class="co">#&gt; $calls[[1]]</span></span>
-<span><span class="co">#&gt; rnorm(n)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $calls[[2]]</span></span>
-<span><span class="co">#&gt; c + rnorm(n)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $calls[[3]]</span></span>
-<span><span class="co">#&gt; x + c + 3 + rnorm(n)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; attr(,"class")</span></span>
-<span><span class="co">#&gt; [1] "list"    "datasim"</span></span>
+<span><span class="co">#&gt; Simulation object</span></span>
+<span><span class="co">#&gt; ------------</span></span>
+<span><span class="co">#&gt; [1] c &lt;- rnorm(n)</span></span>
+<span><span class="co">#&gt; [2] x &lt;- c + rnorm(n)</span></span>
+<span><span class="co">#&gt; [3] y &lt;- x + c + 3 + rnorm(n)</span></span>
 <span><span class="fu"><a href="reference/dag_draw.html">dag_draw</a></span><span class="op">(</span><span class="va">sim_08</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-READMEoXTf5e-1.png" width="100%"></p>
 <p>From the rules, we can see that <code>y</code> increases directly with <code>x</code>, the coefficient being 1. A simple model gets this wrong:</p>

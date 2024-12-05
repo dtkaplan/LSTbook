@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>{LST}: R package for *Lessons in Statistical Thinking* • LSTbook</title>
+<title>{LSTbook}: R package for the book *Lessons in Statistical Thinking* • LSTbook</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="{LST}: R package for *Lessons in Statistical Thinking*">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="{LSTbook}: R package for the book *Lessons in Statistical Thinking*">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -58,7 +58,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>{LST}: R package for *Lessons in Statistical Thinking*</h1>
+      <h1>{LSTbook}: R package for the book *Lessons in Statistical Thinking*</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LSTbook/blob/master/vignettes/LSTbook.Rmd" class="external-link"><code>vignettes/LSTbook.Rmd</code></a></small>
@@ -67,8 +67,8 @@
 
     
     
-<p>The <code>{LST}</code> package provides support for the style of R
-computing used in the textbook, <a href="https://dtkaplan.github.io/Lessons-in-statistical-thinking/" class="external-link"><em>Lessons
+<p>The <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> package provides support for the style of
+R computing used in the textbook, <a href="https://dtkaplan.github.io/Lessons-in-statistical-thinking/" class="external-link"><em>Lessons
 in Statistical Thinking</em></a>. This style seeks to reduce the
 cognitive load on students by reducing to a minimum the number of R
 functions and the syntax needed to undertake a complete course that
@@ -135,15 +135,15 @@ sufficient for teaching an entire statistics course that includes
 inference and covariation.</p>
 <ul>
 <li>The output is <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> compatible.</li>
-<li>Other such omnibus commands from <code>{LST}</code> seen in
+<li>Other such omnibus commands from <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> seen in
 <em>Lessons</em> are <code><a href="../reference/model_train.html">model_train()</a></code>, <code><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample()</a></code>,
 and <code><a href="../reference/trials.html">trials()</a></code>.</li>
 <li>Wrangling functions from <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> are also occasionally
 used, especially <code>mutate()</code> and
 <code>summarize()</code>.</li>
-<li>Summaries of statistical models are made with the <code>{LST}</code>
-function <code><a href="../reference/regression_summaries.html">conf_interval()</a></code> and occasionally
-<code><a href="../reference/regression_summaries.html">R2()</a></code>. (Near the end of the course,
+<li>Summaries of statistical models are made with the
+<a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> function <code><a href="../reference/regression_summaries.html">conf_interval()</a></code> and
+occasionally <code><a href="../reference/regression_summaries.html">R2()</a></code>. (Near the end of the course,
 <code><a href="../reference/regression_summaries.html">regression_summary()</a></code> and <code><a href="../reference/regression_summaries.html">anova_summary()</a></code> are
 introduced, but these play only a very minor, optional role in the
 course.)</li>
@@ -186,8 +186,8 @@ open/closed pair of parentheses. Usually, there is something such as a
 often additional <strong>named arguments</strong> such as the
 <code>annot = "model"</code> in the example command presented in <span class="citation">@sec-command-template</span>.</p></li>
 <li><p>The function call in (a) produces an R object. For the
-<code>{LST}</code> functions, this object will always be one of the four
-types presented in the previous section (data frame, model, data
+<a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> functions, this object will always be one of the
+four types presented in the previous section (data frame, model, data
 simulation, graphics frame).</p></li>
 </ol>
 </div>
@@ -245,21 +245,22 @@ put together the modeling systems in R. Rather than the hodge-podge of
 printed model formats, I encourage users to print specific summaries of
 models such as graphs of the model function (use
 <code><a href="../reference/model_plot.html">model_plot()</a></code>). The numerical model summaries in
-<code>{LST}</code> are always printed in data-frame format. Most of the
-time in <em>Lessons</em>, models are summarized with coefficients and
-confidence intervals, a format produced by <code><a href="../reference/regression_summaries.html">conf_interval()</a></code>.
-I strongly recommend that model coefficients <em>always</em> be shown in
-the context of a confidence interval; <code><a href="../reference/regression_summaries.html">conf_interval()</a></code>
-imposes this policy. Another sometimes useful format of summary is
-provided by <code><a href="../reference/regression_summaries.html">R2()</a></code>. Toward the end of the course, the ANOVA
-generalization of R<sup>2</sup> is introduced.
-<code><a href="../reference/regression_summaries.html">anova_summary()</a></code> is useful for comparing two or more models.
-<code><a href="../reference/regression_summaries.html">regression_summary()</a></code> shows a standard regression report,
-but <code><a href="../reference/regression_summaries.html">conf_interval()</a></code> is, I think, a superior format. (If you
-feel obliged to show a p-value, use the <code>show_p = TRUE</code>
-argument to <code><a href="../reference/regression_summaries.html">conf_interval()</a></code>. But I recommend focussing on
-whether the confidence interval includes zero, using the
-<code>level =</code> argument if you aren’t happy with 0.05.)</p>
+<a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> are always printed in data-frame format. Most of
+the time in <em>Lessons</em>, models are summarized with coefficients
+and confidence intervals, a format produced by
+<code><a href="../reference/regression_summaries.html">conf_interval()</a></code>. I strongly recommend that model
+coefficients <em>always</em> be shown in the context of a confidence
+interval; <code><a href="../reference/regression_summaries.html">conf_interval()</a></code> imposes this policy. Another
+sometimes useful format of summary is provided by <code><a href="../reference/regression_summaries.html">R2()</a></code>.
+Toward the end of the course, the ANOVA generalization of R<sup>2</sup>
+is introduced. <code><a href="../reference/regression_summaries.html">anova_summary()</a></code> is useful for comparing two
+or more models. <code><a href="../reference/regression_summaries.html">regression_summary()</a></code> shows a standard
+regression report, but <code><a href="../reference/regression_summaries.html">conf_interval()</a></code> is, I think, a
+superior format. (If you feel obliged to show a p-value, use the
+<code>show_p = TRUE</code> argument to <code><a href="../reference/regression_summaries.html">conf_interval()</a></code>. But
+I recommend focussing on whether the confidence interval includes zero,
+using the <code>level =</code> argument if you aren’t happy with
+0.05.)</p>
 <p>Data simulations are printed as text showing the causal formulas
 relating one variable to the others. Like this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -273,7 +274,7 @@ relating one variable to the others. Like this:</p>
 <p>Instructions for constructing data simulations are given in the
 <em>Simulating data with Directed Acyclic Graphs</em> vignette of this
 package. Many pre-built simulations are provided with this
-<code>{LST}</code> package. New ones can be constructed using
+<a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> package. New ones can be constructed using
 <code><a href="../reference/datasim_make.html">datasim_make()</a></code>. Except in the most straightforward cases,
 such construction is an instructor-level task.</p>
 </div>
@@ -286,9 +287,9 @@ repeating a command multiple times, accumulating the results into a data
 frame. For instance:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">mosaic</span><span class="fu">::</span><span class="fu">do</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><code>{LST}</code> has updated this functionality to take advantage
-of the R built-in pipe notation and the style of arranging model
-summaries as data frames. The functionality is provided by the
+<p><a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> has updated this functionality to take
+advantage of the R built-in pipe notation and the style of arranging
+model summaries as data frames. The functionality is provided by the
 <code><a href="../reference/trials.html">trials()</a></code> function. To use it, place <code><a href="../reference/trials.html">trials()</a></code>
 at the end of a pipeline:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -319,7 +320,7 @@ this object has the format you seek, add the final <code><a href="../reference/t
 stage back in.</p>
 </div>
 <div class="section level2">
-<h2 id="graphics-in-lst">Graphics in <code>{LST}</code><a class="anchor" aria-label="anchor" href="#graphics-in-lst"></a>
+<h2 id="graphics-in-lstbook">Graphics in <code>{LSTbook}</code><a class="anchor" aria-label="anchor" href="#graphics-in-lstbook"></a>
 </h2>
 <p>Instructors may feel obliged by convention to introduce the menagerie
 of plotting modalities, such as bar charts, line charts, histograms,
@@ -341,20 +342,20 @@ used with the R pipe <code>|&gt;</code> and which employe
 tilde-expressions for specifying response and explanatory variables.</p>
 </div>
 <div class="section level2">
-<h2 id="lst-mosaic-and-ggformula">
-<code>{LST}</code>, <code>{mosaic}</code>, and
-<code>{ggformula}</code><a class="anchor" aria-label="anchor" href="#lst-mosaic-and-ggformula"></a>
+<h2 id="lstbook-mosaic-and-ggformula">
+<code>{LSTbook}</code>, <code>{mosaic}</code>, and
+<code>{ggformula}</code><a class="anchor" aria-label="anchor" href="#lstbook-mosaic-and-ggformula"></a>
 </h2>
 <p>The MOSAIC suite of packages—including <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and
 <a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>—are widely used in teaching statistics with R.
-Many of the pedagogical principles behind <code>{LST}</code> are shared
-with <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and <a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>. You are of
-course welcome to use <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and <a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>
-along with <code>{LST}</code>, particularly if you want to teach other
-graphics modalities than those provided by
+Many of the pedagogical principles behind <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> are
+shared with <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and <a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>. You are
+of course welcome to use <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and
+<a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a> along with <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a>, particularly
+if you want to teach other graphics modalities than those provided by
 <code>LST::point_plot()</code>.</p>
 <p>Other than shared pedagogical principles, there is no connection of
-<code>{LST}</code> with either <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and
+<a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> with either <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> and
 <a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>. One reason for this is the pipe
 <code>|&gt;</code>, which prominently features in <em>Lessons</em>.
 <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> is not pipe-ready because many functions require a
@@ -362,11 +363,11 @@ graphics modalities than those provided by
 <p>Another reason concerns recent developments in deploying R computing
 <em>via</em> web pages. The system that provides within-a-web-page R
 computing is not yet compatible with <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a> or
-<a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>. For <code>{LST}</code> to work with R embedded
-in web pages, <code>{LST}</code> cannot make any use of
+<a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>. For <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> to work with R
+embedded in web pages, <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> cannot make any use of
 <a href="https://github.com/ProjectMOSAIC/mosaic" class="external-link">mosaic</a>/<a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a>. This situation may
-change in the future, at which point <code>{LST}</code> will be able to
-acknowledge its aunts and uncles.</p>
+change in the future, at which point <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> will be able
+to acknowledge its aunts and uncles.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
