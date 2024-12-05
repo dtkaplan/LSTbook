@@ -186,7 +186,7 @@ if(FALSE) {
 
 #' Cull objects used with do()
 #'
-#' The [do()] function facilitates easy replication for
+#' The `do()` function facilitates easy replication for
 #' randomization tests and bootstrapping (among other things).  Part of what
 #' makes this particularly useful is the ability to cull from the objects
 #' produced those elements that are useful for subsequent analysis.

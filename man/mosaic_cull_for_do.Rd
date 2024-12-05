@@ -12,7 +12,7 @@ mosaic_cull_for_do(object, ...)
 \item{...}{additional arguments (currently ignored)}
 }
 \description{
-The \code{\link[=do]{do()}} function facilitates easy replication for
+The \code{do()} function facilitates easy replication for
 randomization tests and bootstrapping (among other things).  Part of what
 makes this particularly useful is the ability to cull from the objects
 produced those elements that are useful for subsequent analysis.

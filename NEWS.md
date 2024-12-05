@@ -30,3 +30,5 @@ First CRAN release
 
 # LSTbook 0.6
 
+Updated CRAN release 
+
