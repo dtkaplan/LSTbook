@@ -1,5 +1,4 @@
-url: https://dtkaplan.github.io/LSTbook/
+url: ~
 template:
   bootstrap: 5
-development:
-  mode: auto
+
