@@ -25,6 +25,6 @@ A "skeleton" is a data frame containing "nicely spaced" values for the explanato
 in a model.
 }
 \examples{
-Model <- FEV |> model_train(FEV ~ sex + age + height)
+Model <- CRDS |> model_train(FEV ~ sex + age + height)
 Model |> model_skeleton()
 }

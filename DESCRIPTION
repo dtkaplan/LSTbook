@@ -32,7 +32,8 @@ Suggests:
     palmerpenguins,
     stringdist,
     rmarkdown,
-    knitr
+    knitr,
+    testthat
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://dtkaplan.github.io/LSTbook/

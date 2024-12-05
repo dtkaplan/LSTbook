@@ -46,7 +46,7 @@ emphasize to students that the results are a summary in the form of a regression
 report, similar to the summaries produced by \code{stats::confint()}, \code{stats::coef()}, etc.
 }
 \examples{
-Model <- FEV |> model_train(FEV ~ age + smoker)
+Model <- CRDS |> model_train(FEV ~ age + smoker)
 Model |> conf_interval()
 Model |> R2()
 Model |> anova_summary()

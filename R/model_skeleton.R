@@ -12,7 +12,7 @@
 #' to the horizontal axis and so should have many levels to produce a smooth graph. (Default: 50)
 #'
 #' @examples
-#' Model <- FEV |> model_train(FEV ~ sex + age + height)
+#' Model <- CRDS |> model_train(FEV ~ sex + age + height)
 #' Model |> model_skeleton()
 #' @returns a data frame
 #'

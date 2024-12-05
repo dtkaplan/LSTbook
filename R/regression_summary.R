@@ -22,7 +22,7 @@
 #' @returns a data frame
 #'
 #' @examples
-#' Model <- FEV |> model_train(FEV ~ age + smoker)
+#' Model <- CRDS |> model_train(FEV ~ age + smoker)
 #' Model |> conf_interval()
 #' Model |> R2()
 #' Model |> anova_summary()

@@ -3,14 +3,6 @@ test_that("1-variable plots work", {
   expect_snapshot_file(gg_in_tmp_png(P), "1-var-plot.png")
 })
 
-# Deleted this for CRAN submission, since {natality2014} is not generally available
-# test_that("Transformations work", {
-#   Babies <- natality2014::Natality_2014_10k |> select(combgest, dbwt) |> stats::na.omit()
-#   Babies |> point_plot(dbwt ~ ntiles(combgest, n=3), annot="violin", point_ink = 0.01) -> P
-#   # look for 4 violins, including one  for NA
-#   expect_snapshot_file(gg_in_tmp_png(P), "transform-plot.png")
-# })
-
 test_that("Categorical responses trigger logistic regression", {
   P <- Birdkeepers |> point_plot(LC ~ YR, annot = "model")
   # Check that model function curves between NoCancer and Lung Cancer

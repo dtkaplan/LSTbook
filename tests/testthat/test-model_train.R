@@ -13,3 +13,9 @@ test_that("lm (or gaussian) works", {
   expect_identical(conf_interval(baseline), conf_interval(to_test))
 })
 
+test_that("Zero-one transform of response in tilde expression works to trigger logistic regression", {
+  mod <- Whickham |> model_train(zero_one(outcome, one="Dead") ~ smoker + age)
+  expect_true(inherits(mod, "glm"))
+})
+
+

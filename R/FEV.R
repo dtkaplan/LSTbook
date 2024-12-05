@@ -7,7 +7,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(FEV)
+#' @usage data(CRDS)
 #'
 #' @format A data.frame with one row for each of 645 youngsters.
 #' - age in years

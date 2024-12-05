@@ -11,8 +11,8 @@
 #' @param digits desired number of digits for labeling of factors.
 #' @return a vector.  The type of vector will depend on `format`.
 #' @examples
-#' FEV |> head(20) |> mutate(group = ntiles(height, 3, format="center"))
-#' FEV |> head(20) |> mutate(group = ntiles(height, 3, format="interval"))
+#' CRDS |> head(20) |> mutate(group = ntiles(height, 3, format="center"))
+#' CRDS |> head(20) |> mutate(group = ntiles(height, 3, format="interval"))
 #'
 #' @export
 

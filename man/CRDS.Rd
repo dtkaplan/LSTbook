@@ -19,7 +19,7 @@ Cummiskey, et al. (2020) "Causal Inference in Introductory Statistics Courses"
 \emph{Journal of Statistics Education} \strong{28}(1) \doi{10.1080/10691898.2020.1713936}
 }
 \usage{
-data(FEV)
+data(CRDS)
 }
 \description{
 Data from the Childhood Respiratory Disease Study collected

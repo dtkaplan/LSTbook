@@ -33,7 +33,7 @@ removed in the future, when there is no need to avoid such dependency, e.g. when
 available on WASM.
 }
 \examples{
-FEV |> head(20) |> mutate(group = ntiles(height, 3, format="center"))
-FEV |> head(20) |> mutate(group = ntiles(height, 3, format="interval"))
+CRDS |> head(20) |> mutate(group = ntiles(height, 3, format="center"))
+CRDS |> head(20) |> mutate(group = ntiles(height, 3, format="interval"))
 
 }
