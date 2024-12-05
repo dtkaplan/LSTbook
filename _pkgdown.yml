@@ -2,4 +2,4 @@ url: https://dtkaplan.github.io/LSTbook/
 template:
   bootstrap: 5
 development:
-  mode: unreleased
+  mode: auto

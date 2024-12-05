@@ -28,3 +28,5 @@ First CRAN release
 
 * Fix point_plot so error bars are dodged when there are multiple colors.
 
+# LSTbook 0.6
+
