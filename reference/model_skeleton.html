@@ -80,10 +80,39 @@ to the horizontal axis and so should have many levels to produce a smooth graph.
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="va">FEV</span> <span class="op">|&gt;</span> <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">FEV</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">height</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'FEV' not found</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="va">CRDS</span> <span class="op">|&gt;</span> <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">FEV</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">height</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">Model</span> <span class="op">|&gt;</span> <span class="fu">model_skeleton</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'Model' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    sex age height</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    F   0     40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    M   0     40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    F  10     40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    M  10     40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    F  20     40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    M  20     40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    F   0     50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    M   0     50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    F  10     50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   M  10     50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   F  20     50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   M  20     50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   F   0     60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   M   0     60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   F  10     60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   M  10     60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   F  20     60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   M  20     60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   F   0     70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   M   0     70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   F  10     70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   M  10     70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   F  20     70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   M  20     70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   F   0     80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   M   0     80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   F  10     80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28   M  10     80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   F  20     80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   M  20     80</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
