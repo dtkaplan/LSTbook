@@ -26,7 +26,5 @@ First CRAN release
 
 * Fixed a warning in "model_eval()" that led residuals not being calculated for zero-one response variables.
 
-TO DO
-
-- Fix point_plot so error bars are dodged when there are multiple colors.
+* Fix point_plot so error bars are dodged when there are multiple colors.
 

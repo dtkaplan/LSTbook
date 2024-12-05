@@ -212,7 +212,7 @@ point_plot <- function(D, tilde, ..., seed=101,
                             ymin=.data$.lwr, ymax=.data$.upr, # for CRAN CMD check
                             color=.data[[vars[3]]]),
                         alpha = model_ink, size=6,
-                        position=position_dodge(width = 2)) +  +
+                        position=position_dodge(width = 0.5)) +
           guides(fill="none")
       } else {
         Res <- Res +

@@ -13,10 +13,10 @@ model_family <- function(.data, .tilde,
 
   # Specification must be a two-sided formula, response variable on the left.
   if (!inherits(.tilde, "formula")) stop("Must provide a tilde formula specification.")
-  if (length(.tilde) == 2) stop("Specification must be two sided.")
+  if (length(.tilde) != 3) stop("Specification must be two sided.")
 
   # get the response variable
-  data <- .data[[deparse(.tilde[[2]])]]
+  data <- eval(.tilde[[2]], envir = .data)
   # Don't need the complexity involved in this line
   # data <- data_from_tilde(.data, .tilde)[[1]]
 
@@ -37,7 +37,7 @@ model_family <- function(.data, .tilde,
     # It's categorical
     allowable <- "svm"
     if (length(unique(data)) == 2) allowable <- c("binomial", allowable)
-    else whats_wrong <- "not two level categorical variable."
+    else whats_wrong <- "not two-level categorical variable."
   }
 
   if (family == "auto") return(allowable) # return names of allowable model families.
