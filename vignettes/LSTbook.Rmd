@@ -1,8 +1,8 @@
 ---
-title: "{LST}: R package for *Lessons in Statistical Thinking*"
+title: "{LSTbook}: R package for the book *Lessons in Statistical Thinking*"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{{LST}: R package for *Lessons in Statistical Thinking*}
+  %\VignetteIndexEntry{{LSTbook }: R package for *Lessons in Statistical Thinking*}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,7 +20,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-The `{LST}` package provides support for the style of R computing used in the textbook, [*Lessons in Statistical Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/). This style seeks to reduce the cognitive load on students by reducing to a minimum the number of R functions and the syntax needed to undertake a complete course that includes (simple) data wrangling, visualization, modeling, and causal simulation. At the same time, the style supports using statistical inference in an informal way from the very beginning of the course, *gradually* formalizing it over the semester.
+The `{LSTbook}` package provides support for the style of R computing used in the textbook, [*Lessons in Statistical Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/). This style seeks to reduce the cognitive load on students by reducing to a minimum the number of R functions and the syntax needed to undertake a complete course that includes (simple) data wrangling, visualization, modeling, and causal simulation. At the same time, the style supports using statistical inference in an informal way from the very beginning of the course, *gradually* formalizing it over the semester.
 
 This document is oriented toward instructors or strongly motivated students. The *Lessons* textbook and accompanying [blog posts](https://dtkaplan.github.io/Math300blog/) provide an introduction for the typical student. The reader of this document should already know at least a little about R: basics of data frames as well as functions and function calls, named arguments, and R "formulas" (such as `mpg ~ hp + cyl`) which are called **tilde expressions** in *Lessons*. (Statistics students need to use mathematical formulas from time to time, so best not confuse math formulas with an unneeded name for an R syntactical structure.) 
 
@@ -47,9 +47,9 @@ The command illustrates several features of the style of commands in *Lessons*:
     
 * `point_plot()` is a omnibus graphics command sufficient for teaching an entire statistics course that includes inference and covariation. 
     - The output is `{ggplot2}` compatible.
-    - Other such omnibus commands from `{LST}` seen in *Lessons* are `model_train()`, `sample()`, and `trials()`. 
+    - Other such omnibus commands from `{LSTbook}` seen in *Lessons* are `model_train()`, `sample()`, and `trials()`. 
     - Wrangling functions from `{dplyr}` are also occasionally used, especially `mutate()` and `summarize()`.
-    - Summaries of statistical models are made with the `{LST}` function `conf_interval()` and occasionally `R2()`. (Near the end of the course, `regression_summary()` and `anova_summary()` are introduced, but these play only a very minor, optional role in the course.)
+    - Summaries of statistical models are made with the `{LSTbook}` function `conf_interval()` and occasionally `R2()`. (Near the end of the course, `regression_summary()` and `anova_summary()` are introduced, but these play only a very minor, optional role in the course.)
     
 ## Pipe input-ends {#sec-input-end}
 
@@ -67,7 +67,7 @@ Just as *input end* refers to the object provided at the left-hand side of the p
 
 a. The R command given on the right-hand side of `|>` will **always** be a function call. No exceptions. A function call consists of the name of a function (e.g., `point_plot` or `model_train`) followed by an open/closed pair of parentheses. Usually, there is something such as a *tilde expression* contained in the parentheses, but there are often additional **named arguments** such as the `annot = "model"` in the example command presented in @sec-command-template. 
 
-b. The function call in (a) produces an R object. For the `{LST}` functions, this object will always be one of the four types presented in the previous section (data frame, model, data simulation, graphics frame).
+b. The function call in (a) produces an R object. For the `{LSTbook}` functions, this object will always be one of the four types presented in the previous section (data frame, model, data simulation, graphics frame).
 
 ## Multi-stage pipelines
 
@@ -98,7 +98,7 @@ In R, the form in which an object is printed is controlled by the programmer. Gr
 
 In addition to data frames and graphics, *Lessons* deals frequently with two other sorts of objects: data simulations and models. 
 
-By default, models are printed as text. There is a wide variety of formats corresponding to the large number of people who have communally put together the modeling systems in R. Rather than the hodge-podge of printed model formats, I encourage users to print specific summaries of models such as graphs of the model function (use `model_plot()`). The numerical model summaries in `{LST}` are always printed in data-frame format. Most of the time in *Lessons*, models are summarized with coefficients and confidence intervals, a format produced by `conf_interval()`. I strongly recommend that model coefficients *always* be shown in the context of a confidence interval; `conf_interval()` imposes this policy. Another sometimes useful format of summary is provided by `R2()`. Toward the end of the course, the ANOVA generalization of R^2^ is introduced. `anova_summary()` is useful for comparing two or more models. `regression_summary()` shows a standard regression report, but `conf_interval()` is, I think, a superior format. (If you feel obliged to show a p-value, use the `show_p = TRUE` argument to `conf_interval()`. But I recommend focussing on whether the confidence interval includes zero, using the `level = ` argument if you aren't happy with 0.05.)
+By default, models are printed as text. There is a wide variety of formats corresponding to the large number of people who have communally put together the modeling systems in R. Rather than the hodge-podge of printed model formats, I encourage users to print specific summaries of models such as graphs of the model function (use `model_plot()`). The numerical model summaries in `{LSTbook}` are always printed in data-frame format. Most of the time in *Lessons*, models are summarized with coefficients and confidence intervals, a format produced by `conf_interval()`. I strongly recommend that model coefficients *always* be shown in the context of a confidence interval; `conf_interval()` imposes this policy. Another sometimes useful format of summary is provided by `R2()`. Toward the end of the course, the ANOVA generalization of R^2^ is introduced. `anova_summary()` is useful for comparing two or more models. `regression_summary()` shows a standard regression report, but `conf_interval()` is, I think, a superior format. (If you feel obliged to show a p-value, use the `show_p = TRUE` argument to `conf_interval()`. But I recommend focussing on whether the confidence interval includes zero, using the `level = ` argument if you aren't happy with 0.05.)
 
 Data simulations are printed as text showing the causal formulas relating one variable to the others. Like this:
 
@@ -106,7 +106,7 @@ Data simulations are printed as text showing the causal formulas relating one va
 sim_06
 ```
 
-Instructions for constructing data simulations are given in the *Simulating data with Directed Acyclic Graphs* vignette of this package. Many pre-built simulations are provided with this `{LST}` package. New ones can be constructed using `datasim_make()`. Except in the most straightforward cases, such construction is an instructor-level task.
+Instructions for constructing data simulations are given in the *Simulating data with Directed Acyclic Graphs* vignette of this package. Many pre-built simulations are provided with this `{LSTbook}` package. New ones can be constructed using `datasim_make()`. Except in the most straightforward cases, such construction is an instructor-level task.
 
 ## Trials and the pipe
 
@@ -116,7 +116,7 @@ A popular feature of the `{mosaic}` package is the `do()` function, which provid
 mosaic::do(3) * sum(runif(5))
 ```
 
-`{LST}` has updated this functionality to take advantage of the R built-in pipe notation and the style of arranging model summaries as data frames. The functionality is provided by the `trials()` function. To use it, place `trials()` at the end of a pipeline: 
+`{LSTbook}` has updated this functionality to take advantage of the R built-in pipe notation and the style of arranging model summaries as data frames. The functionality is provided by the `trials()` function. To use it, place `trials()` at the end of a pipeline: 
 
 ```{r}
 mtcars |> 
@@ -135,7 +135,7 @@ It's natural to think of the pipeline leading up to the `trials()` stage as crea
 An excellent way to develop the statement to be repeated: write the pipeline *excluding* the final `trials()` stage. Each time you run the truncated pipeline, you will receive one object. When this object has the format you seek, add the final `trials()` stage back in. 
 
   
-## Graphics in `{LST}`
+## Graphics in `{LSTbook}`
 
 Instructors may feel obliged by convention to introduce the menagerie of plotting modalities, such as bar charts, line charts, histograms, etc. *Lessons* was written to use only a single primary graphic modality: the point plot (a.k.a. "scatter plot") as produced by `point_plot()`. Three other modalities---confidence intervals, confidence bands, and violin plots of density---are provided by the annotation feature of `point_plot()`. These are `annot = "violin"` and `"annot = "model"`.
 
@@ -143,11 +143,11 @@ The output of `point_plot()` is a `{ggplot2}` graphical object. Consequently, yo
 
 I recommend use of the `{ggformula}` package which re-packages the `{ggplot2}` facilities in a way that can be used with the R pipe `|>` and which employe tilde-expressions for specifying response and explanatory variables. 
 
-## `{LST}`, `{mosaic}`, and `{ggformula}`
+## `{LSTbook}`, `{mosaic}`, and `{ggformula}`
 
-The MOSAIC suite of packages---including `{mosaic}` and `{ggformula}`---are widely used in teaching statistics with R. Many of the pedagogical principles behind `{LST}` are shared with `{mosaic}` and `{ggformula}`. You are of course welcome to use `{mosaic}` and `{ggformula}` along with `{LST}`, particularly if you want to teach other graphics modalities than those provided by `LST::point_plot()`. 
+The MOSAIC suite of packages---including `{mosaic}` and `{ggformula}`---are widely used in teaching statistics with R. Many of the pedagogical principles behind `{LSTbook}` are shared with `{mosaic}` and `{ggformula}`. You are of course welcome to use `{mosaic}` and `{ggformula}` along with `{LSTbook}`, particularly if you want to teach other graphics modalities than those provided by `LST::point_plot()`. 
 
-Other than shared pedagogical principles, there is no connection of `{LST}` with either `{mosaic}` and `{ggformula}`. One reason for this is the pipe `|>`, which prominently features in *Lessons*. `{mosaic}` is not pipe-ready because many functions require a `data =` argument.
+Other than shared pedagogical principles, there is no connection of `{LSTbook}` with either `{mosaic}` and `{ggformula}`. One reason for this is the pipe `|>`, which prominently features in *Lessons*. `{mosaic}` is not pipe-ready because many functions require a `data =` argument.
 
-Another reason concerns recent developments in deploying R computing *via* web pages. The system that provides within-a-web-page R computing is not yet compatible with `{mosaic}` or `{ggformula}`. For `{LST}` to work with R embedded in web pages, `{LST}` cannot make any use of `{mosaic}`/`{ggformula}`. This situation may change in the future, at which point `{LST}` will be able to acknowledge its aunts and uncles.
+Another reason concerns recent developments in deploying R computing *via* web pages. The system that provides within-a-web-page R computing is not yet compatible with `{mosaic}` or `{ggformula}`. For `{LSTbook}` to work with R embedded in web pages, `{LSTbook}` cannot make any use of `{mosaic}`/`{ggformula}`. This situation may change in the future, at which point `{LSTbook}` will be able to acknowledge its aunts and uncles.
 

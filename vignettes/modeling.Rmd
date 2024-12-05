@@ -22,7 +22,7 @@ To "train a model" involves three components:
 
 1. A data frame with training data
 2. A model specification naming the response variable and the explanatory variables. This is formatted in the same tilde-expression manner as for `lm()` and `glm()`.
-3. A model-fitting function that puts (1) and (2) together into a **model object**. Examples of model-fitting functions are `lm()` and `glm()`. In *Lessons in Statistical Thinking* and the corresponding `{LST}` package, we almost always use `model_train()`
+3. A model-fitting function that puts (1) and (2) together into a **model object**. Examples of model-fitting functions are `lm()` and `glm()`. In *Lessons in Statistical Thinking* and the corresponding `{LSTbook}` package, we almost always use `model_train()`
 
 Once the model object has been constructed, you can plot the model, create summaries such as regression reports or ANOVA reports, and evaluate the model for new inputs, etc.
 
@@ -56,7 +56,7 @@ Note that the `zero_one()` marks the response variable as a candidate for logist
 
 The output of `model_train()` is in the format of whichever `{stats}` package function has been used, e.g. `lm()` or `glm()`. (The training data is stored as an "attribute," meaning that it is invisible.) Consequently, you can use the model object as an input to whatever model-plotting or summarizing function you like. 
 
-In *Lessons in Statistical Thinking* we use `{LST}` functions for plotting and summarizing:
+In *Lessons in Statistical Thinking* we use `{LSTbook}` functions for plotting and summarizing:
 
 - `model_plot()`
 - `R2()`

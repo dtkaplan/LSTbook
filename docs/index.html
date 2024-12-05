@@ -13,8 +13,8 @@
     pipeline-oriented computing style featured in the book.'>
 <title>Data and Software for "Lessons in Statistical Thinking"  • LSTbook</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Data and Software for " lessons in statistical thinking>
 <meta property="og:description" content='"Lessons in Statistical Thinking" D.T. Kaplan (2014) 
@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="index.html">LSTbook</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,10 +90,18 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>We hope to have <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> available on CRAN by February 2024. In the meanwhile, you can install the development version of <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Version 0.6 of <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> was released on CRAN by February 2024. Note that previous versions did not include the <code><a href="take_sample.html">take_sample()</a></code> function, which is used extensively in <em>Lessons</em>. The CRAN version is also published for use with webr (as are most CRAN packages).</p>
+<p>For more recent updates:</p>
+<ul>
+<li>Install the development version of <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> from <a href="https://github.com/" class="external-link">GitHub</a> with:</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dtkaplan/LSTbook"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Via r-universe.dev: <a href="https://dtkaplan.r-universe.dev/LSTbook" class="external-link uri">https://dtkaplan.r-universe.dev/LSTbook</a></p></li>
+<li><p>In the YAML for a webr document, refer to the repository thus under the <code>webr</code> index: <code>repos: ["https://dtkaplan.r-universe.dev"]</code></p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -119,37 +127,37 @@
 <p>Start by installing <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> as described above, then loading it into the R session:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a></span><span class="op">)</span></span></code></pre></div>
-<p>In the examples that follow, we will use the <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> function <code><a href="reference/point_plot.html">point_plot()</a></code> which handles both numerical and categorical variables using one syntax. Here’s a graphic for looking at the difference between two means.</p>
+<p>In the examples that follow, we will use the <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> function <code><a href="point_plot.html">point_plot()</a></code> which handles both numerical and categorical variables using one syntax. Here’s a graphic for looking at the difference between two means.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-READMEDfxgmm-1.png" width="100%"></p>
 <p>Point plots can be easily annotated with models. To illustrate the difference between the two means, add a model annotation:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README1euiBE-1.png" width="100%"></p>
-<p>Other <code><a href="reference/point_plot.html">point_plot()</a></code> annotations are <code>violin</code> and <code>bw</code>.</p>
+<p>Other <code><a href="point_plot.html">point_plot()</a></code> annotations are <code>violin</code> and <code>bw</code>.</p>
 <p>In <em>Lessons</em>, models are always graphed in the context of the underlying data and shown as confidence intervals.</p>
 <p>The same graphics and modeling conventions apply to categorical variables:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README1OriL5-1.png" width="100%"></p>
 <p>Simple regression works in the same way:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">mother</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">mother</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README2lz92Z-1.png" width="100%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-README2lz92Z-2.png" width="100%"></p>
 <p>The syntax extends naturally to handle the inclusion of covariates. For example, the simple calculation of difference between two proportions is misleading; <code>age</code>, not smoking status, plays the primary role in explaning mortality.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="point_plot.html">point_plot</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">smoker</span>, annot <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-READMEtrysVK-1.png" width="100%"></p>
 <p>NOTE: To highlight statistical inference, we have been working with an n=200 sub-sample of Galton:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">&lt;-</span> <span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/sample.html">sample</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span>, .by <span class="op">=</span> <span class="va">sex</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Galton</span> <span class="op">&lt;-</span> <span class="va">Galton</span> <span class="op">|&gt;</span> <span class="fu"><a href="take_sample.html">take_sample</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span>, .by <span class="op">=</span> <span class="va">sex</span><span class="op">)</span></span></code></pre></div>
 <p>Quantitative modeling has the same syntax, but rather than rely on the default R reports for models, <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> offers concise summaries.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/model_train.html">model_train</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">smoker</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">Whickham</span> <span class="op">|&gt;</span> <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">smoker</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Waiting for profiling to be done...</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 4</span></span>
 <span><span class="co">#&gt;   term          .lwr  .coef   .upr</span></span>
@@ -160,38 +168,19 @@
 <p>To help students develop an deeper appreciation of the importance of covariates, we can turn to data-generating simulations where we know the rules behind the data and can check whether modeling reveals them faithfully.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sim_08</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $names</span></span>
-<span><span class="co">#&gt; $names[[1]]</span></span>
-<span><span class="co">#&gt; c</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $names[[2]]</span></span>
-<span><span class="co">#&gt; x</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $names[[3]]</span></span>
-<span><span class="co">#&gt; y</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $calls</span></span>
-<span><span class="co">#&gt; $calls[[1]]</span></span>
-<span><span class="co">#&gt; rnorm(n)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $calls[[2]]</span></span>
-<span><span class="co">#&gt; c + rnorm(n)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $calls[[3]]</span></span>
-<span><span class="co">#&gt; x + c + 3 + rnorm(n)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; attr(,"class")</span></span>
-<span><span class="co">#&gt; [1] "list"    "datasim"</span></span>
-<span><span class="fu"><a href="reference/dag_draw.html">dag_draw</a></span><span class="op">(</span><span class="va">sim_08</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; Simulation object</span></span>
+<span><span class="co">#&gt; ------------</span></span>
+<span><span class="co">#&gt; [1] c &lt;- rnorm(n)</span></span>
+<span><span class="co">#&gt; [2] x &lt;- c + rnorm(n)</span></span>
+<span><span class="co">#&gt; [3] y &lt;- x + c + 3 + rnorm(n)</span></span>
+<span><span class="fu"><a href="dag_draw.html">dag_draw</a></span><span class="op">(</span><span class="va">sim_08</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-READMEoXTf5e-1.png" width="100%"></p>
 <p>From the rules, we can see that <code>y</code> increases directly with <code>x</code>, the coefficient being 1. A simple model gets this wrong:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sim_08</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/sample.html">sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/model_train.html">model_train</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="take_sample.html">take_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
 <span><span class="co">#&gt;   term         .lwr .coef  .upr</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
@@ -201,10 +190,10 @@
 <p>Finally, an advanced example that’s used as a demonstration but illustrates the flexibility of unifying modeling, simulation, and wrangling. We’ll calculate the width of the <code>x</code> confidence interval as a function of the sample size <code>n</code> and averaging over 100 trials.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sim_08</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/sample.html">sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sample_size</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/model_train.html">model_train</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/trials.html">trials</a></span><span class="op">(</span>times <span class="op">=</span> <span class="fl">2</span>, sample_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">400</span>, <span class="fl">1600</span>, <span class="fl">6400</span>, <span class="fl">25600</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="take_sample.html">take_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sample_size</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="trials.html">trials</a></span><span class="op">(</span>times <span class="op">=</span> <span class="fl">2</span>, sample_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">400</span>, <span class="fl">1600</span>, <span class="fl">6400</span>, <span class="fl">25600</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">==</span> <span class="st">"x"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>width <span class="op">=</span> <span class="va">.upr</span> <span class="op">-</span> <span class="va">.lwr</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    .trial sample_size term     .lwr    .coef     .upr      width</span></span>
@@ -218,7 +207,7 @@
 <span><span class="co">#&gt; 8       2        6400    x 1.487190 1.508327 1.529465 0.04227480</span></span>
 <span><span class="co">#&gt; 9       1       25600    x 1.495289 1.505822 1.516355 0.02106636</span></span>
 <span><span class="co">#&gt; 10      2       25600    x 1.498624 1.509280 1.519937 0.02131267</span></span></code></pre></div>
-<p>I’ve used only two trials to show the output of <code><a href="reference/trials.html">trials()</a></code>, but increase it to, say, <code>times = 100</code> and finish off the wrangling with the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> function <code>summarize(mean(width), .by = sample_size)</code>.</p>
+<p>I’ve used only two trials to show the output of <code><a href="trials.html">trials()</a></code>, but increase it to, say, <code>times = 100</code> and finish off the wrangling with the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> function <code>summarize(mean(width), .by = sample_size)</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co">#&gt;   sample_size mean(width)</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt; 1         100  0.34800368</span></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; 2         400  0.17059320</span></span>
@@ -230,6 +219,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=LSTbook" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/dtkaplan/LSTbook/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/dtkaplan/LSTbook/issues/" class="external-link">Report a bug</a></li>
 </ul>

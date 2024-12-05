@@ -2,7 +2,7 @@
 % Please edit documentation in R/random_terms.R
 \name{random_terms}
 \alias{random_terms}
-\title{create columns with random numbers}
+\title{Create columns with random numbers for modeling}
 \usage{
 random_terms(df = 1, rdist = rnorm, args = list(), n, seed = NULL)
 }

@@ -5,7 +5,7 @@ of the pipeline in order to repeat the calculation multiple times. Typically,
 each trial involves some random component, but another (or an additional)
 capability is to parameterize the pipeline expression by including some
 unbound variable in it, e.g. lambda. Then call trials(lambda=c(10,20)) to
-repeat the calculation for each of the elements of the named parameter."><title>Run the left side of the pipeline multiple times. — trials • LSTbook</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run the left side of the pipeline multiple times. — trials"><meta property="og:description" content="Write a pipeline to perform some calculation whose result can
+repeat the calculation for each of the elements of the named parameter."><title>Run the left side of the pipeline multiple times. — trials • LSTbook</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run the left side of the pipeline multiple times. — trials"><meta property="og:description" content="Write a pipeline to perform some calculation whose result can
 be coerced into one line of a data frame. Add trials(times=3) to the end
 of the pipeline in order to repeat the calculation multiple times. Typically,
 each trial involves some random component, but another (or an additional)
@@ -22,7 +22,7 @@ repeat the calculation for each of the elements of the named parameter."><!-- ma
     
     <a class="navbar-brand me-2" href="../index.html">LSTbook</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,10 +117,10 @@ vector of length &gt; 1, the trials will be run separately for each element of t
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `` -&gt; `...2`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> New names:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `` -&gt; `...2`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .trial         ...2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1  0.195557925</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2      2 -0.358358647</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3      3  0.008935456</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .trial       ...2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1  0.1355040</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      2  0.7796057</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      3 -0.1295242</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">trials</span><span class="op">(</span>lambda<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> New names:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `` -&gt; `...3`</span>
@@ -129,9 +129,9 @@ vector of length &gt; 1, the trials will be run separately for each element of t
 <span class="r-msg co"><span class="r-pr">#&gt;</span> New names:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `` -&gt; `...3`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .trial lambda         ...3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1      1  1.007865750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2      1    100 -0.066747849</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3      1  10000  0.006162709</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1      1  1.078517525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      1    100  0.027760336</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      1  10000 -0.005564744</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">trials</span><span class="op">(</span>times<span class="op">=</span><span class="fl">5</span>, lambda<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> New names:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `` -&gt; `...3`</span>
@@ -164,38 +164,35 @@ vector of length &gt; 1, the trials will be run separately for each element of t
 <span class="r-msg co"><span class="r-pr">#&gt;</span> New names:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `` -&gt; `...3`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    .trial lambda         ...3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1      1  0.056373446</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2      1 -1.246264472</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       3      1  0.188988127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       4      1 -0.752384639</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       5      1  0.661741495</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       1    100  0.178970252</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7       2    100  0.051135235</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8       3    100  0.013606658</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       4    100  0.020965758</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10      5    100  0.040333309</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11      1  10000  0.002462381</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12      2  10000  0.007751799</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13      3  10000  0.007810626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14      4  10000 -0.009780755</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15      5  10000  0.018391817</span>
-<span class="r-in"><span><span class="fu"><a href="sample.html">sample</a></span><span class="op">(</span><span class="va">mtcars</span>, n<span class="op">=</span><span class="va">lambda</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">mpg</span>, <span class="va">hp</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="sample.html">resample</a></span><span class="op">(</span><span class="va">hp</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1      1 -0.546449966</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2      1  0.604958074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       3      1  0.500036123</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       4      1  0.388217185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       5      1  0.852351189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       1    100 -0.084561838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7       2    100 -0.068460779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8       3    100 -0.154239487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       4    100 -0.060918370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10      5    100 -0.186271712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11      1  10000  0.007646683</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12      2  10000 -0.020246237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13      3  10000  0.008982420</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14      4  10000  0.002411333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15      5  10000  0.015156344</span>
+<span class="r-in"><span><span class="fu"><a href="take_sample.html">take_sample</a></span><span class="op">(</span><span class="va">mtcars</span>, n<span class="op">=</span><span class="va">lambda</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">mpg</span>, <span class="va">hp</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="take_sample.html">resample</a></span><span class="op">(</span><span class="va">hp</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="regression_summaries.html">regression_summary</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">trials</span><span class="op">(</span>times<span class="op">=</span><span class="fl">3</span>, lambda<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">40</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">==</span> <span class="st">"resample(hp)"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The `tidy()` method for objects of class `model_object` is not maintained by the broom team, and is only supported through the `lm` tidier method. Please be cautious in interpreting and reporting broom output.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">This warning is displayed once per session.</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .trial lambda         term     estimate  std.error  statistic    p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1     10 resample(hp)  0.012597995 0.01795724  0.7015554 0.50285102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2      2     10 resample(hp)  0.030261467 0.02511576  1.2048796 0.26268019</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3      3     10 resample(hp) -0.041730533 0.03982042 -1.0479682 0.32527933</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4      1     20 resample(hp)  0.012090463 0.02078032  0.5818228 0.56790213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5      2     20 resample(hp)  0.003021334 0.01859688  0.1624645 0.87274999</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      3     20 resample(hp) -0.013214974 0.02288540 -0.5774413 0.57079438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7      1     40 resample(hp)  0.034207337 0.01353217  2.5278528 0.01575414</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8      2     40 resample(hp) -0.002350105 0.01204203 -0.1951586 0.84630856</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9      3     40 resample(hp) -0.030200397 0.01217559 -2.4804048 0.01766836</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .trial lambda         term     estimate  std.error  statistic     p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1     10 resample(hp)  0.098746917 0.02432590  4.0593329 0.003636804</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      2     10 resample(hp) -0.045460777 0.03585710 -1.2678318 0.240511254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      3     10 resample(hp) -0.081086576 0.04491934 -1.8051596 0.108692294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      1     20 resample(hp) -0.015708407 0.04168843 -0.3768050 0.710723785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      2     20 resample(hp) -0.010002710 0.01836100 -0.5447803 0.592590854</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      3     20 resample(hp)  0.012678416 0.01519494  0.8343843 0.415001324</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      1     40 resample(hp)  0.007472809 0.01342789  0.5565139 0.581122395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      2     40 resample(hp) -0.012123982 0.01830818 -0.6622168 0.511828733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      3     40 resample(hp) -0.029782613 0.01142542 -2.6066978 0.012988264</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

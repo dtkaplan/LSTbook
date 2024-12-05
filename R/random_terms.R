@@ -1,4 +1,4 @@
-#' create columns with random numbers
+#' Create columns with random numbers for modeling
 #'
 #' For demonstration purposes, add the specified number of
 #' random columns to a model matrix. This is intended to be used

@@ -8,8 +8,8 @@
 <meta name="description" content="LSTbook">
 <title>Training models • LSTbook</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Training models">
 <meta property="og:description" content="LSTbook">
@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">LSTbook</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,7 @@
       <img src="" class="logo" alt=""><h1>Training models</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LSTbook/blob/HEAD/vignettes/modeling.Rmd" class="external-link"><code>vignettes/modeling.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dtkaplan/LSTbook/blob/HEAD/docs/reference/vignettes/modeling.Rmd" class="external-link"><code>docs/reference/vignettes/modeling.Rmd</code></a></small>
       <div class="d-none name"><code>modeling.Rmd</code></div>
     </div>
 
@@ -95,8 +95,8 @@ manner as for <code><a href="https://rdrr.io/r/stats/lm.html" class="external-li
 <li>A model-fitting function that puts (1) and (2) together into a
 <strong>model object</strong>. Examples of model-fitting functions are
 <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>. In <em>Lessons in Statistical
-Thinking</em> and the corresponding <code>{LST}</code> package, we
-almost always use <code><a href="../reference/model_train.html">model_train()</a></code>
+Thinking</em> and the corresponding <a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> package, we
+almost always use <code><a href="model_train.html">model_train()</a></code>
 </li>
 </ol>
 <p>Once the model object has been constructed, you can plot the model,
@@ -105,24 +105,24 @@ evaluate the model for new inputs, etc.</p>
 <div class="section level2">
 <h2 id="using-model_train">Using <code>model_train()</code><a class="anchor" aria-label="anchor" href="#using-model_train"></a>
 </h2>
-<p><code><a href="../reference/model_train.html">model_train()</a></code> is a wrapper around some commonly used
+<p><code><a href="model_train.html">model_train()</a></code> is a wrapper around some commonly used
 model-fitting functions from the <code>{stats}</code> package,
 particularly <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>. It’s worth
 explaining motivation for introducing a new model-fitting function.</p>
 <ol style="list-style-type: decimal">
 <li>
-<code><a href="../reference/model_train.html">model_train()</a></code> is pipeline ready. Example:
+<code><a href="model_train.html">model_train()</a></code> is pipeline ready. Example:
 <code>Galton |&gt; model_train(height ~ mother)</code>
 </li>
 <li>
-<code><a href="../reference/model_train.html">model_train()</a></code> has internal logic to figure out
+<code><a href="model_train.html">model_train()</a></code> has internal logic to figure out
 automatically which type of model (e.g. linear, binomial, poisson) to
 fit. (You can also specify this with the <code>family=</code> argument.)
-The automatic nature of <code><a href="../reference/model_train.html">model_train()</a></code> means, e.g., you can
+The automatic nature of <code><a href="model_train.html">model_train()</a></code> means, e.g., you can
 use it with neophyte students for logistic regression without having to
 introduce a new function.</li>
 <li>
-<code><a href="../reference/model_train.html">model_train()</a></code> saves a copy of the training data as an
+<code><a href="model_train.html">model_train()</a></code> saves a copy of the training data as an
 attribute of the model object being produced. This is helpful in
 plotting the model, cross-validation, etc., particularly when the model
 specification involves nonlinear explanatory terms (e.g.,
@@ -140,7 +140,7 @@ specification involves nonlinear explanatory terms (e.g.,
 technique here.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">height_model</span> <span class="op">&lt;-</span> <span class="fu">mosaicData</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mosaicData/man/Galton.html" class="external-link">Galton</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/model_train.html">model_train</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">mother</span> <span class="op">+</span> <span class="va">father</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">height_model</span> <span class="op">&lt;-</span> <span class="fu">mosaicData</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mosaicData/man/Galton.html" class="external-link">Galton</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">mother</span> <span class="op">+</span> <span class="va">father</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>modeling the probability that a voter will vote in an election
 (<code>primary2006</code>) given the household size
@@ -152,32 +152,32 @@ an appropriate technique.</li>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vote_model</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">Go_vote</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/model_train.html">model_train</a></span><span class="op">(</span><span class="fu"><a href="../reference/zero_one.html">zero_one</a></span><span class="op">(</span><span class="va">primary2006</span>, one <span class="op">=</span> <span class="st">"voted"</span><span class="op">)</span> <span class="op">~</span> <span class="va">yearofbirth</span> <span class="op">*</span> <span class="va">primary2004</span> <span class="op">*</span> <span class="va">hhsize</span> <span class="op">*</span> <span class="va">yearofbirth</span> <span class="op">)</span></span></code></pre></div>
-<p>Note that the <code><a href="../reference/zero_one.html">zero_one()</a></code> marks the response variable as
+<span>  <span class="fu"><a href="model_train.html">model_train</a></span><span class="op">(</span><span class="fu"><a href="zero_one.html">zero_one</a></span><span class="op">(</span><span class="va">primary2006</span>, one <span class="op">=</span> <span class="st">"voted"</span><span class="op">)</span> <span class="op">~</span> <span class="va">yearofbirth</span> <span class="op">*</span> <span class="va">primary2004</span> <span class="op">*</span> <span class="va">hhsize</span> <span class="op">*</span> <span class="va">yearofbirth</span> <span class="op">)</span></span></code></pre></div>
+<p>Note that the <code><a href="zero_one.html">zero_one()</a></code> marks the response variable as
 a candidate for logistic regression.</p>
-<p>The output of <code><a href="../reference/model_train.html">model_train()</a></code> is in the format of
+<p>The output of <code><a href="model_train.html">model_train()</a></code> is in the format of
 whichever <code>{stats}</code> package function has been used,
 e.g. <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> or <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>. (The training data is
 stored as an “attribute,” meaning that it is invisible.) Consequently,
 you can use the model object as an input to whatever model-plotting or
 summarizing function you like.</p>
-<p>In <em>Lessons in Statistical Thinking</em> we use <code>{LST}</code>
-functions for plotting and summarizing:</p>
+<p>In <em>Lessons in Statistical Thinking</em> we use
+<a href="https://dtkaplan.github.io/LSTbook/">LSTbook</a> functions for plotting and summarizing:</p>
 <ul>
-<li><code><a href="../reference/model_plot.html">model_plot()</a></code></li>
-<li><code><a href="../reference/regression_summaries.html">R2()</a></code></li>
-<li><code><a href="../reference/regression_summaries.html">conf_interval()</a></code></li>
-<li>Late in <em>Lessons</em>, <code><a href="../reference/regression_summaries.html">regression_summary()</a></code> and
-<code><a href="../reference/regression_summaries.html">anova_summary()</a></code>
+<li><code><a href="model_plot.html">model_plot()</a></code></li>
+<li><code><a href="regression_summaries.html">R2()</a></code></li>
+<li><code><a href="regression_summaries.html">conf_interval()</a></code></li>
+<li>Late in <em>Lessons</em>, <code><a href="regression_summaries.html">regression_summary()</a></code> and
+<code><a href="regression_summaries.html">anova_summary()</a></code>
 </li>
 </ul>
 <p>Let’s apply some of these to the modeling examples introduced
 above.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">height_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/model_plot.html">model_plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">height_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="model_plot.html">model_plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="modeling_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">height_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">height_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="regression_summaries.html">conf_interval</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
 <span><span class="co">#&gt;   term         .lwr  .coef   .upr</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -185,23 +185,24 @@ above.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> sexM        4.94   5.23   5.51 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> mother      0.260  0.321  0.383</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> father      0.349  0.406  0.463</span></span>
-<span><span class="va">vote_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/model_plot.html">model_plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">vote_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="model_plot.html">model_plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="modeling_files/figure-html/unnamed-chunk-4-2.png" width="700"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vote_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/regression_summaries.html">R2</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">vote_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="regression_summaries.html">R2</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        n k   Rsquared       F      adjR2 p df.num df.denom</span></span>
 <span><span class="co">#&gt; 1 305866 7 0.03799898 1725.91 0.03797696 0      7   305858</span></span></code></pre></div>
-<p>The <code><a href="../reference/model_eval.html">model_eval()</a></code> function from this package allows you
+<p>The <code><a href="model_eval.html">model_eval()</a></code> function from this package allows you
 to provide inputs and receive the model output, with a prediction
 interval by default. (For logistic regression, only a confidence
 interval is available.)</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vote_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/model_eval.html">model_eval</a></span><span class="op">(</span>yearofbirth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1960</span>, <span class="fl">1980</span><span class="op">)</span>, primary2004<span class="op">=</span><span class="st">"voted"</span>, hhsize<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">vote_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="model_eval.html">model_eval</a></span><span class="op">(</span>yearofbirth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1960</span>, <span class="fl">1980</span><span class="op">)</span>, primary2004<span class="op">=</span><span class="st">"voted"</span>, hhsize<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in model_eval(vote_model, yearofbirth = c(1960, 1980), primary2004 =</span></span>
-<span><span class="co">#&gt; "voted", : No prediction interval available. Using confidence interval.</span></span>
-<span><span class="co">#&gt;   yearofbirth primary2004 hhsize      .lwr   .output      .upr</span></span>
-<span><span class="co">#&gt; 1        1960       voted      4 0.4344150 0.4418285 0.4492680</span></span>
-<span><span class="co">#&gt; 2        1980       voted      4 0.3016314 0.3128150 0.3242207</span></span></code></pre></div>
+<span><span class="co">#&gt; "voted", : No prediction interval available, since the response variable is</span></span>
+<span><span class="co">#&gt; effectively categorical, not quantitative.</span></span>
+<span><span class="co">#&gt;   yearofbirth primary2004 hhsize   .output</span></span>
+<span><span class="co">#&gt; 1        1960       voted      4 0.4418285</span></span>
+<span><span class="co">#&gt; 2        1980       voted      4 0.3128150</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

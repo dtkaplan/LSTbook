@@ -12,14 +12,25 @@ Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/).
 
 ## Installation
 
-We hope to have `{LSTbook}` available on CRAN by February 2024. In the
-meanwhile, you can install the development version of `{LSTbook}` from
-[GitHub](https://github.com/) with:
+Version 0.6 of `{LSTbook}` was released on CRAN by February 2024. Note
+that previous versions did not include the `take_sample()` function,
+which is used extensively in *Lessons*. The CRAN version is also
+published for use with webr (as are most CRAN packages).
+
+For more recent updates:
+
+- Install the development version of `{LSTbook}` from
+  [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("dtkaplan/LSTbook")
 ```
+
+- Via r-universe.dev: <https://dtkaplan.r-universe.dev/LSTbook>
+
+- In the YAML for a webr document, refer to the repository thus under
+  the `webr` index: `repos: ["https://dtkaplan.r-universe.dev"]`
 
 ## Overview
 
@@ -184,30 +195,11 @@ faithfully.
 
 ``` r
 print(sim_08)
-#> $names
-#> $names[[1]]
-#> c
-#> 
-#> $names[[2]]
-#> x
-#> 
-#> $names[[3]]
-#> y
-#> 
-#> 
-#> $calls
-#> $calls[[1]]
-#> rnorm(n)
-#> 
-#> $calls[[2]]
-#> c + rnorm(n)
-#> 
-#> $calls[[3]]
-#> x + c + 3 + rnorm(n)
-#> 
-#> 
-#> attr(,"class")
-#> [1] "list"    "datasim"
+#> Simulation object
+#> ------------
+#> [1] c <- rnorm(n)
+#> [2] x <- c + rnorm(n)
+#> [3] y <- x + c + 3 + rnorm(n)
 dag_draw(sim_08)
 ```
 
