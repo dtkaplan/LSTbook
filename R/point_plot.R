@@ -36,6 +36,8 @@
 #' @param interval the type of interval: default `"confidence"`. Others: `"none"` or `"prediction"`
 #' @param nx Number of places to evaluate any x-axis quantitative vars. Default 50. Use higher
 #' if graph isn't smooth enough.
+#' @param ncategorical Number of levels of the categorical variable to retain
+#' when displaying model annotations. Default: Choose the 3 most populated levels.
 #' @param model_family Override the default model type. See `model_train()`
 #' @param \ldots Graphical options for the data points, labels, e.g. size
 #'
@@ -52,7 +54,7 @@ point_plot <- function(D, tilde, ..., seed=101,
                        interval = c("confidence", "none", "prediction"),
                        point_ink = 0.5,
                        model_ink = 0.4, palette=LETTERS[1:8], bw = NULL, level=0.95,
-                       nx = 50, model_family = NULL) {
+                       nx = 50, ncategorical = 3, model_family = NULL) {
   annot <- match.arg(annot)
   interval <- match.arg(interval)
   palette <- match.arg(palette)
@@ -187,7 +189,7 @@ point_plot <- function(D, tilde, ..., seed=101,
     # references to the <names> of the already transformed data.
     mod_vals <- simple_mod_eval(calls_to_names(tilde), data,
                                 level = level, itype = interval,
-                                nx = nx, family = model_family)
+                                nx = nx, ncategorical, family = model_family)
 
     # special case for categorical response variable
     if (!inherits(y_data, "zero_one") && y_is_discrete) {
@@ -206,12 +208,15 @@ point_plot <- function(D, tilde, ..., seed=101,
     if (show_color) {
       if (x_is_discrete) {
         if (model_ink < 0.8) model_ink <- model_ink + 0.2 # enhance visibility
+        annot_width <- 6
+        nlevels <- length(unique(mod_vals[[vars[2]]]))
+        annot_width <- annot_width / ifelse(nlevels > 4, sqrt(nlevels), 1)
         Res <- Res +
           geom_linerange(data=mod_vals,
                         aes(x=.data[[vars[2]]],
                             ymin=.data$.lwr, ymax=.data$.upr, # for CRAN CMD check
                             color=.data[[vars[3]]]),
-                        alpha = model_ink, size=6,
+                        alpha = model_ink, linewidth = annot_width,
                         position=position_dodge(width = 0.5)) +
           guides(fill="none")
       } else {
@@ -291,7 +296,7 @@ add_plot_labels <- function(P, ..., color=NULL) {
 #'
 # Train and evaluate the model, with evaluation only
 # on a skeleton.
-simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confidence", nx=50) {
+simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confidence", nx=50, ncategorical = 3) {
   M <- if (!is.null(family)) model_train(data, tilde, family = family)
   else model_train(data, tilde)
   # Construct a skeleton of explanatory variable values
@@ -299,7 +304,7 @@ simple_mod_eval <- function(tilde, data, family=NULL, level=0.95, itype="confide
     # there are no explanatory variables, that is, the tilde is y ~ 1
     Dskel <- tibble::tibble(1)
   } else {
-    Dskel <- expand.grid(data_skeleton(data, tilde, ncont=nx))
+    Dskel <- expand.grid(data_skeleton(data, tilde, ncont=nx, nlevels = ncategorical))
   }
   Meval <- model_eval(M, data = Dskel, interval = itype, level = level) |>
     dplyr::select(".output", ".lwr", ".upr")

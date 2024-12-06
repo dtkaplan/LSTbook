@@ -73,7 +73,10 @@ data_skeleton <- function(data, tilde, spreadn=NULL, ..., ncont=10, nlevels=3) {
   first_type <- continuous_or_discrete(first_vals)
   Vals[[explan_names[[1]]]] <- get_typical(data[[explan_names[1]]],
                                            type = "continuous", ncont = ncont,
-                                           nlevels = nlevels)
+                                           # changed nlevels from 3 so that effectively
+                                           # all levels of an x-mapped explanatory variable
+                                           # will have model annotations.
+                                           nlevels = 20)
   if (spreadn > 1) {
     for (k in 2:spreadn) {
       Vals[[explan_names[[k]]]] <-
@@ -125,14 +128,21 @@ get_typical <- function(vals, type=c("continuous", "discrete"), ncont=10, nlevel
     return(breaks)
   } else {
     # if an ordered factor, give all the levels
-    if (is.ordered(vals)) return(unique(vals))
-    # pull out the nlevels most populated levels
+    # Dec 6, 2024: Can't think of any good reason for supporting
+    # this behavior
+    # if (is.ordered(vals)) return(unique(vals))
 
-    tmp <- table(vals)
-    biggest <- order(tmp, decreasing=TRUE)[1:nlevels]
-    biggest <- biggest[!is.na(biggest)]
-    names(tmp)[biggest]
+    get_most_populated_levels(vals, nlevels)
   }
+}
+
+# For a categorical variable, pull out the <nlevels> most populated levels
+get_most_populated_levels <- function(vals, nlevels) {
+  # pull out the nlevels most populated levels
+  tmp <- table(vals)
+  biggest <- order(tmp, decreasing=TRUE)[1:nlevels]
+  biggest <- biggest[!is.na(biggest)]
+  names(tmp)[biggest]
 }
 
 #'

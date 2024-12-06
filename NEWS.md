@@ -34,3 +34,10 @@ First CRAN release
 
 Updated CRAN release 
 
+# LSTbook 0.6.0.9000
+
+* In point_plot(), categorical variables mapped to x now will show model annotations for all levels of x.
+
+* A new argument to point_plot(), ncategorical=, controls how many levels will be shown for model annotations for color & faceting 
+variables.
+
