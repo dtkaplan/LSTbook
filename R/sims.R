@@ -105,12 +105,20 @@ datasim_intervene <- function(sim, ...) {
   new_vnames <-
     lapply(new_steps, function(x) as.character(rlang::quo_get_expr(x)[[2]]))
   new_vcalls <- lapply(new_steps, function(x) rlang::quo_get_expr(x)[[3]])
+
   # replace the calls corresponding to any re-used names
-  reused <- which(as.character(sim$names) %in% as.character(new_vnames))
-  indices <- which(as.character(new_vnames) %in% as.character(sim$names))
+  indices <- integer()
+  for (i in seq_along(sim$names)) {
+    for (j in seq_along(new_vnames)) {
+      if (sim$names[[i]] == new_vnames[[j]]) {
+        sim$calls[[i]] <- new_vcalls[[j]]
+        indices <- c(indices, j)
+      }
+    }
+  }
+
   # replace any steps already defined in the input datasim
   if (length(indices) > 0) {
-    sim$calls[reused] <- new_vcalls[indices]
     new_vcalls[indices] <- NULL
     new_vnames[indices] <- NULL
   }
