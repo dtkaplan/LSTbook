@@ -1,3 +1,5 @@
+# LSTbook 0.7
+
 # LSTbook 0.5.0
 
 First CRAN release

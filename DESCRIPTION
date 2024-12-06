@@ -36,6 +36,6 @@ Suggests:
     testthat
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-URL: https://dtkaplan.github.io/LSTbook/, https://github.com/dtkaplan/LSTbook
+URL: https://github.com/dtkaplan/LSTbook
 BugReports: https://github.com/dtkaplan/LSTbook/issues
 License: MIT + file LICENSE
