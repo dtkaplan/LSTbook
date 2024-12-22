@@ -41,3 +41,8 @@ Updated CRAN release
 * A new argument to point_plot(), ncategorical=, controls how many levels will be shown for model annotations for color & faceting 
 variables.
 
+# LSTbook 0.6.1
+
+* New version number so that r-universe.dev will pick up the package.
+
+* Fixed order of colors for model values in `point_plot()`.

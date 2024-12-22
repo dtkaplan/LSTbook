@@ -12,7 +12,7 @@ Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking/).
 
 ## Installation
 
-Version 0.6 of `{LSTbook}` was released on CRAN by February 2024. Note
+Version 0.6 of `{LSTbook}` was released on CRAN in December 2024. Note
 that previous versions did not include the `take_sample()` function,
 which is used extensively in *Lessons*. The CRAN version is also
 published for use with webr (as are most CRAN packages).

@@ -142,7 +142,8 @@ get_most_populated_levels <- function(vals, nlevels) {
   tmp <- table(vals)
   biggest <- order(tmp, decreasing=TRUE)[1:nlevels]
   biggest <- biggest[!is.na(biggest)]
-  names(tmp)[biggest]
+  # sort() keeps factor levels in order.
+  names(tmp)[sort(biggest)]
 }
 
 #'
