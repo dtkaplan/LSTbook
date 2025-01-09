@@ -18,6 +18,7 @@ point_plot(
   bw = NULL,
   level = 0.95,
   nx = 50,
+  ncategorical = 3,
   model_family = NULL
 )
 }
@@ -48,6 +49,9 @@ prefer to alter the color scheme. There are 8 palettes available: \code{"A"} thr
 
 \item{nx}{Number of places to evaluate any x-axis quantitative vars. Default 50. Use higher
 if graph isn't smooth enough.}
+
+\item{ncategorical}{Number of levels of the categorical variable to retain
+when displaying model annotations. Default: Choose the 3 most populated levels.}
 
 \item{model_family}{Override the default model type. See \code{model_train()}}
 

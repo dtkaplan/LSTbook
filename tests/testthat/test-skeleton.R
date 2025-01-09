@@ -13,3 +13,7 @@ test_that("model_skeleton() gets untransformed explanatory variables", {
   expect_true(all(names(Tmp) %in% c("father", "mother", "sex")))
 })
 
+test_that("typical values preserve order of factor levels", {
+  tmp <- LSTbook:::get_typical(Penguins$species, type = "discrete")
+  expect_true(all(levels(tmp) == levels(Penguins$species)))
+})

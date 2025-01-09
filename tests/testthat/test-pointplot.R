@@ -22,3 +22,9 @@ test_that("NAs in color or faceting variables cause the corresponding row to be 
   expect_snapshot_file(suppressWarnings(gg_in_tmp_png(P)), "color-and-facet-na.png")
 })
 
+test_that("Model annotations show up for all levels of a categorical variable mapped to x.", {
+  P <- MPG |> point_plot(mpg_comb ~ drive + class, annot = "model",
+                         point_ink = 0.1, ncategorical = 4)
+  expect_snapshot_file(suppressWarnings(gg_in_tmp_png(P)), "all-levels-x.png")
+})
+
