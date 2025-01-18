@@ -2,16 +2,7 @@
 #'
 #' The Centers for Disease Control collects data on all births registered
 #' in the US (50 states + DC). \code{Natality_2014}, contains a random sample of
-#' 10,000 rows and 55 variables from the CDC data.
-#' only a subset of variables related to potential risk factors and outcomes.
-#' \code{Natality_2014_100k}, \code{Natality_2014_10k}, \code{Natality_2014_1k} are random
-#' samples of
-#' size one-hundred thousand, ten thousand, and one thousand respectively
-#' and are provided
-#' automatically when the \code{natality2014} package is attached. A larger sample of one-million
-#' cases, \code{Natality_2014_1000k}, and the complete set of cases in \code{Natality_2014} are also provided by the
-#' package, but not through the usual \code{data()} interface. To access those large files,
-#' see the instructions given in \code{Larger_natality_data_files}.
+#' 10,000 rows and 55 variables related to potential risk factors and outcomes from the CDC data.
 #'
 #' Variable names are the same as in the original CDC file.
 #'
