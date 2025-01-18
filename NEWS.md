@@ -1,5 +1,3 @@
-# LSTbook 0.7
-
 # LSTbook 0.5.0
 
 First CRAN release
@@ -46,3 +44,9 @@ variables.
 * New version number so that r-universe.dev will pick up the package.
 
 * Fixed order of colors for model values in `point_plot()`.
+
+* Added `Natality_2014` with 10,000 randomly selected cases from the 3.99M in the `"dtkaplan/natality2014"`
+package available by `remotes::install_github("dtkaplan/natality2014")`. That large data set
+won't work in WebR installations.
+
+
