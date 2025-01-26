@@ -49,4 +49,7 @@ variables.
 package available by `remotes::install_github("dtkaplan/natality2014")`. That large data set
 won't work in WebR installations.
 
+* Ungrouped Sessions in College_database.rda and removed redundant College_grades.rda
+
+
 

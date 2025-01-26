@@ -34,7 +34,7 @@ Three data frames
 
 An object of class \code{data.frame} with 6124 rows and 3 columns.
 
-An object of class \code{grouped_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14 rows and 2 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 14 rows and 2 columns.
 }
 \source{
 Used with permission by the college's registrar.
