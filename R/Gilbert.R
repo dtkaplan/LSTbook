@@ -20,14 +20,6 @@
 #' - `death` Whether a patient death occurred during the shift.
 #' - `gilbert` Whether nurse Kristen Gilbert was on duty during the shift.
 #'
-#' - `time`: the winning time in seconds
-#' - `race` the name of the race. Many races are repeated over successive years.
-#' - `year` the year the race was run
-#' - `name` the name of the winning runner
-#' - `sex`: the runner's sex, coded as `F` and `M`
-#' - `distance`: the total distance of the race in km
-#' - `climb`: the total vertical climb of the race in meters
-#'
 #' @details Only tabular summaries of the shift/death information
 #' are public. This data frame was reconstructed from those summaries.
 #'

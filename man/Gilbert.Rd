@@ -9,13 +9,6 @@ A data frame with one row for each shift at the VA hospital.
 \itemize{
 \item \code{death} Whether a patient death occurred during the shift.
 \item \code{gilbert} Whether nurse Kristen Gilbert was on duty during the shift.
-\item \code{time}: the winning time in seconds
-\item \code{race} the name of the race. Many races are repeated over successive years.
-\item \code{year} the year the race was run
-\item \code{name} the name of the winning runner
-\item \code{sex}: the runner's sex, coded as \code{F} and \code{M}
-\item \code{distance}: the total distance of the race in km
-\item \code{climb}: the total vertical climb of the race in meters
 }
 }
 \usage{
