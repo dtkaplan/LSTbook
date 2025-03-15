@@ -1,6 +1,6 @@
 Package: LSTbook
 Title: Data and Software for "Lessons in Statistical Thinking" 
-Version: 0.6.1.9003
+Version: 0.6.1.9004
 Authors@R: c(
     person(given = "Daniel", family = "Kaplan", email = "dtkaplan@gmail.com", role = c("aut", "cre")),
     person(given = "Randall", family = "Pruim", email = "rpruim@calvin.edu", role = "aut") )

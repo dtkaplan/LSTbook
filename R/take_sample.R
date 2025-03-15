@@ -102,3 +102,11 @@ take_sample.default <- function(x, n = length(x), replace=FALSE, prob=NULL, .by 
 resample <- function(..., replace = TRUE) {
   take_sample(..., replace = replace)
 }
+
+#' A convenience function for shuffling, typically used with
+#' within model_train(), but available elsewhere for, e.g. demonstrations
+#' @rdname take_sample
+#' @export
+shuffle <- function(...) {
+  take_sample(...)
+}

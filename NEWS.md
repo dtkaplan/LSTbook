@@ -51,5 +51,8 @@ won't work in WebR installations.
 
 * Ungrouped Sessions in College_database.rda and removed redundant College_grades.rda
 
+* Added simple `shuffle()` function.
+
+* Added `rterm()` for demonstrations of degrees of freedom.
 
 

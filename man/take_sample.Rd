@@ -4,6 +4,7 @@
 \alias{take_sample}
 \alias{take_sample.default}
 \alias{resample}
+\alias{shuffle}
 \title{Samples from various kinds of objects}
 \usage{
 take_sample(x, n, replace = FALSE, ...)
@@ -20,6 +21,8 @@ take_sample(x, n, replace = FALSE, ...)
 )
 
 resample(..., replace = TRUE)
+
+shuffle(...)
 }
 \arguments{
 \item{x}{The object from which to sample}
