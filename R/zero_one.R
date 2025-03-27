@@ -50,7 +50,8 @@ label_zero_one <- function(P) {
       P +
         scale_y_continuous(breaks=c(0, 0.5, 1),
                            sec.axis=sec_axis(
-                             trans = ~ ., breaks=c(0,1), labels=levels(YesNo)))
+                             transform = ~ ., breaks=c(0,1),
+                             labels=levels(YesNo)))
     )
   }
 }

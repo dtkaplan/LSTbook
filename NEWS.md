@@ -55,4 +55,6 @@ won't work in WebR installations.
 
 * Added `rterm()` for demonstrations of degrees of freedom.
 
+* `trials()` avoids name conflicts (per issue #14)
+
 

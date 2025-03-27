@@ -40,6 +40,7 @@ trials <- function(.ex, times = 1, ...) {
   # create a function to hold the left-hand side of the pipeline
   fun <- function() {}
   body(fun) <- substitute(.ex)
+  environment(fun) <- parent.frame()
   params <- c(list(.trial = 1:times), list(...))
   # data frame with all combinations of 1:size and the parameters (if any)
   param_vals <- expand.grid(params, stringsAsFactors = TRUE)
@@ -51,7 +52,9 @@ trials <- function(.ex, times = 1, ...) {
   # Iterate over all the combinations of 1:size and the parameters
   for (k in 1:nrow(param_vals)) {
     vals <- param_vals[k, , drop = FALSE]
-    output <- do.call(fun, vals) |> mosaic_cull_for_do()
+    output <-
+      do.call(fun, vals) |>
+      mosaic_cull_for_do()
     Res[[k]] <- dplyr::bind_cols(vals, output)
   }
 
