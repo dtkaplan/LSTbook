@@ -2,9 +2,39 @@
 % Please edit documentation in R/mosaic-do.R
 \name{mosaic_cull_for_do}
 \alias{mosaic_cull_for_do}
+\alias{mosaic_cull_for_do.default}
+\alias{mosaic_cull_for_do.fitdistr}
+\alias{mosaic_cull_for_do.aov}
+\alias{mosaic_cull_for_do.anova}
+\alias{mosaic_cull_for_do.table}
+\alias{mosaic_cull_for_do.aggregated.stat}
+\alias{mosaic_cull_for_do.lm}
+\alias{mosaic_cull_for_do.htest}
+\alias{mosaic_cull_for_do.cointoss}
+\alias{mosaic_cull_for_do.matrix}
 \title{Cull objects used with do()}
 \usage{
 mosaic_cull_for_do(object, ...)
+
+\method{mosaic_cull_for_do}{default}(object, ...)
+
+\method{mosaic_cull_for_do}{fitdistr}(object, ...)
+
+\method{mosaic_cull_for_do}{aov}(object, ...)
+
+\method{mosaic_cull_for_do}{anova}(object, ...)
+
+\method{mosaic_cull_for_do}{table}(object, ...)
+
+\method{mosaic_cull_for_do}{aggregated.stat}(object, ...)
+
+\method{mosaic_cull_for_do}{lm}(object, ...)
+
+\method{mosaic_cull_for_do}{htest}(object, ...)
+
+\method{mosaic_cull_for_do}{cointoss}(object, ...)
+
+\method{mosaic_cull_for_do}{matrix}(object, ...)
 }
 \arguments{
 \item{object}{an object to be culled}

@@ -9,7 +9,8 @@ add_to_attach <- function(pkg) {
     pkgs_to_attach <<- c(pkgs_to_attach, pkg)
 }
 
-foobar <- sapply(optional_packages, add_to_attach)
+# Taken out 30 Apr 2025 to work on Issue 15 for {LSTbook}
+# foobar <- sapply(optional_packages, add_to_attach)
 
 #################
 .onLoad <- function(libname, pkgname) {

@@ -210,18 +210,21 @@ if(FALSE) {
 #' Clock_auction |> model_train(price ~ resample(bidders)) |>
 #'   R2() |> trials(times=10)
 
-
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do <- function(object, ...) {
   UseMethod("mosaic_cull_for_do")
 }
 
 
-
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.default <- function(object, ...) {
   object
 }
 
-
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.fitdistr <- function(object, ...) {
   est <- object$estimate
   names(est) <- paste0(names(est), ".est")
@@ -231,11 +234,15 @@ mosaic_cull_for_do.fitdistr <- function(object, ...) {
 }
 
 
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.aov <- function(object, ...) {
   mosaic_cull_for_do(stats::anova(object))
 }
 
 
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.anova <- function(object, ...) {
   res <- as.data.frame(object)
   res <- cbind (data.frame(source=row.names(res)), res)
@@ -262,6 +269,8 @@ mosaic_cull_for_do.anova <- function(object, ...) {
 }
 
 
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.table <- function(object, ...) {
   result <- data.frame(object)
   res <- result[[ncol(result)]]
@@ -275,7 +284,8 @@ mosaic_cull_for_do.table <- function(object, ...) {
   return(res)
 }
 
-
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.aggregated.stat <- function(object, ...) {
   result <- object
   res <- as.vector(result[, "S"])  # ncol(result)]
@@ -285,13 +295,14 @@ mosaic_cull_for_do.aggregated.stat <- function(object, ...) {
   return(res)
 }
 
-
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.lm <- function(object, ...) {
   regression_summary(object)
 }
 
-
-
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.htest <- function(object, ...) {
   if (is.null(object$conf.int)) {
     result <-  data.frame(
@@ -330,6 +341,8 @@ mosaic_cull_for_do.htest <- function(object, ...) {
 #   }
 
 
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.cointoss <- function(object, ...) {
   return( c(n=attr(object,'n'),
             heads=sum(attr(object,'sequence')=='H'),
@@ -338,7 +351,8 @@ mosaic_cull_for_do.cointoss <- function(object, ...) {
   ) )
 }
 
-
+#' @rdname mosaic_cull_for_do
+#' @export
 mosaic_cull_for_do.matrix <- function(object, ...) {
   if (ncol(object) == 1) {
     nn <- rownames(object)
