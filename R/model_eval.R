@@ -18,6 +18,17 @@
 #' - if training data is used as the input, then it's possible to calculate the residual. This
 #' will be called `.resid`.
 #'
+#' @details
+#' The experienced R user may wonder why LST uses `model_train()` instead of
+#' `lm()`, `glm()`, and such.
+#' 1. `model_train()` can train seversl kinds of different model architectures
+#' 2. `model_train()` accepts piped in data, unlike `lm()`
+#' 3. `model_train()` stores the training data frame. This integrates with
+#' `model_plot()`, `point_plot()`, and such which need the original data.
+#' 4. The original data is stored in the same way as the data frame input.
+#' If the tilde expression includes transformations of the data-frame variables, the names
+#' given to the transforms don't obscure the original names for the variables.
+#'
 #' @examples
 #' mod <- mtcars |> model_train(mpg ~ hp + wt)
 #' model_eval(mod, hp=100, wt=c(2,3))
@@ -61,6 +72,9 @@ model_eval <- function(mod, data=NULL, ..., skeleton=FALSE, ncont=3,
   }
 
   explan_names <- explanatory_vars(mod)
+  # The following might be triggered is not using model_train() and
+  # where the model tilde expression includes an object name not in
+  # the data set, as with splines::bs(x, knots = k)
   if (!all(explan_names %in% names(eval_data)))
     stop("Must provide values for all explanatory variables. Try using `model_train()` to construct the model.")
 

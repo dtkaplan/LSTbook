@@ -47,6 +47,19 @@ will be called \code{.resid}.
 \description{
 Evaluate a model on inputs
 }
+\details{
+The experienced R user may wonder why LST uses \code{model_train()} instead of
+\code{lm()}, \code{glm()}, and such.
+\enumerate{
+\item \code{model_train()} can train seversl kinds of different model architectures
+\item \code{model_train()} accepts piped in data, unlike \code{lm()}
+\item \code{model_train()} stores the training data frame. This integrates with
+\code{model_plot()}, \code{point_plot()}, and such which need the original data.
+\item The original data is stored in the same way as the data frame input.
+If the tilde expression includes transformations of the data-frame variables, the names
+given to the transforms don't obscure the original names for the variables.
+}
+}
 \examples{
 mod <- mtcars |> model_train(mpg ~ hp + wt)
 model_eval(mod, hp=100, wt=c(2,3))

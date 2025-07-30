@@ -9,7 +9,13 @@
 #'
 #' @rdname utils
 explanatory_vars <- function(model, ...) {
-  all.vars(formula_from_mod(model)[[3]])
+  if ("explan_names" %in% names(attributes(model))) {
+    attr(model, "explan_names")
+  } else {
+    # if the model wasn't made with model_train() then we
+    # have to guess the explanatory variables from the tilde expression
+    all.vars(formula_from_mod(model)[[3]])
+  }
 }
 #' @rdname utils
 response_var <- function(model, ...) {
@@ -28,9 +34,12 @@ formula_from_mod <- function(model, ...) {
 
 #' @rdname utils
 get_training_data <- function(model, ...) {
-  if ("training_data" %in% names(attributes(model)))
+  if ("training_data" %in% names(attributes(model))) {
     attributes(model)$training_data
-  else {
+  } else {
+    if ("dataClasses" %in% attributes(model$terms)) {
+      return(names(attr(model$terms, "dataClasses")))
+    }
     error_string <- paste0("Model architecture '",
                            paste(class(model), collapse = "', "),
                            "' not recognized by LSTbook.")

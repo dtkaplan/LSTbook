@@ -57,4 +57,9 @@ won't work in WebR installations.
 
 * `trials()` avoids name conflicts (per issue #14)
 
+* Internal `explanatory_vars()` now looks to the names from the tilde expression
+that match up with the original names in the input data frame. This extends
+the sorts of models that can be used in `point_plot()` or `model_plot()`.
 
+* `point_plot()` now draws color legends with alpha = 1, regardless of what
+`point_ink` is set to.

@@ -32,13 +32,19 @@ model_train <- function(data, tilde,
     mod <- stats::glm(tilde, data= data, family="binomial")
   } else if (mod_family == "poisson") {
     mod <- stats::glm(tilde, data = data, family="poisson")
-    return(mod)
   } else if (mod_family == "rlm") {
     mod <- MASS::rlm(tilde, data = data)
   } else {
     stop(glue::glue("Model type {mod_family} not yet available."))
   }
 
+  attr(mod, "explan_names") <-
+    base::intersect(
+      all.vars(tilde[[3]]),
+      names(data))
+  # the above deals with situations where an object name is used
+  # in the tilde expression to set a parameter, but does not
+  # correspond to an explanatory variable.
   attr(mod, "training_data") <- data
   class(mod) <- c("model_object", class(mod))
 

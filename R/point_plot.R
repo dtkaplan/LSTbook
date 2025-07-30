@@ -271,7 +271,8 @@ point_plot <- function(D, tilde, ..., seed=101,
     Res <- label_zero_one(Res)
   }
 
-  Res
+  # make sure the legend (if any) shows the colors in full alpha
+  Res + guides(color = guide_legend(override.aes = list(alpha = 1) ) )
 }
 
 #' Convenience function for adding labels to point_plot or others without needing
@@ -325,7 +326,7 @@ calls_to_names <- function(tilde) {
   }
   else {
     str <- deparse(tilde)
-    if (grepl("(ns|poly|rand)\\(", str)) {
+    if (grepl("(bs|ns|poly|rand)\\(", str)) {
       # handle ns() or poly() or rand(), by passing the
       # whole expression. This is because simple_mod_eval() doesn't
       # translate the multi-column modeling transformations so
