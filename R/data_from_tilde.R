@@ -107,9 +107,3 @@ best_name_match <- function(nms, msg, starter="`{obj_name}` not found among vari
   }
 }
 
-# Keep track of the names of often-used data frames to help with error messages
-.PackagesToSearch. <- c("LSTbook", "mosaicData", "openintro", "moderndive")
-.getDFNames <- function() {
-  names <- suppressWarnings(data(package = .PackagesToSearch.))$results[,3]
-}
-.DataFrameNames. <- gsub(" \\(.*\\)$", "", .getDFNames())

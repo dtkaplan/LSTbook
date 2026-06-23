@@ -82,7 +82,7 @@ If you want to use the same explanatory variable for color and faceting
 in the faceting position, e.g. \code{mpg ~ hp + cyl + cyl}.
 }
 \examples{
-mosaicData::Galton |> point_plot(height ~ mother + sex + father, annot="model", model_ink=1)
+Galton |> point_plot(height ~ mother + sex + father, annot="model", model_ink=1)
 mtcars |> point_plot(mpg ~ wt + cyl)
 mtcars |> point_plot(mpg ~ wt + cyl + hp, annot="model")
 }

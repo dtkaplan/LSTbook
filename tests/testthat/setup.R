@@ -5,3 +5,4 @@ gg_in_tmp_png <- function(plot_code, width = 4, height = 4) {
 
   path
 }
+

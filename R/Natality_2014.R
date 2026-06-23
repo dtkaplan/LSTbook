@@ -17,67 +17,63 @@
 #' @details
 #' The full set of 3.99 million cases from the CDC are not available
 #' via this `{LSTbook}` package. You can install the "dtkaplan/natality2014" package from
-#' GitHub. You will need a laptop or server-based version of R to do this.
+#' GitHub. You will need a laptop or server-based version of R to do this. COMMENT
 #'
 #' @docType data
 #' @name Natality_2014
 #'
 #' @keywords datasets
 #'
-#' @format
-#'   A data frame with a random sample of size 100000 from the complete CDC set of 3,998,175 cases, each of which is a birth in the US in 2014.
-#'   \itemize{
-#'     \item{\code{mager}} {Mother's age at date of birth}
-#'     \item{\code{fagecomb}} {Father's age at date of birth}
-#'     \item{\code{ubfacil}} {Type of facility where the birth took place}
-#'     \item{\code{urf_diab}} {Mother had diabetes before pregnancy}
-#'     \item{\code{urf_chyper}} {Mother had chronic hypertension before pregnancy}
-#'     \item{\code{urf_phyper}} {Mother developed hypertension during pregnancy}
-#'     \item{\code{urf_eclam}} {Mother developed eclampsia}
-#'     \item{\code{uop_induc}} {Was labor induced?}
-#'     \item{\code{uld_breech}} {Did baby present as breech? See \code{me_pres}.}
-#'     \item{\code{ilive}} {Whether the baby was alive at the time of the report.}
-#'     \item{\code{ab_aven1}} {Baby put on mechanical ventilator immediately}
-#'     \item{\code{ab_aven6}} {Baby still on ventilator after 6 hours}
-#'     \item{\code{ab_nicu}} {Baby transferred to intensive care unit.}
-#'     \item{\code{ab_surf}} {Surfactant administered to newborn}
-#'     \item{\code{ab_anti}} {Antibiotics administered to newborn}
-#'     \item{\code{ab_seiz}} {Newborn had seizure}
-#'     \item{\code{dbwt}} {Baby's weight (gm)}
-#'     \item{\code{combgest}} {Length of gestation}
-#'     \item{\code{sex}} {Baby's sex}
-#'     \item{\code{dplural}} {Plurality of birth: 2 = twins, 3 = triplets, ...}
-#'     \item{\code{apgar5}} {APGAR score at 5 minutes}
-#'     \item{\code{apgar10}} {APGAR score at 10 minutes}
-#'     \item{\code{mtran}} {Mother transferred. No other description given.}
-#'     \item{\code{pay}} {Source of payment for delivery}
-#'     \item{\code{mm_mtr}} {Mother received blood transfusion}
-#'     \item{\code{mm_plac}} {Perineal laceraction}
-#'     \item{\code{mm_rupt}} {Ruptured uterus}
-#'     \item{\code{mm_uhyst}} {Unplanned hysterectomy}
-#'     \item{\code{mm_aicu}} {Mother transferred to intensive care unit}
-#'     \item{\code{me_pres}} {Presentation of baby on delivery. See \code{uld_breech}. It's not clear why "other" corresponds to breech.}
-#'     \item{\code{me_rout}} {Method of delivery}
-#'     \item{\code{ld_indl}} {Labor induced}
-#'     \item{\code{pwgt_r}} {Mother's weight before pregnancy}
-#'     \item{\code{dwgt_r}} {Mother's weight at delivery}
-#'     \item{\code{m_ht_in}} {Mother's height}
-#'     \item{\code{cig_0}} {Number of cigarettes smoked daily before pregnancy}
-#'     \item{\code{cig_1}} {Number of cigarettes smoked daily during first trimester}
-#'     \item{\code{cig_2}} {Number of cigarettes smoked daily during second trimester}
-#'     \item{\code{cig_3}} {Number of cigarettes smoked daily during third trimester}
-#'     \item{\code{wic}} {Enrolled in Women, Infants, and Children (WIC) program for supplemental nutrition.}
-#'     \item{\code{precare}} {Month started in prenatal care. 15 means never started.}
-#'     \item{\code{previs}} {Number of visits to prenatal care.}
-#'     \item{\code{priorlive}} {Number of previous live births.}
-#'     \item{\code{priordead}} {Number of previous births where baby died.}
-#'     \item{\code{priorterm}} {Number of terminations of pregnancy before this birth.}
-#'   }
-#'
-#' @seealso \code{\link{Larger_natality_data_files}}
+#' @format A data frame with a random sample of size 100000 from the complete CDC set of 3,998,175 cases, each of which is a birth in the US in 2014.
+#' \describe{
+#'   \item{mager}{Mother's age at date of birth}
+#'   \item{fagecomb}{Father's age at date of birth}
+#'   \item{ubfacil}{Type of facility where the birth took place}
+#'   \item{urf_diab}{Mother had diabetes before pregnancy}
+#'   \item{urf_chyper}{Mother had chronic hypertension before pregnancy}
+#'   \item{urf_phyper}{Mother developed hypertension during pregnancy}
+#'   \item{urf_eclam}{Mother developed eclampsia}
+#'   \item{uop_induc}{Was labor induced?}
+#'   \item{uld_breech}{Did baby present as breech? See \code{me_pres}.}
+#'   \item{ilive}{Whether the baby was alive at the time of the report.}
+#'   \item{ab_aven1}{Baby put on mechanical ventilator immediately}
+#'   \item{ab_aven6}{Baby still on ventilator after 6 hours}
+#'   \item{ab_nicu}{Baby transferred to intensive care unit.}
+#'   \item{ab_surf}{Surfactant administered to newborn}
+#'   \item{ab_anti}{Antibiotics administered to newborn}
+#'   \item{ab_seiz}{Newborn had seizure}
+#'   \item{dbwt}{Baby's weight (gm)}
+#'   \item{combgest}{Length of gestation}
+#'   \item{sex}{Baby's sex}
+#'   \item{dplural}{Plurality of birth: 2 = twins, 3 = triplets, ...}
+#'   \item{apgar5}{APGAR score at 5 minutes}
+#'   \item{apgar10}{APGAR score at 10 minutes}
+#'   \item{mtran}{Mother transferred. No other description given.}
+#'   \item{pay}{Source of payment for delivery}
+#'   \item{mm_mtr}{Mother received blood transfusion}
+#'   \item{mm_plac}{Perineal laceraction}
+#'   \item{mm_rupt}{Ruptured uterus}
+#'   \item{mm_uhyst}{Unplanned hysterectomy}
+#'   \item{mm_aicu}{Mother transferred to intensive care unit}
+#'   \item{me_pres}{Presentation of baby on delivery. See \code{uld_breech}. It's not clear why "other" corresponds to breech.}
+#'   \item{me_rout}{Method of delivery}
+#'   \item{ld_indl}{Labor induced}
+#'   \item{pwgt_r}{Mother's weight before pregnancy}
+#'   \item{dwgt_r}{Mother's weight at delivery}
+#'   \item{m_ht_in}{Mother's height}
+#'   \item{cig_0}{Number of cigarettes smoked daily before pregnancy}
+#'   \item{cig_1}{Number of cigarettes smoked daily during first trimester}
+#'   \item{cig_2}{Number of cigarettes smoked daily during second trimester}
+#'   \item{cig_3}{Number of cigarettes smoked daily during third trimester}
+#'   \item{wic}{Enrolled in Women, Infants, and Children (WIC) program for supplemental nutrition.}
+#'   \item{precare}{Month started in prenatal care. 15 means never started.}
+#'   \item{previs}{Number of visits to prenatal care.}
+#'   \item{priorlive}{Number of previous live births.}
+#'   \item{priordead}{Number of previous births where baby died.}
+#'   \item{priorterm}{Number of terminations of pregnancy before this birth.}
+#' }
+
 #'
 #' @examples
-#' table(Natality_2014_100k$ilive)
-#' table(Natality_2014_10k$ilive) # from sample of 10,000
-#' table(Natality_2014_1k$ilive) # from sample of 1000
+#' table(Natality_2014$ilive)
 "Natality_2014"

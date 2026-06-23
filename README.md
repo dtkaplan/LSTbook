@@ -95,11 +95,12 @@ precursors to the essential multivariable modeling techniques used in
 mainstream data-science tasks such as dealing with confounding.
 
 To illustrate how `{LSTbook}` supports teaching such topics in a unified
-and streamlined way, consider to datasets provided by the `{mosaicData}`
+and streamlined way, consider to datasets originally provided by the `{mosaicData}`
 package: `Galton`, which contains the original data used by Francis
 Galton in the 1880s to study the heritability of genetic traits,
 specifically, human height; and `Whickham` results from a 20-year
-follow-up survey to study smoking and health.
+follow-up survey to study smoking and health. (Both of these are directly accessible
+from `{LSTbook}`.)
 
 Start by installing `{LSTbook}` as described above, then loading it into
 the R session:
