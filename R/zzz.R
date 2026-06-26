@@ -1,31 +1,3 @@
-# For the user's convenience, attach packages that are often used in the textbook
-
-pkgs_to_attach <- c("ggplot2", "dplyr", "palmerpenguins")
-
-# if an optional package is installed, .onLoad() will attach it.
-add_to_attach <- function(pkg) {
-  if (requireNamespace(pkg, quietly = TRUE))
-    pkgs_to_attach <<- c(pkgs_to_attach, pkg)
-}
-
-# Taken out 30 Apr 2025 to work on Issue 15 for {LSTbook}
-# foobar <- sapply(optional_packages, add_to_attach)
-
-#################
-.onLoad <- function(libname, pkgname) {
-
-  pks <- invisible(suppressPackageStartupMessages(
-    sapply(pkgs_to_attach, requireNamespace, quietly = TRUE)
-  ))
-  for (p in pkgs_to_attach) {
-    if (! is_attached(p)) suppressPackageStartupMessages(attachNamespace(p))
-  }
-}
-################
-is_attached <- function(x) {
-  paste0("package:", x) %in% search()
-}
-
 ################
 # to avoid notes in CRAN checks
 utils::globalVariables(c("data", "pf", "xend", "yend",
